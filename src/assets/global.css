@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --clr-primary: #f5f5f5;
+  --clr-primary: #f0f0f0;
   --clr-secondary: #121212;
 
   --clr-add: #ff6f00;

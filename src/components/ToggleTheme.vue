@@ -11,5 +11,11 @@ function toggleTheme() {
 </script>
 
 <template>
-  <button @click="toggleTheme">{{ isDark ? "SUN" : "MOON" }}</button>
+  <button
+    class="bg-primary text-secondary dark:bg-secondary dark:text-primary grid p-1 rounded-full"
+    @click="toggleTheme"
+  >
+    <i v-if="isDark" class="material-symbols-outlined">light_mode</i>
+    <i v-else class="material-symbols-outlined">dark_mode</i>
+  </button>
 </template>
