@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavLink from "@/components/NavLink.vue";
+import ToggleTheme from "@/components/ToggleTheme.vue";
 </script>
 
 <template>
@@ -10,5 +11,6 @@ import NavLink from "@/components/NavLink.vue";
       <NavLink to="/">HOME</NavLink>
       <NavLink to="/recipes">RECIPES</NavLink>
     </nav>
+    <ToggleTheme />
   </header>
 </template>

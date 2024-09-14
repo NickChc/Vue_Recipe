@@ -30,6 +30,11 @@ body {
   color: var(--clr-secondary);
 }
 
+body.dark {
+  background-color: var(--clr-secondary);
+  color: var(--clr-primary);
+}
+
 h1,
 h2,
 h3,

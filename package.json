@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vueuse/core": "^11.0.3",
     "pinia": "^2.2.2",
     "vite-tsconfig-paths": "^5.0.1",
     "vue": "^3.4.37",
