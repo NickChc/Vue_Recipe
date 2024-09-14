@@ -14,6 +14,9 @@ export default {
         roboto: "var(--font-roboto)",
         merri: "var(--font-merri)",
       },
+      screens: {
+        xs: "280px",
+      },
     },
   },
   plugins: [],

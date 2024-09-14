@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { RouterLink } from "vue-router";
+import NavLink from "@/components/NavLink.vue";
 </script>
 
 <template>
   <header class="bg-add p-3 flex items-center">
     <nav
-      class="flex items-center justify-center gap-x-10 text-primary font-merri"
+      class="flex items-center justify-around xs:justify-center w-full xs:gap-x-6 sm:gap-x-10 text-primary font-merri mx-auto"
     >
-      <RouterLink to="/">HOME</RouterLink>
+      <NavLink to="/">HOME</NavLink>
+      <NavLink to="/recipes">RECIPES</NavLink>
     </nav>
   </header>
 </template>
