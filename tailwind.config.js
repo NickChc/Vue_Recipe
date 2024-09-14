@@ -10,6 +10,10 @@ export default {
         danger: "var(--clr-danger)",
         success: "var(--clr-success)",
       },
+      fontFamily: {
+        roboto: "var(--font-roboto)",
+        merri: "var(--font-merri)",
+      },
     },
   },
   plugins: [],
