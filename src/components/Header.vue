@@ -2,11 +2,11 @@
 import NavLink from "@/components/NavLink.vue";
 import ToggleTheme from "@/components/ToggleTheme.vue";
 import SelectLang from "@/components/SelectLang.vue";
-import SideBarButton from "@/components/SideBarButton.vue";
+import SideBarButton from "@/components/SideBar/SideBarButton.vue";
 </script>
 
 <template>
-  <header class="bg-add p-3 flex items-center">
+  <header class="bg-add py-3 pr-6 pl-0 sm:pl-6 flex items-center">
     <SideBarButton />
 
     <SelectLang />

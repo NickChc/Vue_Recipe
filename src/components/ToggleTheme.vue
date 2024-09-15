@@ -6,16 +6,26 @@ const themeStore = useThemeStore();
 const { isDark } = storeToRefs(themeStore);
 
 function toggleTheme() {
-  themeStore.toggle();
+  themeStore.toggleTheme();
 }
 </script>
 
 <template>
   <button
-    class="hidden sm:grid bg-primary text-secondary dark:bg-secondary dark:text-primary p-1 rounded-full"
+    class="text-add hidden sm:grid bg-primary text-secondary dark:bg-secondary dark:text-primary p-1 rounded-full"
     @click="toggleTheme"
   >
-    <i v-if="isDark" class="material-symbols-outlined">light_mode</i>
-    <i v-else class="material-symbols-outlined">dark_mode</i>
+    <i
+      :style="{ color: 'var(--clr-add)' }"
+      v-if="isDark"
+      class="material-symbols-outlined"
+      >light_mode</i
+    >
+    <i
+      :style="{ color: 'var(--clr-add)' }"
+      v-else
+      class="material-symbols-outlined"
+      >dark_mode</i
+    >
   </button>
 </template>

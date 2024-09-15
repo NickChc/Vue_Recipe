@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import Header from "@/components/Header.vue";
-import SideBar from "@/components/SideBar.vue";
+import SideBar from "@/components/SideBar/SideBar.vue";
 import { useGlobalStore } from "@/stores/globalStore";
 import { storeToRefs } from "pinia";
 
@@ -14,7 +14,7 @@ const { sideBarOpen } = storeToRefs(globalStore);
   <div
     :class="`duration-500 transition-transform sm:transition-none ease-in ${
       sideBarOpen
-        ? `translate-x-[calc(100vw-var(--width-sidebar-btn))]`
+        ? `translate-x-[calc(100%-var(--width-sidebar-btn))] sm:translate-x-0`
         : 'translate-x-0'
     }`"
   >

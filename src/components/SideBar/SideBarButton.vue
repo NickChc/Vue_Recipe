@@ -6,7 +6,7 @@ const globalStore = useGlobalStore();
 
 <template>
   <button
-    class="grid sm:hidden w-sidebar-btn"
+    class="grid sm:hidden w-sidebar-btn text-primary"
     @click="globalStore.toggleSideBar"
   >
     <i class="material-symbols-outlined" :style="{ fontSize: '1.8rem' }"

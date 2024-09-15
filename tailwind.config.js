@@ -19,7 +19,9 @@ export default {
         xs: "280px",
       },
       width: {
-        sidebar: "calc(100vw - var(--width-sidebar-btn))",
+        "sidebar-btn": "var(--width-sidebar-btn)",
+      },
+      minWidth: {
         "sidebar-btn": "var(--width-sidebar-btn)",
       },
     },

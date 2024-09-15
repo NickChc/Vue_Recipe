@@ -5,13 +5,6 @@ import { LANG } from "@/config/storageKeys";
 
 type MessageSchema = typeof en;
 
-// function loadLocaleMessages(): LocaleMessages<MessageSchema> {
-//   return {
-//     en,
-//     ka,
-//   };
-// }
-
 export default createI18n<[MessageSchema], "en" | "ka">({
   locale: localStorage.getItem(LANG) || "en",
   fallbackLocale: "en",

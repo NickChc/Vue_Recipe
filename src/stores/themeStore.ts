@@ -1,26 +1,34 @@
+import { THEME } from "@/config/storageKeys";
 import { defineStore } from "pinia";
-import { useDark, useToggle } from "@vueuse/core";
-import { onMounted, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 export const useThemeStore = defineStore("themeStore", () => {
-  const isDark = useDark();
-  const toggle = useToggle(isDark);
+  const isDark = ref(false);
 
-  function toggleTheme(isDarkMode: boolean) {
+  function toggleTheme() {
+    isDark.value = !isDark.value;
+  }
+
+  function setIsDark(isDarkMode: boolean) {
     if (isDarkMode) {
       document.body.classList.add("dark");
+      localStorage.setItem(THEME, "dark");
     } else {
       document.body.classList.remove("dark");
+      localStorage.removeItem(THEME);
     }
   }
 
   watch(isDark, (isDark) => {
-    toggleTheme(isDark);
+    setIsDark(isDark);
   });
 
   onMounted(() => {
-    toggleTheme(isDark.value);
+    const savedTheme = localStorage.getItem(THEME);
+    if (savedTheme) {
+      setIsDark(true);
+    }
   });
 
-  return { isDark, toggle };
+  return { isDark, toggleTheme };
 });
