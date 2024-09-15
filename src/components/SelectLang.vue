@@ -7,7 +7,10 @@ const { locale } = storeToRefs(langStore);
 </script>
 
 <template>
-  <select v-model="locale">
+  <select
+    class="hidden sm:block font-bold text-add p-2 cursor-pointer outline-none rounded-lg"
+    v-model="locale"
+  >
     <option
       v-for="lang in $i18n.availableLocales"
       :key="`locale-${lang}`"
@@ -16,5 +19,4 @@ const { locale } = storeToRefs(langStore);
       {{ lang.toUpperCase() }}
     </option>
   </select>
-  {{ locale }}
 </template>

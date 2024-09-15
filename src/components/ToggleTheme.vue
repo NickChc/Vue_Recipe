@@ -12,7 +12,7 @@ function toggleTheme() {
 
 <template>
   <button
-    class="bg-primary text-secondary dark:bg-secondary dark:text-primary grid p-1 rounded-full"
+    class="hidden sm:grid bg-primary text-secondary dark:bg-secondary dark:text-primary p-1 rounded-full"
     @click="toggleTheme"
   >
     <i v-if="isDark" class="material-symbols-outlined">light_mode</i>

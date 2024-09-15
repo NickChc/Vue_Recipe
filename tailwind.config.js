@@ -18,6 +18,10 @@ export default {
       screens: {
         xs: "280px",
       },
+      width: {
+        sidebar: "calc(100vw - var(--width-sidebar-btn))",
+        "sidebar-btn": "var(--width-sidebar-btn)",
+      },
     },
   },
   plugins: [],
