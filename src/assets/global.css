@@ -28,6 +28,13 @@
 body {
   font-size: var(--font-base);
   font-family: var(--font-roboto);
+  max-width: 100vw;
+  overflow-x: clip;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   background-color: var(--clr-primary);
   color: var(--clr-secondary);

@@ -12,10 +12,8 @@ const { to } = defineProps<NavLinkProps>();
 
 <template>
   <RouterLink
-    :class="`xs:text-xl sm:text-3xl font-bold ${
-      route.fullPath.endsWith(to)
-        ? 'opacity-80 font-merri pointer-events-none '
-        : ''
+    :class="`text-sm font-merri xs:text-base flex items-center gap-x-3 sm:text-3xl font-bold ${
+      route.fullPath.endsWith(to) ? 'text-add-2 pointer-events-none ' : ''
     }`"
     :to="to"
   >

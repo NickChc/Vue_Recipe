@@ -14,14 +14,10 @@ function handleResize() {
 
 watch(sideBarOpen, (isOpen) => {
   if (isOpen) {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflowY = "hidden";
     document.body.style.position = "fixed";
-    document.body.style.right = "0";
-    document.body.style.left = "0";
-    document.body.style.top = "0";
-    document.body.style.bottom = "0";
   } else {
-    document.body.style.overflow = "auto";
+    document.body.style.overflowY = "auto";
     document.body.style.position = "";
   }
 });
@@ -43,7 +39,7 @@ onBeforeUnmount(() => {
   >
     <h2 class="text-2xl font-semibold">{{ $t("menu") }}</h2>
     <ul
-      class="list-none flex flex-col gap-y-3 mt-5 w-fit mx-auto max-h-[90%] overflow-x-hidden overflow-y-auto"
+      class="list-none flex flex-col gap-y-3 mt-5 w-[80%] mx-auto max-h-[90%] overflow-x-hidden overflow-y-auto"
     >
       <li>
         <SideBarThemeToggle />

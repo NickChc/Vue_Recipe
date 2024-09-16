@@ -15,15 +15,15 @@ function handleToggle() {
     {{ $t("theme") }}
 
     <div class="flex items-center gap-x-2 font-semibold">
-      <i :style="{ fontSize: '0.9rem' }" class="material-symbols-outlined"
+      <i :style="{ fontSize: '1.2rem' }" class="material-symbols-outlined"
         >light_mode</i
       >
       <button class="flex items-center gap-x-2" @click="handleToggle">
         <div
-          class="flex relative items-center bg-add p-0.5 h-4 w-8 rounded-xl after:content-[''] after:block after:w-3 after:h-3 after:bg-secondary after:rounded-full after:duration-300 after:absolute after:top-1/2 after:-translate-y-1/2 dark:after:translate-x-4 ease transition-transform dark:after:bg-primary"
+          class="flex relative items-center bg-add p-0.5 h-5 w-9 rounded-xl after:content-[''] after:block after:w-4 after:h-4 after:bg-secondary after:rounded-full after:duration-300 after:absolute after:top-1/2 after:-translate-y-1/2 dark:after:translate-x-4 ease transition-transform dark:after:bg-primary"
         ></div>
       </button>
-      <i :style="{ fontSize: '0.9rem' }" class="material-symbols-outlined"
+      <i :style="{ fontSize: '1.2rem' }" class="material-symbols-outlined"
         >dark_mode</i
       >
     </div>
