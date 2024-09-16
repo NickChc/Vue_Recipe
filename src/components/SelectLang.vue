@@ -8,7 +8,7 @@ const { locale } = storeToRefs(langStore);
 
 <template>
   <select
-    class="hidden bg-secondary sm:block font-bold text-add p-2 cursor-pointer outline-none rounded-lg"
+    class="hidden bg-primary dark:bg-secondary sm:block font-bold text-add p-2 cursor-pointer outline-none rounded-md"
     v-model="locale"
   >
     <option

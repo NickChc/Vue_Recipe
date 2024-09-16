@@ -13,7 +13,7 @@ import SideBarButton from "@/components/SideBar/SideBarButton.vue";
 
     <SelectLang />
     <nav
-      class="flex items-center justify-around sm:justify-center w-full gap-x-3 xs:gap-x-6 sm:gap-x-10 text-primary font-merri mx-auto"
+      class="flex items-center justify-around sm:justify-center w-full xs:gap-x-6 sm:gap-x-10 text-primary font-merri mx-auto"
     >
       <NavLink to="/">
         <i class="material-symbols-outlined sm:hidden">house</i>

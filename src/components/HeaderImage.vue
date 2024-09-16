@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import LayoutImage from "@/assets/images/Layout_Image.jpg";
 import LayoutImageLarge from "@/assets/images/Layout_Image_Large.jpg";
+import { useLangStore } from "@/stores/langStore";
+import { storeToRefs } from "pinia";
+
+const langStore = useLangStore();
+const { locale } = storeToRefs(langStore);
 </script>
 
 <template>
@@ -24,21 +29,34 @@ import LayoutImageLarge from "@/assets/images/Layout_Image_Large.jpg";
     >
       <div>
         <h1
-          class="text-xl xs:mb-1 sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl lg:mb-4 xs:ml-4 font-bold whitespace-nowrap"
+          class="text-lg xs:mb-1 sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl lg:mb-4 font-bold whitespace-nowrap"
         >
-          Welcome to MealShare
+          <p v-if="locale === 'en'">Welcome to MealShare</p>
+          <p v-else-if="locale === 'ka'">
+            MealShare -ი <br class="xs:hidden" />
+            მოგესალმებათ
+          </p>
         </h1>
-        <p class="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl">
+        <p
+          v-if="locale === 'en'"
+          class="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl"
+        >
           Connect with fellow food lovers and share your cherished
           <br class="hidden sm:block" />
           recipes for every occasion.
+        </p>
+        <p
+          v-else-if="locale === 'ka'"
+          class="text-xs xs:text-sm sm:text-base lg:text-lg xl:text-xl"
+        >
+          დაამყარეთ კავშირი სხვებთან თქვენი საყვარელი რეცეპტების მეშვეობით.
         </p>
       </div>
 
       <button
         class="absolute bottom-4 lg:bottom-6 right-6 lg:right-8 xl:right-10 p-1 px-3 text-xs border-2 border-primary rounded-sm ml-auto w-fit font-bold font-merri flex items-center gap-x-2 backdrop-blur-sm lg:text-base xl:text-lg lg:p-2 xl:p-3 hover:bg-primary duration-200 transition-colors hover:text-[rgba(0,0,0,0.5)]"
       >
-        ADD A RECIPE
+        {{ $t("addARecipe") }}
         <i class="material-symbols-outlined mb-1">add</i>
       </button>
     </div>
