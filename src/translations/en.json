@@ -1,5 +1,7 @@
 {
   "helloWorld": "Hellow World",
   "home": "HOME",
-  "recipes": "RECIPES"
+  "recipes": "RECIPES",
+  "menu": "Menu",
+  "theme": "Theme"
 }

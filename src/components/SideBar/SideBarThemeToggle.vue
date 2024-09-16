@@ -12,7 +12,7 @@ function handleToggle() {
   <div
     class="flex items-center justify-between gap-x-6 text-sm xs:text-lg whitespace-nowrap"
   >
-    Theme
+    {{ $t("theme") }}
 
     <div class="flex items-center gap-x-2 font-semibold">
       <i :style="{ fontSize: '0.9rem' }" class="material-symbols-outlined"
@@ -20,7 +20,7 @@ function handleToggle() {
       >
       <button class="flex items-center gap-x-2" @click="handleToggle">
         <div
-          class="flex relative items-center bg-add p-1 h-4 w-10 rounded-xl after:content-[''] after:block after:w-3 after:h-3 after:bg-secondary after:rounded-full after:duration-300 after:absolute after:top-1/2 after:-translate-y-1/2 ease transition-transform dark:after:translate-x-5 dark:after:bg-primary"
+          class="flex relative items-center bg-add p-0.5 h-4 w-8 rounded-xl after:content-[''] after:block after:w-3 after:h-3 after:bg-secondary after:rounded-full after:duration-300 after:absolute after:top-1/2 after:-translate-y-1/2 dark:after:translate-x-4 ease transition-transform dark:after:bg-primary"
         ></div>
       </button>
       <i :style="{ fontSize: '0.9rem' }" class="material-symbols-outlined"

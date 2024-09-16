@@ -19,14 +19,15 @@ export const useThemeStore = defineStore("themeStore", () => {
     }
   }
 
-  watch(isDark, (isDark) => {
-    setIsDark(isDark);
+  watch(isDark, (isDarkMode) => {
+    setIsDark(isDarkMode);
   });
 
   onMounted(() => {
     const savedTheme = localStorage.getItem(THEME);
     if (savedTheme) {
       setIsDark(true);
+      isDark.value = true;
     }
   });
 

@@ -41,9 +41,9 @@ onBeforeUnmount(() => {
       sideBarOpen ? 'left-0 opacity-100' : '-left-full opacity-0'
     }`"
   >
-    <h2 class="text-2xl font-semibold">Menu</h2>
+    <h2 class="text-2xl font-semibold">{{ $t("menu") }}</h2>
     <ul
-      class="list-none flex flex-col gap-y-3 mt-8 w-fit mx-auto max-h-[90%] overflow-x-hidden overflow-y-auto"
+      class="list-none flex flex-col gap-y-3 mt-5 w-fit mx-auto max-h-[90%] overflow-x-hidden overflow-y-auto"
     >
       <li>
         <SideBarThemeToggle />
