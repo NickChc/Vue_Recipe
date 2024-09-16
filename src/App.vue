@@ -2,7 +2,6 @@
 import { RouterView } from "vue-router";
 import Header from "@/components/Header.vue";
 import SideBar from "@/components/SideBar/SideBar.vue";
-import HeaderImage from "@/components/HeaderImage.vue";
 import { useGlobalStore } from "@/stores/globalStore";
 import { storeToRefs } from "pinia";
 
@@ -20,8 +19,7 @@ const { sideBarOpen } = storeToRefs(globalStore);
     }`"
   >
     <Header />
-    <HeaderImage />
-    <div class="p-2">
+    <div class="">
       <RouterView />
     </div>
   </div>
