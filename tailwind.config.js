@@ -8,6 +8,7 @@ export default {
         primary: "var(--clr-primary)",
         secondary: "var(--clr-secondary)",
         add: "var(--clr-add)",
+        "add-2": "var(--clr-add-2)",
         danger: "var(--clr-danger)",
         success: "var(--clr-success)",
       },

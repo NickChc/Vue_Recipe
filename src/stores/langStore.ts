@@ -11,7 +11,7 @@ export enum TLocale_Enum {
 export const useLangStore = defineStore("langStore", () => {
   const locale = ref(i18n.global.locale);
 
-  function toggleLocale(lang: TLocale_Enum) {
+  function setLocale(lang: TLocale_Enum) {
     locale.value = lang;
   }
 
@@ -19,5 +19,5 @@ export const useLangStore = defineStore("langStore", () => {
     localStorage.setItem(LANG, locale);
   });
 
-  return { locale, toggleLocale };
+  return { locale, setLocale };
 });
