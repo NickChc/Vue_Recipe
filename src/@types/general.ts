@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export enum TComplexity_Enum {
   BEGINNER = "beginner",
   INTERMEDIATE = "intermediate",
@@ -12,9 +14,14 @@ export interface TRecipe {
   recipe: string;
   cooking_time: number;
   rating: number;
+  rates: number;
   complexity: TComplexity_Enum;
-  created_at: Date;
-  image: string;
+  created_at: Timestamp;
+  image?: string;
+  author: {
+    name: string;
+    rating: number;
+  };
 }
 
 export interface TUser {

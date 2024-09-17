@@ -4,5 +4,13 @@
   "recipes": "RECIPES",
   "menu": "Menu",
   "theme": "Theme",
-  "addARecipe": "ADD A RECIPE"
+  "addARecipe": "ADD A RECIPE",
+  "complexity": {
+    "beginner": "BEGINNER",
+    "intermediate": "INTERMEDIATE",
+    "advanced": "ADVANCED",
+    "chef": "CHEF"
+  },
+  "lvl": "level - {level}",
+  "min": "min"
 }

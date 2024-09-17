@@ -4,5 +4,13 @@
   "recipes": "რეცეპტები",
   "menu": "მენიუ",
   "theme": "ფერები",
-  "addARecipe": "რეცეპტის დამატება"
+  "addARecipe": "რეცეპტის დამატება",
+  "complexity": {
+    "beginner": "დამწყები",
+    "intermediate": "საშუალო",
+    "advanced": "რთული",
+    "chef": "შეფი"
+  },
+  "lvl": "სირთულე - {level}",
+  "min": "წთ"
 }
