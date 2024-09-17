@@ -4,5 +4,7 @@ import HeaderImage from "@/components/HeaderImage.vue";
 
 <template>
   <HeaderImage />
-  <h1>{{ $t("home") }}</h1>
+  <div class="h-screen">
+    <h1>{{ $t("home") }}</h1>
+  </div>
 </template>
