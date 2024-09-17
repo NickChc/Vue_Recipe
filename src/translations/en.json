@@ -12,5 +12,6 @@
     "chef": "CHEF"
   },
   "lvl": "level - {level}",
-  "min": "min"
+  "min": "min",
+  "noImage": "No image"
 }

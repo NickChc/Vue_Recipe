@@ -22,7 +22,7 @@ onMounted(() => {
     <div v-if="gettingTopRated">LOADING...</div>
     <div
       v-else-if="topRatedRecipes.length > 0"
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 p-3"
+      class="w-fill sm:w-[90%] md:w-[80%] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-4 p-3"
     >
       <RecipeCard
         v-for="recipe in topRatedRecipes"

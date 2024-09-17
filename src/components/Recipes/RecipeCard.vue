@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { TRecipe } from "@/@types/general";
 import Fallback_Food_Image from "@/assets/images/Fallback_Food_Image.avif";
+import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
 import { ref } from "vue";
-import RecipeCardRating from "./RecipeCardRating.vue";
 
 interface RecipeCardProps {
   recipe: TRecipe;
@@ -30,7 +30,7 @@ function onImageError(e: Event) {
         class="absolute inset-0 bg-[rgba(128,128,128,0.8)] grid place-items-center"
       >
         <h2 class="text-primary font-bold text-xl xs:text-3xl font-merri">
-          No image
+          {{ $t("noImage") }}
         </h2>
       </div>
       <img
