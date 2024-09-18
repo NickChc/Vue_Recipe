@@ -11,6 +11,12 @@ const routes: RouteRecordRaw[] = [
     name: "Recipes",
     component: () => import("@/views/Recipes.vue"),
   },
+  {
+    path: "/recipes/:recipeId",
+    name: "Recipe",
+    props: true,
+    component: () => import("@/views/Recipe.vue"),
+  },
 ];
 
 const router = createRouter({
