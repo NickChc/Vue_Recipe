@@ -42,6 +42,10 @@ body {
   color: var(--clr-secondary);
 }
 
+#app {
+  height: 100vh;
+}
+
 body.dark {
   background-color: var(--clr-secondary);
   color: var(--clr-primary);

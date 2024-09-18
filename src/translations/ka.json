@@ -17,5 +17,10 @@
   "peopleRatedAmount": "{amount} -მა ადამიანმა შეაფასა ეს რეცეპტი",
   "complexityTitle": "რეცეპტის სირთულე",
   "estimatedTimeOfCooking": "სავარაუდო დრო",
-  "more": "სრულად"
+  "more": "სრულად",
+  "author": "ავტორი - {name}",
+  "subscribe": "გამოწერა",
+  "unsubscribe": "გაუქმება",
+  "rateTheRecipe": "შეაფასეთ რეცეპტი",
+  "subscribeTip": "გამოიწერეთ და მიიღეთ შეტყობინებები თქვენი რჩეული ავტორის ახალ რეცეპტებზე."
 }

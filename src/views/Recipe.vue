@@ -12,9 +12,9 @@ const { currentRecipe, loading, error } = useGetCurrentRecipe(recipeId);
 </script>
 
 <template>
-  <div class="w-[80%] mx-auto overflow-hidden">
+  <div class="sm:w-[80%] h-full mx-auto overflow-x-hidden">
     <div v-if="loading">LOADING...</div>
-    <RecipeCard v-else-if="currentRecipe" :recipe="currentRecipe" />
+    <RecipeCard v-else-if="currentRecipe" :recipe="currentRecipe" isMore />
     <div v-else-if="error">{{ error }}</div>
   </div>
 </template>

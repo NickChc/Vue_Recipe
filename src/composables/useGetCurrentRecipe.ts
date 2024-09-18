@@ -1,8 +1,7 @@
 import { TRecipe } from "@/@types/general";
-import { db, recipesCollection } from "@/firebase";
+import { db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { onMounted, ref } from "vue";
-import { ref as firebaseRef } from "firebase/database";
 
 export function useGetCurrentRecipe(recipeId: string) {
   const currentRecipe = ref<TRecipe | null>(null);

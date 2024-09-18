@@ -1,15 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import StarIcon from "@/components/StarIcon.vue";
-import ManIcon from "../ManIcon.vue";
+import ManIcon from "@/components/ManIcon.vue";
 
 interface RecipeCardRatingProps {
   rating: number;
   totalRates: number;
+  isMore?: boolean;
 }
 
-const { rating, totalRates } = defineProps<RecipeCardRatingProps>();
+const { rating, totalRates, isMore } = defineProps<RecipeCardRatingProps>();
 
+// TODO : make real rating
 const newRating = ref(0);
 
 function handleRate(point: number) {
@@ -39,8 +41,13 @@ function getMaskWidth(star: number) {
 </script>
 
 <template>
+  <h3 v-if="isMore" class="text-sm mt-3">{{ $t("rateTheRecipe") }}:</h3>
   <div
-    class="rating absolute bottom-1 left-0 right-0 text-[goldenrod] flex items-center justify-between pr-2"
+    :class="`bottom-1 left-0 right-0 text-[goldenrod] flex  pr-2 items-center ${
+      isMore
+        ? 'justify-start xs:gap-x-5 mt-2 mb-4'
+        : 'rating absolute justify-between'
+    }`"
   >
     <div class="flex items-center gap-x-1 px-2">
       <button

@@ -12,14 +12,14 @@ const { sideBarOpen } = storeToRefs(globalStore);
 <template>
   <SideBar />
   <div
-    :class="`duration-500 transition-transform sm:transition-none ease-in ${
+    :class="`duration-500 transition-transform sm:transition-none ease-in h-full ${
       sideBarOpen
         ? `translate-x-[calc(100%-var(--width-sidebar-btn))] sm:translate-x-0`
         : 'translate-x-0'
     }`"
   >
     <Header />
-    <div class="">
+    <div class="h-full">
       <RouterView />
     </div>
   </div>
