@@ -13,5 +13,9 @@
   },
   "lvl": "სირთულე - {level}",
   "min": "წთ",
-  "noImage": "სურათი არ არის"
+  "noImage": "სურათი არ არის",
+  "peopleRatedAmount": "{amount} -მა ადამიანმა შეაფასა ეს რეცეპტი",
+  "complexityTitle": "რეცეპტის სირთულე",
+  "estimatedTimeOfCooking": "სავარაუდო დრო",
+  "more": "სრულად"
 }

@@ -2,13 +2,14 @@
 import { TRecipe } from "@/@types/general";
 import Fallback_Food_Image from "@/assets/images/Fallback_Food_Image.avif";
 import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 interface RecipeCardProps {
   recipe: TRecipe;
 }
 
 const { recipe } = defineProps<RecipeCardProps>();
+const totalRates = computed(() => recipe.rates.length);
 
 const imageError = ref(false);
 
@@ -29,7 +30,7 @@ function onImageError(e: Event) {
         v-if="imageError || recipe.image == null"
         class="absolute inset-0 bg-[rgba(128,128,128,0.8)] grid place-items-center"
       >
-        <h2 class="text-primary font-bold text-xl xs:text-3xl font-merri">
+        <h2 class="text-primary font-bold text-xl xs:text-2xl font-merri">
           {{ $t("noImage") }}
         </h2>
       </div>
@@ -41,7 +42,7 @@ function onImageError(e: Event) {
           imageError || recipe.image == null ? '' : ''
         } `"
       />
-      <RecipeCardRating :rating="recipe.rating" />
+      <RecipeCardRating :rating="recipe.rating" :totalRates="totalRates" />
     </div>
 
     <div class="p-3 flex flex-col gap-y-3">
@@ -53,9 +54,9 @@ function onImageError(e: Event) {
 
       <strong class="text-add">By - {{ recipe.author.name }}</strong>
       <div
-        class="flex text-add-2 dark:text-primary justify-between items-center"
+        class="flex text-add-2 dark:text-primary justify-between gap-x-1 items-center text-xs xs:text-sm"
       >
-        <span class="text-sm flex items-center">
+        <span class="flex items-center" :title="$t('estimatedTimeOfCooking')">
           <i
             class="material-symbols-outlined mr-1"
             :style="{ fontSize: '1rem' }"
@@ -64,9 +65,16 @@ function onImageError(e: Event) {
           -
           {{ recipe.cooking_time }} {{ $t("min") }}
         </span>
-        <span class="ml-auto text-sm">
+        <span :title="$t('complexityTitle')">
           {{ $t(`complexity.${recipe.complexity}`) }}</span
         >
+        <RouterLink
+          class="text-secondary dark:text-add duration-200 transition-colors hover:text-add active:opacity-75 flex items-center"
+          :to="`/recipes/${recipe.id}`"
+        >
+          <p class="underline">{{ $t("more") }}</p>
+          <i class="material-symbols-outlined text-xl">chevron_right</i>
+        </RouterLink>
       </div>
     </div>
   </div>

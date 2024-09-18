@@ -14,7 +14,7 @@ export interface TRecipe {
   recipe: string;
   cooking_time: number;
   rating: number;
-  rates: number;
+  rates: { point: number; user_id: string }[];
   complexity: TComplexity_Enum;
   created_at: Timestamp;
   image?: string;

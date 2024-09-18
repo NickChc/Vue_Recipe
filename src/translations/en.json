@@ -13,5 +13,9 @@
   },
   "lvl": "level - {level}",
   "min": "min",
-  "noImage": "No image"
+  "noImage": "No image",
+  "peopleRatedAmount": "{amount} people rated this recipe",
+  "complexityTitle": "Complexity of the recipe",
+  "estimatedTimeOfCooking": "Estimated time",
+  "more": "More"
 }

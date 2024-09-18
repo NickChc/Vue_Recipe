@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import StarIcon from "@/components/StarIcon.vue";
+import ManIcon from "../ManIcon.vue";
 
 interface RecipeCardRatingProps {
   rating: number;
+  totalRates: number;
 }
 
-const { rating } = defineProps<RecipeCardRatingProps>();
+const { rating, totalRates } = defineProps<RecipeCardRatingProps>();
 
 const newRating = ref(0);
 
@@ -38,18 +40,32 @@ function getMaskWidth(star: number) {
 
 <template>
   <div
-    class="rating flex items-center gap-x-1 absolute bottom-1 px-2 text-[goldenrod]"
+    class="rating absolute bottom-1 left-0 right-0 text-[goldenrod] flex items-center justify-between pr-2"
   >
-    <button
-      v-for="star in [1, 2, 3, 4, 5]"
-      :key="star"
-      @click="handleRate(20 * star)"
+    <div class="flex items-center gap-x-1 px-2">
+      <button
+        v-for="star in [1, 2, 3, 4, 5]"
+        :key="star"
+        @click="handleRate(20 * star)"
+      >
+        <StarIcon
+          class="text-xs xs:text-sm lg:text-base xl:text-sm"
+          :fill="newRating >= 20 * star ? 'goldenrod' : undefined"
+          :mask-width="getMaskWidth(star)"
+        />
+      </button>
+    </div>
+
+    <div
+      class="flex items-center gap-x-1.5 ml-0.5 mt-2"
+      :title="$t('peopleRatedAmount', { amount: totalRates })"
     >
-      <StarIcon
-        :fill="newRating >= 20 * star ? 'goldenrod' : undefined"
-        :mask-width="getMaskWidth(star)"
-      />
-    </button>
+      <span class="text-shadow text-sm flex items-center">{{ rating }}% </span>
+      <span class="border border-[goldenrod] h-3.5"></span>
+      <span class="flex items-center text-sm xs:text-base">
+        {{ totalRates }} <ManIcon class="text-base xs:text-lg" />
+      </span>
+    </div>
   </div>
 </template>
 
