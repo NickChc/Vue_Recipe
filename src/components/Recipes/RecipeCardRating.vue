@@ -17,6 +17,23 @@ function handleRate(point: number) {
     newRating.value = point;
   }
 }
+
+function getMaskWidth(star: number) {
+  const starCount = 5;
+  const percentagePerStar = 100 / starCount;
+
+  const starStart = (star - 1) * percentagePerStar;
+  const starEnd = star * percentagePerStar;
+
+  if (starEnd < rating) {
+    return "100%";
+  } else if (starStart > rating) {
+    return "0%";
+  }
+
+  const filledPercentage = ((rating - starStart) / percentagePerStar) * 100;
+  return `${filledPercentage}%`;
+}
 </script>
 
 <template>
@@ -28,7 +45,10 @@ function handleRate(point: number) {
       :key="star"
       @click="handleRate(20 * star)"
     >
-      <StarIcon :fill="newRating >= 20 * star ? 'goldenrod' : undefined" />
+      <StarIcon
+        :fill="newRating >= 20 * star ? 'goldenrod' : undefined"
+        :mask-width="getMaskWidth(star)"
+      />
     </button>
   </div>
 </template>
