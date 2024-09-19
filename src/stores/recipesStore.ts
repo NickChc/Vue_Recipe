@@ -11,5 +11,15 @@ export const useRecipesStore = defineStore("recipes", () => {
     topRatedRecipes.value = recipes;
   }
 
-  return { recipes, topRatedRecipes, newestRecipes, setTopRatedRecipes };
+  function setRecipes(newRecipes: TRecipe[]) {
+    recipes.value = newRecipes;
+  }
+
+  return {
+    recipes,
+    topRatedRecipes,
+    newestRecipes,
+    setTopRatedRecipes,
+    setRecipes,
+  };
 });

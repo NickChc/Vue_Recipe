@@ -12,7 +12,7 @@ function toggleTheme() {
 
 <template>
   <button
-    class="text-add hidden sm:grid bg-primary dark:bg-secondary dark:text-primary p-1 rounded-full"
+    class="text-add hidden sm:grid bg-primary dark:bg-secondary dark:text-primary p-1.5 rounded-full"
     @click="toggleTheme"
   >
     <i

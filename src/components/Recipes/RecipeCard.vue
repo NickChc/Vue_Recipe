@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TRecipe } from "@/@types/general";
-import Fallback_Food_Image from "@/assets/images/Fallback_Food_Image.avif";
+import Fallback_Food_Image from "@/assets/images/Fallback_Food_Image.jpeg";
 import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
 import { computed, ref } from "vue";
 import { TComplexity_Enum } from "@/@types/general";
@@ -92,7 +92,7 @@ function checkLevel(iconIndex: number) {
           class="flex flex-col sm:justify-between gap-y-3 xs:gap-y-3 xs:gap-x-4 xs:flex-row"
         >
           <div
-            class="flex flex-col gap-y-2 items-start sm:items-start lg:flex-row lg:gap-x-3 min-w-[50%]"
+            class="flex flex-col gap-y-2 items-start sm:items-center lg:flex-row lg:gap-x-3 min-w-[50%]"
           >
             <strong class="text-add max-w-[50%] min-w-fit"
               >{{ $t("author", { name: recipe.author.name }) }}
