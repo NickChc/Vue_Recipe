@@ -24,5 +24,11 @@
   "rateTheRecipe": "Rate the recipe",
   "subscribeTip": "Subscribe to receive notifications about your favorite author's new recipes.",
   "topRated": "Top Rated",
-  "newest": "New Recipes"
+  "newest": "New Recipes",
+  "name": "NAME",
+  "email": "EMAIL",
+  "password": "PASSWORD",
+  "confirmPassword": "CONFIRM PASSWORD",
+  "signIn": "SIGN IN",
+  "aboutUs": "About Us"
 }

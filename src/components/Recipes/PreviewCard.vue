@@ -15,7 +15,7 @@ const { recipes, title } = defineProps<PreviewCardProps>();
 <template>
   <div class="flex flex-col gap-y-2">
     <h2
-      class="px-3 flex items-center gap-x-3 font-semibold sm:text-lg md:text-xl lg:text-2xl"
+      class="px-3 flex items-center gap-x-3 md:gap-x-5 font-semibold sm:text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl"
     >
       {{ title }}
       <slot></slot>

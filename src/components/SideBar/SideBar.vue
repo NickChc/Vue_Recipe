@@ -4,9 +4,13 @@ import { storeToRefs } from "pinia";
 import SideBarThemeToggle from "@/components/SideBar/SideBarThemeToggle.vue";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import SideBarLangSelect from "@/components/SideBar/SideBarLangSelect.vue";
+import Button from "../Button.vue";
+import { RouterLink, useRoute } from "vue-router";
 
 const globalStore = useGlobalStore();
 const { sideBarOpen } = storeToRefs(globalStore);
+
+const route = useRoute();
 
 function handleResize() {
   sideBarOpen.value = false;
@@ -44,9 +48,28 @@ onBeforeUnmount(() => {
       <li>
         <SideBarThemeToggle />
       </li>
+
       <hr class="border border-secondary dark:border-primary" />
+
       <li>
         <SideBarLangSelect />
+      </li>
+
+      <!-- <hr class="border border-secondary dark:border-primary" /> -->
+
+      <li
+        v-if="!route.fullPath.endsWith('/sign-in')"
+        class="flex flex-col items-stretch"
+      >
+        <Button variation="outlined" asChild @click="sideBarOpen = false">
+          <RouterLink
+            class="px-2 py-1 flex items-center justify-center gap-x-2"
+            to="/sign-in"
+          >
+            <i class="material-symbols-outlined">account_circle</i>
+            Sign In</RouterLink
+          >
+        </Button>
       </li>
     </ul>
   </div>

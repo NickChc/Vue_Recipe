@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HeaderImage from "@/components/HeaderImage.vue";
+import NewIcon from "@/components/Icons/NewIcon.vue";
 import StarIcon from "@/components/Icons/StarIcon.vue";
 import PreviewCard from "@/components/Recipes/PreviewCard.vue";
 import { useNewestRecipes } from "@/composables/useNewestRecipes";
@@ -31,7 +32,7 @@ onMounted(() => {
 <template>
   <HeaderImage />
   <div
-    class="w-fill sm:w-[90%] md:w-[80%] mx-auto min-h-screen pt-6 pb-14 flex flex-col gap-y-6"
+    class="w-fill sm:w-[90%] md:w-[80%] mx-auto min-h-screen pt-6 pb-14 flex flex-col gap-y-10"
   >
     <PreviewCard
       v-if="topRatedRecipes.length > 0"
@@ -42,7 +43,7 @@ onMounted(() => {
       <StarIcon
         maskWidth="0%"
         :fill="isDark ? 'var(--clr-primary)' : 'var(--clr-secondary)'"
-        class="text-secondary dark:text-primary text-xs mb-1"
+        class="text-secondary dark:text-primary text-xs sm:text-sm xl:text-lg mb-1"
       />
     </PreviewCard>
 
@@ -52,6 +53,9 @@ onMounted(() => {
       :loading="gettingNewest"
       :title="$t('newest', 'New Recipes')"
     >
+      <NewIcon
+        class="text-secondary dark:text-primary text-xl sm:text-2xl xl:text-4xl mb-1"
+      />
     </PreviewCard>
   </div>
 </template>
