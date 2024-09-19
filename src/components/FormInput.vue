@@ -24,18 +24,37 @@ const showPassword = ref(false);
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-2 relative">
+  <div class="flex flex-col gap-y-2">
     <label v-if="label" class="xs:text-lg">{{ label }}</label>
 
-    <input
-      :name="name"
-      v-bind="$attrs"
-      class="p-2 rounded-sm outline-add text-secondary"
-      @input="emitUpdate"
-      :type="`${
-        type === 'password' && !showPassword ? 'password' : type || 'text'
-      }`"
-    />
+    <div class="relative">
+      <input
+        :name="name"
+        v-bind="$attrs"
+        class="p-2 rounded-sm outline-add text-secondary w-full"
+        @input="emitUpdate"
+        :type="`${
+          type === 'password'
+            ? `${showPassword ? 'text' : 'password'}`
+            : type || 'text'
+        }`"
+      />
+      <button
+        type="button"
+        v-if="type === 'password'"
+        @click="showPassword = !showPassword"
+        class="absolute bottom-1/2 translate-y-1/2 right-3 grid text-secondary"
+      >
+        <i
+          v-if="!showPassword"
+          class="material-symbols-outlined text-xl sm:text-2xl"
+          >visibility</i
+        >
+        <i v-else class="material-symbols-outlined text-xl sm:text-2xl"
+          >visibility_off</i
+        >
+      </button>
+    </div>
 
     <div v-if="error">{{ error }}</div>
   </div>

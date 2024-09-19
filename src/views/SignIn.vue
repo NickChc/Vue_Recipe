@@ -79,6 +79,7 @@ function handleUpdate(value: keyof TUserData) {
       />
 
       <FormInput
+        type="password"
         name="password"
         v-model="userData.password"
         :label="$t('password', 'PASSWORD')"
@@ -86,6 +87,7 @@ function handleUpdate(value: keyof TUserData) {
       />
 
       <FormInput
+        type="password"
         name="confirmPassword"
         v-model="userData.confirmPassword"
         :label="$t('confirmPassword', 'CONFIRM PASSWORD')"
