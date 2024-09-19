@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { TRecipe } from "@/@types/general";
 import RecipeCard from "@/components/Recipes/RecipeCard.vue";
+import RecipeCardSkeleton from "./RecipeCardSkeleton.vue";
 
 interface PreviewCardProps {
   recipes: TRecipe[];
   title: string;
+  loading: boolean;
 }
 
 const { recipes, title } = defineProps<PreviewCardProps>();
@@ -19,7 +21,18 @@ const { recipes, title } = defineProps<PreviewCardProps>();
       <slot></slot>
     </h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-4 p-3">
-      <RecipeCard v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
+      <template v-if="loading">
+        <RecipeCardSkeleton />
+        <RecipeCardSkeleton />
+        <RecipeCardSkeleton />
+        <RecipeCardSkeleton />
+      </template>
+      <RecipeCard
+        v-else
+        v-for="recipe in recipes"
+        :key="recipe.id"
+        :recipe="recipe"
+      />
     </div>
   </div>
 </template>

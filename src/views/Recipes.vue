@@ -12,7 +12,7 @@ const { recipes, loading } = useGetRecipes();
   <div
     class="sm:w-[80%] p-3 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-8 my-9"
   >
-    <template v-if="loading || true">
+    <template v-if="loading">
       <RecipeCardSkeleton />
       <RecipeCardSkeleton />
       <RecipeCardSkeleton />

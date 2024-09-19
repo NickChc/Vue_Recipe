@@ -33,9 +33,9 @@ onMounted(() => {
   <div
     class="w-fill sm:w-[90%] md:w-[80%] mx-auto min-h-screen pt-6 pb-14 flex flex-col gap-y-6"
   >
-    <div v-if="gettingTopRated">LOADING...</div>
     <PreviewCard
-      v-else-if="topRatedRecipes.length > 0"
+      v-if="topRatedRecipes.length > 0"
+      :loading="gettingTopRated"
       :recipes="topRatedRecipes"
       :title="$t('topRated', 'Top Rated')"
     >
@@ -46,10 +46,10 @@ onMounted(() => {
       />
     </PreviewCard>
 
-    <div v-if="gettingNewest">LOADING...</div>
     <PreviewCard
-      v-else-if="newestRecipes.length > 0"
+      v-if="newestRecipes.length > 0"
       :recipes="newestRecipes"
+      :loading="gettingNewest"
       :title="$t('newest', 'New Recipes')"
     >
     </PreviewCard>
