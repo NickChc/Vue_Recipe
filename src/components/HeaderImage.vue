@@ -54,10 +54,15 @@ const { locale } = storeToRefs(langStore);
       </div>
 
       <button
-        class="absolute bottom-4 lg:bottom-6 right-6 lg:right-8 xl:right-10 p-1 px-3 text-xs border-2 border-primary rounded-sm ml-auto w-fit font-bold font-merri flex items-center gap-x-2 backdrop-blur-sm lg:text-base xl:text-lg lg:p-2 xl:p-3 hover:bg-primary duration-200 transition-colors hover:text-[rgba(0,0,0,0.5)]"
+        class="absolute bottom-4 lg:bottom-6 right-6 lg:right-8 xl:right-10 border-2 border-primary rounded-sm ml-auto w-fit font-bold font-merri backdrop-blur-sm hover:bg-primary duration-200 transition-colors hover:text-[rgba(0,0,0,0.5)]"
       >
-        {{ $t("addARecipe") }}
-        <i class="material-symbols-outlined mb-1">add</i>
+        <RouterLink
+          to="/recipes/new"
+          class="p-1 px-3 lg:p-2 xl:p-3 text-xs sm:text-sm lg:text-base xl:text-lg flex items-center gap-x-2"
+        >
+          {{ $t("addARecipe") }}
+          <i class="material-symbols-outlined mb-1">add</i>
+        </RouterLink>
       </button>
     </div>
   </div>

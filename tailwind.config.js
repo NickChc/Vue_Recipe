@@ -25,6 +25,10 @@ export default {
       minWidth: {
         "sidebar-btn": "var(--width-sidebar-btn)",
       },
+      animation: {
+        "pulse-2": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "pulse-3": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
     },
   },
   plugins: [],

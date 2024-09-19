@@ -11,6 +11,10 @@ export const useRecipesStore = defineStore("recipes", () => {
     topRatedRecipes.value = recipes;
   }
 
+  function setNewestRecipes(newRecipes: TRecipe[]) {
+    newestRecipes.value = newRecipes;
+  }
+
   function setRecipes(newRecipes: TRecipe[]) {
     recipes.value = newRecipes;
   }
@@ -20,6 +24,7 @@ export const useRecipesStore = defineStore("recipes", () => {
     topRatedRecipes,
     newestRecipes,
     setTopRatedRecipes,
+    setNewestRecipes,
     setRecipes,
   };
 });

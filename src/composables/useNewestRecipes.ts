@@ -5,21 +5,21 @@ import { getDocs, limit, orderBy, query } from "firebase/firestore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 
-export function useTopRatedRecipes() {
+export function useNewestRecipes() {
   const recipesStore = useRecipesStore();
-  const { topRatedRecipes } = storeToRefs(recipesStore);
+  const { newestRecipes } = storeToRefs(recipesStore);
 
   const loading = ref<boolean>(false);
   const error = ref<null | string>(null);
 
-  async function getTopRatedRecipes() {
+  async function getNewestRecipes() {
     try {
       error.value = null;
       loading.value = true;
 
       const recipesQuery = query(
         recipesCollection,
-        orderBy("rating", "desc"),
+        orderBy("created_at", "desc"),
         limit(4)
       );
 
@@ -34,7 +34,7 @@ export function useTopRatedRecipes() {
         } as TRecipe;
       });
 
-      recipesStore.setTopRatedRecipes(data);
+      recipesStore.setNewestRecipes(data);
     } catch (err: any) {
       console.log(err.message);
       error.value = "Couldn't get top rated recipes";
@@ -43,5 +43,5 @@ export function useTopRatedRecipes() {
     }
   }
 
-  return { getTopRatedRecipes, loading, error, topRatedRecipes };
+  return { getNewestRecipes, loading, error, newestRecipes };
 }

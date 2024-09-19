@@ -39,16 +39,24 @@ function checkLevel(iconIndex: number) {
 
 <template>
   <div
-    :class="`flex flex-col shadow-xl rounded-sm group h-full ${
-      isMore ? 'h-full pb-6 bg-add-2' : 'bg-primary dark:bg-add-2'
+    :class="`flex flex-col shadow-xl  group h-full ${
+      isMore ? 'h-full pb-6 bg-add-2' : 'rounded-sm bg-primary dark:bg-add-2'
     }`"
   >
-    <div class="relative overflow-hidden">
+    <div
+      :class="`relative overflow-hidden  ${
+        isMore ? 'min-h-40 xs:min-h-auto aspect-video' : ''
+      }`"
+    >
       <div
         v-if="imageError || recipe.image == null"
-        class="absolute inset-0 bg-[rgba(128,128,128,0.8)] grid place-items-center"
+        class="absolute aspect-video inset-0 bg-[rgba(128,128,128,0.8)] grid place-items-center z-10"
       >
-        <h2 class="text-primary font-bold text-xl xs:text-2xl font-merri">
+        <h2
+          :class="`text-primary font-bold  font-merri ${
+            isMore ? 'text-xl xs:text-2xl' : 'text-lg'
+          }`"
+        >
           {{ $t("noImage") }}
         </h2>
       </div>
@@ -56,9 +64,11 @@ function checkLevel(iconIndex: number) {
         :src="recipe.image || Fallback_Food_Image"
         alt="Meal image"
         @error="onImageError"
-        :class="`object-cover w-full aspect-video ${
-          imageError || recipe.image == null ? '' : ''
-        } `"
+        :class="`object-cover w-full aspect-video  ${
+          isMore
+            ? 'absolute inset-0 xs:static xs:aspect-video z-0'
+            : 'aspect-video'
+        }`"
       />
       <RecipeCardRating
         v-if="!isMore"
@@ -71,14 +81,20 @@ function checkLevel(iconIndex: number) {
       :class="`p-3 flex flex-col ${isMore ? 'my-3 text-primary' : 'gap-y-3'}`"
     >
       <div class="flex flex-col gap-y-1">
-        <h3 class="text-xl font-semibold">{{ recipe.title }}</h3>
+        <h3
+          :class="`text-xl font-semibold ${
+            isMore ? 'md:text-2xl lg:text-3xl' : ''
+          }`"
+        >
+          {{ recipe.title }}
+        </h3>
 
         <hr v-if="isMore" class="w-full my-2" />
 
         <p
           :class="`text-sm ${
             isMore
-              ? 'md:max-w-[700px] mb-3 md:text-base lg:text-lg'
+              ? 'md:max-w-[700px] mb-3 md:text-base lg:text-lg py-3 sm:px-10'
               : 'line-clamp-3'
           }`"
         >

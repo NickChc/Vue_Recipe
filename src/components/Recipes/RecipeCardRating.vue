@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import StarIcon from "@/components/StarIcon.vue";
-import ManIcon from "@/components/ManIcon.vue";
+import StarIcon from "@/components/Icons/StarIcon.vue";
+import ManIcon from "@/components/Icons/ManIcon.vue";
 
 interface RecipeCardRatingProps {
   rating: number;
@@ -46,7 +46,7 @@ function getMaskWidth(star: number) {
     :class="`bottom-1 left-0 right-0 text-[goldenrod] flex  pr-2 items-center ${
       isMore
         ? 'justify-start xs:gap-x-5 mt-2 mb-4'
-        : 'rating absolute justify-between'
+        : 'rating absolute z-30 justify-between'
     }`"
   >
     <div class="flex items-center gap-x-1 px-2">
