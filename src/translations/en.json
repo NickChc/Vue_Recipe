@@ -34,5 +34,13 @@
   "alreadyHaveAnAccount": "Already have an account?",
   "dontHaveAnAccountYet": "Don't have an account yet?",
   "doRegister": "REGISTER",
-  "register": "REGISTER"
+  "register": "REGISTER",
+  "enterYourName": "Enter your name",
+  "nameAtLeast2Chars": "Name must contain at least 2 characters",
+  "invalidEmailFormat": "Invalid email format",
+  "enterPassword": "Enter password",
+  "passwordAtLeast6": "Password must contain at least 6 characters",
+  "passwordMismatch": "Passwords don't match",
+  "repeatPassword": "Repeat your password",
+  "problemOccuredTryAgain": "Oops! A problem occured, please try again"
 }

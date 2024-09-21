@@ -34,5 +34,13 @@
   "alreadyHaveAnAccount": "უკვე გაქვთ ანგარიში?",
   "dontHaveAnAccountYet": "არ გაქვთ ანგარიში?",
   "doRegister": "გაიარეთ რეგისტრაცია",
-  "register": "რეგისტრაცია"
+  "register": "რეგისტრაცია",
+  "enterYourName": "შეიყვანეთ თქვენი სახელი",
+  "nameAtLeast2Chars": "სახელი უნდა შეიცავდეს მინ. 2 სიმბოლოს",
+  "invalidEmailFormat": "ელ. ფოსტის ფორმატი მცდარია",
+  "enterPassword": "შეიყვანეთ პაროლი",
+  "passwordAtLeast6": "პაროლი უნდა შეიცავდეს მინ. 6 სიმბოლოს",
+  "passwordMismatch": "პაროლები არ ემთხვევა",
+  "repeatPassword": "გაიმეორეთ თქვენი პაროლი",
+  "problemOccuredTryAgain": "შეფერხება! გთხოვთ სცადოთ ახლიდან"
 }

@@ -10,6 +10,7 @@ export default {
         add: "var(--clr-add)",
         "add-2": "var(--clr-add-2)",
         danger: "var(--clr-danger)",
+        "danger-dark": "var(--clr-danger-dark)",
         success: "var(--clr-success)",
       },
       fontFamily: {

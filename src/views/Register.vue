@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Button from "@/components/Button.vue";
-import FormInput from "@/components/FormInput.vue";
+import RegisterForm from "@/components/Auth/RegisterForm.vue";
 import { useLangStore } from "@/stores/langStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
@@ -63,46 +62,6 @@ function handleUpdate(value: keyof TUserData) {
     </p>
     <hr class="w-full border-add my-3" />
 
-    <form
-      @submit.prevent="console.log(userData)"
-      class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6"
-    >
-      <FormInput
-        name="name"
-        v-model="userData.name"
-        :label="$t('name', 'NAME')"
-        @update:value="handleUpdate('name')"
-      />
-
-      <FormInput
-        name="email"
-        v-model="userData.email"
-        :label="$t('email', 'EMAIL')"
-        @update:value="handleUpdate('email')"
-      />
-
-      <FormInput
-        type="password"
-        name="password"
-        v-model="userData.password"
-        :label="$t('password', 'PASSWORD')"
-        @update:value="handleUpdate('password')"
-      />
-
-      <FormInput
-        type="password"
-        name="confirmPassword"
-        v-model="userData.confirmPassword"
-        :label="$t('confirmPassword', 'CONFIRM PASSWORD')"
-        @update:value="handleUpdate('confirmPassword')"
-      />
-
-      <div class="invisible my-6"></div>
-
-      <Button variation="primary" type="submit">REGISTER</Button>
-      <RouterLink class="underline mt-10" to="/sign-in">{{
-        $t("alreadyHaveAnAccount")
-      }}</RouterLink>
-    </form>
+    <RegisterForm />
   </div>
 </template>

@@ -9,13 +9,11 @@ interface FormInputProps {
 }
 
 const emit = defineEmits<{
-  (e: "update:value", value: string): void;
+  (e: "update:value", inputEvent: Event): void;
 }>();
 
 function emitUpdate(e: Event) {
-  const target = e.target as HTMLInputElement;
-
-  emit("update:value", target.value);
+  emit("update:value", e);
 }
 
 const { label, error, type, name } = defineProps<FormInputProps>();
@@ -25,10 +23,15 @@ const showPassword = ref(false);
 
 <template>
   <div class="flex flex-col gap-y-2">
-    <label v-if="label" class="xs:text-lg">{{ label }}</label>
+    <label
+      v-if="label"
+      class="xs:text-lg mb-0.5 sm:text-xl md:text-2xl 2xl:text-3xl"
+      >{{ label }}</label
+    >
 
     <div class="relative">
       <input
+        @blur="false"
         :name="name"
         v-bind="$attrs"
         class="p-2 rounded-sm outline-add text-secondary w-full"
@@ -56,6 +59,12 @@ const showPassword = ref(false);
       </button>
     </div>
 
-    <div v-if="error">{{ error }}</div>
+    <div
+      :class="`overflow-hidden text-danger dark:text-danger-dark font-semibold text-xs xs:text-sm sm:text-base xl:text-lg duration-300 ${
+        error ? 'h-[1.4em]' : 'h-0'
+      }`"
+    >
+      {{ error }}
+    </div>
   </div>
 </template>

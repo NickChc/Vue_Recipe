@@ -9,6 +9,7 @@
   --clr-add: #ff6f00;
   --clr-add-2: #4b5563;
   --clr-danger: #d32f2f;
+  --clr-danger-dark: #d04f4f;
   --clr-success: #388e3c;
 
   --font-base: 16px;
@@ -40,6 +41,14 @@ body {
 
   background-color: var(--clr-primary);
   color: var(--clr-secondary);
+}
+
+/* Prevent chrome from changing input color on auto-fill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 #app {
