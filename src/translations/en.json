@@ -30,5 +30,9 @@
   "password": "PASSWORD",
   "confirmPassword": "CONFIRM PASSWORD",
   "signIn": "SIGN IN",
-  "aboutUs": "About Us"
+  "aboutUs": "About Us",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "dontHaveAnAccountYet": "Don't have an account yet?",
+  "doRegister": "REGISTER",
+  "register": "REGISTER"
 }

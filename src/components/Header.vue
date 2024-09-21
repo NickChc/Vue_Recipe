@@ -5,6 +5,7 @@ import SelectLang from "@/components/SelectLang.vue";
 import SideBarButton from "@/components/SideBar/SideBarButton.vue";
 import Button from "@/components/Button.vue";
 import { useRoute } from "vue-router";
+import { isAuthPath } from "@/utils/isAuthPath";
 
 const route = useRoute();
 </script>
@@ -37,10 +38,10 @@ const route = useRoute();
     </nav>
 
     <div
-      v-if="!route.fullPath.endsWith('/sign-in')"
+      v-if="!isAuthPath(route.fullPath)"
       class="hidden sm:block mr-5 lg:mr-10"
     >
-      <Button variation="outlined" asChild>
+      <Button variation="outlined" asChild color="white">
         <RouterLink to="/sign-in" class="px-2 py-1">Sign In</RouterLink>
       </Button>
     </div>

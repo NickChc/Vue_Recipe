@@ -4,7 +4,7 @@ import { storeToRefs } from "pinia";
 import SideBarThemeToggle from "@/components/SideBar/SideBarThemeToggle.vue";
 import { onBeforeUnmount, onMounted, watch } from "vue";
 import SideBarLangSelect from "@/components/SideBar/SideBarLangSelect.vue";
-import Button from "../Button.vue";
+import Button from "@/components/Button.vue";
 import { RouterLink, useRoute } from "vue-router";
 
 const globalStore = useGlobalStore();
@@ -37,7 +37,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    :class="`bg overflow-hidden  border-r-2 border-add p-3 h-full sm:hidden fixed top-0 bottom-0 z-50 duration-500 transition-all ease-in w-[calc(100vw-var(--width-sidebar-btn))] text-add ${
+    :class="`bg-priamry dark:bg-secondary overflow-hidden border-r-2 border-add p-3 h-full sm:hidden fixed top-0 bottom-0 z-50 duration-500 transition-all ease-in w-[calc(100vw-var(--width-sidebar-btn))] text-add ${
       sideBarOpen ? 'left-0 opacity-100' : '-left-full opacity-0'
     }`"
   >
@@ -54,8 +54,6 @@ onBeforeUnmount(() => {
       <li>
         <SideBarLangSelect />
       </li>
-
-      <!-- <hr class="border border-secondary dark:border-primary" /> -->
 
       <li
         v-if="!route.fullPath.endsWith('/sign-in')"

@@ -30,5 +30,9 @@
   "password": "პაროლი",
   "confirmPassword": "გაიმეორეთ პაროლი",
   "signIn": "გაიარეთ ავტორიზაცია",
-  "aboutUs": "ჩვენს შესახებ"
+  "aboutUs": "ჩვენს შესახებ",
+  "alreadyHaveAnAccount": "უკვე გაქვთ ანგარიში?",
+  "dontHaveAnAccountYet": "არ გაქვთ ანგარიში?",
+  "doRegister": "გაიარეთ რეგისტრაცია",
+  "register": "რეგისტრაცია"
 }

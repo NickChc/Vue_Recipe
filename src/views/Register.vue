@@ -29,9 +29,11 @@ function handleUpdate(value: keyof TUserData) {
 
 <template>
   <div
-    class="w-full sm:w-[80%] flex flex-col mx-auto p-3 dark:bg-add-2 h-full min-h-full pb-10"
+    class="w-full sm:w-[80%] flex flex-col mx-auto p-3 dark:bg-add-2 min-h-full pb-10"
   >
-    <h1 class="text-xl font-bold text-add">{{ $t("signIn", "SIGN IN") }}</h1>
+    <h1 class="text-xl font-bold text-add">
+      {{ $t("doRegister", "REGISTER") }}
+    </h1>
     <p
       v-if="locale === 'ka'"
       class="text-add-2 dark:text-primary mt-2 text-xs xs:text-sm sm:text-base"
@@ -66,6 +68,13 @@ function handleUpdate(value: keyof TUserData) {
       class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6"
     >
       <FormInput
+        name="name"
+        v-model="userData.name"
+        :label="$t('name', 'NAME')"
+        @update:value="handleUpdate('name')"
+      />
+
+      <FormInput
         name="email"
         v-model="userData.email"
         :label="$t('email', 'EMAIL')"
@@ -80,11 +89,19 @@ function handleUpdate(value: keyof TUserData) {
         @update:value="handleUpdate('password')"
       />
 
+      <FormInput
+        type="password"
+        name="confirmPassword"
+        v-model="userData.confirmPassword"
+        :label="$t('confirmPassword', 'CONFIRM PASSWORD')"
+        @update:value="handleUpdate('confirmPassword')"
+      />
+
       <div class="invisible my-6"></div>
 
-      <Button variation="primary" type="submit">SIGN IN</Button>
-      <RouterLink class="mt-10 underline" to="/register">{{
-        $t("dontHaveAnAccountYet")
+      <Button variation="primary" type="submit">REGISTER</Button>
+      <RouterLink class="underline mt-10" to="/sign-in">{{
+        $t("alreadyHaveAnAccount")
       }}</RouterLink>
     </form>
   </div>

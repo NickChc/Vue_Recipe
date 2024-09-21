@@ -35,6 +35,17 @@ onMounted(() => {
     class="w-fill sm:w-[90%] md:w-[80%] mx-auto min-h-screen pt-6 pb-14 flex flex-col gap-y-10"
   >
     <PreviewCard
+      v-if="newestRecipes.length > 0"
+      :recipes="newestRecipes"
+      :loading="gettingNewest"
+      :title="$t('newest', 'New Recipes')"
+    >
+      <NewIcon
+        class="text-secondary dark:text-primary text-xl sm:text-2xl xl:text-4xl mb-1"
+      />
+    </PreviewCard>
+
+    <PreviewCard
       v-if="topRatedRecipes.length > 0"
       :loading="gettingTopRated"
       :recipes="topRatedRecipes"
@@ -44,17 +55,6 @@ onMounted(() => {
         maskWidth="0%"
         :fill="isDark ? 'var(--clr-primary)' : 'var(--clr-secondary)'"
         class="text-secondary dark:text-primary text-xs sm:text-sm xl:text-lg mb-1"
-      />
-    </PreviewCard>
-
-    <PreviewCard
-      v-if="newestRecipes.length > 0"
-      :recipes="newestRecipes"
-      :loading="gettingNewest"
-      :title="$t('newest', 'New Recipes')"
-    >
-      <NewIcon
-        class="text-secondary dark:text-primary text-xl sm:text-2xl xl:text-4xl mb-1"
       />
     </PreviewCard>
   </div>

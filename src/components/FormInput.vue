@@ -47,10 +47,10 @@ const showPassword = ref(false);
       >
         <i
           v-if="!showPassword"
-          class="material-symbols-outlined text-xl sm:text-2xl"
+          class="material-symbols-outlined text-xl sm:text-2xl`"
           >visibility</i
         >
-        <i v-else class="material-symbols-outlined text-xl sm:text-2xl"
+        <i v-else class="material-symbols-outlined text-xl sm:text-2xl`"
           >visibility_off</i
         >
       </button>
