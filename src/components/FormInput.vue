@@ -6,6 +6,7 @@ interface FormInputProps {
   error?: null | string;
   type?: InputTypeHTMLAttribute;
   name?: string;
+  disabled?: boolean;
 }
 
 const emit = defineEmits<{
@@ -16,7 +17,7 @@ function emitUpdate(e: Event) {
   emit("update:value", e);
 }
 
-const { label, error, type, name } = defineProps<FormInputProps>();
+const { label, error, type, name, disabled } = defineProps<FormInputProps>();
 
 const showPassword = ref(false);
 </script>
@@ -31,10 +32,10 @@ const showPassword = ref(false);
 
     <div class="relative">
       <input
-        @blur="false"
+        :disabled="disabled"
         :name="name"
         v-bind="$attrs"
-        class="p-2 rounded-sm outline-add text-secondary w-full"
+        class="p-2 rounded-sm outline-add text-secondary w-full disabled:bg-add-2 dark:disabled:bg-primary dark:disabled:opacity-50 disabled:text-primary"
         @input="emitUpdate"
         :type="`${
           type === 'password'
@@ -43,10 +44,11 @@ const showPassword = ref(false);
         }`"
       />
       <button
+        :disabled="disabled"
         type="button"
         v-if="type === 'password'"
         @click="showPassword = !showPassword"
-        class="absolute bottom-1/2 translate-y-1/2 right-3 grid text-secondary"
+        class="absolute bottom-1/2 translate-y-1/2 right-3 grid text-secondary disabled:opacity-75"
       >
         <i
           v-if="!showPassword"

@@ -2,28 +2,9 @@
 import RegisterForm from "@/components/Auth/RegisterForm.vue";
 import { useLangStore } from "@/stores/langStore";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
-
-interface TUserData {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-const userData = ref<TUserData>({
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-});
 
 const langStore = useLangStore();
 const { locale } = storeToRefs(langStore);
-
-function handleUpdate(value: keyof TUserData) {
-  userData.value[value] = value;
-}
 </script>
 
 <template>

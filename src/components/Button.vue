@@ -3,11 +3,12 @@ interface ButtonProps {
   variation?: "outlined" | "danger" | "primary";
   asChild?: boolean;
   type?: "submit" | "button";
+  size?: "sm";
   disabled?: boolean;
   color?: "white";
 }
 
-const { variation, asChild, type, disabled, color } =
+const { variation, asChild, type, disabled, color, size } =
   defineProps<ButtonProps>();
 </script>
 
@@ -15,7 +16,7 @@ const { variation, asChild, type, disabled, color } =
   <button
     :disabled="disabled"
     :type="type"
-    :class="`border-2 whitespace-nowrap rounded-md font-semibold duration-300 transition-colors disabled:pointer-events-none disabled:opacity-80 ${
+    :class="`border-2 whitespace-nowrap rounded-md font-semibold duration-300 transition-colors disabled:pointer-events-none disabled:opacity-75 ${
       variation === 'outlined' && color === 'white'
         ? 'text-primary border-primary dark:text-primary dark:border-primary'
         : variation === 'outlined'
@@ -25,7 +26,7 @@ const { variation, asChild, type, disabled, color } =
         : variation === 'primary'
         ? 'border-add text-primary bg-add'
         : 'border-add text-add hover:bg-add hover:text-primary'
-    } ${asChild ? 'grid' : 'p-2'}`"
+    } ${asChild ? 'grid' : 'p-2'} ${size === 'sm' ? 'px-3 py-1' : ''}`"
   >
     <slot></slot>
   </button>

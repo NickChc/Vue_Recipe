@@ -42,5 +42,16 @@
   "passwordAtLeast6": "Password must contain at least 6 characters",
   "passwordMismatch": "Passwords don't match",
   "repeatPassword": "Repeat your password",
-  "problemOccuredTryAgain": "Oops! A problem occured, please try again"
+  "problemOccuredTryAgain": "Oops! A problem occured, please try again",
+  "couldntRegister": "Couldn't register user",
+  "registering": "REGISTERING...",
+  "verificationSent": "Registration was successful! please confirm email at {email} to continue",
+  "confirm": "Confirm",
+  "sendAgain": "Send Again",
+  "sending": "Sending...",
+  "accountAlreadyExists": "Account already exists",
+  "couldntperformAction": "Couldn't perform this action",
+  "tryAgain": "Try Again",
+  "tooManySendAgains": "Too many attemps, try again later",
+  "emailNotVerified": "Email is not verified, try again"
 }

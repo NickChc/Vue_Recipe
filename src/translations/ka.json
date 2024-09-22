@@ -42,5 +42,16 @@
   "passwordAtLeast6": "პაროლი უნდა შეიცავდეს მინ. 6 სიმბოლოს",
   "passwordMismatch": "პაროლები არ ემთხვევა",
   "repeatPassword": "გაიმეორეთ თქვენი პაროლი",
-  "problemOccuredTryAgain": "შეფერხება! გთხოვთ სცადოთ ახლიდან"
+  "problemOccuredTryAgain": "შეფერხება! გთხოვთ სცადოთ ახლიდან",
+  "couldntRegister": "მომხმარებლის რეგისტრაცია ვერ მოხერხდა",
+  "registering": "დაელოდეთ...",
+  "verificationSent": "ავტორიზაციამ წარმატებით ჩაიარა, გასაგრძელებლად ეწვიეთ თქვენს ელ.ფოსტას - {email}",
+  "confirm": "დადასტურება",
+  "sendAgain": "ახლიდან გაგზავნა",
+  "sending": "იგზავნება...",
+  "accountAlreadyExists": "ანგარიში უკვე არსებობს",
+  "couldntperformAction": "ოპერაცია ვერ მოხერხდა",
+  "tryAgain": "ახლიდან",
+  "tooManySendAgains": "ცდების რაოდენობა ლიმიტერებულია, გთხოვთ მოგვიანებით სცადოთ.",
+  "emailNotVerified": "ელ.ფოსტა დადასტურებული არ არის."
 }

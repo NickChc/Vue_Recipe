@@ -6,7 +6,19 @@ import {
   TRegisterValues,
   useValidateRegister,
 } from "@/composables/useValidateRegister";
-import FormError from "./FormError.vue";
+import FormError from "@/components/Auth/FormError.vue";
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+} from "firebase/auth";
+import { auth } from "@/firebase";
+import { useI18n } from "vue-i18n";
+import EmailConfirmation from "@/components/Auth/EmailConfirmation.vue";
+import { useAuthStore } from "@/stores/authStore";
+import { storeToRefs } from "pinia";
+
+const authStore = useAuthStore();
+const { verificationSent } = storeToRefs(authStore);
 
 const userData = ref<TRegisterValues>({
   name: "",
@@ -19,6 +31,8 @@ const { errors, isValid, validateRegister, clearError } = useValidateRegister(
   userData.value
 );
 
+const { t } = useI18n();
+
 const submitError = ref<null | string>(null);
 const loading = ref(false);
 
@@ -30,10 +44,26 @@ async function handleSubmit() {
 
     if (!isValid.value) return;
 
-    console.log(userData.value);
+    const { email, password } = userData.value;
+
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+
+    await sendEmailVerification(result.user);
+    verificationSent.value = true;
   } catch (err: any) {
     console.log(err.message);
-    submitError.value = "Couldn't register user";
+    const message: string = err.message;
+    if (message.includes("auth/email-already-in-use")) {
+      if (authStore.fireUser) {
+        await sendEmailVerification(authStore.fireUser);
+        verificationSent.value = true;
+        return;
+      }
+
+      submitError.value = t("accountAlreadyExists");
+      return;
+    }
+    submitError.value = t("couldntRegister");
   } finally {
     loading.value = false;
   }
@@ -49,12 +79,16 @@ function handleUpdate(e: Event) {
 </script>
 
 <template>
+  <EmailConfirmation v-if="verificationSent" />
+
   <form
     novalidate
     @submit.prevent="handleSubmit"
     class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6"
+    :class="verificationSent ? 'h-0 overflow-hidden' : ''"
   >
     <FormInput
+      :disabled="verificationSent || loading"
       name="name"
       :label="$t('name', 'NAME')"
       @update:value="handleUpdate"
@@ -62,6 +96,7 @@ function handleUpdate(e: Event) {
     />
 
     <FormInput
+      :disabled="verificationSent || loading"
       name="email"
       :label="$t('email', 'EMAIL')"
       @update:value="handleUpdate"
@@ -69,6 +104,7 @@ function handleUpdate(e: Event) {
     />
 
     <FormInput
+      :disabled="verificationSent || loading"
       type="password"
       name="password"
       :label="$t('password', 'PASSWORD')"
@@ -77,6 +113,7 @@ function handleUpdate(e: Event) {
     />
 
     <FormInput
+      :disabled="verificationSent || loading"
       type="password"
       name="confirmPassword"
       :label="$t('confirmPassword', 'CONFIRM PASSWORD')"
@@ -95,9 +132,14 @@ function handleUpdate(e: Event) {
       "
     />
 
-    <div class="invisible my-6"></div>
+    <div v-if="!verificationSent" class="invisible my-6"></div>
 
-    <Button variation="primary" type="submit">REGISTER</Button>
+    <Button
+      :disabled="verificationSent || loading"
+      variation="primary"
+      type="submit"
+      >{{ loading ? $t("registering") : $t("register") }}</Button
+    >
     <RouterLink class="underline mt-10" to="/sign-in">{{
       $t("alreadyHaveAnAccount")
     }}</RouterLink>
