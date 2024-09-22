@@ -50,6 +50,7 @@ async function handleSubmit() {
 
     await sendEmailVerification(result.user);
     verificationSent.value = true;
+    window.scrollTo({ top: 0, behavior: "smooth" });
   } catch (err: any) {
     console.log(err.message);
     const message: string = err.message;
@@ -85,7 +86,6 @@ function handleUpdate(e: Event) {
     novalidate
     @submit.prevent="handleSubmit"
     class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6"
-    :class="verificationSent ? 'h-0 overflow-hidden' : ''"
   >
     <FormInput
       :disabled="verificationSent || loading"

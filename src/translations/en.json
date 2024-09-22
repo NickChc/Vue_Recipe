@@ -53,5 +53,6 @@
   "couldntperformAction": "Couldn't perform this action",
   "tryAgain": "Try Again",
   "tooManySendAgains": "Too many attemps, try again later",
-  "emailNotVerified": "Email is not verified, try again"
+  "emailNotVerified": "Email is not verified, try again",
+  "verificationExpired": "Verification link has expired, register and try again"
 }

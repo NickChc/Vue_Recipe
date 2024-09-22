@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Button from "@/components/Button.vue";
 import { EMAIL_CONFIRM_ATTEMPTS } from "@/config/storageKeys";
+import { auth } from "@/firebase";
 import { useAuthStore } from "@/stores/authStore";
 import { sendEmailVerification } from "firebase/auth";
 import { storeToRefs } from "pinia";
@@ -23,7 +24,10 @@ const sending = ref(false);
 const error = ref<null | string>(null);
 
 async function confirmVerified() {
-  if (fireUser.value == null) return;
+  if (fireUser.value == null) {
+    error.value = t("verificationExpired");
+    return;
+  }
 
   await fireUser.value.reload();
 
@@ -84,8 +88,12 @@ async function handleSendAgain() {
       localStorage.removeItem(EMAIL_CONFIRM_ATTEMPTS);
     }
 
+    await auth.currentUser?.reload();
+    console.log(fireUser.value);
+    console.log(fireUser.value);
+
     if (fireUser.value == null) {
-      error.value = t("couldntperformAction");
+      error.value = t("verificationExpired");
       return;
     }
 
@@ -104,11 +112,10 @@ async function handleSendAgain() {
 
 <template>
   <div
-    v-if="fireUser"
     class="border-2 border-add rounded-sm flex flex-col items-center justify-between text-add p-2 text-center"
   >
     <p v-if="error == null">
-      {{ $t("verificationSent", { email: fireUser.email }) }}
+      {{ $t("verificationSent", { email: fireUser?.email }) }}
     </p>
     <p v-else class="text-danger dark:text-danger-dark">{{ error }}</p>
 
@@ -121,9 +128,19 @@ async function handleSendAgain() {
       }}</Button>
     </div>
     <div v-else>
-      <Button size="sm" variation="primary" @click="error = null">{{
-        $t("tryAgain")
-      }}</Button>
+      <Button
+        size="sm"
+        variation="primary"
+        @click="
+          () => {
+            if (fireUser == null) {
+              authStore.verificationSent = false;
+            }
+            error = null;
+          }
+        "
+        >{{ $t("tryAgain") }}</Button
+      >
     </div>
   </div>
 </template>

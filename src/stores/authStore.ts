@@ -5,7 +5,7 @@ import { onMounted, ref } from "vue";
 
 export const useAuthStore = defineStore("authStore", () => {
   const fireUser = ref<null | User>(null);
-  const verificationSent = ref(true);
+  const verificationSent = ref(false);
 
   onMounted(() => {
     onAuthStateChanged(auth, (authUser) => {
