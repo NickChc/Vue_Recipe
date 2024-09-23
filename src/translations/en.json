@@ -29,6 +29,7 @@
   "email": "EMAIL",
   "password": "PASSWORD",
   "confirmPassword": "CONFIRM PASSWORD",
+  "doSignIn": "SIGN IN",
   "signIn": "SIGN IN",
   "aboutUs": "About Us",
   "alreadyHaveAnAccount": "Already have an account?",
@@ -36,6 +37,7 @@
   "doRegister": "REGISTER",
   "register": "REGISTER",
   "enterYourName": "Enter your name",
+  "enterEmail": "Enter your email",
   "nameAtLeast2Chars": "Name must contain at least 2 characters",
   "invalidEmailFormat": "Invalid email format",
   "enterPassword": "Enter password",
@@ -54,5 +56,7 @@
   "tryAgain": "Try Again",
   "tooManySendAgains": "Too many attemps, try again later",
   "emailNotVerified": "Email is not verified, try again",
-  "verificationExpired": "Verification link has expired, register and try again"
+  "verificationExpired": "Verification link has expired, register and try again",
+  "signingIn": "SIGNING IN...",
+  "invalidCredentials": "Invalid credentials"
 }

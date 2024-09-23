@@ -1,37 +1,17 @@
 <script setup lang="ts">
-import Button from "@/components/Button.vue";
-import FormInput from "@/components/FormInput.vue";
+import SignInForm from "@/components/Auth/SignInForm.vue";
 import { useLangStore } from "@/stores/langStore";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
-
-interface TUserData {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
-
-const userData = ref<TUserData>({
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-});
 
 const langStore = useLangStore();
 const { locale } = storeToRefs(langStore);
-
-function handleUpdate(value: keyof TUserData) {
-  userData.value[value] = value;
-}
 </script>
 
 <template>
   <div
     class="w-full sm:w-[80%] flex flex-col mx-auto p-3 dark:bg-add-2 h-full min-h-full pb-10"
   >
-    <h1 class="text-xl font-bold text-add">{{ $t("signIn", "SIGN IN") }}</h1>
+    <h1 class="text-xl font-bold text-add">{{ $t("doSignIn", "SIGN IN") }}</h1>
     <p
       v-if="locale === 'ka'"
       class="text-add-2 dark:text-primary mt-2 text-xs xs:text-sm sm:text-base"
@@ -61,31 +41,6 @@ function handleUpdate(value: keyof TUserData) {
     </p>
     <hr class="w-full border-add my-3" />
 
-    <form
-      @submit.prevent="console.log(userData)"
-      class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6"
-    >
-      <FormInput
-        name="email"
-        v-model="userData.email"
-        :label="$t('email', 'EMAIL')"
-        @update:value="handleUpdate('email')"
-      />
-
-      <FormInput
-        type="password"
-        name="password"
-        v-model="userData.password"
-        :label="$t('password', 'PASSWORD')"
-        @update:value="handleUpdate('password')"
-      />
-
-      <div class="invisible my-6"></div>
-
-      <Button variation="primary" type="submit">SIGN IN</Button>
-      <RouterLink class="mt-10 underline" to="/register">{{
-        $t("dontHaveAnAccountYet")
-      }}</RouterLink>
-    </form>
+    <SignInForm />
   </div>
 </template>

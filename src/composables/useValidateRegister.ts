@@ -47,9 +47,7 @@ export function useValidateRegister(values: TRegisterValues) {
   const langStore = useLangStore();
   const { locale } = storeToRefs(langStore);
 
-  const initialErrors: TRegisterErrors = {};
-
-  const errors = ref<TRegisterErrors>(initialErrors);
+  const errors = ref<TRegisterErrors>({});
 
   function clearError(error: keyof TRegisterErrors) {
     errors.value[error] = undefined;
@@ -66,7 +64,7 @@ export function useValidateRegister(values: TRegisterValues) {
     }
 
     isValid.value = true;
-    errors.value = initialErrors;
+    errors.value = {};
   }
 
   watch(locale, () => {
