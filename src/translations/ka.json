@@ -39,7 +39,7 @@
   "nameAtLeast2Chars": "სახელი უნდა შეიცავდეს მინ. 2 სიმბოლოს",
   "invalidEmailFormat": "ელ. ფოსტის ფორმატი მცდარია",
   "enterPassword": "შეიყვანეთ პაროლი",
-  "passwordAtLeast6": "პაროლი უნდა შეიცავდეს მინ. 6 სიმბოლოს",
+  "passwordAtLeast8": "პაროლი უნდა შეიცავდეს მინ. 8 სიმბოლოს",
   "passwordMismatch": "პაროლები არ ემთხვევა",
   "repeatPassword": "გაიმეორეთ თქვენი პაროლი",
   "problemOccuredTryAgain": "შეფერხება! გთხოვთ სცადოთ ახლიდან",

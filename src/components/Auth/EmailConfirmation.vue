@@ -89,8 +89,6 @@ async function handleSendAgain() {
     }
 
     await auth.currentUser?.reload();
-    console.log(fireUser.value);
-    console.log(fireUser.value);
 
     if (fireUser.value == null) {
       error.value = t("verificationExpired");
@@ -112,14 +110,17 @@ async function handleSendAgain() {
 
 <template>
   <div
-    class="border-2 border-add rounded-sm flex flex-col items-center justify-between text-add p-2 text-center"
+    class="bg-add-2 border-2 border-add rounded-sm flex flex-col sm:flex-row sm:gap-x-3 items-center justify-between text-add p-2 text-center sm:text-start w-[700px] max-w-full mx-auto md:text-lg xl:text-xl"
   >
     <p v-if="error == null">
       {{ $t("verificationSent", { email: fireUser?.email }) }}
     </p>
-    <p v-else class="text-danger dark:text-danger-dark">{{ error }}</p>
+    <p v-else class="p-1 text-danger-dark dark:text-danger-dark">{{ error }}</p>
 
-    <div v-if="error == null" class="text-sm grid grid-cols-2 gap-x-3 mt-3">
+    <div
+      v-if="error == null"
+      class="text-sm grid grid-cols-1 xs:text-base sm:w-auto sm:min-w-fit gap-y-3 w-full gap-x-3 mt-3 sm:mt-0"
+    >
       <Button @click="confirmVerified" variation="primary" size="sm">{{
         $t("confirm")
       }}</Button>

@@ -27,7 +27,7 @@ function createRegisterSchema(t: any) {
       password: z
         .string({ message: t("enterPassword") })
         .min(1, t("enterPassword"))
-        .min(6, t("passwordAtLeast6")),
+        .min(8, t("passwordAtLeast8")),
       confirmPassword: z
         .string({ message: t("repeatPassword") })
         .min(1, t("repeatPassword")),
