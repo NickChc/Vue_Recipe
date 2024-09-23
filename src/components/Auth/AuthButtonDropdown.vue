@@ -29,7 +29,11 @@ watch(dropdownOpen, (isOpen) => {
 <template>
   <div id="container" class="relative">
     <button
-      class="p-1 border-primary border-2 grid text-primary whitespace-nowrap rounded-full"
+      :class="`p-1 border-2 grid whitespace-nowrap rounded-full ${
+        dropdownOpen
+          ? 'border-primary bg-primary dark:border-secondary dark:bg-secondary text-secondary dark:text-primary cursor-default'
+          : 'border-primary dark:border-secondary text-primary dark:text-secondary '
+      }`"
       @click="dropdownOpen = !dropdownOpen"
     >
       <i class="material-symbols-outlined">person</i>
@@ -38,7 +42,7 @@ watch(dropdownOpen, (isOpen) => {
     <ul
       v-if="dropdownOpen"
       id="dropdown"
-      class="list-none bg-primary text-add absolute right-1/2 px-2 py-1 rounded-sm shadow-2xl hover:shadow-none"
+      class="list-none bg-primary absolute right-1/2 px-2 py-1 rounded-sm shadow-2xl hover:shadow-none"
     >
       <li
         class="text-secondary duration-200 transition-opacity hover:opacity-75"
@@ -51,7 +55,7 @@ watch(dropdownOpen, (isOpen) => {
         </RouterLink>
       </li>
       <hr class="border-secondary my-1" />
-      <li class="duration-200 transition-opacity hover:opacity-75">
+      <li class="duration-200 transition-opacity hover:opacity-75 text-danger">
         <button
           @click="authStore.handleSignOut"
           class="flex items-center justify-between gap-x-2 whitespace-nowrap"
