@@ -33,7 +33,7 @@ import AuthButton from "@/components/Auth/AuthButton.vue";
       </NavLink>
     </nav>
 
-    <div class="flex items-center gap-x-5">
+    <div class="hidden sm:flex items-center gap-x-5">
       <AuthButton />
 
       <ToggleTheme />

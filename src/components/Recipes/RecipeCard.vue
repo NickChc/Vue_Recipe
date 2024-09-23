@@ -90,6 +90,20 @@ function checkLevel(iconIndex: number) {
         </h3>
 
         <hr v-if="isMore" class="w-full my-2" />
+        <!-- REST -->
+
+        <div v-if="isMore" class="flex flex-col">
+          <ul class="list-none text-xs sm:text-sm mt-2">
+            <li class="inline-flex m-1">
+              <h4 class="text-lg sm:text-xl lg:text-2xl">Diets -</h4>
+            </li>
+            <li v-for="diet in recipe.diet" :key="diet" class="inline-flex m-1">
+              <span class="rounded-md bg-add-2 p-2 bg-gray-300 text-add">{{
+                diet.toUpperCase()
+              }}</span>
+            </li>
+          </ul>
+        </div>
 
         <p
           :class="`text-sm ${

@@ -7,6 +7,25 @@ export enum TComplexity_Enum {
   CHEF = "chef",
 }
 
+export enum TCategory_Enum {
+  BREAKFAST = "Breakfast",
+  LUNCH = "Lunch",
+  DINNER = "Dinner",
+  SNACK = "Snack",
+  DESSERT = "Dessert",
+  APPETIZER = "Appetizer",
+}
+
+export enum TDiet_Enum {
+  VEGETARIAN = "Vegetarian",
+  VEGAN = "Vegan",
+  GLUTEN_FREE = "Gluten Free",
+  DAIRY_FREE = "Dairy Free",
+  KETO = "Keto",
+  PALEO = "Paleo",
+  LOW_CARB = "Low Carb",
+}
+
 export interface TRecipe {
   id: string;
   user_id: string;
@@ -17,6 +36,10 @@ export interface TRecipe {
   rates: { point: number; user_id: string }[];
   complexity: TComplexity_Enum;
   created_at: Timestamp;
+  ingredients: string[];
+  diet?: TDiet_Enum[];
+  servings: number;
+  category: TCategory_Enum[];
   image?: string;
   author: {
     name: string;
