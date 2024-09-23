@@ -3,17 +3,7 @@ import NavLink from "@/components/NavLink.vue";
 import ToggleTheme from "@/components/ToggleTheme.vue";
 import SelectLang from "@/components/SelectLang.vue";
 import SideBarButton from "@/components/SideBar/SideBarButton.vue";
-import Button from "@/components/Button.vue";
-import { useRoute } from "vue-router";
-import { isAuthPath } from "@/utils/isAuthPath";
-import { useAuthStore } from "@/stores/authStore";
-import { storeToRefs } from "pinia";
-import { signOut } from "firebase/auth";
-import { auth } from "@/firebase";
-
-const route = useRoute();
-const authStore = useAuthStore();
-const { fireUser } = storeToRefs(authStore);
+import AuthButton from "@/components/Auth/AuthButton.vue";
 </script>
 
 <template>
@@ -43,33 +33,11 @@ const { fireUser } = storeToRefs(authStore);
       </NavLink>
     </nav>
 
-    <!-- TODO : get rid of that logout -->
-    <button
-      v-if="fireUser?.emailVerified"
-      @click="signOut(auth)"
-      class="p-1 border-primary text-primary whitespace-nowrap"
-    >
-      Log Out
-    </button>
+    <div class="flex items-center gap-x-5">
+      <AuthButton />
 
-    <div
-      v-if="!isAuthPath(route.fullPath)"
-      class="hidden sm:block mr-5 lg:mr-10"
-    >
-      <Button variation="outlined" asChild color="white">
-        <RouterLink v-if="fireUser == null" to="/sign-in" class="px-2 py-1"
-          >Sign In</RouterLink
-        >
-        <RouterLink
-          v-else-if="fireUser.emailVerified"
-          to="/profile"
-          class="px-2 py-1"
-          >Profile</RouterLink
-        >
-      </Button>
+      <ToggleTheme />
     </div>
-
-    <ToggleTheme />
   </header>
 </template>
 

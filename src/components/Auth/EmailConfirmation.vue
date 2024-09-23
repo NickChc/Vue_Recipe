@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { TUser } from "@/@types/general";
 import Button from "@/components/Button.vue";
 import { EMAIL_CONFIRM_ATTEMPTS } from "@/config/storageKeys";
-import { auth } from "@/firebase";
-import { useAuthStore } from "@/stores/authStore";
 import { sendEmailVerification } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "@/firebase";
+import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
@@ -35,6 +37,23 @@ async function confirmVerified() {
     error.value = t("emailNotVerified");
     return;
   }
+
+  const { displayName, email } = fireUser.value;
+
+  const userDocRef = doc(db, "users", fireUser.value.uid);
+
+  const newUser: Omit<TUser, "id"> = {
+    name: displayName!,
+    email: email!,
+    rating: 0,
+    subscribers: [],
+    subscriptions: [],
+    recipes: [],
+  };
+
+  await setDoc(userDocRef, newUser);
+  authStore.setCurrentUser({ ...newUser, id: fireUser.value.uid });
+  console.log(newUser);
 
   authStore.verificationSent = false;
   router.replace("/");

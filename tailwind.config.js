@@ -29,6 +29,7 @@ export default {
       animation: {
         "pulse-2": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "pulse-3": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        "spin-3/2": "spin 1.5s linear infinite",
       },
     },
   },

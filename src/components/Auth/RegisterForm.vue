@@ -10,6 +10,7 @@ import FormError from "@/components/Auth/FormError.vue";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useI18n } from "vue-i18n";
@@ -47,6 +48,8 @@ async function handleSubmit() {
     const { email, password } = userData.value;
 
     const result = await createUserWithEmailAndPassword(auth, email, password);
+
+    await updateProfile(result.user, { displayName: userData.value.name });
 
     await sendEmailVerification(result.user);
     verificationSent.value = true;

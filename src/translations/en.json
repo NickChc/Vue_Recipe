@@ -58,5 +58,8 @@
   "emailNotVerified": "Email is not verified, try again",
   "verificationExpired": "Verification link has expired, register and try again",
   "signingIn": "SIGNING IN...",
-  "invalidCredentials": "Invalid credentials"
+  "invalidCredentials": "Invalid credentials",
+  "logOut": "Log Out",
+  "loggingOut": "Logging Out",
+  "profile": "Profile"
 }

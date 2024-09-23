@@ -26,6 +26,7 @@ export interface TRecipe {
 
 export interface TUser {
   id: string;
+  email: string;
   name: string;
   bio?: string;
   avatar?: string;

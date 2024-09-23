@@ -58,5 +58,8 @@
   "emailNotVerified": "ელ.ფოსტა დადასტურებული არ არის.",
   "verificationExpired": "ვერიფიკაციის ბმულს ვადა გაუვიდა, დარეგისტრირდით და სცადეთ ახლიდან.",
   "signingIn": "დაელოდეთ...",
-  "invalidCredentials": "ელ.ფოსტა ან პაროლი მცდარია"
+  "invalidCredentials": "ელ.ფოსტა ან პაროლი მცდარია",
+  "logOut": "გამოსვლა",
+  "loggingOut": "დაელოდეთ",
+  "profile": "პროფილი"
 }

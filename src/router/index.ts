@@ -1,3 +1,6 @@
+import { auth } from "@/firebase";
+import { useAuthStore } from "@/stores/authStore";
+import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: RouteRecordRaw[] = [
@@ -51,6 +54,8 @@ const routes: RouteRecordRaw[] = [
   },
 ];
 
+export const PROTECTED_ROUTES = ["/profile", "/recipes/new"];
+
 const router = createRouter({
   history: createWebHistory(),
   routes,
@@ -61,6 +66,28 @@ const router = createRouter({
 
     return { top: 0 };
   },
+});
+
+router.beforeEach((to) => {
+  if (!PROTECTED_ROUTES.includes(to.path)) return true;
+
+  const authStore = useAuthStore();
+  const { loadingAuth, currentUser } = storeToRefs(authStore);
+
+  if (loadingAuth.value) {
+    return new Promise((resolve) => {
+      const unsubscribe = authStore.$subscribe(() => {
+        if (!authStore.loadingAuth) {
+          unsubscribe();
+          resolve(to);
+        }
+      });
+    });
+  }
+
+  if (currentUser.value) return true;
+
+  return { path: "/sign-in" };
 });
 
 export default router;

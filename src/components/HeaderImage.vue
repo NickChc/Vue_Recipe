@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import LayoutImage from "@/assets/images/Layout_Image.jpg";
 import LayoutImageLarge from "@/assets/images/Layout_Image_Large.jpg";
+import { useAuthStore } from "@/stores/authStore";
 import { useLangStore } from "@/stores/langStore";
 import { storeToRefs } from "pinia";
 
 const langStore = useLangStore();
 const { locale } = storeToRefs(langStore);
+
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -57,7 +60,7 @@ const { locale } = storeToRefs(langStore);
         class="absolute bottom-4 lg:bottom-6 right-6 lg:right-8 xl:right-10 border-2 border-primary rounded-sm ml-auto w-fit font-bold font-merri backdrop-blur-sm hover:bg-primary duration-200 transition-colors hover:text-[rgba(0,0,0,0.5)]"
       >
         <RouterLink
-          to="/recipes/new"
+          :to="authStore.currentUser ? '/recipes/new' : '/sign-in'"
           class="p-1 px-3 lg:p-2 xl:p-3 text-xs sm:text-sm lg:text-base xl:text-lg flex items-center gap-x-2"
         >
           {{ $t("addARecipe") }}
