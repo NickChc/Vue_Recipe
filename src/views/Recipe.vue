@@ -21,7 +21,7 @@ const { currentRecipe, loading, error } = useGetCurrentRecipe(recipeId);
         @click="router.go(-1)"
         class="text-primary text-lg flex items-center gap-x-1"
       >
-        <i class="material-symbols-outlined">chevron_left</i> Back
+        <i class="material-symbols-outlined">chevron_left</i> {{ $t("back") }}
       </button>
     </nav>
     <div v-if="loading">LOADING...</div>

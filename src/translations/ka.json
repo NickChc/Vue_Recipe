@@ -61,5 +61,17 @@
   "invalidCredentials": "ელ.ფოსტა ან პაროლი მცდარია",
   "logOut": "გამოსვლა",
   "loggingOut": "დაელოდეთ",
-  "profile": "პროფილი"
+  "profile": "პროფილი",
+  "diets": "დიეტები",
+  "ingredients": "შემცველობა",
+  "diet_obj": {
+    "Vegetarian": "ვეგეტარიანული",
+    "Vegan": "ვეგანური",
+    "GlutenFree": "გლუტენის გარაშე",
+    "DairyFree": "რძის ნაწარმის გარაშე",
+    "Keto": "კეტო",
+    "Paleo": "პალეო",
+    "LowCarb": "დაბალი ნახშირწყლებით"
+  },
+  "back": "უკან"
 }

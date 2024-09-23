@@ -61,5 +61,17 @@
   "invalidCredentials": "Invalid credentials",
   "logOut": "Log Out",
   "loggingOut": "Logging Out",
-  "profile": "Profile"
+  "profile": "Profile",
+  "diets": "Diets",
+  "ingredients": "Ingredients",
+  "diet_obj": {
+    "Vegetarian": "Vegetarian",
+    "Vegan": "Vegan",
+    "Gluten_Free": "Gluten Free",
+    "Dairy_Free": "Dairy Free",
+    "Keto": "Keto",
+    "Paleo": "Paleo",
+    "LowCarb": "Low Card"
+  },
+  "back": "Back"
 }

@@ -40,16 +40,59 @@ const totalRates = computed(() => recipe.rates.length);
         <!-- REST -->
 
         <div v-if="isMore" class="flex flex-col">
-          <ul class="list-none text-xs sm:text-sm mt-2">
-            <li class="inline-flex m-1">
-              <h4 class="text-lg sm:text-xl lg:text-2xl">Diets -</h4>
-            </li>
-            <li v-for="diet in recipe.diet" :key="diet" class="inline-flex m-1">
-              <span class="rounded-md bg-add-2 p-2 bg-gray-300 text-add">{{
-                diet.toUpperCase()
-              }}</span>
-            </li>
-          </ul>
+          <div class="grid grid-cols-2 gap-x-6"></div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 w-full gap-3 md:gap-6 relative my-2"
+          >
+            <div class="w-full h-full flex flex-col sm:items-center">
+              <h4
+                class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl md:text-center"
+              >
+                {{ $t("diets") }}
+              </h4>
+              <ul
+                v-if="recipe.diet?.length! > 0"
+                class="list-none sm:px-2 h-full w-full md:w-fit text-xs sm:text-sm mt-2"
+              >
+                <li
+                  v-for="diet in recipe.diet"
+                  :key="diet"
+                  class="inline-flex m-1"
+                >
+                  <span
+                    class="rounded-md p-1 sm:p-2 bg-gray-300 text-add font-semibold"
+                    >{{ $t(`diet_obj.${diet.replace(" ", "_")}`) }}</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div
+              class="absolute right-1/2 h-full w-[1px] bg-primary hidden md:block"
+            ></div>
+
+            <div class="w-full h-full flex flex-col sm:items-center">
+              <h4
+                class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl text-start md:text-center"
+              >
+                {{ $t("ingredients") }}
+              </h4>
+              <ul
+                class="list-none sm:px-2 h-full w-full md:w-fit text-xs sm:text-sm mt-2"
+              >
+                <li
+                  v-for="ingredient in recipe.ingredients"
+                  :key="ingredient"
+                  class="inline-flex m-1"
+                >
+                  <span
+                    class="rounded-md p-1 sm:p-2 bg-gray-300 text-add-2 font-semibold"
+                    >{{ ingredient }}</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <p

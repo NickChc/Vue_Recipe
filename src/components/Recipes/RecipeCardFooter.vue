@@ -33,38 +33,30 @@ function checkLevel(iconIndex: number) {
       class="flex flex-col sm:justify-between gap-y-3 xs:gap-y-3 xs:gap-x-4 xs:flex-row"
     >
       <div
-        class="flex flex-col gap-y-2 items-start sm:items-center lg:flex-row lg:gap-x-3 min-w-[50%]"
+        class="flex flex-col gap-y-2 items-start sm:items-center lg:flex-row lg:gap-x-3 min-w-[50%] sm:text-lg 2xl:text-xl"
       >
         <strong class="text-add max-w-[50%] min-w-fit"
           >{{ $t("author", { name: recipe.author.name }) }}
         </strong>
 
         <button
-          :class="`text-sm text-add flex items-center gap-x-2 border border-add rounded-sm px-4 py-0.5 font-semibold duration-200 transition-colors ${
+          :class="`w-full xs:w-fit text-sm sm:text-base lg:text-lg text-add flex items-center justify-center gap-x-2 border border-add rounded-sm px-4 py-0.5 font-semibold duration-200 transition-colors ${
             isSubscribed ? 'bg-add text-primary' : 'text-add'
           }`"
           @click="isSubscribed = !isSubscribed"
         >
           <template v-if="isSubscribed">
             {{ $t("unsubscribe") }}
-            <i
-              class="material-symbols-outlined mt-1"
-              :style="{ fontSize: '1.2rem' }"
-              >notifications_active</i
-            >
+            <i class="material-symbols-outlined note">notifications_active</i>
           </template>
 
           <template v-else>
             {{ $t("subscribe") }}
-            <i
-              class="material-symbols-outlined mt-1"
-              :style="{ fontSize: '1.2rem' }"
-              >notifications</i
-            >
+            <i class="material-symbols-outlined note">notifications</i>
           </template>
         </button>
       </div>
-      <p class="text-sm text-add">
+      <p class="text-sm sm:text-base text-add">
         {{ $t("subscribeTip") }}
       </p>
     </div>
@@ -82,9 +74,7 @@ function checkLevel(iconIndex: number) {
     }`"
   >
     <span class="flex items-center" :title="$t('estimatedTimeOfCooking')">
-      <i class="material-symbols-outlined mr-1" :style="{ fontSize: '1rem' }"
-        >alarm</i
-      >
+      <i class="material-symbols-outlined mr-1">alarm</i>
       -
       {{ recipe.cooking_time }} {{ $t("min") }}
     </span>
@@ -130,3 +120,9 @@ function checkLevel(iconIndex: number) {
     </RouterLink>
   </div>
 </template>
+
+<style scoped>
+i.note {
+  @apply text-xl lg:text-2xl;
+}
+</style>
