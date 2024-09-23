@@ -73,5 +73,9 @@
     "Paleo": "Paleo",
     "LowCarb": "Low Card"
   },
-  "back": "Back"
+  "back": "Back",
+  "serveFor": "Serve for {count}",
+  "person": "person",
+  "people": "people",
+  "servings": "Servings"
 }

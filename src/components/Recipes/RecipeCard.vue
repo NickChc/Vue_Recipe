@@ -37,14 +37,15 @@ const totalRates = computed(() => recipe.rates.length);
         </h3>
 
         <hr v-if="isMore" class="w-full my-2" />
-        <!-- REST -->
 
         <div v-if="isMore" class="flex flex-col">
           <div class="grid grid-cols-2 gap-x-6"></div>
           <div
             class="grid grid-cols-1 md:grid-cols-2 w-full gap-3 md:gap-6 relative my-2"
           >
-            <div class="w-full h-full flex flex-col sm:items-center">
+            <div
+              class="w-full h-full flex flex-col sm:items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
+            >
               <h4
                 class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl md:text-center"
               >
@@ -60,7 +61,7 @@ const totalRates = computed(() => recipe.rates.length);
                   class="inline-flex m-1"
                 >
                   <span
-                    class="rounded-md p-1 sm:p-2 bg-gray-300 text-add font-semibold"
+                    class="rounded-md p-1 sm:p-2 bg-add-2 text-primary font-semibold"
                     >{{ $t(`diet_obj.${diet.replace(" ", "_")}`) }}</span
                   >
                 </li>
@@ -71,7 +72,9 @@ const totalRates = computed(() => recipe.rates.length);
               class="absolute right-1/2 h-full w-[1px] bg-primary hidden md:block"
             ></div>
 
-            <div class="w-full h-full flex flex-col sm:items-center">
+            <div
+              class="w-full h-full flex flex-col sm:items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
+            >
               <h4
                 class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl text-start md:text-center"
               >
@@ -86,7 +89,7 @@ const totalRates = computed(() => recipe.rates.length);
                   class="inline-flex m-1"
                 >
                   <span
-                    class="rounded-md p-1 sm:p-2 bg-gray-300 text-add-2 font-semibold"
+                    class="rounded-md p-1 sm:p-2 bg-add-2 text-primary font-semibold"
                     >{{ ingredient }}</span
                   >
                 </li>

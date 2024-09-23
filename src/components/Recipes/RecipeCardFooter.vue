@@ -2,6 +2,7 @@
 import { TComplexity_Enum, TRecipe } from "@/@types/general";
 import { ref } from "vue";
 import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
+import ManIcon from "../Icons/ManIcon.vue";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;
@@ -28,6 +29,20 @@ function checkLevel(iconIndex: number) {
 
 <template>
   <template v-if="isMore">
+    <h5
+      class="flex items-center justify-start mb-1"
+      :title="$t('serveFor', { count: recipe.servings })"
+    >
+      {{ $t("servings") }} -
+      <ManIcon
+        v-if="recipe.servings < 7"
+        v-for="man in recipe.servings"
+        :key="man"
+      />
+      <div v-else class="flex items-center">
+        <ManIcon v-for="man in 7" :key="man" /> +
+      </div>
+    </h5>
     <hr class="w-full border-add mb-2" />
     <div
       class="flex flex-col sm:justify-between gap-y-3 xs:gap-y-3 xs:gap-x-4 xs:flex-row"
@@ -73,8 +88,11 @@ function checkLevel(iconIndex: number) {
       isMore ? 'sm:text-lg text-primary' : 'text-add-2 dark:text-primary'
     }`"
   >
-    <span class="flex items-center" :title="$t('estimatedTimeOfCooking')">
-      <i class="material-symbols-outlined mr-1">alarm</i>
+    <span
+      class="flex items-center text-xs xs:text-sm"
+      :title="$t('estimatedTimeOfCooking')"
+    >
+      <i class="material-symbols-outlined alarm">alarm</i>
       -
       {{ recipe.cooking_time }} {{ $t("min") }}
     </span>
@@ -124,5 +142,9 @@ function checkLevel(iconIndex: number) {
 <style scoped>
 i.note {
   @apply text-xl lg:text-2xl;
+}
+
+i.alarm {
+  @apply mr-1 text-base xs:text-lg;
 }
 </style>
