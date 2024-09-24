@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useGlobalStore } from "@/stores/globalStore";
+import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 import SideBarThemeToggle from "@/components/SideBar/SideBarThemeToggle.vue";
 import { onBeforeUnmount, onMounted, watch } from "vue";
@@ -9,6 +10,9 @@ import { RouterLink, useRoute } from "vue-router";
 
 const globalStore = useGlobalStore();
 const { sideBarOpen } = storeToRefs(globalStore);
+
+const authStore = useAuthStore();
+const { currentUser, loadingAuth } = storeToRefs(authStore);
 
 const route = useRoute();
 
@@ -43,7 +47,7 @@ onBeforeUnmount(() => {
   >
     <h2 class="text-2xl font-semibold">{{ $t("menu") }}</h2>
     <ul
-      class="list-none flex flex-col gap-y-3 mt-5 w-full xs:w-[80%] mx-auto max-h-[90%] overflow-x-hidden overflow-y-auto"
+      class="list-none flex flex-col gap-y-3 mt-5 w-full xs:w-[80%] mx-auto pb-10 min-h-[90%] max-h-[90%] overflow-x-hidden overflow-y-auto"
     >
       <li>
         <SideBarThemeToggle />
@@ -55,17 +59,46 @@ onBeforeUnmount(() => {
         <SideBarLangSelect />
       </li>
 
-      <li
-        v-if="!route.fullPath.endsWith('/sign-in')"
-        class="flex flex-col items-stretch"
-      >
+      <li v-if="loadingAuth" class="mx-auto opacity-75 animate-spin-3/2 grid">
+        <i class="material-symbols-outlined text-4xl">hourglass_empty</i>
+      </li>
+
+      <template v-else-if="currentUser && !route.fullPath.endsWith('/profile')">
+        <li class="grid">
+          <Button variation="outlined" asChild @click="sideBarOpen = false">
+            <RouterLink
+              class="px-2 py-1 flex items-center justify-between gap-x-2 h-8"
+              to="/profile"
+            >
+              {{ $t("profile") }}
+
+              <i class="material-symbols-outlined">account_circle</i>
+            </RouterLink>
+          </Button>
+        </li>
+
+        <li class="w-full grid">
+          <Button asChild variation="outlined" @click="authStore.handleSignOut">
+            <div
+              class="flex items-center justify-between gap-x-2 px-2 py-1 h-8"
+            >
+              {{ $t("logOut") }}
+              <i class="material-symbols-outlined text-xl font-semibold"
+                >logout</i
+              >
+            </div>
+          </Button>
+        </li>
+      </template>
+
+      <li v-else-if="!route.fullPath.endsWith('/sign-in')" class="grid">
         <Button variation="outlined" asChild @click="sideBarOpen = false">
           <RouterLink
             class="px-2 py-1 flex items-center justify-center gap-x-2"
             to="/sign-in"
           >
             <i class="material-symbols-outlined">account_circle</i>
-            Sign In</RouterLink
+            {{ $t("signIn") }}</RouterLink
           >
         </Button>
       </li>

@@ -1,7 +1,7 @@
-export function isAuthPath(fullpath: string) {
-  const authPaths = ["/register", "/sign-in"];
+import { AUTH_ROUTES } from "@/router";
 
-  const result = authPaths.some((path) => fullpath.endsWith(path));
+export function isAuthPath(fullpath: string) {
+  const result = AUTH_ROUTES.some((path) => fullpath.endsWith(path));
 
   return result;
 }

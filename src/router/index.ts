@@ -55,7 +55,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 export const PROTECTED_ROUTES = ["/profile", "/recipes/new"];
-const AUTH_ROUTES = ["/sign-in", "/register"];
+export const AUTH_ROUTES = ["/sign-in", "/register"];
 
 const router = createRouter({
   history: createWebHistory(),

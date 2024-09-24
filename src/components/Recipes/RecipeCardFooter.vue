@@ -31,7 +31,9 @@ function checkLevel(iconIndex: number) {
   <template v-if="isMore">
     <h5
       class="flex items-center justify-start mb-1"
-      :title="$t('serveFor', { count: recipe.servings })"
+      :title="`${$t('serveFor', { count: recipe.servings })} ${
+        recipe.servings === 1 ? $t('person') : $t('people')
+      }`"
     >
       {{ $t("servings") }} -
       <ManIcon
