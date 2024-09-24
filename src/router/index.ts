@@ -1,4 +1,3 @@
-import { auth } from "@/firebase";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
@@ -74,13 +73,13 @@ router.beforeEach((to) => {
   const { loadingAuth, currentUser } = storeToRefs(authStore);
 
   if (AUTH_ROUTES.includes(to.path)) {
-    if (!loadingAuth.value) return currentUser.value ? false : true;
+    if (!loadingAuth.value) return currentUser.value ? { path: "/" } : true;
 
     return new Promise((resolve) => {
       const unsubscribe = authStore.$subscribe(() => {
         if (!authStore.loadingAuth) {
           unsubscribe();
-          resolve({ path: "/" });
+          resolve(to);
         }
       });
     });

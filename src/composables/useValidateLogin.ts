@@ -50,7 +50,8 @@ export function useValidateLogin(values: TLoginValues) {
 
   watch(locale, () => {
     loginSchema.value = createLoginSchema(t);
-    validateLogin();
+    // validateLogin();
+    errors.value = {};
   });
 
   return { validateLogin, clearError, errors, isValid };

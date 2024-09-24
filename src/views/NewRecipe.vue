@@ -1,5 +1,20 @@
+<script setup lang="ts">
+import Side_Food_Image from "@/assets/images/Side_Food_Image.jpg";
+import Side_Food_Image_2 from "@/assets/images/Side_Food_Image_2.avif";
+</script>
+
 <template>
-  <div class="w-full">
-    <h1>NEW RECIPE HERE</h1>
+  <div class="h-full bg-danger flex">
+    <div
+      class="hidden sm:block h-full w-60 bg-fixed bg-cover"
+      :style="{ backgroundImage: `url(${Side_Food_Image})` }"
+    ></div>
+    <div class="w-full max-h-full overflow-y-auto">
+      <!-- FORM HERE -->
+    </div>
+    <div
+      class="hidden sm:block h-full w-60 bg-fixed bg-cover"
+      :style="{ backgroundImage: `url(${Side_Food_Image_2})` }"
+    ></div>
   </div>
 </template>

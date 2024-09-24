@@ -17,6 +17,7 @@ import { useI18n } from "vue-i18n";
 import EmailConfirmation from "@/components/Auth/EmailConfirmation.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
+import { scrollToTop } from "@/utils/scrollToTop";
 
 const authStore = useAuthStore();
 const { verificationSent } = storeToRefs(authStore);
@@ -53,7 +54,9 @@ async function handleSubmit() {
 
     await sendEmailVerification(result.user);
     verificationSent.value = true;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    const form = document.getElementById("registerForm");
+    scrollToTop(form);
   } catch (err: any) {
     console.log(err.message);
     const message: string = err.message;
@@ -86,9 +89,10 @@ function handleUpdate(e: Event) {
   <EmailConfirmation v-if="verificationSent" />
 
   <form
+    id="registerForm"
     novalidate
     @submit.prevent="handleSubmit"
-    class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6"
+    class="flex flex-col gap-y-3 w-[700px] max-w-full min-h-fit pb-20 sm:pb-28 mx-auto mt-6"
   >
     <FormInput
       :disabled="verificationSent || loading"
@@ -143,7 +147,7 @@ function handleUpdate(e: Event) {
       type="submit"
       >{{ loading ? $t("registering") : $t("register") }}</Button
     >
-    <RouterLink class="underline mt-10" to="/sign-in">{{
+    <RouterLink class="underline mt-10 w-fit" to="/sign-in">{{
       $t("alreadyHaveAnAccount")
     }}</RouterLink>
   </form>

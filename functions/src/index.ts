@@ -17,15 +17,15 @@ exports.deleteUnverifiedUsers = functions.pubsub
       result.users.forEach((user) => {
         const now = Date.now();
         const createdAt = Date.parse(user.metadata.creationTime);
-        // unverified users who have account for more that 15 minutes will be deleted
+        // unverified users who have account for more that 30 minutes will be deleted
         const miliseconds = 30 * 60 * 1000;
 
         if (!user.emailVerified && now - createdAt > miliseconds) {
           unverifiedUsers.push(user.uid);
         }
-
-        if (result.pageToken) getAllUsers(result.pageToken);
       });
+
+      if (result.pageToken) getAllUsers(result.pageToken);
     }
 
     await getAllUsers();

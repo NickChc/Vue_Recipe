@@ -5,7 +5,7 @@ interface ButtonProps {
   type?: "submit" | "button";
   size?: "sm";
   disabled?: boolean;
-  color?: "white";
+  color?: "white" | "add";
 }
 
 const { variation, asChild, type, disabled, color, size } =
@@ -19,6 +19,8 @@ const { variation, asChild, type, disabled, color, size } =
     :class="`border-2 whitespace-nowrap rounded-md font-semibold duration-300 transition-colors disabled:pointer-events-none disabled:opacity-75 ${
       variation === 'outlined' && color === 'white'
         ? 'text-primary border-primary dark:text-primary dark:border-primary'
+        : variation === 'outlined' && color === 'add'
+        ? 'text-add border-add'
         : variation === 'outlined'
         ? 'text-secondary dark:text-primary border-secondary dark:border-primary'
         : variation === 'danger'

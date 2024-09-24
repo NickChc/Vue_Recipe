@@ -69,7 +69,8 @@ export function useValidateRegister(values: TRegisterValues) {
 
   watch(locale, () => {
     registerSchema.value = createRegisterSchema(t);
-    validateRegister();
+    // validateRegister();
+    errors.value = {};
   });
 
   return { errors, validateRegister, isValid, clearError };
