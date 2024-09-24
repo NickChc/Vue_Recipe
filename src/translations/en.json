@@ -81,5 +81,7 @@
   "tryAgainLater": "Try again later",
   "cancel": "Cancel",
   "authCancelText": "Either enter the password you used for registration, or wait for 30 minutes and the operation will be cancelled",
-  "invalidPassword": "Invalid password"
+  "invalidPassword": "Invalid password",
+  "pageNotFoundText": "Oops! Looks like the page you are looking for doesn't exist!",
+  "takeMeHome": "Take Me Home"
 }

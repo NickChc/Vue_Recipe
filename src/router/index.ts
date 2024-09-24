@@ -51,6 +51,11 @@ const routes: RouteRecordRaw[] = [
     name: "AdminLayout",
     component: () => import("@/layouts/AdminLayout.vue"),
   },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: () => import("@/views/NotFound.vue"),
+  },
 ];
 
 export const PROTECTED_ROUTES = ["/profile", "/recipes/new"];
