@@ -2,7 +2,7 @@
 import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { watch } from "vue";
-import { PROTECTED_ROUTES } from "./router";
+import { PROTECTED_ROUTES } from "@/router";
 
 const route = useRoute();
 const router = useRouter();
