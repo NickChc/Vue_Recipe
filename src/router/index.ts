@@ -55,6 +55,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 export const PROTECTED_ROUTES = ["/profile", "/recipes/new"];
+const AUTH_ROUTES = ["/sign-in", "/register"];
 
 const router = createRouter({
   history: createWebHistory(),
@@ -69,10 +70,23 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
-  if (!PROTECTED_ROUTES.includes(to.path)) return true;
-
   const authStore = useAuthStore();
   const { loadingAuth, currentUser } = storeToRefs(authStore);
+
+  if (AUTH_ROUTES.includes(to.path)) {
+    if (!loadingAuth.value) return currentUser.value ? false : true;
+
+    return new Promise((resolve) => {
+      const unsubscribe = authStore.$subscribe(() => {
+        if (!authStore.loadingAuth) {
+          unsubscribe();
+          resolve({ path: "/" });
+        }
+      });
+    });
+  }
+
+  if (!PROTECTED_ROUTES.includes(to.path)) return true;
 
   if (loadingAuth.value) {
     return new Promise((resolve) => {
