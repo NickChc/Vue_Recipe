@@ -31,7 +31,9 @@ function selectDiet(diet: TDiet_Enum) {
 </script>
 
 <template>
-  <h3 class="my-2 font-bold">{{ $t("chooseFittingDiets") }}</h3>
+  <h3 class="my-2 font-bold text-sm xs:text-base">
+    {{ $t("chooseFittingDiets") }}
+  </h3>
   <div>
     <button
       v-for="diet in Object.values(TDiet_Enum)"

@@ -2,7 +2,8 @@
 import { TComplexity_Enum, TRecipe } from "@/@types/general";
 import { ref } from "vue";
 import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
-import ManIcon from "../Icons/ManIcon.vue";
+import ManIcon from "@/components/Icons/ManIcon.vue";
+import { checkRecipeComplexity } from "@/utils/checkRecipeComplexity";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;
@@ -14,17 +15,6 @@ const { isMore, recipe, totalRates } = defineProps<RecipeCardFooterProps>();
 
 // TODO : make real subscribe thing
 const isSubscribed = ref(false);
-
-function checkLevel(iconIndex: number) {
-  const totalCases = Object.values(TComplexity_Enum);
-  const lvlIndex = totalCases.indexOf(recipe.complexity);
-
-  if (iconIndex <= lvlIndex) {
-    return true;
-  }
-
-  return false;
-}
 </script>
 
 <template>
@@ -110,7 +100,7 @@ function checkLevel(iconIndex: number) {
           :key="lvl"
           class="material-symbols-outlined text-xs sm:text-base"
           >{{
-            checkLevel(index)
+            checkRecipeComplexity(index, recipe.complexity)
               ? "radio_button_checked"
               : "radio_button_unchecked"
           }}</i

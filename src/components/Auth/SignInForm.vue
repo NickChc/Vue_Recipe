@@ -64,6 +64,7 @@ async function handleSubmit() {
     <FormInput
       :disabled="loading"
       name="email"
+      type="email"
       v-model="loginData.email"
       :label="$t('email', 'EMAIL')"
       @update:value="handleUpdate"

@@ -15,7 +15,7 @@ const totalRates = computed(() => recipe.rates.length);
 
 <template>
   <div
-    :class="`flex flex-col shadow-xl  group h-full ${
+    :class="`flex flex-col shadow-xl group h-full ${
       isMore ? 'h-full pb-6 bg-add-2' : 'rounded-sm bg-primary dark:bg-add-2'
     }`"
   >

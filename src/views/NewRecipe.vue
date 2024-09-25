@@ -1,6 +1,11 @@
 form
 <script setup lang="ts">
-import { TComplexity_Enum, TDiet_Enum, TRecipe } from "@/@types/general";
+import {
+  TCategory_Enum,
+  TComplexity_Enum,
+  TDiet_Enum,
+  TRecipe,
+} from "@/@types/general";
 import Side_Food_Image from "@/assets/images/Side_Food_Image.jpg";
 import Side_Food_Image_2 from "@/assets/images/Side_Food_Image_2.avif";
 import { ref } from "vue";
@@ -8,6 +13,7 @@ import PlaceholderImage from "@/assets/images/Fallback_Food_Image.jpeg";
 import FormInput from "@/components/FormInput.vue";
 import NewIngredient from "@/components/Recipes/NewIngredient.vue";
 import SelectDiets from "@/components/Recipes/SelectDiets.vue";
+import SelectCategories from "@/components/Recipes/SelectCategories.vue";
 
 type TNewRecipeData = Omit<
   TRecipe,
@@ -48,16 +54,20 @@ function setIngredients(ingredients: string[]) {
 function setDiets(diets?: TDiet_Enum[]) {
   newRecipeData.value.diet = diets;
 }
+
+function setCategories(categories: TCategory_Enum[]) {
+  newRecipeData.value.category = categories;
+}
 </script>
 
 <template>
-  <div class="h-full flex pb-12">
+  <div class="h-full flex pb-20">
     <div
       class="hidden sm:block h-full w-60 bg-fixed bg-cover bg-center"
       :style="{ backgroundImage: `url(${Side_Food_Image})` }"
     ></div>
     <div class="w-full h-full max-h-full p-3 overflow-y-auto">
-      <h2 class="font-semibold">Share your favorite recipe!</h2>
+      <h2 class="font-semibold">{{ $t("shareYourFavRecipe") }}</h2>
       <form class="flex flex-col mt-4">
         <input
           ref="imageInput"
@@ -77,7 +87,7 @@ function setDiets(diets?: TDiet_Enum[]) {
             class="absolute inset-0 z-10 backdrop-blur-sm active:brightness-75 cursor-pointer"
           ></div>
           <span
-            class="cursor-pointer z-20 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 text-3xl flex flex-col items-center"
+            class="text-primary cursor-pointer z-20 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 text-3xl flex flex-col items-center"
           >
             <i class="material-symbols-outlined text-[2em]">add</i>
             <h4 class="text-base whitespace-nowrap">Add an image</h4>
@@ -98,6 +108,24 @@ function setDiets(diets?: TDiet_Enum[]) {
         />
 
         <SelectDiets :diets="newRecipeData.diet" @set-diets="setDiets" />
+
+        <SelectCategories
+          :categories="newRecipeData.category"
+          @set-categories="setCategories"
+        />
+
+        <h3 class="mt-3 font-bold text-sm xs:text-base">
+          {{ $t("chooseFittingLevel") }}
+        </h3>
+
+        <select
+          v-model="newRecipeData.complexity"
+          class="mt-3 p-2 text-secondary rounded-sm font-semibold"
+        >
+          <option :value="lvl" v-for="lvl in Object.values(TComplexity_Enum)">
+            {{ $t(`complexity.${lvl}`) }}
+          </option>
+        </select>
       </form>
     </div>
     <div

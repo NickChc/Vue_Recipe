@@ -85,5 +85,16 @@
   "pageNotFoundText": "უი - როგორც ჩანს, გვერდი, რომელსაც თქვენ ეძებთ, არ არსებობს!",
   "takeMeHome": "მთავარზე დაბრუნება",
   "pressSpaceForIngredient": "დააწექით \"Enter\"-ს დასამატებლად",
-  "chooseFittingDiets": "აარჩიეთ შესაბამისი დიეტები"
+  "chooseFittingDiets": "აარჩიეთ შესაბამისი დიეტები",
+  "chooseFittingCategories": "აარჩიეთ შესაბამისი კატეგორიები",
+  "shareYourFavRecipe": "გააზიარეთ თქვენი საყვარელი რეცეპტი!",
+  "category_obj": {
+    "Breakfast": "საუზმე",
+    "Lunch": "სადილი",
+    "Dinner": "ვახშამი",
+    "Snack": "სნექი",
+    "Dessert": "დესერტი",
+    "Appetizer": "აპეტაიზერი"
+  },
+  "chooseFittingLevel": "აარჩიეთ შესაბამისი სირთულე"
 }

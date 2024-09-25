@@ -85,5 +85,16 @@
   "pageNotFoundText": "Oops! Looks like the page you are looking for doesn't exist!",
   "takeMeHome": "Take Me Home",
   "pressSpaceForIngredient": "press \"Enter\" to add",
-  "chooseFittingDiets": "Choose fitting diet"
+  "chooseFittingDiets": "Choose fitting diet",
+  "chooseFittingCategories": "Choose fitting categories",
+  "shareYourFavRecipe": "Share your favorite recipe!",
+  "category_obj": {
+    "Breakfast": "Breakfast",
+    "Lunch": "Lunch",
+    "Dinner": "Dinner",
+    "Snack": "Snack",
+    "Dessert": "Dessert",
+    "Appetizer": "Apetizer"
+  },
+  "chooseFittingLevel": "Choose fitting level"
 }
