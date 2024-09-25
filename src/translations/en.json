@@ -13,6 +13,7 @@
   },
   "lvl": "level - {level}",
   "min": "min",
+  "hr": "hr",
   "noImage": "No image",
   "peopleRatedAmount": "{amount} people rated this recipe",
   "complexityTitle": "Complexity of the recipe",
@@ -96,5 +97,12 @@
     "Dessert": "Dessert",
     "Appetizer": "Apetizer"
   },
-  "chooseFittingLevel": "Choose fitting level"
+  "chooseFittingLevel": "Choose fitting level",
+  "cookingTime_obj": {
+    "FIFTEEN_TO_THRITY": "15 - 30 min",
+    "THIRTY_TO_HOUR": "30 - 60 min",
+    "HOUR_TO_TWO_HOURS": "1 - 2 hr",
+    "TWO_PLUS_HOURS": "2+ hr"
+  },
+  "selectCookingTime": "Select cooking time"
 }

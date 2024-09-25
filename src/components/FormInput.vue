@@ -2,6 +2,7 @@
 import { InputTypeHTMLAttribute, ref } from "vue";
 
 interface FormInputProps {
+  modelValue?: string;
   label?: string;
   error?: null | string;
   type?: InputTypeHTMLAttribute;
@@ -12,19 +13,21 @@ interface FormInputProps {
 }
 
 const emit = defineEmits<{
-  (e: "update:value", inputEvent: Event): void;
+  (e: "update:modelValue", newValue: string): void;
   (e: "keyobard", keyboardInput: Event): void;
 }>();
 
-function emitUpdate(e: Event) {
-  emit("update:value", e);
+function onInput(e: Event) {
+  const target = e.target as HTMLInputElement;
+  const inputValue = target.value;
+  emit("update:modelValue", inputValue);
 }
 
 function emitKeyboard(e: Event) {
   emit("keyobard", e);
 }
 
-const { label, error, type, name, disabled, placeholder, hint } =
+const { label, error, type, name, disabled, placeholder, hint, modelValue } =
   defineProps<FormInputProps>();
 
 const showPassword = ref(false);
@@ -44,8 +47,9 @@ const showPassword = ref(false);
         :placeholder="placeholder"
         :disabled="disabled"
         :name="name"
+        :value="modelValue"
         class="p-2 rounded-sm outline-add text-secondary w-full disabled:bg-add-2 dark:disabled:bg-primary disabled:opacity-50 disabled:text-primary"
-        @input="emitUpdate"
+        @input="onInput"
         :type="`${
           type === 'password'
             ? `${showPassword ? 'text' : 'password'}`

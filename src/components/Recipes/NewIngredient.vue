@@ -20,19 +20,10 @@ function addIngredient(e: Event) {
     const value = newIngredient.value.trim();
 
     if (!!value) {
-      const input = e.target as HTMLInputElement;
-
       emitSetIngredients([...ingredients, value]);
       newIngredient.value = "";
-      input.value = "";
     }
   }
-}
-
-function ingredientChange(e: Event) {
-  const target = e.target as HTMLInputElement;
-
-  newIngredient.value = target.value;
 }
 </script>
 
@@ -40,7 +31,7 @@ function ingredientChange(e: Event) {
   <FormInput
     :hint="!!newIngredient.trim() ? $t('pressSpaceForIngredient') : ''"
     placeholder="Add ingredients"
-    @update:value="ingredientChange"
+    v-model="newIngredient"
     @keyobard="addIngredient"
   />
   <ul class="list-none mt-1 sm:mt-2 lg:mt-3">

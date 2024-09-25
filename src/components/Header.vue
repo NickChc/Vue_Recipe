@@ -8,7 +8,7 @@ import AuthButton from "@/components/Auth/AuthButton.vue";
 
 <template>
   <header
-    class="sticky z-50 top-0 left-0 right-0 bg-add backdrop-blur-xl border-y border-add py-3 pr-6 pl-1 sm:pl-6 flex items-center"
+    class="sticky z-50 top-0 left-0 right-0 bg-add backdrop-blur-xl border-y border-add py-3 pr-6 pl-1 sm:pl-6 flex items-center h-header-sm sm:h-header-lg"
   >
     <SideBarButton />
 

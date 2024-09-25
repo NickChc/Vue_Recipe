@@ -4,6 +4,7 @@ import { ref } from "vue";
 import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
 import ManIcon from "@/components/Icons/ManIcon.vue";
 import { checkRecipeComplexity } from "@/utils/checkRecipeComplexity";
+import { useI18n } from "vue-i18n";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;
@@ -12,6 +13,8 @@ interface RecipeCardFooterProps {
 }
 
 const { isMore, recipe, totalRates } = defineProps<RecipeCardFooterProps>();
+
+const { t } = useI18n();
 
 // TODO : make real subscribe thing
 const isSubscribed = ref(false);
@@ -76,17 +79,18 @@ const isSubscribed = ref(false);
   </strong>
 
   <div
-    :class="`flex justify-between gap-x-1 items-center text-xs xs:text-sm ${
-      isMore ? 'sm:text-lg text-primary' : 'text-add-2 dark:text-primary'
+    :class="`flex  gap-x-4 items-center text-xs xs:text-sm ${
+      isMore
+        ? 'sm:text-lg text-primary justify-between'
+        : 'justify-start text-add-2 dark:text-primary'
     }`"
   >
     <span
-      class="flex items-center text-xs xs:text-sm"
+      class="flex items-center text-xs sm:text-sm whitespace-nowrap"
       :title="$t('estimatedTimeOfCooking')"
     >
       <i class="material-symbols-outlined alarm">alarm</i>
-      -
-      {{ recipe.cooking_time }} {{ $t("min") }}
+      {{ recipe.cooking_time.replace("min", t("min")).replace("hr", t("hr")) }}
     </span>
 
     <div
@@ -122,7 +126,7 @@ const isSubscribed = ref(false);
     >
     <RouterLink
       v-if="!isMore"
-      class="text-secondary dark:text-add duration-200 transition-colors hover:text-add active:opacity-75 flex items-center"
+      class="text-secondary dark:text-add duration-200 transition-colors hover:text-add active:opacity-75 flex items-center absolute bottom-1 right-1"
       :to="`/recipes/${recipe.id}`"
     >
       <p class="underline">{{ $t("more") }}</p>

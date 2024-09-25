@@ -3,12 +3,13 @@ form
 import {
   TCategory_Enum,
   TComplexity_Enum,
+  TCookingTime_Enum,
   TDiet_Enum,
   TRecipe,
 } from "@/@types/general";
 import Side_Food_Image from "@/assets/images/Side_Food_Image.jpg";
 import Side_Food_Image_2 from "@/assets/images/Side_Food_Image_2.avif";
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import PlaceholderImage from "@/assets/images/Fallback_Food_Image.jpeg";
 import FormInput from "@/components/FormInput.vue";
 import NewIngredient from "@/components/Recipes/NewIngredient.vue";
@@ -20,10 +21,12 @@ type TNewRecipeData = Omit<
   "id" | "user_id" | "rating" | "rates" | "created_at" | "author"
 >;
 
+const RECIPE_FORM_DATA = "recipe_form_data";
+
 const newRecipeData = ref<TNewRecipeData>({
   category: [],
   complexity: TComplexity_Enum.BEGINNER,
-  cooking_time: 0,
+  cooking_time: TCookingTime_Enum.FIFTEEN_TO_THRITY,
   ingredients: ["Cheeze", "Oil", "Tomatos", "Spaghetti pasta"],
   recipe: "",
   servings: 0,
@@ -33,6 +36,10 @@ const newRecipeData = ref<TNewRecipeData>({
 });
 
 const imageFile = ref<null | File>(null);
+
+const cookingTimes = Object.keys(
+  TCookingTime_Enum
+) as (keyof typeof TCookingTime_Enum)[];
 
 function handleImageUpload(e: Event) {
   const target = e.target as HTMLInputElement;
@@ -58,15 +65,32 @@ function setDiets(diets?: TDiet_Enum[]) {
 function setCategories(categories: TCategory_Enum[]) {
   newRecipeData.value.category = categories;
 }
+
+onMounted(() => {
+  const savedData = localStorage.getItem(RECIPE_FORM_DATA);
+
+  if (savedData) {
+    newRecipeData.value = JSON.parse(savedData);
+    console.table(newRecipeData.value);
+  }
+
+  const autosaveInterval = setInterval(() => {
+    localStorage.setItem(RECIPE_FORM_DATA, JSON.stringify(newRecipeData.value));
+  }, 5000);
+
+  onBeforeUnmount(() => {
+    clearInterval(autosaveInterval);
+  });
+});
 </script>
 
 <template>
-  <div class="h-full flex pb-20">
+  <div class="h-full flex">
     <div
       class="hidden sm:block h-full w-60 bg-fixed bg-cover bg-center"
       :style="{ backgroundImage: `url(${Side_Food_Image})` }"
     ></div>
-    <div class="w-full h-full max-h-full p-3 overflow-y-auto">
+    <div class="w-full h-full max-h-full p-3 pb-14 overflow-y-scroll">
       <h2 class="font-semibold">{{ $t("shareYourFavRecipe") }}</h2>
       <form class="flex flex-col mt-4">
         <input
@@ -94,13 +118,7 @@ function setCategories(categories: TCategory_Enum[]) {
           </span>
         </div>
         <div class="mb-3">
-          <FormInput
-            placeholder="Title"
-            @update:value="(e) => {
-            const target = e.target as HTMLInputElement;
-            newRecipeData.title = target.value;
-          }"
-          />
+          <FormInput placeholder="Title" v-model="newRecipeData.title" />
         </div>
         <NewIngredient
           :ingredients="newRecipeData.ingredients"
@@ -124,6 +142,19 @@ function setCategories(categories: TCategory_Enum[]) {
         >
           <option :value="lvl" v-for="lvl in Object.values(TComplexity_Enum)">
             {{ $t(`complexity.${lvl}`) }}
+          </option>
+        </select>
+
+        <h3 class="mt-3 font-bold text-sm xs:text-base">
+          {{ $t("selectCookingTime") }}
+        </h3>
+
+        <select
+          v-model="newRecipeData.cooking_time"
+          class="mt-3 p-2 text-secondary rounded-sm font-semibold"
+        >
+          <option v-for="time in cookingTimes" :value="TCookingTime_Enum[time]">
+            {{ $t(`cookingTime_obj.${time}`) }}
           </option>
         </select>
       </form>

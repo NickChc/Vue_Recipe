@@ -7,6 +7,13 @@ export enum TComplexity_Enum {
   CHEF = "chef",
 }
 
+export enum TCookingTime_Enum {
+  FIFTEEN_TO_THRITY = "15 - 30 min",
+  THIRTY_TO_HOUR = "30 - 60 min",
+  HOUR_TO_TWO_HOURS = "1 - 2 hr",
+  TWO_PLUS_HOURS = "2+ hr",
+}
+
 export enum TCategory_Enum {
   BREAKFAST = "Breakfast",
   LUNCH = "Lunch",
@@ -31,7 +38,7 @@ export interface TRecipe {
   user_id: string;
   title: string;
   recipe: string;
-  cooking_time: number;
+  cooking_time: TCookingTime_Enum;
   rating: number;
   rates: { point: number; user_id: string }[];
   complexity: TComplexity_Enum;

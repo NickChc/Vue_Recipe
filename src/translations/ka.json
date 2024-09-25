@@ -13,6 +13,7 @@
   },
   "lvl": "სირთულე - {level}",
   "min": "წთ",
+  "hr": "სთ",
   "noImage": "სურათი ვერ მოიძებნა",
   "peopleRatedAmount": "{amount} -მა ადამიანმა შეაფასა ეს რეცეპტი",
   "complexityTitle": "რეცეპტის სირთულე",
@@ -96,5 +97,12 @@
     "Dessert": "დესერტი",
     "Appetizer": "აპეტაიზერი"
   },
-  "chooseFittingLevel": "აარჩიეთ შესაბამისი სირთულე"
+  "chooseFittingLevel": "აარჩიეთ შესაბამისი სირთულე",
+  "cookingTime_obj": {
+    "FIFTEEN_TO_THRITY": "15 - 30 წთ.",
+    "THIRTY_TO_HOUR": "30 - 60 წთ.",
+    "HOUR_TO_TWO_HOURS": "1 - 2 სთ.",
+    "TWO_PLUS_HOURS": "2+ სთ."
+  },
+  "selectCookingTime": "მონიშნეთ სავარაუდო დრო"
 }
