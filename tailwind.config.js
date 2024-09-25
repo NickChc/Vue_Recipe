@@ -23,6 +23,10 @@ export default {
       width: {
         "sidebar-btn": "var(--width-sidebar-btn)",
       },
+      height: {
+        "header-sm": "var(--height-header-sm)",
+        "header-lg": "var(--height-header-lg)",
+      },
       minWidth: {
         "sidebar-btn": "var(--width-sidebar-btn)",
       },

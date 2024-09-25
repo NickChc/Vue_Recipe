@@ -18,6 +18,8 @@
   --font-merri: "Merriweather", serif;
 
   --width-sidebar-btn: 42px;
+  --height-header-sm: 56px;
+  --height-header-lg: 66px;
 }
 
 @layer components {
@@ -37,10 +39,14 @@ body {
   font-family: var(--font-roboto);
   max-width: 100vw;
   overflow-x: hidden;
-  inset: 0;
 
   background-color: var(--clr-primary);
   color: var(--clr-secondary);
+}
+
+body.dark {
+  background-color: var(--clr-secondary);
+  color: var(--clr-primary);
 }
 
 /* Prevent chrome from changing input color on auto-fill */
@@ -55,11 +61,6 @@ input:-webkit-autofill:active {
   height: 100dvh;
 }
 
-body.dark {
-  background-color: var(--clr-secondary);
-  color: var(--clr-primary);
-}
-
 h1,
 h2,
 h3,
@@ -68,3 +69,5 @@ h5,
 h6 {
   font-family: var(--font-merri);
 }
+
+/* TODO : define custom scrollbar styles */
