@@ -12,7 +12,7 @@ const { sideBarOpen } = storeToRefs(globalStore);
 <template>
   <SideBar />
   <div
-    :class="`duration-500 transition-transform sm:transition-none ease-in h-full overflow-hidden ${
+    :class="`duration-[400ms] transition-transform sm:transition-none ease-in h-full overflow-hidden ${
       sideBarOpen
         ? `translate-x-[calc(100%-var(--width-sidebar-btn))] sm:translate-x-0`
         : 'translate-x-0'

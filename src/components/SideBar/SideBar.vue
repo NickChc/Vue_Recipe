@@ -41,7 +41,7 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    :class="`bg-priamry dark:bg-secondary overflow-hidden border-r-2 border-add p-3 h-full sm:hidden fixed top-0 bottom-0 z-50 duration-500 transition-all ease-in w-[calc(100vw-var(--width-sidebar-btn))] text-add ${
+    :class="`bg-priamry dark:bg-secondary overflow-hidden border-r-2 border-add p-3 h-full sm:hidden fixed top-0 bottom-0 z-50 duration-[400ms] ease-in w-[calc(100vw-var(--width-sidebar-btn))] text-add ${
       sideBarOpen ? 'left-0 opacity-100' : '-left-full opacity-0'
     }`"
   >

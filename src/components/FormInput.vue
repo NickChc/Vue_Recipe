@@ -8,24 +8,30 @@ interface FormInputProps {
   name?: string;
   disabled?: boolean;
   placeholder?: string;
+  hint?: string;
 }
 
 const emit = defineEmits<{
   (e: "update:value", inputEvent: Event): void;
+  (e: "keyobard", keyboardInput: Event): void;
 }>();
 
 function emitUpdate(e: Event) {
   emit("update:value", e);
 }
 
-const { label, error, type, name, disabled, placeholder } =
+function emitKeyboard(e: Event) {
+  emit("keyobard", e);
+}
+
+const { label, error, type, name, disabled, placeholder, hint } =
   defineProps<FormInputProps>();
 
 const showPassword = ref(false);
 </script>
 
 <template>
-  <div class="flex flex-col gap-y-2">
+  <div class="flex flex-col">
     <label
       v-if="label"
       class="xs:text-lg mb-0.5 sm:text-xl md:text-2xl 2xl:text-3xl"
@@ -34,6 +40,7 @@ const showPassword = ref(false);
 
     <div class="relative">
       <input
+        @keydown="emitKeyboard"
         :placeholder="placeholder"
         :disabled="disabled"
         :name="name"
@@ -61,6 +68,16 @@ const showPassword = ref(false);
           >visibility_off</i
         >
       </button>
+    </div>
+
+    <div v-if="error == null && hint != null" class="h-[1em] mt-1">
+      <div
+        :class="`overflow-hidden font-semibold text-xs xs:text-sm sm:text-base xl:text-lg duration-300 ${
+          !!hint ? 'h-[1.4em]' : 'h-0'
+        }`"
+      >
+        {{ hint }}
+      </div>
     </div>
 
     <div

@@ -71,7 +71,7 @@
     "Dairy_Free": "Dairy Free",
     "Keto": "Keto",
     "Paleo": "Paleo",
-    "LowCarb": "Low Card"
+    "Low_Carb": "Low Carb"
   },
   "back": "Back",
   "serveFor": "Serve for {count}",
@@ -83,5 +83,7 @@
   "authCancelText": "Either enter the password you used for registration, or wait for 30 minutes and the operation will be cancelled",
   "invalidPassword": "Invalid password",
   "pageNotFoundText": "Oops! Looks like the page you are looking for doesn't exist!",
-  "takeMeHome": "Take Me Home"
+  "takeMeHome": "Take Me Home",
+  "pressSpaceForIngredient": "press \"Enter\" to add",
+  "chooseFittingDiets": "Choose fitting diet"
 }

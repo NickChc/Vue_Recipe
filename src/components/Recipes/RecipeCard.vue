@@ -62,7 +62,7 @@ const totalRates = computed(() => recipe.rates.length);
                 >
                   <span
                     class="rounded-md p-1 sm:p-2 bg-add-2 text-primary font-semibold"
-                    >{{ $t(`diet_obj.${diet.replace(" ", "_")}`) }}</span
+                    >{{ $t(`diet_obj.${diet.replace(/\s/g, "_")}`) }}</span
                   >
                 </li>
               </ul>
