@@ -16,7 +16,7 @@ const { variation, asChild, type, disabled, color, size } =
   <button
     :disabled="disabled"
     :type="type"
-    :class="`border-2 whitespace-nowrap rounded-md font-semibold duration-300 transition-colors disabled:pointer-events-none disabled:opacity-75 ${
+    :class="`border-2 whitespace-nowrap rounded-sm font-semibold duration-300 transition-colors disabled:pointer-events-none disabled:opacity-75 ${
       variation === 'outlined' && color === 'white'
         ? 'text-primary border-primary dark:text-primary dark:border-primary'
         : variation === 'outlined' && color === 'add'
@@ -26,7 +26,7 @@ const { variation, asChild, type, disabled, color, size } =
         : variation === 'danger'
         ? 'border-danger text-danger'
         : variation === 'primary'
-        ? 'border-add text-primary bg-add'
+        ? 'border-add text-primary bg-add hover:opacity-90'
         : 'border-add text-add hover:bg-add hover:text-primary'
     } ${asChild ? 'grid' : 'p-[0.4em]'} ${size === 'sm' ? 'px-3 py-1' : ''}`"
   >

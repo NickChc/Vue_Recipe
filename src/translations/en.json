@@ -104,5 +104,12 @@
     "HOUR_TO_TWO_HOURS": "1 - 2 hr",
     "TWO_PLUS_HOURS": "2+ hr"
   },
-  "selectCookingTime": "Select cooking time"
+  "selectCookingTime": "Select cooking time",
+  "describeTheRecipe": "Describe the recipe",
+  "howManyServings": "How many servings",
+  "title": "Title",
+  "addIngredients": "Add ingredients",
+  "submit": "SUBMIT",
+  "required": "Required",
+  "optional": "Optional"
 }

@@ -54,6 +54,11 @@ export interface TRecipe {
   };
 }
 
+export type TRecipeFormValues = Omit<
+  TRecipe,
+  "id" | "user_id" | "rating" | "rates" | "created_at" | "author"
+>;
+
 export interface TUser {
   id: string;
   email: string;

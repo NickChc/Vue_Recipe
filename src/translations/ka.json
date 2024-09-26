@@ -104,5 +104,12 @@
     "HOUR_TO_TWO_HOURS": "1 - 2 სთ.",
     "TWO_PLUS_HOURS": "2+ სთ."
   },
-  "selectCookingTime": "მონიშნეთ სავარაუდო დრო"
+  "selectCookingTime": "მონიშნეთ სავარაუდო დრო",
+  "describeTheRecipe": "აღწერეთ რეცეპტი",
+  "howManyServings": "ულუფების რაოდენობა",
+  "title": "დასახელება",
+  "addIngredients": "შემადგენლობის დამატება",
+  "submit": "მზადაა",
+  "required": "სავალდებულო",
+  "optional": "არჩევითი"
 }

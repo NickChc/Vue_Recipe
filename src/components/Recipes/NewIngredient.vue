@@ -29,12 +29,13 @@ function addIngredient(e: Event) {
 
 <template>
   <FormInput
+    :label="$t('addIngredients')"
     :hint="!!newIngredient.trim() ? $t('pressSpaceForIngredient') : ''"
-    placeholder="Add ingredients"
+    placeholder="4 oz pastrami"
     v-model="newIngredient"
     @keyobard="addIngredient"
   />
-  <ul class="list-none mt-1 sm:mt-2 lg:mt-3">
+  <ul class="list-none mt-1 sm:mt-2 lg:mt-3 max-h-24 overflow-y-auto">
     <li
       v-for="ingredient in ingredients"
       :key="ingredient"
@@ -42,7 +43,7 @@ function addIngredient(e: Event) {
     >
       <button
         type="button"
-        class="ingredient-remove p-1 opacity-80 hover:opacity-100 rounded-sm bg-add-2 m-1 flex items-center gap-x-1 text-primary text-xs"
+        class="ingredient-remove p-1 md:p-1.5 opacity-80 hover:opacity-100 rounded-sm bg-add-2 m-1 flex items-center gap-x-1 text-primary text-xs sm:text-sm lg:text-base"
         @click="emitSetIngredients(ingredients.filter((i) => i !== ingredient))"
       >
         {{ ingredient }} <i class="material-symbols-outlined text-xs">close</i>

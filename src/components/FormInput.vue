@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { InputTypeHTMLAttribute, ref } from "vue";
+import { InputTypeHTMLAttribute, onMounted, ref } from "vue";
 
 interface FormInputProps {
   modelValue?: string;
@@ -10,39 +10,64 @@ interface FormInputProps {
   disabled?: boolean;
   placeholder?: string;
   hint?: string;
+  savedValueKey?: string;
 }
 
 const emit = defineEmits<{
-  (e: "update:modelValue", newValue: string): void;
+  (e: "update:modelValue", newValue: string, event?: Event): void;
   (e: "keyobard", keyboardInput: Event): void;
 }>();
 
 function onInput(e: Event) {
   const target = e.target as HTMLInputElement;
   const inputValue = target.value;
-  emit("update:modelValue", inputValue);
+  emit("update:modelValue", inputValue, e);
 }
 
 function emitKeyboard(e: Event) {
   emit("keyobard", e);
 }
 
-const { label, error, type, name, disabled, placeholder, hint, modelValue } =
-  defineProps<FormInputProps>();
+const {
+  label,
+  error,
+  type,
+  name,
+  disabled,
+  placeholder,
+  hint,
+  modelValue,
+  savedValueKey,
+} = defineProps<FormInputProps>();
 
 const showPassword = ref(false);
+
+const input = ref<null | HTMLInputElement>(null);
+
+onMounted(() => {
+  if (savedValueKey == null || input.value == null) return;
+
+  const savedValue: string | null = JSON.parse(
+    localStorage.getItem(savedValueKey) || "null"
+  );
+
+  if (savedValue == null) return;
+
+  input.value.value = savedValue;
+});
 </script>
 
 <template>
   <div class="flex flex-col">
     <label
       v-if="label"
-      class="xs:text-lg mb-0.5 sm:text-xl md:text-2xl 2xl:text-3xl"
+      class="xs:text-lg mb-[0.2em] sm:text-xl md:text-2xl 2xl:text-3xl"
       >{{ label }}</label
     >
 
     <div class="relative">
       <input
+        ref="input"
         @keydown="emitKeyboard"
         :placeholder="placeholder"
         :disabled="disabled"
