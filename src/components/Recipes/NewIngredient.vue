@@ -1,23 +1,55 @@
 <script setup lang="ts">
 import FormInput from "@/components/FormInput.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
+
+interface NewIngredientProps {
+  ingredients: string[];
+  schemaError?: string;
+}
 
 const newIngredient = ref("");
 
-const { ingredients } = defineProps<{ ingredients: string[] }>();
+const { ingredients, schemaError } = defineProps<NewIngredientProps>();
+
+const error = ref<null | string>(schemaError || null);
+
+watch(
+  () => schemaError,
+  (err) => {
+    error.value = err || null;
+  }
+);
+
+const { t } = useI18n();
 
 const emit = defineEmits<{
   (e: "set-ingredients", ingredients: string[]): void;
+  (e: "clear-error"): void;
 }>();
 
 function emitSetIngredients(ingredients: string[]) {
   emit("set-ingredients", ingredients);
 }
 
+function emitClearError() {
+  emit("clear-error");
+}
+
 function addIngredient(e: Event) {
+  if (ingredients.length > 99) {
+    error.value = t("tooManyIngredients");
+    return;
+  }
+
   const event = e as KeyboardEvent;
   if (event.key === "Enter") {
     const value = newIngredient.value.trim();
+
+    if (ingredients.includes(value)) {
+      error.value = t(`ingredientAlreadyThere`);
+      return;
+    }
 
     if (!!value) {
       emitSetIngredients([...ingredients, value]);
@@ -33,7 +65,14 @@ function addIngredient(e: Event) {
     :hint="!!newIngredient.trim() ? $t('pressSpaceForIngredient') : ''"
     placeholder="4 oz pastrami"
     v-model="newIngredient"
-    @keyobard="addIngredient"
+    @keyboard="addIngredient"
+    :error="error"
+    @clear-error="
+      () => {
+        error = null;
+        emitClearError();
+      }
+    "
   />
   <ul class="list-none mt-1 sm:mt-2 lg:mt-3 max-h-24 overflow-y-auto">
     <li

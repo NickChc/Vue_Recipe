@@ -15,17 +15,19 @@ interface FormInputProps {
 
 const emit = defineEmits<{
   (e: "update:modelValue", newValue: string, event?: Event): void;
-  (e: "keyobard", keyboardInput: Event): void;
+  (e: "keyboard", keyboardInput: Event): void;
+  (e: "clear-error"): void;
 }>();
 
 function onInput(e: Event) {
   const target = e.target as HTMLInputElement;
   const inputValue = target.value;
   emit("update:modelValue", inputValue, e);
+  emit("clear-error");
 }
 
 function emitKeyboard(e: Event) {
-  emit("keyobard", e);
+  emit("keyboard", e);
 }
 
 const {
@@ -72,7 +74,7 @@ onMounted(() => {
         :placeholder="placeholder"
         :disabled="disabled"
         :name="name"
-        :value="modelValue"
+        :value="modelValue || input?.value"
         class="p-2 rounded-sm outline-add text-secondary w-full disabled:bg-add-2 dark:disabled:bg-primary disabled:opacity-50 disabled:text-primary"
         @input="onInput"
         :type="`${

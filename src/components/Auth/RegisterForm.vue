@@ -75,14 +75,6 @@ async function handleSubmit() {
     loading.value = false;
   }
 }
-
-function handleUpdate(e: Event) {
-  const target = e.target as HTMLInputElement;
-  const name = target.name as keyof TRegisterValues;
-
-  userData.value[name] = target.value;
-  clearError(name);
-}
 </script>
 
 <template>
@@ -98,16 +90,18 @@ function handleUpdate(e: Event) {
       :disabled="verificationSent || loading"
       name="name"
       :label="$t('name', 'NAME')"
-      @update:value="handleUpdate"
+      v-model="userData.name"
       :error="errors.name?.[0]"
+      @clear-error="clearError('name')"
     />
 
     <FormInput
       :disabled="verificationSent || loading"
       name="email"
       :label="$t('email', 'EMAIL')"
-      @update:value="handleUpdate"
+      v-model="userData.email"
       :error="errors.email?.[0]"
+      @clear-error="clearError('email')"
     />
 
     <FormInput
@@ -115,8 +109,9 @@ function handleUpdate(e: Event) {
       type="password"
       name="password"
       :label="$t('password', 'PASSWORD')"
-      @update:value="handleUpdate"
+      v-model="userData.password"
       :error="errors.password?.[0]"
+      @clear-error="clearError('password')"
     />
 
     <FormInput
@@ -124,8 +119,9 @@ function handleUpdate(e: Event) {
       type="password"
       name="confirmPassword"
       :label="$t('confirmPassword', 'CONFIRM PASSWORD')"
-      @update:value="handleUpdate"
+      v-model="userData.confirmPassword"
       :error="errors.confirmPassword?.[0]"
+      @clear-error="clearError('confirmPassword')"
     />
 
     <FormError

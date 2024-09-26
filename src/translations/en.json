@@ -111,5 +111,14 @@
   "addIngredients": "Add ingredients",
   "submit": "SUBMIT",
   "required": "Required",
-  "optional": "Optional"
+  "optional": "Optional",
+  "tooManyIngredients": "Too many ingredients",
+  "ingredientAlreadyThere": "This ingredient is already included",
+  "invalidFormat": "Invalid format",
+  "enterTitle": "Enter title",
+  "recipeTooShort": "The recipe is too short (min 100 letters)",
+  "enterIngredients": "Enter ingredients",
+  "servingsRange": "Invalid amount",
+  "maxImageSize": "The image must be less then 5MB in size",
+  "emptyField": "This field is empty"
 }

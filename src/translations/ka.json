@@ -111,5 +111,14 @@
   "addIngredients": "შემადგენლობის დამატება",
   "submit": "მზადაა",
   "required": "სავალდებულო",
-  "optional": "არჩევითი"
+  "optional": "არჩევითი",
+  "tooManyIngredients": "ზედმეტად დიდი შემადგენლობა",
+  "ingredientAlreadyThere": "პროდუქტი უკვე დამატებულია",
+  "invalidFormat": "მცდარი ფორმატი",
+  "enterTitle": "შეიყვანეთ დასახელება",
+  "recipeTooShort": "რეცეპტი ზედმეტად მოკლეა (მინ. 100 სიმბოლოს)",
+  "enterIngredients": "შეიყვანეთ შემადგენლობა",
+  "servingsRange": "რაოდენობა არაა ვალიდური",
+  "maxImageSize": "სურათის ზომა უნდა იყოს 5MB -ზე ნაკლები",
+  "emptyField": "ველი ცარიელია"
 }

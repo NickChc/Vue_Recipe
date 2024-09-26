@@ -14,9 +14,16 @@ import {
 } from "@/@types/general";
 import Button from "@/components/Button.vue";
 import FormHint from "./FormHint.vue";
+import { useValidateNewRecipe } from "@/composables/useValidateNewRecipe";
+import { createRecipe } from "@/data/createRecipe";
+import FormError from "@/components/Auth/FormError.vue";
+import FieldError from "./FieldError.vue";
 
 const RECIPE_FORM_DATA = "recipe_form_data";
 const SERVINGS = "servings";
+
+const loading = ref(false);
+const error = ref<null | string>(null);
 
 const recipePlaceholder =
   "Toast the bread: Lightly toast both slices of rye bread. \n\nWarm the pastrami: Heat the pastrami slices in a skillet on medium heat for 2-3 minutes, until warm. \n\nAssemble the sandwich: Spread mustard on one side of each toasted slice. \n\nLayer the warm pastrami between the bread slices. Add Swiss cheese if desired. \n\nServe: Slice in half and serve with a pickle on the side. \n\nEnjoy!";
@@ -33,11 +40,14 @@ const newRecipeData = ref<TRecipeFormValues>({
   image: undefined,
 });
 
-const imageFile = ref<null | File>(null);
+const imageFile = ref<undefined | File>();
 
 const cookingTimes = Object.keys(
   TCookingTime_Enum
 ) as (keyof typeof TCookingTime_Enum)[];
+
+const { errors, isValid, validateNewRecipe, clearError } =
+  useValidateNewRecipe();
 
 function handleImageUpload(e: Event) {
   const target = e.target as HTMLInputElement;
@@ -48,7 +58,7 @@ function handleImageUpload(e: Event) {
     newRecipeData.value.image = URL.createObjectURL(image);
     return;
   }
-  imageFile.value = null;
+  imageFile.value = undefined;
   newRecipeData.value.image = undefined;
 }
 
@@ -70,6 +80,12 @@ function numberInput(newValue: string, e?: Event) {
   const target = e.target as HTMLInputElement;
   const lastChar = newValue[newValue.length - 1];
 
+  if (newValue === "") {
+    newRecipeData.value.servings = 0;
+    target.value = "";
+    return;
+  }
+
   if (newValue.length > 2 || isNaN(Number(lastChar)) || lastChar === " ") {
     target.value = newValue.slice(0, -1);
     return;
@@ -80,9 +96,17 @@ function numberInput(newValue: string, e?: Event) {
 
 async function handleSubmit() {
   try {
-    console.table(newRecipeData.value);
+    error.value = null;
+    loading.value = true;
+    validateNewRecipe(newRecipeData.value, imageFile.value);
+
+    if (!isValid.value) return;
+
+    await createRecipe(newRecipeData.value, imageFile.value);
   } catch (err: any) {
     console.log(err.message);
+  } finally {
+    loading.value = false;
   }
 }
 
@@ -140,16 +164,24 @@ onMounted(() => {
           <i class="material-symbols-outlined text-[2em]">add</i>
           <h4 class="text-base whitespace-nowrap">Add an image</h4>
         </span>
+        <div class="absolute left-3 top-full">
+          <FieldError :error="errors.image?.[0] || errors.imageFile?.[0]" />
+        </div>
       </div>
+
       <div class="flex flex-col">
         <div class="mb-3">
           <FormInput
             placeholder="Pastrami sandwich"
             :label="$t('title')"
             v-model="newRecipeData.title"
+            :error="errors.title?.[0]"
+            @clear-error="clearError('title')"
           />
         </div>
         <NewIngredient
+          :schemaError="errors.ingredients?.[0]"
+          @clear-error="clearError('ingredients')"
           :ingredients="newRecipeData.ingredients"
           @set-ingredients="setIngredients"
         />
@@ -178,6 +210,8 @@ onMounted(() => {
       </option>
     </select>
 
+    <FieldError :error="errors.complexity?.[0]" />
+
     <h3
       class="mt-3 font-bold text-sm xs:text-base sm:text-lg md:text-xl xl:text-xl"
     >
@@ -193,6 +227,8 @@ onMounted(() => {
       </option>
     </select>
 
+    <FieldError :error="errors.cooking_time?.[0]" />
+
     <h3
       class="mt-3 font-bold text-sm xs:text-base sm:text-lg md:text-xl xl:text-xl"
     >
@@ -200,19 +236,34 @@ onMounted(() => {
     </h3>
 
     <textarea
+      @input="clearError('recipe')"
       v-model="newRecipeData.recipe"
       :placeholder="recipePlaceholder"
       class="p-[0.4em] mt-3 resize-none sm:resize-y outline-add min-h-60 text-secondary"
     />
 
-    <div class="my-6 md:mb-12">
+    <FieldError :error="errors.recipe?.[0]" />
+
+    <div class="my-6 mb-12">
       <FormInput
         :savedValueKey="SERVINGS"
         :label="$t('howManyServings')"
-        @update:model-value="numberInput"
+        @update:modelValue="numberInput"
         placeholder="3"
+        :error="errors.servings?.[0]"
       />
     </div>
+
+    <FormError
+      v-if="errors.rootError || error"
+      :error="errors.rootError! || error!"
+      @clear-error="
+        () => {
+          error = null;
+          clearError('rootError');
+        }
+      "
+    />
 
     <Button variation="primary" type="submit">
       <div class="text-base md:text-xl xl:text-2xl">
