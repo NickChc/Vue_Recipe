@@ -85,7 +85,7 @@
   "invalidPassword": "Invalid password",
   "pageNotFoundText": "Oops! Looks like the page you are looking for doesn't exist!",
   "takeMeHome": "Take Me Home",
-  "pressSpaceForIngredient": "press \"Enter\" to add",
+  "pressEnterForIngredient": "press \"Enter\" to add",
   "chooseFittingDiets": "Choose fitting diet",
   "chooseFittingCategories": "Choose fitting categories",
   "shareYourFavRecipe": "Share your favorite recipe!",
@@ -120,5 +120,7 @@
   "enterIngredients": "Enter ingredients",
   "servingsRange": "Invalid amount",
   "maxImageSize": "The image must be less then 5MB in size",
-  "emptyField": "This field is empty"
+  "emptyField": "This field is empty",
+  "addAnImage": "Add an image",
+  "changeTheImage": "Change the image"
 }

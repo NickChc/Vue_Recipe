@@ -85,7 +85,7 @@
   "invalidPassword": "პაროლი მცდარია",
   "pageNotFoundText": "უი - როგორც ჩანს, გვერდი, რომელსაც თქვენ ეძებთ, არ არსებობს!",
   "takeMeHome": "მთავარზე დაბრუნება",
-  "pressSpaceForIngredient": "დააწექით \"Enter\"-ს დასამატებლად",
+  "pressEnterForIngredient": "დააწექით \"Enter\"-ს დასამატებლად",
   "chooseFittingDiets": "აარჩიეთ შესაბამისი დიეტები",
   "chooseFittingCategories": "აარჩიეთ შესაბამისი კატეგორიები",
   "shareYourFavRecipe": "გააზიარეთ თქვენი საყვარელი რეცეპტი!",
@@ -120,5 +120,7 @@
   "enterIngredients": "შეიყვანეთ შემადგენლობა",
   "servingsRange": "რაოდენობა არაა ვალიდური",
   "maxImageSize": "სურათის ზომა უნდა იყოს 5MB -ზე ნაკლები",
-  "emptyField": "ველი ცარიელია"
+  "emptyField": "ველი ცარიელია",
+  "addAnImage": "სურათის დამატება",
+  "changeTheImage": "სურათის შეცვლა"
 }

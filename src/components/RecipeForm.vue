@@ -4,7 +4,7 @@ import FormInput from "@/components/FormInput.vue";
 import NewIngredient from "@/components/Recipes/NewIngredient.vue";
 import SelectDiets from "@/components/Recipes/SelectDiets.vue";
 import SelectCategories from "@/components/Recipes/SelectCategories.vue";
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref, watch } from "vue";
 import {
   TCategory_Enum,
   TComplexity_Enum,
@@ -13,11 +13,11 @@ import {
   TRecipeFormValues,
 } from "@/@types/general";
 import Button from "@/components/Button.vue";
-import FormHint from "./FormHint.vue";
+import FormHint from "@/components/FormHint.vue";
 import { useValidateNewRecipe } from "@/composables/useValidateNewRecipe";
 import { createRecipe } from "@/data/createRecipe";
 import FormError from "@/components/Auth/FormError.vue";
-import FieldError from "./FieldError.vue";
+import FieldError from "@/components/FieldError.vue";
 
 const RECIPE_FORM_DATA = "recipe_form_data";
 const SERVINGS = "servings";
@@ -110,13 +110,7 @@ async function handleSubmit() {
   }
 }
 
-onMounted(() => {
-  const savedData = localStorage.getItem(RECIPE_FORM_DATA);
-
-  if (savedData) {
-    newRecipeData.value = JSON.parse(savedData);
-  }
-
+onMounted(async () => {
   const autosaveInterval = setInterval(() => {
     localStorage.setItem(RECIPE_FORM_DATA, JSON.stringify(newRecipeData.value));
     localStorage.setItem(
@@ -128,6 +122,13 @@ onMounted(() => {
   onBeforeUnmount(() => {
     clearInterval(autosaveInterval);
   });
+
+  const savedData = localStorage.getItem(RECIPE_FORM_DATA);
+
+  if (savedData) {
+    newRecipeData.value = JSON.parse(savedData);
+    newRecipeData.value.image = undefined;
+  }
 });
 </script>
 
@@ -137,7 +138,7 @@ onMounted(() => {
       {{ $t("optional") }} - <FormHint variation="optional" />
     </div>
 
-    <div class="flex flex-col xl:flex-row gap-x-3">
+    <div class="flex flex-col xl:flex-row gap-x-3 xl:max-h-[320px]">
       <input
         ref="imageInput"
         class="hidden"
@@ -146,7 +147,7 @@ onMounted(() => {
         accept="image/*"
       />
       <div
-        class="w-full xl:min-w-[500px] aspect-video relative bg-cover mt-4 z-0 md:max-w-[500px] mb-4"
+        class="w-full xl:min-w-[500px] aspect-video relative mt-4 z-0 md:max-w-[500px] bg-no-repeat bg-fixed bg-cover mb-4"
         :style="{
           backgroundImage: `url(${newRecipeData.image || PlaceholderImage})`,
         }"
@@ -165,7 +166,11 @@ onMounted(() => {
           <h4 class="text-base whitespace-nowrap">Add an image</h4>
         </span>
         <div class="absolute left-3 top-full">
-          <FieldError :error="errors.image?.[0] || errors.imageFile?.[0]" />
+          <FieldError
+            v-if="errors.image?.[0] || errors.imageFile?.[0]"
+            :error="errors.image?.[0] || errors.imageFile?.[0]"
+          />
+          <div v-else-if="imageFile">{{ imageFile.name }}</div>
         </div>
       </div>
 
@@ -251,6 +256,7 @@ onMounted(() => {
         @update:modelValue="numberInput"
         placeholder="3"
         :error="errors.servings?.[0]"
+        @clear-error="clearError('servings')"
       />
     </div>
 

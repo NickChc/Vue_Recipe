@@ -26,7 +26,11 @@ function createRecipeSchema(t: any) {
     complexity: z.string(),
     cooking_time: z.string().min(1, { message: t("invalidFormat") }),
     title: z.string().min(1, t("enterTitle")),
-    recipe: z.string().min(1, t("emptyField")).min(100, t("recipeTooShort")),
+    recipe: z
+      .string()
+      .trim()
+      .min(1, t("emptyField"))
+      .min(100, t("recipeTooShort")),
     ingredients: z.array(z.string()).min(1, t("enterIngredients")),
     servings: z.number().min(1, t("servingsRange")),
     diet: z.optional(z.array(z.string())),

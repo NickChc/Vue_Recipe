@@ -6,7 +6,7 @@ export async function createRecipe(
 ) {
   try {
     console.table(values);
-    console.log(imageFile?.name);
+    console.log(imageFile);
   } catch (err: any) {
     console.log(err.message);
   }

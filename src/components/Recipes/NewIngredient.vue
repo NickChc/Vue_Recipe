@@ -17,6 +17,7 @@ const error = ref<null | string>(schemaError || null);
 watch(
   () => schemaError,
   (err) => {
+    console.log(schemaError);
     error.value = err || null;
   }
 );
@@ -44,6 +45,7 @@ function addIngredient(e: Event) {
 
   const event = e as KeyboardEvent;
   if (event.key === "Enter") {
+    e.preventDefault();
     const value = newIngredient.value.trim();
 
     if (ingredients.includes(value)) {
@@ -51,10 +53,14 @@ function addIngredient(e: Event) {
       return;
     }
 
-    if (!!value) {
-      emitSetIngredients([...ingredients, value]);
-      newIngredient.value = "";
+    if (!value) {
+      error.value = t("emptyField");
+      return;
     }
+
+    emitSetIngredients([...ingredients, value]);
+    newIngredient.value = "";
+    (e.target as HTMLInputElement).value = "";
   }
 }
 </script>
@@ -62,7 +68,7 @@ function addIngredient(e: Event) {
 <template>
   <FormInput
     :label="$t('addIngredients')"
-    :hint="!!newIngredient.trim() ? $t('pressSpaceForIngredient') : ''"
+    :hint="!!newIngredient.trim() ? $t('pressEnterForIngredient') : ''"
     placeholder="4 oz pastrami"
     v-model="newIngredient"
     @keyboard="addIngredient"

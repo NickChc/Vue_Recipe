@@ -110,7 +110,6 @@ onMounted(() => {
         {{ hint }}
       </div>
     </div>
-
     <div
       :class="`overflow-hidden text-danger dark:text-danger-dark font-semibold text-xs xs:text-sm sm:text-base xl:text-lg duration-300 ${
         error ? 'h-[1.4em]' : 'h-0'
