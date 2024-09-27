@@ -3,12 +3,13 @@ import FormInput from "@/components/FormInput.vue";
 import NewIngredient from "@/components/Recipes/NewIngredient.vue";
 import SelectDiets from "@/components/Recipes/SelectDiets.vue";
 import SelectCategories from "@/components/Recipes/SelectCategories.vue";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import {
   TCategory_Enum,
   TComplexity_Enum,
   TCookingTime_Enum,
   TDiet_Enum,
+  TRecipe,
   TRecipeFormValues,
 } from "@/@types/general";
 import Button from "@/components/Button.vue";
@@ -18,6 +19,12 @@ import FieldError from "@/components/FieldError.vue";
 import RecipeImageInput from "@/components/RecipeImageInput.vue";
 import { useCreateRecipe } from "@/composables/useCreateRecipe";
 import { SERVINGS } from "@/config/storageKeys";
+
+interface RecipeFormProps {
+  editRecipe?: TRecipeFormValues;
+}
+
+const { editRecipe } = defineProps<RecipeFormProps>();
 
 const newRecipeData = ref<TRecipeFormValues>({
   category: [],
@@ -40,7 +47,13 @@ const {
   recipePlaceholder,
   cookingTimes,
   validation: { errors, clearError },
-} = useCreateRecipe(newRecipeData, imageFile, setRecipeData, setImageValues);
+} = useCreateRecipe(
+  newRecipeData,
+  imageFile,
+  setRecipeData,
+  setImageValues,
+  editRecipe
+);
 
 function setIngredients(ingredients: string[]) {
   newRecipeData.value.ingredients = ingredients;
@@ -88,6 +101,12 @@ function numberInput(newValue: string, e?: Event) {
 
   newRecipeData.value.servings = Number(newValue);
 }
+
+onMounted(() => {
+  if (editRecipe) {
+    newRecipeData.value = editRecipe;
+  }
+});
 </script>
 
 <template>
@@ -102,6 +121,7 @@ function numberInput(newValue: string, e?: Event) {
         :error="errors.image?.[0] || errors.imageFile?.[0]"
         :image="newRecipeData.image"
         :imageFile="imageFile"
+        :editRecipeImage="editRecipe?.image"
         @set-image-values="setImageValues"
       />
 
@@ -214,7 +234,10 @@ function numberInput(newValue: string, e?: Event) {
     />
 
     <Button :loading="loading" variation="primary" type="submit">
-      <div class="text-base md:text-xl xl:text-2xl">
+      <div v-if="editRecipe" class="text-base md:text-xl xl:text-2xl">
+        {{ loading ? $t("saving") : $t("save", "SUBMIT") }}
+      </div>
+      <div v-else class="text-base md:text-xl xl:text-2xl">
         {{ loading ? $t("submitting") : $t("submit", "SUBMIT") }}
       </div>
     </Button>

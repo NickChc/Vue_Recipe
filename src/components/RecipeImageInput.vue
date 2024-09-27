@@ -8,9 +8,10 @@ interface RecipeImageInputProps {
   image: string | null;
   imageFile: File | undefined;
   error?: string;
+  editRecipeImage?: string | null;
 }
 
-const { loading, error, image, imageFile } =
+const { loading, error, image, imageFile, editRecipeImage } =
   defineProps<RecipeImageInputProps>();
 
 const emit = defineEmits<{
@@ -71,6 +72,23 @@ function handleImageUpload(e: Event) {
     <div class="absolute left-3 top-full">
       <FieldError v-if="error" :error="error" />
       <div v-else-if="imageFile">{{ imageFile.name }}</div>
+    </div>
+    <div v-if="editRecipeImage" class="absolute right-3 top-full">
+      <button
+        type="button"
+        class="flex items-center gap-x-1 my-1 text-xs xs:text-sm sm:text-base"
+        @click="
+          (e) => {
+            e.stopPropagation();
+            setImageValues(null, undefined);
+          }
+        "
+      >
+        <i class="material-symbols-outlined text-sm xs:text-base sm:text-lg">
+          cancel
+        </i>
+        {{ $t("discardImage") }}
+      </button>
     </div>
   </div>
 </template>

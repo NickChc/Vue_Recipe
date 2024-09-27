@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TRecipe } from "@/@types/general";
 import { computed } from "vue";
+import { TRecipe } from "@/@types/general";
 import RecipeCardImage from "@/components/Recipes/RecipeCardImage.vue";
 import RecipeCardFooter from "@/components/Recipes/RecipeCardFooter.vue";
 
@@ -44,16 +44,16 @@ const totalRates = computed(() => recipe.rates.length);
             class="grid grid-cols-1 md:grid-cols-2 w-full gap-3 md:gap-6 relative my-2"
           >
             <div
-              class="w-full h-full flex flex-col sm:items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
+              class="w-full h-full flex flex-col items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
             >
               <h4
-                class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl md:text-center"
+                class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl text-center"
               >
                 {{ $t("diets") }}
               </h4>
               <ul
                 v-if="recipe.diet?.length! > 0"
-                class="list-none sm:px-2 h-full w-full md:w-fit text-xs sm:text-sm mt-2"
+                class="list-none sm:px-2 h-full w-fit text-xs sm:text-sm mt-2"
               >
                 <li
                   v-for="diet in recipe.diet"
@@ -66,22 +66,24 @@ const totalRates = computed(() => recipe.rates.length);
                   >
                 </li>
               </ul>
+              <i v-else class="material-symbols-outlined text-3xl mt-1"
+                >block</i
+              >
             </div>
-
             <div
               class="absolute right-1/2 h-full w-[1px] bg-primary hidden md:block"
             ></div>
 
             <div
-              class="w-full h-full flex flex-col sm:items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
+              class="w-full h-full flex flex-col items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
             >
               <h4
-                class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl text-start md:text-center"
+                class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl text-center"
               >
                 {{ $t("ingredients") }}
               </h4>
               <ul
-                class="list-none sm:px-2 h-full w-full md:w-fit text-xs sm:text-sm mt-2"
+                class="list-none sm:px-2 h-full w-fit text-xs sm:text-sm mt-2"
               >
                 <li
                   v-for="ingredient in recipe.ingredients"

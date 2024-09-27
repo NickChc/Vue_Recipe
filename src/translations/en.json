@@ -124,5 +124,12 @@
   "addAnImage": "Add an image",
   "changeTheImage": "Change the image",
   "submitting": "SUBMITTING...",
-  "failedToCreateRecipe": "Failed to create recipe"
+  "failedToCreateRecipe": "Failed to create recipe",
+  "edit": "Edit",
+  "you": "You",
+  "none": "None",
+  "editYourRecipe": "Edit your recipe",
+  "discardImage": "Discard image",
+  "save": "SAVE",
+  "saving": "SAVING..."
 }

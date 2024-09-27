@@ -74,7 +74,9 @@ function addIngredient(e: Event) {
       }
     "
   />
-  <ul class="list-none mt-1 sm:mt-2 lg:mt-3 max-h-24 overflow-y-auto">
+  <ul
+    class="list-none mt-1 sm:mt-2 lg:mt-3 xl:min-h-24 max-h-24 overflow-y-auto"
+  >
     <li
       v-for="ingredient in ingredients"
       :key="ingredient"

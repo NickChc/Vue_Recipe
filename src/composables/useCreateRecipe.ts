@@ -6,6 +6,7 @@ import { createRecipe } from "@/data/createRecipe";
 import { useRouter } from "vue-router";
 import { RECIPE_FORM_DATA, SERVINGS } from "@/config/storageKeys";
 import { useI18n } from "vue-i18n";
+import { updateRecipe } from "@/data/updateRecipe";
 
 export function useCreateRecipe(
   newRecipeData: Ref<TRecipeFormValues>,
@@ -14,7 +15,8 @@ export function useCreateRecipe(
   setImageValues: (values: {
     image: string | null;
     imgFile: File | undefined;
-  }) => void
+  }) => void,
+  editRecipe?: TRecipeFormValues
 ) {
   const loading = ref(false);
   const error = ref<null | string>(null);
@@ -47,14 +49,27 @@ export function useCreateRecipe(
         return;
       }
 
-      const { error: createError } = await createRecipe(
-        authStore.currentUser,
-        newRecipeData.value,
-        imageFile.value
-      );
+      let res: { success: boolean; error: string | null } = {
+        success: false,
+        error: null,
+      };
 
-      if (createError) {
-        throw new Error(createError);
+      if (editRecipe) {
+        res = await updateRecipe(
+          editRecipe,
+          newRecipeData.value,
+          imageFile.value
+        );
+      } else {
+        res = await createRecipe(
+          authStore.currentUser,
+          newRecipeData.value,
+          imageFile.value
+        );
+      }
+
+      if (res.error) {
+        throw new Error(res.error);
       }
 
       localStorage.removeItem(RECIPE_FORM_DATA);
@@ -68,6 +83,8 @@ export function useCreateRecipe(
   }
 
   onMounted(async () => {
+    if (editRecipe) return;
+
     const autosaveInterval = setInterval(() => {
       localStorage.setItem(
         RECIPE_FORM_DATA,

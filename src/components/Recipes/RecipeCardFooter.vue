@@ -5,6 +5,8 @@ import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
 import ManIcon from "@/components/Icons/ManIcon.vue";
 import { checkRecipeComplexity } from "@/utils/checkRecipeComplexity";
 import { useI18n } from "vue-i18n";
+import { useAuthStore } from "@/stores/authStore";
+import { storeToRefs } from "pinia";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;
@@ -13,6 +15,9 @@ interface RecipeCardFooterProps {
 }
 
 const { isMore, recipe, totalRates } = defineProps<RecipeCardFooterProps>();
+
+const authStore = useAuthStore();
+const { currentUser } = storeToRefs(authStore);
 
 const { t } = useI18n();
 
@@ -45,26 +50,32 @@ const isSubscribed = ref(false);
       <div
         class="flex flex-col gap-y-2 items-start sm:items-center lg:flex-row lg:gap-x-3 min-w-[50%] sm:text-lg 2xl:text-xl"
       >
-        <strong class="text-add max-w-[50%] min-w-fit"
-          >{{ $t("author", { name: recipe.author.name }) }}
+        <template v-if="currentUser?.id !== recipe.user_id">
+          <strong class="text-add max-w-[50%] min-w-fit"
+            >{{ $t("author", { name: recipe.author.name }) }}
+          </strong>
+
+          <button
+            :class="`w-full xs:w-fit text-sm sm:text-base lg:text-lg text-add flex items-center justify-center gap-x-2 border border-add rounded-sm px-4 py-0.5 font-semibold duration-200 transition-colors ${
+              isSubscribed ? 'bg-add text-primary' : 'text-add'
+            }`"
+            @click="isSubscribed = !isSubscribed"
+          >
+            <template v-if="isSubscribed">
+              {{ $t("unsubscribe") }}
+              <i class="material-symbols-outlined note">notifications_active</i>
+            </template>
+
+            <template v-else>
+              {{ $t("subscribe") }}
+              <i class="material-symbols-outlined note">notifications</i>
+            </template>
+          </button>
+        </template>
+        <strong v-else class="text-[#08a408] max-w-[50%] min-w-fit"
+          >{{ $t("author") }}
+          <span class="]">{{ $t("you") }}</span>
         </strong>
-
-        <button
-          :class="`w-full xs:w-fit text-sm sm:text-base lg:text-lg text-add flex items-center justify-center gap-x-2 border border-add rounded-sm px-4 py-0.5 font-semibold duration-200 transition-colors ${
-            isSubscribed ? 'bg-add text-primary' : 'text-add'
-          }`"
-          @click="isSubscribed = !isSubscribed"
-        >
-          <template v-if="isSubscribed">
-            {{ $t("unsubscribe") }}
-            <i class="material-symbols-outlined note">notifications_active</i>
-          </template>
-
-          <template v-else>
-            {{ $t("subscribe") }}
-            <i class="material-symbols-outlined note">notifications</i>
-          </template>
-        </button>
       </div>
       <p class="text-sm sm:text-base text-add">
         {{ $t("subscribeTip") }}
@@ -73,6 +84,13 @@ const isSubscribed = ref(false);
     <hr class="w-full border-add mt-2" />
     <RecipeCardRating isMore :rating="recipe.rating" :totalRates="totalRates" />
   </template>
+
+  <strong
+    v-else-if="currentUser?.id === recipe.user_id"
+    class="text-[#08a408] text-add max-w-full truncate"
+    >{{ $t("author") }}
+    <span class="]">{{ $t("you") }}</span>
+  </strong>
 
   <strong v-else class="text-add max-w-full truncate"
     >{{ $t("author", { name: recipe.author.name }) }}
