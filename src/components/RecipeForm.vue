@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import PlaceholderImage from "@/assets/images/Fallback_Food_Image.jpeg";
 import FormInput from "@/components/FormInput.vue";
 import NewIngredient from "@/components/Recipes/NewIngredient.vue";
 import SelectDiets from "@/components/Recipes/SelectDiets.vue";
 import SelectCategories from "@/components/Recipes/SelectCategories.vue";
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { ref } from "vue";
 import {
   TCategory_Enum,
   TComplexity_Enum,
@@ -14,22 +13,11 @@ import {
 } from "@/@types/general";
 import Button from "@/components/Button.vue";
 import FormHint from "@/components/FormHint.vue";
-import { useValidateNewRecipe } from "@/composables/useValidateNewRecipe";
-import { createRecipe } from "@/data/createRecipe";
 import FormError from "@/components/Auth/FormError.vue";
 import FieldError from "@/components/FieldError.vue";
-import { useAuthStore } from "@/stores/authStore";
-import { useRouter } from "vue-router";
-import { useI18n } from "vue-i18n";
-
-const RECIPE_FORM_DATA = "recipe_form_data";
-const SERVINGS = "servings";
-
-const loading = ref(false);
-const error = ref<null | string>(null);
-
-const recipePlaceholder =
-  "Toast the bread: Lightly toast both slices of rye bread. \n\nWarm the pastrami: Heat the pastrami slices in a skillet on medium heat for 2-3 minutes, until warm. \n\nAssemble the sandwich: Spread mustard on one side of each toasted slice. \n\nLayer the warm pastrami between the bread slices. Add Swiss cheese if desired. \n\nServe: Slice in half and serve with a pickle on the side. \n\nEnjoy!";
+import RecipeImageInput from "@/components/RecipeImageInput.vue";
+import { useCreateRecipe } from "@/composables/useCreateRecipe";
+import { SERVINGS } from "@/config/storageKeys";
 
 const newRecipeData = ref<TRecipeFormValues>({
   category: [],
@@ -45,38 +33,36 @@ const newRecipeData = ref<TRecipeFormValues>({
 
 const imageFile = ref<undefined | File>();
 
-const cookingTimes = Object.keys(
-  TCookingTime_Enum
-) as (keyof typeof TCookingTime_Enum)[];
-
-const router = useRouter();
-
-const authStore = useAuthStore();
-
-const { t } = useI18n();
-
-const { errors, isValid, validateNewRecipe, clearError } =
-  useValidateNewRecipe();
-
-function handleImageUpload(e: Event) {
-  const target = e.target as HTMLInputElement;
-  const image = target.files?.[0];
-
-  if (image) {
-    imageFile.value = image;
-    newRecipeData.value.image = URL.createObjectURL(image);
-    return;
-  }
-  imageFile.value = undefined;
-  newRecipeData.value.image = null;
-}
+const {
+  handleCreateRecipe,
+  loading,
+  error,
+  recipePlaceholder,
+  cookingTimes,
+  validation: { errors, clearError },
+} = useCreateRecipe(newRecipeData, imageFile, setRecipeData, setImageValues);
 
 function setIngredients(ingredients: string[]) {
   newRecipeData.value.ingredients = ingredients;
 }
 
+function setRecipeData(data: TRecipeFormValues) {
+  newRecipeData.value = data;
+}
+
 function setDiets(diets?: TDiet_Enum[]) {
   newRecipeData.value.diet = diets;
+}
+
+function setImageValues({
+  image,
+  imgFile,
+}: {
+  image: string | null;
+  imgFile: File | undefined;
+}) {
+  newRecipeData.value.image = image;
+  imageFile.value = imgFile;
 }
 
 function setCategories(categories: TCategory_Enum[]) {
@@ -102,104 +88,22 @@ function numberInput(newValue: string, e?: Event) {
 
   newRecipeData.value.servings = Number(newValue);
 }
-
-async function handleSubmit() {
-  if (authStore.currentUser == null) return;
-
-  try {
-    error.value = null;
-    loading.value = true;
-    validateNewRecipe(newRecipeData.value, imageFile.value);
-
-    if (!isValid.value) return;
-
-    const { error: createError } = await createRecipe(
-      authStore.currentUser,
-      newRecipeData.value,
-      imageFile.value
-    );
-
-    if (createError) {
-      throw new Error(createError);
-    }
-
-    localStorage.removeItem(RECIPE_FORM_DATA);
-    localStorage.removeItem(SERVINGS);
-    router.push("/");
-  } catch (err: any) {
-    console.log(err.message);
-    error.value = t("failedToCreateRecipe");
-    loading.value = false;
-  }
-}
-
-onMounted(async () => {
-  const autosaveInterval = setInterval(() => {
-    localStorage.setItem(RECIPE_FORM_DATA, JSON.stringify(newRecipeData.value));
-    localStorage.setItem(
-      SERVINGS,
-      JSON.stringify(newRecipeData.value.servings)
-    );
-  }, 5000);
-
-  onBeforeUnmount(() => {
-    clearInterval(autosaveInterval);
-  });
-
-  const savedData = localStorage.getItem(RECIPE_FORM_DATA);
-
-  if (savedData) {
-    newRecipeData.value = JSON.parse(savedData);
-    newRecipeData.value.image = null;
-  }
-});
 </script>
 
 <template>
-  <form @submit.prevent="handleSubmit" class="flex flex-col mt-4">
+  <form @submit.prevent="handleCreateRecipe" class="flex flex-col mt-4">
     <div class="flex items-center gap-x-3 xs:text-lg xl:text-xl">
       {{ $t("optional") }} - <FormHint variation="optional" />
     </div>
 
     <div class="flex flex-col xl:flex-row gap-x-3 xl:max-h-[320px]">
-      <input
-        :disabled="loading"
-        ref="imageInput"
-        class="hidden"
-        type="file"
-        @input="handleImageUpload"
-        accept="image/*"
+      <RecipeImageInput
+        :loading="loading"
+        :error="errors.image?.[0] || errors.imageFile?.[0]"
+        :image="newRecipeData.image"
+        :imageFile="imageFile"
+        @set-image-values="setImageValues"
       />
-      <div
-        class="w-full xl:min-w-[500px] aspect-video relative mt-4 z-0 md:max-w-[500px] bg-no-repeat bg-fixed bg-cover mb-4"
-        :class="loading ? 'opacity-75 pointer-events-none' : ''"
-        :style="{
-          backgroundImage: `url(${newRecipeData.image || PlaceholderImage})`,
-        }"
-        @click="$refs.imageInput.click()"
-      >
-        <div class="absolute right-1 -top-7">
-          <FormHint variation="optional" />
-        </div>
-        <div
-          class="absolute inset-0 z-10 backdrop-blur-sm active:brightness-75 cursor-pointer"
-        ></div>
-        <span
-          class="text-primary cursor-pointer z-20 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 text-3xl flex flex-col items-center"
-        >
-          <i class="material-symbols-outlined text-[2em]">add</i>
-          <h4 class="text-base whitespace-nowrap">
-            {{ newRecipeData.image ? $t("changeTheImage") : $t("addAnImage") }}
-          </h4>
-        </span>
-        <div class="absolute left-3 top-full">
-          <FieldError
-            v-if="errors.image?.[0] || errors.imageFile?.[0]"
-            :error="errors.image?.[0] || errors.imageFile?.[0]"
-          />
-          <div v-else-if="imageFile">{{ imageFile.name }}</div>
-        </div>
-      </div>
 
       <div class="flex flex-col">
         <div class="mb-3">
