@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { TDiet_Enum } from "@/@types/general";
-import FormHint from "../FormHint.vue";
+import FormHint from "@/components/FormHint.vue";
 
 interface SelectDietsProps {
   diets?: TDiet_Enum[];
+  disabled: boolean;
 }
 
 const { diets } = defineProps<SelectDietsProps>();
@@ -43,8 +44,9 @@ function selectDiet(diet: TDiet_Enum) {
       v-for="diet in Object.values(TDiet_Enum)"
       :key="diet"
       type="button"
+      :disabled="disabled"
       @click="selectDiet(diet)"
-      :class="`p-1 md:p-1.5 rounded-sm w-fit m-1 text-xs sm:text-sm lg:text-base font-semibold active:opacity-80 ${
+      :class="`p-1 md:p-1.5 rounded-sm w-fit m-1 text-xs sm:text-sm lg:text-base font-semibold active:opacity-80 disabled:opacity-50 disabled:pointer-events-none ${
         diets?.includes(diet)
           ? 'bg-add text-primary'
           : 'bg-add-2 dark:bg-primary text-primary dark:text-secondary'

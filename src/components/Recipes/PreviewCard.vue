@@ -20,7 +20,9 @@ const { recipes, title } = defineProps<PreviewCardProps>();
       {{ title }}
       <slot></slot>
     </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-4 p-3">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-4 gap-y-6 p-3"
+    >
       <template v-if="loading">
         <RecipeCardSkeleton />
         <RecipeCardSkeleton />

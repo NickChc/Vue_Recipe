@@ -47,7 +47,7 @@ export interface TRecipe {
   diet?: TDiet_Enum[];
   servings: number;
   category: TCategory_Enum[];
-  image?: string;
+  image: null | string;
   author: {
     name: string;
     rating: number;

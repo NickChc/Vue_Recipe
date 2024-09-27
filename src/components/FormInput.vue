@@ -75,7 +75,7 @@ onMounted(() => {
         :disabled="disabled"
         :name="name"
         :value="modelValue || input?.value"
-        class="p-2 rounded-sm outline-add text-secondary w-full disabled:bg-add-2 dark:disabled:bg-primary disabled:opacity-50 disabled:text-primary"
+        class="p-2 rounded-sm outline-add text-secondary w-full disabled:bg-add-2 dark:disabled:bg-primary disabled:opacity-50 disabled:text-primary dark:disabled:text-secondary"
         @input="onInput"
         :type="`${
           type === 'password'

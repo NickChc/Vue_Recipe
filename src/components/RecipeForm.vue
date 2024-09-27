@@ -4,7 +4,7 @@ import FormInput from "@/components/FormInput.vue";
 import NewIngredient from "@/components/Recipes/NewIngredient.vue";
 import SelectDiets from "@/components/Recipes/SelectDiets.vue";
 import SelectCategories from "@/components/Recipes/SelectCategories.vue";
-import { onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import {
   TCategory_Enum,
   TComplexity_Enum,
@@ -18,6 +18,9 @@ import { useValidateNewRecipe } from "@/composables/useValidateNewRecipe";
 import { createRecipe } from "@/data/createRecipe";
 import FormError from "@/components/Auth/FormError.vue";
 import FieldError from "@/components/FieldError.vue";
+import { useAuthStore } from "@/stores/authStore";
+import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 
 const RECIPE_FORM_DATA = "recipe_form_data";
 const SERVINGS = "servings";
@@ -37,7 +40,7 @@ const newRecipeData = ref<TRecipeFormValues>({
   servings: 0,
   title: "",
   diet: [],
-  image: undefined,
+  image: null,
 });
 
 const imageFile = ref<undefined | File>();
@@ -45,6 +48,12 @@ const imageFile = ref<undefined | File>();
 const cookingTimes = Object.keys(
   TCookingTime_Enum
 ) as (keyof typeof TCookingTime_Enum)[];
+
+const router = useRouter();
+
+const authStore = useAuthStore();
+
+const { t } = useI18n();
 
 const { errors, isValid, validateNewRecipe, clearError } =
   useValidateNewRecipe();
@@ -59,7 +68,7 @@ function handleImageUpload(e: Event) {
     return;
   }
   imageFile.value = undefined;
-  newRecipeData.value.image = undefined;
+  newRecipeData.value.image = null;
 }
 
 function setIngredients(ingredients: string[]) {
@@ -95,6 +104,8 @@ function numberInput(newValue: string, e?: Event) {
 }
 
 async function handleSubmit() {
+  if (authStore.currentUser == null) return;
+
   try {
     error.value = null;
     loading.value = true;
@@ -102,10 +113,22 @@ async function handleSubmit() {
 
     if (!isValid.value) return;
 
-    await createRecipe(newRecipeData.value, imageFile.value);
+    const { error: createError } = await createRecipe(
+      authStore.currentUser,
+      newRecipeData.value,
+      imageFile.value
+    );
+
+    if (createError) {
+      throw new Error(createError);
+    }
+
+    localStorage.removeItem(RECIPE_FORM_DATA);
+    localStorage.removeItem(SERVINGS);
+    router.push("/");
   } catch (err: any) {
     console.log(err.message);
-  } finally {
+    error.value = t("failedToCreateRecipe");
     loading.value = false;
   }
 }
@@ -127,7 +150,7 @@ onMounted(async () => {
 
   if (savedData) {
     newRecipeData.value = JSON.parse(savedData);
-    newRecipeData.value.image = undefined;
+    newRecipeData.value.image = null;
   }
 });
 </script>
@@ -140,6 +163,7 @@ onMounted(async () => {
 
     <div class="flex flex-col xl:flex-row gap-x-3 xl:max-h-[320px]">
       <input
+        :disabled="loading"
         ref="imageInput"
         class="hidden"
         type="file"
@@ -148,6 +172,7 @@ onMounted(async () => {
       />
       <div
         class="w-full xl:min-w-[500px] aspect-video relative mt-4 z-0 md:max-w-[500px] bg-no-repeat bg-fixed bg-cover mb-4"
+        :class="loading ? 'opacity-75 pointer-events-none' : ''"
         :style="{
           backgroundImage: `url(${newRecipeData.image || PlaceholderImage})`,
         }"
@@ -163,7 +188,9 @@ onMounted(async () => {
           class="text-primary cursor-pointer z-20 absolute top-1/2 -translate-y-1/2 right-1/2 translate-x-1/2 text-3xl flex flex-col items-center"
         >
           <i class="material-symbols-outlined text-[2em]">add</i>
-          <h4 class="text-base whitespace-nowrap">Add an image</h4>
+          <h4 class="text-base whitespace-nowrap">
+            {{ newRecipeData.image ? $t("changeTheImage") : $t("addAnImage") }}
+          </h4>
         </span>
         <div class="absolute left-3 top-full">
           <FieldError
@@ -177,6 +204,7 @@ onMounted(async () => {
       <div class="flex flex-col">
         <div class="mb-3">
           <FormInput
+            :disabled="loading"
             placeholder="Pastrami sandwich"
             :label="$t('title')"
             v-model="newRecipeData.title"
@@ -185,17 +213,23 @@ onMounted(async () => {
           />
         </div>
         <NewIngredient
+          :disabled="loading"
           :schemaError="errors.ingredients?.[0]"
           @clear-error="clearError('ingredients')"
           :ingredients="newRecipeData.ingredients"
           @set-ingredients="setIngredients"
         />
 
-        <SelectDiets :diets="newRecipeData.diet" @set-diets="setDiets" />
+        <SelectDiets
+          :disabled="loading"
+          :diets="newRecipeData.diet"
+          @set-diets="setDiets"
+        />
       </div>
     </div>
 
     <SelectCategories
+      :disabled="loading"
       :categories="newRecipeData.category"
       @set-categories="setCategories"
     />
@@ -208,7 +242,8 @@ onMounted(async () => {
 
     <select
       v-model="newRecipeData.complexity"
-      class="mt-3 p-2 text-secondary rounded-sm font-semibold outline-add"
+      :disabled="loading"
+      class="mt-3 p-2 text-secondary rounded-sm font-semibold outline-add cursor-pointer disabled:pointer-events-none"
     >
       <option :value="lvl" v-for="lvl in Object.values(TComplexity_Enum)">
         {{ $t(`complexity.${lvl}`) }}
@@ -225,7 +260,8 @@ onMounted(async () => {
 
     <select
       v-model="newRecipeData.cooking_time"
-      class="mt-3 p-2 text-secondary rounded-sm font-semibold outline-add"
+      :disabled="loading"
+      class="mt-3 p-2 text-secondary rounded-sm font-semibold outline-add cursor-pointer disabled:pointer-events-none"
     >
       <option v-for="time in cookingTimes" :value="TCookingTime_Enum[time]">
         {{ $t(`cookingTime_obj.${time}`) }}
@@ -241,16 +277,18 @@ onMounted(async () => {
     </h3>
 
     <textarea
+      :disabled="loading"
       @input="clearError('recipe')"
       v-model="newRecipeData.recipe"
       :placeholder="recipePlaceholder"
-      class="p-[0.4em] mt-3 resize-none sm:resize-y outline-add min-h-60 text-secondary"
+      class="p-[0.4em] mt-3 resize-none sm:resize-y outline-add min-h-60 text-secondary disabled:dark:text-primary disabled:bg-add-2 disabled:opacity-50"
     />
 
     <FieldError :error="errors.recipe?.[0]" />
 
     <div class="my-6 mb-12">
       <FormInput
+        :disabled="loading"
         :savedValueKey="SERVINGS"
         :label="$t('howManyServings')"
         @update:modelValue="numberInput"
@@ -271,9 +309,9 @@ onMounted(async () => {
       "
     />
 
-    <Button variation="primary" type="submit">
+    <Button :loading="loading" variation="primary" type="submit">
       <div class="text-base md:text-xl xl:text-2xl">
-        {{ $t("submit", "SUBMIT") }}
+        {{ loading ? $t("submitting") : $t("submit", "SUBMIT") }}
       </div>
     </Button>
   </form>

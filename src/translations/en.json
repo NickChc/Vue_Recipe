@@ -122,5 +122,7 @@
   "maxImageSize": "The image must be less then 5MB in size",
   "emptyField": "This field is empty",
   "addAnImage": "Add an image",
-  "changeTheImage": "Change the image"
+  "changeTheImage": "Change the image",
+  "submitting": "SUBMITTING...",
+  "failedToCreateRecipe": "Failed to create recipe"
 }

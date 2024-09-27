@@ -5,16 +5,17 @@ interface ButtonProps {
   type?: "submit" | "button";
   size?: "sm";
   disabled?: boolean;
+  loading?: boolean;
   color?: "white" | "add";
 }
 
-const { variation, asChild, type, disabled, color, size } =
+const { variation, asChild, type, disabled, color, size, loading } =
   defineProps<ButtonProps>();
 </script>
 
 <template>
   <button
-    :disabled="disabled"
+    :disabled="disabled || loading"
     :type="type"
     :class="`border-2 whitespace-nowrap rounded-sm font-semibold duration-300 transition-colors disabled:pointer-events-none disabled:opacity-75 ${
       variation === 'outlined' && color === 'white'

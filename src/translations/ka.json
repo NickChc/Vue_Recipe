@@ -122,5 +122,7 @@
   "maxImageSize": "სურათის ზომა უნდა იყოს 5MB -ზე ნაკლები",
   "emptyField": "ველი ცარიელია",
   "addAnImage": "სურათის დამატება",
-  "changeTheImage": "სურათის შეცვლა"
+  "changeTheImage": "სურათის შეცვლა",
+  "submitting": "დაელოდეთ...",
+  "failedToCreateRecipe": "რეცეპტის დამატება ვერ მოხერხდა"
 }

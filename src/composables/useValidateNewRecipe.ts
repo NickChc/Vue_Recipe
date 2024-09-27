@@ -34,7 +34,7 @@ function createRecipeSchema(t: any) {
     ingredients: z.array(z.string()).min(1, t("enterIngredients")),
     servings: z.number().min(1, t("servingsRange")),
     diet: z.optional(z.array(z.string())),
-    image: z.optional(z.string()),
+    image: z.nullable(z.string()),
     imageFile: z
       .instanceof(File)
       .refine((file) => file.size <= MAX_FILE_SIZE, {

@@ -1,7 +1,6 @@
 import { TUser } from "@/@types/general";
 import { getUserById } from "@/data/getUserById";
 import { auth } from "@/firebase";
-import { PROTECTED_ROUTES } from "@/router";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";

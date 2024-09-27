@@ -5,6 +5,7 @@ import { useI18n } from "vue-i18n";
 
 interface NewIngredientProps {
   ingredients: string[];
+  disabled: boolean;
   schemaError?: string;
 }
 
@@ -67,6 +68,7 @@ function addIngredient(e: Event) {
 
 <template>
   <FormInput
+    :disabled="disabled"
     :label="$t('addIngredients')"
     :hint="!!newIngredient.trim() ? $t('pressEnterForIngredient') : ''"
     placeholder="4 oz pastrami"
@@ -87,8 +89,9 @@ function addIngredient(e: Event) {
       class="inline-block"
     >
       <button
+        :disabled="disabled"
         type="button"
-        class="ingredient-remove p-1 md:p-1.5 opacity-80 hover:opacity-100 rounded-sm bg-add-2 m-1 flex items-center gap-x-1 text-primary text-xs sm:text-sm lg:text-base"
+        class="ingredient-remove p-1 md:p-1.5 opacity-80 hover:opacity-100 rounded-sm bg-add-2 m-1 flex items-center gap-x-1 text-primary text-xs sm:text-sm lg:text-base disabled:pointer-events-none disabled:opacity-50"
         @click="emitSetIngredients(ingredients.filter((i) => i !== ingredient))"
       >
         {{ ingredient }} <i class="material-symbols-outlined text-xs">close</i>
