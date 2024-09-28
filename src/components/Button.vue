@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface ButtonProps {
-  variation?: "outlined" | "danger" | "primary";
+  variation?: "outlined" | "danger" | "primary" | "danger-filled";
   asChild?: boolean;
   type?: "submit" | "button";
   size?: "sm";
@@ -26,6 +26,8 @@ const { variation, asChild, type, disabled, color, size, loading } =
         ? 'text-secondary dark:text-primary border-secondary dark:border-primary'
         : variation === 'danger'
         ? 'border-danger text-danger'
+        : variation === 'danger-filled'
+        ? 'border-danger bg-danger text-primary'
         : variation === 'primary'
         ? 'border-add text-primary bg-add hover:opacity-90'
         : 'border-add text-add hover:bg-add hover:text-primary'

@@ -11,7 +11,9 @@ const globalStore = useGlobalStore();
     @mousedown="globalStore.toggleModal"
     class="fixed inset-0 z-50 bg-[rgba(0,0,0,0.7)]"
   >
-    <div class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
+    <div
+      class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2 max-h-[95dvh] overflow-y-auto"
+    >
       <div
         @mousedown="(e) => e.stopPropagation()"
         class="overflow-hidden scale-increase origin-center scale-0"

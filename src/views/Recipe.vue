@@ -2,8 +2,9 @@
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import RecipeCard from "@/components/Recipes/RecipeCard.vue";
 import { useGetCurrentRecipe } from "@/composables/useGetCurrentRecipe";
-import { deleteRecipe } from "@/data/deleteRecipe";
 import { useAuthStore } from "@/stores/authStore";
+import { useGlobalStore } from "@/stores/globalStore";
+import { useRecipesStore } from "@/stores/recipesStore";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
@@ -14,26 +15,22 @@ interface RecipePageProps {
 
 const { recipeId } = defineProps<RecipePageProps>();
 
-const deleting = ref(false);
-
 const router = useRouter();
+
+const globalStore = useGlobalStore();
+
+const recipesStore = useRecipesStore();
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
 
 const { currentRecipe, loading, error } = useGetCurrentRecipe(recipeId);
 
-async function handleDelete() {
-  try {
-    if (currentRecipe.value == null) return;
+function startDelete() {
+  if (currentRecipe.value == null) return;
 
-    deleting.value = true;
-    await deleteRecipe(currentRecipe.value);
-    router.replace("/");
-  } catch (err: any) {
-    console.log(err.message);
-    deleting.value = false;
-  }
+  recipesStore.setDeleteRecipe(currentRecipe.value);
+  globalStore.toggleModal();
 }
 </script>
 
@@ -51,11 +48,8 @@ async function handleDelete() {
         class="flex justify-between gap-x-5"
       >
         <button
-          @click="handleDelete"
-          class="flex items-center gap-x-2 hover:opacity-80 duration-200 transition-colors"
-          :class="
-            deleting ? 'text-danger-dark pointer-events-none' : 'text-danger'
-          "
+          @click="startDelete"
+          class="flex items-center gap-x-2 hover:opacity-80 duration-200 transition-colors text-danger"
         >
           <i class="material-symbols-outlined text-2xl">delete</i>
           <p class="hidden sm:block">

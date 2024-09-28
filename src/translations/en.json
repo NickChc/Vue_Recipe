@@ -134,5 +134,7 @@
   "save": "SAVE",
   "saving": "SAVING...",
   "checkErrorsAbove": "Check the errors above",
-  "delete": "Delete"
+  "delete": "Delete",
+  "sureToDeleteRecipe": "Are you sure you want to delete this recipe?",
+  "deleting": "Deleting..."
 }

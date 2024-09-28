@@ -7,6 +7,8 @@ export const useRecipesStore = defineStore("recipes", () => {
   const topRatedRecipes = ref<TRecipe[]>([]);
   const newestRecipes = ref<TRecipe[]>([]);
 
+  const deleteRecipe = ref<TRecipe | null>(null);
+
   function setTopRatedRecipes(recipes: TRecipe[]) {
     topRatedRecipes.value = recipes;
   }
@@ -19,12 +21,18 @@ export const useRecipesStore = defineStore("recipes", () => {
     recipes.value = newRecipes;
   }
 
+  function setDeleteRecipe(newValue: TRecipe | null) {
+    deleteRecipe.value = newValue;
+  }
+
   return {
     recipes,
     topRatedRecipes,
     newestRecipes,
+    deleteRecipe,
     setTopRatedRecipes,
     setNewestRecipes,
     setRecipes,
+    setDeleteRecipe,
   };
 });

@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
-import { useAuthStore } from "@/stores/authStore";
 import { watch } from "vue";
+import { useAuthStore } from "@/stores/authStore";
 import { PROTECTED_ROUTES } from "@/router";
+import Modal from "@/components/Modal.vue";
+import AssurePopup from "@/components/AssurePopup.vue";
+import { useRecipesStore } from "./stores/recipesStore";
 
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
+const recipesStore = useRecipesStore();
 
 watch(route, ({ fullPath }) => {
   const fireUser = authStore.fireUser;
@@ -31,5 +35,11 @@ watch(
 </script>
 
 <template>
+  <Modal>
+    <AssurePopup
+      v-if="recipesStore.deleteRecipe"
+      :recipe="recipesStore.deleteRecipe"
+    />
+  </Modal>
   <RouterView />
 </template>
