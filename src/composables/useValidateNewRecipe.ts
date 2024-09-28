@@ -46,6 +46,7 @@ function createRecipeSchema(t: any) {
 
 export function useValidateNewRecipe() {
   const isValid = ref(false);
+  const hasErrors = ref(false);
 
   const errors = ref<TNewRecipeErrors>({});
 
@@ -57,6 +58,7 @@ export function useValidateNewRecipe() {
 
   function clearError(error: keyof TNewRecipeErrors) {
     errors.value[error] = undefined;
+    hasErrors.value = false;
   }
 
   function validateNewRecipe(
@@ -75,6 +77,9 @@ export function useValidateNewRecipe() {
     if (result.error) {
       errors.value = result.error.formErrors.fieldErrors;
       errors.value.rootError = result.error.formErrors.formErrors[0];
+      if (Object.values(errors.value).some((value) => value != null)) {
+        hasErrors.value = true;
+      }
       return;
     }
 
@@ -87,5 +92,5 @@ export function useValidateNewRecipe() {
     errors.value = {};
   });
 
-  return { isValid, errors, validateNewRecipe, clearError };
+  return { isValid, errors, validateNewRecipe, clearError, hasErrors };
 }

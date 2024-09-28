@@ -125,11 +125,13 @@
   "changeTheImage": "სურათის შეცვლა",
   "submitting": "დაელოდეთ...",
   "failedToCreateRecipe": "რეცეპტის დამატება ვერ მოხერხდა",
+  "failedToEditRecipe": "რეცეპტის შეცვლა ვერ მოხერხდა",
   "edit": "შეცვლა",
   "you": "თქვენ",
   "none": "არც ერთი",
   "editYourRecipe": "შეცვალეთ თქვენი რეცეპტი",
   "discardImage": "სურათის წაშლა",
   "save": "დამახსოვრება",
-  "saving": "მახსოვრდება..."
+  "saving": "მახსოვრდება...",
+  "checkErrorsAbove": "შეამოწმეთ ზემოთ მოცემული შეცდომები"
 }

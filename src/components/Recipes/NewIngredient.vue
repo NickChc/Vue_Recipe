@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FormInput from "@/components/FormInput.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
 interface NewIngredientProps {
@@ -14,6 +14,15 @@ const newIngredient = ref("");
 const { ingredients, schemaError } = defineProps<NewIngredientProps>();
 
 const error = ref<null | string>(schemaError || null);
+
+watch(
+  () => schemaError,
+  (err) => {
+    if (err) {
+      error.value = err;
+    }
+  }
+);
 
 const { t } = useI18n();
 

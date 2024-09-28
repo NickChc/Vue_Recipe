@@ -125,11 +125,13 @@
   "changeTheImage": "Change the image",
   "submitting": "SUBMITTING...",
   "failedToCreateRecipe": "Failed to create recipe",
+  "failedToEditRecipe": "Failed to edit recipe",
   "edit": "Edit",
   "you": "You",
   "none": "None",
   "editYourRecipe": "Edit your recipe",
   "discardImage": "Discard image",
   "save": "SAVE",
-  "saving": "SAVING..."
+  "saving": "SAVING...",
+  "checkErrorsAbove": "Check the errors above"
 }

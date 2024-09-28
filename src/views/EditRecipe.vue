@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { TRecipe, TRecipeFormValues } from "@/@types/general";
 import Side_Food_Image from "@/assets/images/Side_Food_Image.jpg";
 import Side_Food_Image_2 from "@/assets/images/Side_Food_Image_2.avif";
 import RecipeForm from "@/components/RecipeForm.vue";
 import { useGetCurrentRecipe } from "@/composables/useGetCurrentRecipe";
 import { useAuthStore } from "@/stores/authStore";
-import { watch } from "vue";
+import { computed, watch } from "vue";
 import { useRouter } from "vue-router";
 
 interface EditRecipeProps {
@@ -18,6 +19,23 @@ const router = useRouter();
 const authStore = useAuthStore();
 
 const { currentRecipe, loading } = useGetCurrentRecipe(recipeId);
+
+const editRecipe = computed(() => {
+  const recipe = currentRecipe.value;
+  if (recipe == null) return {} as TRecipeFormValues;
+
+  return {
+    category: recipe.category,
+    complexity: recipe.complexity,
+    cooking_time: recipe.cooking_time,
+    image: recipe.image,
+    ingredients: recipe.ingredients,
+    recipe: recipe.recipe,
+    servings: recipe.servings,
+    title: recipe.title,
+    diet: recipe.diet,
+  } as TRecipeFormValues;
+});
 
 watch([loading, () => authStore.loadingAuth], () => {
   if (authStore.loadingAuth || loading.value) return;
@@ -43,7 +61,10 @@ watch([loading, () => authStore.loadingAuth], () => {
       <h2 class="font-semibold sm:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
         {{ $t("editYourRecipe") }}
       </h2>
-      <RecipeForm v-if="currentRecipe" :editRecipe="currentRecipe" />
+      <RecipeForm
+        v-if="currentRecipe"
+        :editRecipe="{ values: editRecipe, id: currentRecipe.id }"
+      />
     </div>
     <div
       class="hidden sm:block h-full w-40 md:w-60 bg-fixed bg-right bg-cover"

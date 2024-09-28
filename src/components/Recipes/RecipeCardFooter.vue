@@ -87,7 +87,7 @@ const isSubscribed = ref(false);
 
   <strong
     v-else-if="currentUser?.id === recipe.user_id"
-    class="text-[#08a408] text-add max-w-full truncate"
+    class="text-success max-w-full truncate"
     >{{ $t("author") }}
     <span class="]">{{ $t("you") }}</span>
   </strong>
@@ -97,7 +97,7 @@ const isSubscribed = ref(false);
   </strong>
 
   <div
-    :class="`flex  gap-x-4 items-center text-xs xs:text-sm ${
+    :class="`flex pb-3 gap-x-4 items-center text-xs xs:text-sm ${
       isMore
         ? 'sm:text-lg text-primary justify-between'
         : 'justify-start text-add-2 dark:text-primary'

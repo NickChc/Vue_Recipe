@@ -16,7 +16,7 @@ export function useCreateRecipe(
     image: string | null;
     imgFile: File | undefined;
   }) => void,
-  editRecipe?: TRecipeFormValues
+  editRecipe?: { values: TRecipeFormValues; id: string }
 ) {
   const loading = ref(false);
   const error = ref<null | string>(null);
@@ -41,7 +41,6 @@ export function useCreateRecipe(
     try {
       error.value = null;
       loading.value = true;
-      console.log(newRecipeData);
       validateNewRecipe(newRecipeData.value, imageFile.value);
 
       if (!isValid.value) {
@@ -56,7 +55,8 @@ export function useCreateRecipe(
 
       if (editRecipe) {
         res = await updateRecipe(
-          editRecipe,
+          editRecipe.id,
+          editRecipe.values,
           newRecipeData.value,
           imageFile.value
         );
@@ -77,7 +77,11 @@ export function useCreateRecipe(
       router.push("/");
     } catch (err: any) {
       console.log(err.message);
-      error.value = t("failedToCreateRecipe");
+      if (editRecipe) {
+        error.value = t("failedToEditRecipe");
+      } else {
+        error.value = t("failedToCreateRecipe");
+      }
       loading.value = false;
     }
   }

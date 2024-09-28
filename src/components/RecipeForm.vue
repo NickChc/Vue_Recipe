@@ -9,7 +9,6 @@ import {
   TComplexity_Enum,
   TCookingTime_Enum,
   TDiet_Enum,
-  TRecipe,
   TRecipeFormValues,
 } from "@/@types/general";
 import Button from "@/components/Button.vue";
@@ -21,7 +20,7 @@ import { useCreateRecipe } from "@/composables/useCreateRecipe";
 import { SERVINGS } from "@/config/storageKeys";
 
 interface RecipeFormProps {
-  editRecipe?: TRecipeFormValues;
+  editRecipe?: { values: TRecipeFormValues; id: string };
 }
 
 const { editRecipe } = defineProps<RecipeFormProps>();
@@ -46,7 +45,7 @@ const {
   error,
   recipePlaceholder,
   cookingTimes,
-  validation: { errors, clearError },
+  validation: { errors, clearError, hasErrors },
 } = useCreateRecipe(
   newRecipeData,
   imageFile,
@@ -103,8 +102,8 @@ function numberInput(newValue: string, e?: Event) {
 }
 
 onMounted(() => {
-  if (editRecipe) {
-    newRecipeData.value = editRecipe;
+  if (editRecipe?.values) {
+    newRecipeData.value = JSON.parse(JSON.stringify(editRecipe.values));
   }
 });
 </script>
@@ -121,7 +120,7 @@ onMounted(() => {
         :error="errors.image?.[0] || errors.imageFile?.[0]"
         :image="newRecipeData.image"
         :imageFile="imageFile"
-        :editRecipeImage="editRecipe?.image"
+        :editRecipeImage="editRecipe?.values.image"
         @set-image-values="setImageValues"
       />
 
@@ -232,6 +231,7 @@ onMounted(() => {
         }
       "
     />
+    <FormError v-else-if="hasErrors" :error="$t('checkErrorsAbove')" />
 
     <Button :loading="loading" variation="primary" type="submit">
       <div v-if="editRecipe" class="text-base md:text-xl xl:text-2xl">
