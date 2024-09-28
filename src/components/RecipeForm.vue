@@ -120,7 +120,6 @@ onMounted(() => {
         :error="errors.image?.[0] || errors.imageFile?.[0]"
         :image="newRecipeData.image"
         :imageFile="imageFile"
-        :editRecipeImage="editRecipe?.values.image"
         @set-image-values="setImageValues"
       />
 

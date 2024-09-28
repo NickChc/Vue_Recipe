@@ -36,12 +36,10 @@ const totalRates = computed(() => recipe.rates.length);
           {{ recipe.title }}
         </h3>
 
-        <hr v-if="isMore" class="w-full my-2" />
-
         <div v-if="isMore" class="flex flex-col">
-          <div class="grid grid-cols-2 gap-x-6"></div>
+          <hr class="w-full my-2" />
           <div
-            class="grid grid-cols-1 md:grid-cols-2 w-full gap-3 md:gap-6 relative my-2"
+            class="flex flex-col md:grid md:grid-cols-2 w-full gap-y-3 md:gap-x-6 md:relative my-2"
           >
             <div
               class="w-full h-full flex flex-col items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"

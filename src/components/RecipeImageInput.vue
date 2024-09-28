@@ -8,10 +8,9 @@ interface RecipeImageInputProps {
   image: string | null;
   imageFile: File | undefined;
   error?: string;
-  editRecipeImage?: string | null;
 }
 
-const { loading, error, image, imageFile, editRecipeImage } =
+const { loading, error, image, imageFile } =
   defineProps<RecipeImageInputProps>();
 
 const emit = defineEmits<{

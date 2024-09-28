@@ -6,6 +6,7 @@
   --clr-primary: #f0f0f0;
   --clr-secondary: #121212;
 
+  --clr-add-light: #fc8830;
   --clr-add: #ff6f00;
   --clr-add-2: #4b5563;
   --clr-danger: #d32f2f;
@@ -49,6 +50,22 @@ body.dark {
   color: var(--clr-primary);
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: var(--clr-primary);
+}
+::-webkit-scrollbar-track {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--clr-add);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--clr-add-light);
+}
+
 /* Prevent chrome from changing input color on auto-fill */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -69,5 +86,3 @@ h5,
 h6 {
   font-family: var(--font-merri);
 }
-
-/* TODO : define custom scrollbar styles */

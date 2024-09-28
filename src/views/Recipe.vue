@@ -6,7 +6,6 @@ import { useAuthStore } from "@/stores/authStore";
 import { useGlobalStore } from "@/stores/globalStore";
 import { useRecipesStore } from "@/stores/recipesStore";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
 import { RouterLink, useRouter } from "vue-router";
 
 interface RecipePageProps {

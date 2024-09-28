@@ -77,7 +77,10 @@ const isSubscribed = ref(false);
           <span class="]">{{ $t("you") }}</span>
         </strong>
       </div>
-      <p class="text-sm sm:text-base text-add">
+      <p
+        v-if="currentUser?.id !== recipe.user_id"
+        class="text-sm sm:text-base text-add"
+      >
         {{ $t("subscribeTip") }}
       </p>
     </div>
