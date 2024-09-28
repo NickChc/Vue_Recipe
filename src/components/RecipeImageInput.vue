@@ -73,7 +73,7 @@ function handleImageUpload(e: Event) {
       <FieldError v-if="error" :error="error" />
       <div v-else-if="imageFile">{{ imageFile.name }}</div>
     </div>
-    <div v-if="editRecipeImage" class="absolute right-3 top-full">
+    <div v-if="image" class="absolute right-3 top-full">
       <button
         type="button"
         class="flex items-center gap-x-1 my-1 text-xs xs:text-sm sm:text-base"

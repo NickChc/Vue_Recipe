@@ -114,7 +114,7 @@ onMounted(() => {
       {{ $t("optional") }} - <FormHint variation="optional" />
     </div>
 
-    <div class="flex flex-col xl:flex-row gap-x-3 xl:max-h-[320px]">
+    <div class="flex flex-col xl:flex-row gap-x-3">
       <RecipeImageInput
         :loading="loading"
         :error="errors.image?.[0] || errors.imageFile?.[0]"

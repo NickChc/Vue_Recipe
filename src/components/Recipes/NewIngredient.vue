@@ -68,37 +68,42 @@ function addIngredient(e: Event) {
 </script>
 
 <template>
-  <FormInput
-    :disabled="disabled"
-    :label="$t('addIngredients')"
-    :hint="!!newIngredient.trim() ? $t('pressEnterForIngredient') : ''"
-    placeholder="4 oz pastrami"
-    v-model="newIngredient"
-    @keyboard="addIngredient"
-    :error="error"
-    @clear-error="
-      () => {
-        error = null;
-        emitClearError();
-      }
-    "
-  />
-  <ul
-    class="list-none mt-1 sm:mt-2 lg:mt-3 xl:min-h-24 max-h-24 overflow-y-auto"
-  >
-    <li
-      v-for="ingredient in ingredients"
-      :key="ingredient"
-      class="inline-block"
+  <div class="xl:h-52">
+    <FormInput
+      :disabled="disabled"
+      :label="$t('addIngredients')"
+      :hint="!!newIngredient.trim() ? $t('pressEnterForIngredient') : ''"
+      placeholder="4 oz pastrami"
+      v-model="newIngredient"
+      @keyboard="addIngredient"
+      :error="error"
+      @clear-error="
+        () => {
+          error = null;
+          emitClearError();
+        }
+      "
+    />
+    <ul
+      class="list-none mt-1 sm:mt-2 lg:mt-3 xl:min-h-24 max-h-24 overflow-y-auto"
     >
-      <button
-        :disabled="disabled"
-        type="button"
-        class="ingredient-remove p-1 md:p-1.5 opacity-80 hover:opacity-100 rounded-sm bg-add-2 m-1 flex items-center gap-x-1 text-primary text-xs sm:text-sm lg:text-base disabled:pointer-events-none disabled:opacity-50"
-        @click="emitSetIngredients(ingredients.filter((i) => i !== ingredient))"
+      <li
+        v-for="ingredient in ingredients"
+        :key="ingredient"
+        class="inline-block"
       >
-        {{ ingredient }} <i class="material-symbols-outlined text-xs">close</i>
-      </button>
-    </li>
-  </ul>
+        <button
+          :disabled="disabled"
+          type="button"
+          class="ingredient-remove p-1 md:p-1.5 opacity-80 hover:opacity-100 rounded-sm bg-add-2 m-1 flex items-center gap-x-1 text-primary text-xs sm:text-sm lg:text-base disabled:pointer-events-none disabled:opacity-50"
+          @click="
+            emitSetIngredients(ingredients.filter((i) => i !== ingredient))
+          "
+        >
+          {{ ingredient }}
+          <i class="material-symbols-outlined text-xs">close</i>
+        </button>
+      </li>
+    </ul>
+  </div>
 </template>

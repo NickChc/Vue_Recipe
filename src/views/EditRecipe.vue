@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TRecipe, TRecipeFormValues } from "@/@types/general";
+import { TRecipeFormValues } from "@/@types/general";
 import Side_Food_Image from "@/assets/images/Side_Food_Image.jpg";
 import Side_Food_Image_2 from "@/assets/images/Side_Food_Image_2.avif";
 import RecipeForm from "@/components/RecipeForm.vue";
