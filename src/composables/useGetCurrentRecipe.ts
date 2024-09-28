@@ -1,6 +1,5 @@
 import { TRecipe } from "@/@types/general";
-import { db } from "@/firebase";
-import { doc, getDoc } from "firebase/firestore";
+import { getRecipeById } from "@/data/getRecipeById";
 import { onMounted, ref } from "vue";
 
 export function useGetCurrentRecipe(recipeId: string) {
@@ -8,33 +7,25 @@ export function useGetCurrentRecipe(recipeId: string) {
   const loading = ref(false);
   const error = ref<null | string>(null);
 
-  async function getRecipeById(recipeId: string) {
+  async function handleGetRecipeById(recipeId: string) {
     try {
       error.value = null;
       loading.value = true;
 
-      const docRef = doc(db, "recipes", recipeId);
+      const recipe = await getRecipeById(recipeId);
 
-      const recipe = await getDoc(docRef);
-
-      const data = recipe.data();
-
-      if (data == null) {
-        throw new Error("recipe is missing");
-      }
-
-      currentRecipe.value = { id: recipe.id, ...recipe.data() } as TRecipe;
+      currentRecipe.value = recipe;
     } catch (err: any) {
       console.log(err.message);
-      error.value = `Couldn't fetch the product with ID - ${recipeId}`;
+      error.value = `Couldn't fetch the recipe with ID - ${recipeId}`;
     } finally {
       loading.value = false;
     }
   }
 
   onMounted(() => {
-    getRecipeById(recipeId);
+    handleGetRecipeById(recipeId);
   });
 
-  return { currentRecipe, error, loading, getRecipeById };
+  return { currentRecipe, error, loading, handleGetRecipeById };
 }

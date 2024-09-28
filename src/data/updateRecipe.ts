@@ -1,5 +1,6 @@
 import { TRecipeFormValues } from "@/@types/general";
 import { db, storage } from "@/firebase";
+import { getImageRef } from "@/utils/getImageRef";
 import { doc, updateDoc } from "firebase/firestore";
 import {
   deleteObject,
@@ -43,12 +44,7 @@ export async function updateRecipe(
       return { success: true, error: null };
     }
 
-    const url = oldValues.image;
-
-    const pathStart = url.indexOf("/o/") + 3;
-    const pathEnd = url.indexOf("?");
-    const oldImagePath = decodeURIComponent(url.substring(pathStart, pathEnd));
-    const oldImageRef = ref(storage, oldImagePath);
+    const oldImageRef = getImageRef(oldValues.image);
 
     await deleteObject(oldImageRef);
 

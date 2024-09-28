@@ -133,5 +133,6 @@
   "discardImage": "Discard image",
   "save": "SAVE",
   "saving": "SAVING...",
-  "checkErrorsAbove": "Check the errors above"
+  "checkErrorsAbove": "Check the errors above",
+  "delete": "Delete"
 }

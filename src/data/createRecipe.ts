@@ -1,6 +1,7 @@
 import { TRecipe, TRecipeFormValues, TUser } from "@/@types/general";
 import { recipesCollection, storage } from "@/firebase";
 import { addDoc, Timestamp } from "firebase/firestore";
+import { updateUser } from "@/data/updateUser";
 import {
   deleteObject,
   getDownloadURL,
@@ -30,7 +31,6 @@ export async function createRecipe(
       user_id: user.id,
       author: {
         name: user.name,
-        rating: user.rating,
       },
       rating: 0,
       rates: [],
@@ -38,7 +38,10 @@ export async function createRecipe(
       image: imageUrl,
     };
 
-    await addDoc(recipesCollection, newRecipe);
+    const res = await addDoc(recipesCollection, newRecipe);
+    const newUserRecipes = [...user.recipes, res.id];
+
+    await updateUser(user.id, { recipes: newUserRecipes });
     return { success: true, error: null };
   } catch (err: any) {
     if (storageRef) {

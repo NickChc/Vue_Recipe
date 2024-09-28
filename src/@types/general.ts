@@ -50,7 +50,6 @@ export interface TRecipe {
   image: null | string;
   author: {
     name: string;
-    rating: number;
   };
 }
 
@@ -68,5 +67,4 @@ export interface TUser {
   recipes: string[]; // recipe id's
   subscriptions: string[]; // user id's
   subscribers: string[]; // user id's
-  rating: number;
 }

@@ -24,8 +24,8 @@ function onImageError(e: Event) {
 
 <template>
   <div
-    :class="`relative overflow-hidden  ${
-      isMore ? 'min-h-40 xs:min-h-auto aspect-video' : ''
+    :class="`relative overflow-hidden ${
+      isMore ? 'min-h-32 xs:min-h-auto' : ''
     }`"
   >
     <div
@@ -44,10 +44,10 @@ function onImageError(e: Event) {
       :src="recipe.image || Fallback_Food_Image"
       alt="Meal image"
       @error="onImageError"
-      :class="`object-cover w-full aspect-video  ${
+      :class="`w-full  ${
         isMore
-          ? 'absolute inset-0 xs:static xs:aspect-video z-0'
-          : 'aspect-video'
+          ? 'absolute inset-0 xs:static xs:aspect-video z-0 object-contain max-w-[1000px] xl:mx-auto'
+          : 'aspect-video object-cover'
       }`"
     />
     <RecipeCardRating
