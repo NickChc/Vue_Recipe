@@ -64,6 +64,7 @@ onMounted(() => {
     <label
       v-if="label"
       class="xs:text-lg mb-[0.2em] sm:text-xl md:text-2xl 2xl:text-3xl"
+      :class="disabled ? 'opacity-75' : ''"
       >{{ label }}</label
     >
 

@@ -136,5 +136,11 @@
   "checkErrorsAbove": "Check the errors above",
   "delete": "Delete",
   "sureToDeleteRecipe": "Are you sure you want to delete this recipe?",
-  "deleting": "Deleting..."
+  "deleting": "Deleting...",
+  "forgotPassword": "Forgot Password?",
+  "getPasswordRecovery": "Get password recovery email",
+  "send": "SEND",
+  "sending_CAP": "SENDING...",
+  "recoverySentTo": "Recovery link sent to",
+  "done": "Done"
 }

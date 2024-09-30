@@ -31,7 +31,9 @@ const { variation, asChild, type, disabled, color, size, loading } =
         : variation === 'primary'
         ? 'border-add text-primary bg-add hover:opacity-90'
         : 'border-add text-add hover:bg-add hover:text-primary'
-    } ${asChild ? 'grid' : 'p-[0.4em]'} ${size === 'sm' ? 'px-3 py-1' : ''}`"
+    } ${asChild ? 'grid' : 'p-[0.4em]'} ${
+      size === 'sm' && !asChild ? 'px-3 py-1' : ''
+    }`"
   >
     <slot></slot>
   </button>

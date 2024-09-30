@@ -9,7 +9,7 @@ const { locale } = storeToRefs(langStore);
 
 <template>
   <div
-    class="w-full sm:w-[80%] flex flex-col mx-auto p-3 dark:bg-add-2 h-full min-h-full pb-10"
+    class="w-full sm:w-[80%] flex flex-col mx-auto p-3 dark:bg-add-2 h-full min-h-full overflow-y-auto"
   >
     <h1 class="text-xl font-bold text-add">{{ $t("doSignIn", "SIGN IN") }}</h1>
     <p

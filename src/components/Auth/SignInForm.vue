@@ -24,14 +24,6 @@ const { validateLogin, isValid, errors, clearError } = useValidateLogin(
   loginData.value
 );
 
-// function handleUpdate(e: Event) {
-//   const target = e.target as HTMLInputElement;
-//   const name = target.name as keyof TLoginValues;
-
-//   loginData.value[name] = target.value;
-//   clearError(name);
-// }
-
 async function handleSubmit() {
   try {
     loading.value = true;
@@ -47,11 +39,10 @@ async function handleSubmit() {
     router.replace("/");
   } catch (err: any) {
     console.log(err.message);
+    loading.value = false;
     if (err.message.includes("invalid-credential")) {
       error.value = t("invalidCredentials");
     }
-  } finally {
-    loading.value = false;
   }
 }
 </script>
@@ -60,7 +51,7 @@ async function handleSubmit() {
   <form
     novalidate
     @submit.prevent="handleSubmit"
-    class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6"
+    class="flex flex-col gap-y-3 w-[700px] max-w-full mx-auto mt-6 pb-6"
   >
     <FormInput
       :disabled="loading"
@@ -91,8 +82,17 @@ async function handleSubmit() {
         {{ loading ? $t("signingIn") : $t("signIn") }}
       </div>
     </Button>
-    <RouterLink class="mt-10 underline" to="/register">{{
-      $t("dontHaveAnAccountYet")
-    }}</RouterLink>
+
+    <div
+      class="mt-5 sm:mt-10 flex items-center justify-between flex-col gap-y-5 sm:flex-row"
+    >
+      <RouterLink class="underline" to="/register">{{
+        $t("dontHaveAnAccountYet")
+      }}</RouterLink>
+
+      <RouterLink class="underline" to="/forgot-password">{{
+        $t("forgotPassword")
+      }}</RouterLink>
+    </div>
   </form>
 </template>

@@ -21,7 +21,7 @@ function emitClearError() {
 <template>
   <div
     v-if="show"
-    class="font-semibold text-sm xs:text-base p-2 bg-danger text-primary text-center rounded-lg my-2 sm:px-5 relative"
+    class="flex items-start justify-start font-semibold text-sm xs:text-base p-2 pr-8 bg-danger text-primary text-center rounded-lg my-2 sm:px-5 relative"
   >
     {{ error }}
     <button
@@ -31,7 +31,7 @@ function emitClearError() {
           show = false;
         }
       "
-      class="absolute bottom-1/2 translate-y-1/2 right-3 grid"
+      class="absolute top-1 right-2 grid"
     >
       <i class="material-symbols-outlined text-base xs:text-xl sm:text-2xl"
         >cancel</i
