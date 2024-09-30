@@ -1,179 +1,26 @@
 <script setup lang="ts">
-import { TUser } from "@/@types/general";
 import Button from "@/components/Button.vue";
-import { EMAIL_CONFIRM_ATTEMPTS } from "@/config/storageKeys";
-import {
-  sendEmailVerification,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "@/firebase";
+import FormError from "@/components/Auth/FormError.vue";
+import { useEmailConfirmation } from "@/composables/useEmailConfirmation";
+import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
-import { ref } from "vue";
-import { useI18n } from "vue-i18n";
-import { useRouter } from "vue-router";
-import FormError from "./FormError.vue";
 
-interface TSavedAttempts {
-  count: number;
-  date: Date;
-}
+const cancelPassword = ref("");
 
-const router = useRouter();
-const { t } = useI18n();
+const {
+  isCancelling,
+  submitCancel,
+  handleCancel,
+  cancelError,
+  sending,
+  confirmVerified,
+  error,
+  handleSendAgain,
+} = useEmailConfirmation(cancelPassword);
 
 const authStore = useAuthStore();
 const { fireUser } = storeToRefs(authStore);
-
-const sending = ref(false);
-const error = ref<null | string>(null);
-const isCancelling = ref(false);
-const cancelPassword = ref("");
-const cancelError = ref<null | string>(null);
-
-async function confirmVerified() {
-  if (fireUser.value == null) {
-    error.value = t("verificationExpired");
-    return;
-  }
-
-  await fireUser.value.reload();
-
-  if (!fireUser.value.emailVerified) {
-    error.value = t("emailNotVerified");
-    return;
-  }
-
-  const { displayName, email } = fireUser.value;
-
-  const userDocRef = doc(db, "users", fireUser.value.uid);
-
-  const newUser: Omit<TUser, "id"> = {
-    name: displayName!,
-    email: email!,
-    rating: 0,
-    subscribers: [],
-    subscriptions: [],
-    recipes: [],
-  };
-
-  await setDoc(userDocRef, newUser);
-  authStore.setCurrentUser({ ...newUser, id: fireUser.value.uid });
-  console.log(newUser);
-
-  authStore.verificationSent = false;
-  router.replace("/");
-}
-
-function countAttempts() {
-  const attempts: TSavedAttempts | null = JSON.parse(
-    localStorage.getItem(EMAIL_CONFIRM_ATTEMPTS) || "null"
-  );
-
-  if (attempts == null) {
-    localStorage.setItem(
-      EMAIL_CONFIRM_ATTEMPTS,
-      JSON.stringify({
-        count: 1,
-        date: new Date(),
-      })
-    );
-
-    return;
-  }
-
-  localStorage.setItem(
-    EMAIL_CONFIRM_ATTEMPTS,
-    JSON.stringify({
-      count: attempts.count + 1,
-      date: new Date(),
-    })
-  );
-}
-
-async function handleCancel() {
-  await auth.currentUser?.reload();
-  try {
-    if (auth.currentUser) {
-      await auth.currentUser?.delete();
-
-      authStore.verificationSent = false;
-    } else {
-      authStore.verificationSent = false;
-    }
-  } catch (err: any) {
-    console.log(err.message);
-    if (err.message.includes("requires-recent")) {
-      isCancelling.value = true;
-      error.value = t("tryAgainLater");
-    }
-  }
-}
-
-async function submitCancel() {
-  try {
-    cancelError.value = null;
-    if (auth.currentUser?.email == null) return;
-
-    await signInWithEmailAndPassword(
-      auth,
-      auth.currentUser.email,
-      cancelPassword.value
-    );
-    await auth.currentUser.delete();
-    authStore.verificationSent = false;
-  } catch (err: any) {
-    cancelError.value = t("invalidPassword");
-  }
-}
-
-// TODO : devide this into seperate components
-
-async function handleSendAgain() {
-  try {
-    error.value = null;
-    sending.value = true;
-
-    const attempts = JSON.parse(
-      localStorage.getItem(EMAIL_CONFIRM_ATTEMPTS) || "null"
-    );
-
-    if (attempts != null && attempts.count >= 5) {
-      const savedDate = new Date(attempts.date);
-      const currentDate = new Date();
-      const timeDifference = currentDate.getTime() - savedDate.getTime();
-
-      if (timeDifference < 15) {
-        error.value = t("tooManySendAgains");
-        return;
-      }
-
-      localStorage.removeItem(EMAIL_CONFIRM_ATTEMPTS);
-    }
-
-    await auth.currentUser?.reload();
-
-    if (fireUser.value == null) {
-      error.value = t("verificationExpired");
-      return;
-    }
-
-    await sendEmailVerification(fireUser.value);
-    countAttempts();
-  } catch (err: any) {
-    console.log(err.message);
-    if (err.message.includes("auth/too-many-requests")) {
-      error.value = t("tooManySendAgains");
-    }
-
-    if (err.message.includes("token-expired")) {
-      error.value = t("verificationExpired");
-    }
-  } finally {
-    sending.value = false;
-  }
-}
 </script>
 
 <template>
