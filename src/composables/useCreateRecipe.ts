@@ -6,7 +6,7 @@ import { createRecipe } from "@/data/createRecipe";
 import { useRouter } from "vue-router";
 import { RECIPE_FORM_DATA, SERVINGS } from "@/config/storageKeys";
 import { useI18n } from "vue-i18n";
-import { updateRecipe } from "@/data/updateRecipe";
+import { editRecipe as handleEditRecipe } from "@/data/editRecipe";
 
 export function useCreateRecipe(
   newRecipeData: Ref<TRecipeFormValues>,
@@ -54,7 +54,7 @@ export function useCreateRecipe(
       };
 
       if (editRecipe) {
-        res = await updateRecipe(
+        res = await handleEditRecipe(
           editRecipe.id,
           editRecipe.values,
           newRecipeData.value,

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { TComplexity_Enum, TRecipe } from "@/@types/general";
-import { ref } from "vue";
 import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
 import ManIcon from "@/components/Icons/ManIcon.vue";
 import { checkRecipeComplexity } from "@/utils/checkRecipeComplexity";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
+import SubscribeButton from "./SubscribeButton.vue";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;
@@ -20,9 +20,6 @@ const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
 
 const { t } = useI18n();
-
-// TODO : make real subscribe thing
-const isSubscribed = ref(false);
 </script>
 
 <template>
@@ -55,22 +52,7 @@ const isSubscribed = ref(false);
             >{{ $t("author", { name: recipe.author.name }) }}
           </strong>
 
-          <button
-            :class="`w-full xs:w-fit text-sm sm:text-base lg:text-lg text-add flex items-center justify-center gap-x-2 border border-add rounded-sm px-4 py-0.5 font-semibold duration-200 transition-colors ${
-              isSubscribed ? 'bg-add text-primary' : 'text-add'
-            }`"
-            @click="isSubscribed = !isSubscribed"
-          >
-            <template v-if="isSubscribed">
-              {{ $t("unsubscribe") }}
-              <i class="material-symbols-outlined note">notifications_active</i>
-            </template>
-
-            <template v-else>
-              {{ $t("subscribe") }}
-              <i class="material-symbols-outlined note">notifications</i>
-            </template>
-          </button>
+          <SubscribeButton v-if="currentUser" :recipe="recipe" />
         </template>
         <strong v-else class="text-[#08a408] max-w-[50%] min-w-fit"
           >{{ $t("author") }}
