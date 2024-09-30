@@ -5,7 +5,7 @@ import { useAuthStore } from "@/stores/authStore";
 import { PROTECTED_ROUTES } from "@/router";
 import Modal from "@/components/Modal.vue";
 import AssurePopup from "@/components/AssurePopup.vue";
-import { useRecipesStore } from "./stores/recipesStore";
+import { useRecipesStore } from "@/stores/recipesStore";
 
 const route = useRoute();
 const router = useRouter();

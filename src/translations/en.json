@@ -53,6 +53,7 @@
   "sendAgain": "Send Again",
   "sending": "Sending...",
   "accountAlreadyExists": "Account already exists",
+  "accountNoLongerExists": "Account no longer exists",
   "couldntperformAction": "Couldn't perform this action",
   "tryAgain": "Try Again",
   "tooManySendAgains": "Too many attemps, try again later",
@@ -142,5 +143,7 @@
   "send": "SEND",
   "sending_CAP": "SENDING...",
   "recoverySentTo": "Recovery link sent to",
-  "done": "Done"
+  "done": "Done",
+  "subscribeSuccess": "Now you are subscribed to {name}",
+  "unsubscribeSuccess": "You are no longer subscribed to {name}"
 }

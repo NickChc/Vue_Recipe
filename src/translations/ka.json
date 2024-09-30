@@ -34,6 +34,7 @@
   "signIn": "შესვლა",
   "aboutUs": "ჩვენს შესახებ",
   "alreadyHaveAnAccount": "უკვე გაქვთ ანგარიში?",
+  "accountNoLongerExists": "ანგარიში აღარ არსებობს",
   "dontHaveAnAccountYet": "არ გაქვთ ანგარიში?",
   "doRegister": "გაიარეთ რეგისტრაცია",
   "register": "რეგისტრაცია",
@@ -142,5 +143,7 @@
   "send": "გაგზანვა",
   "sending_CAP": "იგზავნება...",
   "recoverySentTo": "აღდგენის ბმული გაიგზავნა მისამართზე",
-  "done": "მზადაა"
+  "done": "მზადაა",
+  "subscribeSuccess": "თქვენ გახდით {name} -ის გამომწერი",
+  "unsubscribeSuccess": "თქვენ აღარ ხართ {name} -ის გამომწერი"
 }

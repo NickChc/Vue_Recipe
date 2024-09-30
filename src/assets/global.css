@@ -86,3 +86,7 @@ h5,
 h6 {
   font-family: var(--font-merri);
 }
+
+.vue-toastify__toast-icon--success {
+  color: var(--clr-add); /* Change this to any color */
+}

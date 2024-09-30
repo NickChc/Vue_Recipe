@@ -3,8 +3,10 @@ import { TRecipe } from "@/@types/general";
 import { getUserById } from "@/data/getUserById";
 import { updateUser } from "@/data/updateUser";
 import { useAuthStore } from "@/stores/authStore";
+import { sendToast } from "@/utils/sendToast";
 import { storeToRefs } from "pinia";
 import { onMounted, ref } from "vue";
+import { useI18n } from "vue-i18n";
 
 interface SubscrieButtonProps {
   recipe: TRecipe;
@@ -13,6 +15,8 @@ interface SubscrieButtonProps {
 const error = ref<null | string>(null);
 
 const { recipe } = defineProps<SubscrieButtonProps>();
+
+const { t } = useI18n();
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
@@ -39,6 +43,7 @@ async function handleSubscription() {
 
     if (author == null) {
       error.value = "accaccountNoLongerExists";
+      sendToast("error", t("accountNoLongerExists"));
       throw new Error("accountNoLongerExists");
     }
 
@@ -69,9 +74,22 @@ async function handleSubscription() {
         subscribers: [...author.subscribers, currUser.id],
       });
     }
+
+    if (originalState) {
+      sendToast(
+        "success",
+        `${t("unsubscribeSuccess", { name: recipe.author.name })}`
+      );
+    } else {
+      sendToast(
+        "success",
+        `${t("subscribeSuccess", { name: recipe.author.name })}`
+      );
+    }
   } catch (err: any) {
     console.log(err.message);
     isSubscribed.value = originalState;
+    sendToast("error", t("problemOccuredTryAgain"));
   }
 }
 
@@ -86,6 +104,7 @@ onMounted(() => {
 
 <template>
   <button
+    class="relative"
     :class="`xs:w-fit text-sm sm:text-base lg:text-lg text-add flex items-center justify-center gap-x-2 border border-add rounded-sm px-4 py-0.5 font-semibold duration-200 transition-colors ${
       isSubscribed ? 'bg-add text-primary' : 'text-add'
     }`"
