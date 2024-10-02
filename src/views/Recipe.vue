@@ -43,7 +43,7 @@ function startDelete() {
       </button>
 
       <div
-        v-if="currentRecipe?.user_id === currentUser?.id"
+        v-if="currentUser && currentRecipe?.user_id === currentUser?.id"
         class="flex justify-between gap-x-5"
       >
         <button

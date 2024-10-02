@@ -21,6 +21,10 @@
   --width-sidebar-btn: 42px;
   --height-header-sm: 56px;
   --height-header-lg: 66px;
+
+  --toastify-icon-color-success: var(--clr-add) !important;
+
+  --toastify-color-progress-success: var(--clr-add) !important;
 }
 
 @layer components {

@@ -29,6 +29,7 @@ async function handleSubscription() {
   if (currUser == null || attemptCount.value > 9) return;
 
   const originalState = isSubscribed.value;
+
   if (attemptCount.value > 8) {
     setTimeout(() => {
       attemptCount.value = 0;
@@ -55,15 +56,25 @@ async function handleSubscription() {
       await updateUser(currUser.id, {
         subscriptions: newSubscriptions,
       });
+
+      authStore.setCurrentUser({
+        ...currUser,
+        subscriptions: newSubscriptions,
+      });
     } else {
       await updateUser(currUser.id, {
         subscriptions: [...currUser.subscriptions, recipe.user_id],
       });
+
+      authStore.setCurrentUser({
+        ...currUser,
+        subscriptions: [...currUser.subscriptions, recipe.user_id],
+      });
     }
 
-    if (currUser.subscriptions.includes(recipe.user_id)) {
+    if (author.subscribers.some((sub) => sub.id === currUser.id)) {
       const newSubscribers = author.subscribers.filter(
-        (id) => id !== currUser.id
+        (sub) => sub.id !== currUser.id
       );
 
       await updateUser(recipe.user_id, {
@@ -71,7 +82,10 @@ async function handleSubscription() {
       });
     } else {
       await updateUser(recipe.user_id, {
-        subscribers: [...author.subscribers, currUser.id],
+        subscribers: [
+          ...author.subscribers,
+          { id: currUser.id, email: currUser.email },
+        ],
       });
     }
 
