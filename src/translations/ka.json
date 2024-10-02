@@ -145,5 +145,6 @@
   "recoverySentTo": "აღდგენის ბმული გაიგზავნა მისამართზე",
   "done": "მზადაა",
   "subscribeSuccess": "თქვენ გახდით {name} -ის გამომწერი",
-  "unsubscribeSuccess": "თქვენ აღარ ხართ {name} -ის გამომწერი"
+  "unsubscribeSuccess": "თქვენ აღარ ხართ {name} -ის გამომწერი",
+  "authPersonOnly": "გასაგრძელებლად გაიარეთ ავტორიზაცია"
 }

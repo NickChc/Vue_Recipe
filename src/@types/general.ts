@@ -39,7 +39,7 @@ export interface TRecipe {
   title: string;
   recipe: string;
   cooking_time: TCookingTime_Enum;
-  rating: number;
+  rating: number; // 0 - 100
   rates: { point: number; user_id: string }[];
   complexity: TComplexity_Enum;
   created_at: Timestamp;

@@ -4,7 +4,7 @@ import App from "@/App.vue";
 import { createPinia } from "pinia";
 import router from "@/router";
 import i18n from "@/i18n";
-import Vue3Toastify from "vue3-toastify";
+import Vue3Toastify, { type ToastContainerOptions } from "vue3-toastify";
 
 const pinia = createPinia();
 
@@ -12,5 +12,8 @@ createApp(App)
   .use(pinia)
   .use(router)
   .use(i18n)
-  .use(Vue3Toastify, { autoClose: 3000 })
+  .use(Vue3Toastify, {
+    autoClose: 3000,
+    transition: "flip",
+  } as ToastContainerOptions)
   .mount("#app");

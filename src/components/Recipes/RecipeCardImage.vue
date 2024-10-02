@@ -52,8 +52,8 @@ function onImageError(e: Event) {
     />
     <RecipeCardRating
       v-if="!isMore"
-      :rating="recipe.rating"
-      :totalRates="totalRates"
+      :recipe="recipe"
+      :totalRating="totalRates"
     />
   </div>
 </template>

@@ -35,7 +35,6 @@ onMounted(() => {
     class="sm:w-[90%] md:w-[80%] mx-auto pt-6 pb-20 sm:pb-40 flex flex-col gap-y-10"
   >
     <PreviewCard
-      v-if="newestRecipes.length > 0"
       :recipes="newestRecipes"
       :loading="gettingNewest"
       :title="$t('newest', 'New Recipes')"
@@ -46,7 +45,6 @@ onMounted(() => {
     </PreviewCard>
 
     <PreviewCard
-      v-if="topRatedRecipes.length > 0"
       :loading="gettingTopRated"
       :recipes="topRatedRecipes"
       :title="$t('topRated', 'Top Rated')"
