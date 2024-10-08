@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import RecipeCard from "@/components/Recipes/RecipeCard.vue";
+import RecipeCardSkeleton from "@/components/Recipes/RecipeCardSkeleton.vue";
 import { useGetCurrentRecipe } from "@/composables/useGetCurrentRecipe";
 import { useAuthStore } from "@/stores/authStore";
 import { useGlobalStore } from "@/stores/globalStore";
@@ -68,11 +69,11 @@ function startDelete() {
       </div>
     </nav>
 
-    <div
-      v-if="loading"
-      class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-full"
-    >
-      <HourglassLoading />
+    <div v-if="loading" class="bg-add-2">
+      <RecipeCardSkeleton />
+      <div class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-full">
+        <HourglassLoading />
+      </div>
     </div>
     <RecipeCard v-else-if="currentRecipe" :recipe="currentRecipe" isMore />
     <div v-else-if="error" class="w-full text-center text-lg text-danger">

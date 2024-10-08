@@ -146,5 +146,9 @@
   "done": "Done",
   "subscribeSuccess": "Now you are subscribed to {name}",
   "unsubscribeSuccess": "You are no longer subscribed to {name}",
-  "authPersonOnly": "Sign in to perform this action"
+  "authPersonOnly": "Sign in to perform this action",
+  "nikaChichua": "Nika Chichua",
+  "info": "Info",
+  "socialNetworks": "Social Networks",
+  "moreInfo": "more"
 }

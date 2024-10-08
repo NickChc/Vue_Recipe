@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import FormInput from "@/components/FormInput.vue";
 import NewIngredient from "@/components/Recipes/NewIngredient.vue";
 import SelectDiets from "@/components/Recipes/SelectDiets.vue";
 import SelectCategories from "@/components/Recipes/SelectCategories.vue";
-import { onMounted, ref } from "vue";
 import {
   TCategory_Enum,
   TComplexity_Enum,
@@ -17,7 +17,7 @@ import FormError from "@/components/Auth/FormError.vue";
 import FieldError from "@/components/FieldError.vue";
 import RecipeImageInput from "@/components/RecipeImageInput.vue";
 import { useCreateRecipe } from "@/composables/useCreateRecipe";
-import { SERVINGS } from "@/config/storageKeys";
+import { RECIPE_FORM_DATA, SERVINGS } from "@/config/storageKeys";
 
 interface RecipeFormProps {
   editRecipe?: { values: TRecipeFormValues; id: string };
@@ -105,6 +105,11 @@ onMounted(() => {
   if (editRecipe?.values) {
     newRecipeData.value = JSON.parse(JSON.stringify(editRecipe.values));
   }
+});
+
+onBeforeUnmount(() => {
+  localStorage.removeItem(RECIPE_FORM_DATA);
+  localStorage.removeItem(SERVINGS);
 });
 </script>
 

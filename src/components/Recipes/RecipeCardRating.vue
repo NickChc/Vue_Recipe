@@ -27,7 +27,6 @@ const { handleGetRecipeById } = useGetCurrentRecipe(recipe.id);
 const { t } = useI18n();
 
 const recipeRates = ref(recipe.rates);
-// const newRating = ref(0);
 
 const authWarning = ref(0);
 
@@ -75,8 +74,6 @@ async function handleRate(point: number) {
         newRates = recipeRates.value.filter(
           (rate) => rate.user_id !== currUser.id
         );
-
-        // newRating.value = 0;
       } else {
         newRates = recipeRates.value.map((rate) =>
           rate.user_id === currUser.id ? { ...rate, point } : rate

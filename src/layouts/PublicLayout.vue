@@ -33,5 +33,4 @@ const { sideBarOpen } = storeToRefs(globalStore);
       <RouterView />
     </div>
   </div>
-  <!-- TODO : add a footer -->
 </template>

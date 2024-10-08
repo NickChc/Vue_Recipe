@@ -10,13 +10,20 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: "/",
-        name: "Home",
-        component: () => import("@/views/Home.vue"),
-      },
-      {
-        path: "/recipes",
-        name: "Recipes",
-        component: () => import("@/views/Recipes.vue"),
+        name: "FooterLayout",
+        component: () => import("@/layouts/WithFooter.vue"),
+        children: [
+          {
+            path: "/",
+            name: "Home",
+            component: () => import("@/views/Home.vue"),
+          },
+          {
+            path: "/recipes",
+            name: "Recipes",
+            component: () => import("@/views/Recipes.vue"),
+          },
+        ],
       },
       {
         path: "/recipes/:recipeId",
