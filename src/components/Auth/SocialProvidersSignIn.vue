@@ -50,7 +50,7 @@ async function handleGoogleSignIn() {
     @click="handleGoogleSignIn"
   >
     <div class="flex items-center justify-center gap-x-2">
-      {{ $t("signInWithGoogle") }}
+      {{ $t("signInWithGoogle").toLocaleUpperCase() }}
       <img :src="GoogleIcon" alt="google icon" class="size-7 sm:size-8" />
     </div>
   </Button>

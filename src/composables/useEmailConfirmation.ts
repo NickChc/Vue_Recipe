@@ -1,13 +1,11 @@
-import { TUser } from "@/@types/general";
 import { EMAIL_CONFIRM_ATTEMPTS } from "@/config/storageKeys";
 import { createUserDoc } from "@/data/createUserDoc";
-import { auth, db } from "@/firebase";
+import { auth } from "@/firebase";
 import { useAuthStore } from "@/stores/authStore";
 import {
   sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
 import { storeToRefs } from "pinia";
 import { Ref, ref } from "vue";
 import { useI18n } from "vue-i18n";
