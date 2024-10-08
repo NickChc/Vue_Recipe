@@ -141,7 +141,11 @@ async function handleSubmit() {
       :disabled="verificationSent || loading"
       variation="primary"
       type="submit"
-      >{{ loading ? $t("registering") : $t("register") }}</Button
+      >{{
+        loading
+          ? $t("registering").toLocaleUpperCase()
+          : $t("register").toLocaleUpperCase()
+      }}</Button
     >
     <RouterLink class="underline mt-10 w-fit" to="/sign-in">{{
       $t("alreadyHaveAnAccount")

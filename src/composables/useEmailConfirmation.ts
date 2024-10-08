@@ -1,5 +1,6 @@
 import { TUser } from "@/@types/general";
 import { EMAIL_CONFIRM_ATTEMPTS } from "@/config/storageKeys";
+import { createUserDoc } from "@/data/createUserDoc";
 import { auth, db } from "@/firebase";
 import { useAuthStore } from "@/stores/authStore";
 import {
@@ -44,19 +45,8 @@ export function useEmailConfirmation(cancelPassword: Ref<string>) {
 
     const { displayName, email } = fireUser.value;
 
-    const userDocRef = doc(db, "users", fireUser.value.uid);
-
-    const newUser: Omit<TUser, "id"> = {
-      name: displayName!,
-      email: email!,
-      subscribers: [],
-      subscriptions: [],
-      recipes: [],
-    };
-
-    await setDoc(userDocRef, newUser);
+    const newUser = await createUserDoc(fireUser.value, displayName!, email!);
     authStore.setCurrentUser({ ...newUser, id: fireUser.value.uid });
-    console.log(newUser);
 
     authStore.verificationSent = false;
     router.replace("/");
