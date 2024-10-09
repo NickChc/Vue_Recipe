@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { TRecipe } from "@/@types/general";
-import RecipeCardImage from "@/components/Recipes/RecipeCardImage.vue";
-import RecipeCardFooter from "@/components/Recipes/RecipeCardFooter.vue";
+import RecipeCardImage from "@/components/recipes/RecipeCardImage.vue";
+import RecipeCardFooter from "@/components/recipes/RecipeCardFooter.vue";
 
 interface RecipeCardProps {
   recipe: TRecipe;

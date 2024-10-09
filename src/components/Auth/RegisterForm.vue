@@ -6,7 +6,7 @@ import {
   TRegisterValues,
   useValidateRegister,
 } from "@/composables/useValidateRegister";
-import FormError from "@/components/Auth/FormError.vue";
+import FormError from "@/components/auth/FormError.vue";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -14,7 +14,7 @@ import {
 } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useI18n } from "vue-i18n";
-import EmailConfirmation from "@/components/Auth/EmailConfirmation.vue";
+import EmailConfirmation from "@/components/auth/EmailConfirmation.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 import { scrollToTop } from "@/utils/scrollToTop";

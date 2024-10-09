@@ -2,9 +2,9 @@
 import { useGlobalStore } from "@/stores/globalStore";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
-import SideBarThemeToggle from "@/components/SideBar/SideBarThemeToggle.vue";
+import SideBarThemeToggle from "@/components/sideBar/SideBarThemeToggle.vue";
 import { onBeforeUnmount, onMounted, watch } from "vue";
-import SideBarLangSelect from "@/components/SideBar/SideBarLangSelect.vue";
+import SideBarLangSelect from "@/components/sideBar/SideBarLangSelect.vue";
 import Button from "@/components/Button.vue";
 import { RouterLink, useRoute } from "vue-router";
 

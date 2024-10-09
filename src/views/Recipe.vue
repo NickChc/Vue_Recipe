@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HourglassLoading from "@/components/HourglassLoading.vue";
-import RecipeCard from "@/components/Recipes/RecipeCard.vue";
-import RecipeCardSkeleton from "@/components/Recipes/RecipeCardSkeleton.vue";
+import RecipeCard from "@/components/recipes/RecipeCard.vue";
+import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 import { useGetCurrentRecipe } from "@/composables/useGetCurrentRecipe";
 import { useAuthStore } from "@/stores/authStore";
 import { useGlobalStore } from "@/stores/globalStore";

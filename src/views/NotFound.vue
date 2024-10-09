@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from "@/components/Button.vue";
-import NotFoundIcon from "@/components/Icons/NotFoundIcon.vue";
+import NotFoundIcon from "@/components/icons/NotFoundIcon.vue";
 </script>
 
 <template>

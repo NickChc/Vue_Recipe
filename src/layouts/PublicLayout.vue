@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from "vue-router";
 import Header from "@/components/Header.vue";
-import SideBar from "@/components/SideBar/SideBar.vue";
+import SideBar from "@/components/sideBar/SideBar.vue";
 import { useGlobalStore } from "@/stores/globalStore";
 import { storeToRefs } from "pinia";
 

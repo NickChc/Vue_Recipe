@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TRecipe } from "@/@types/general";
-import RecipeCard from "@/components/Recipes/RecipeCard.vue";
+import RecipeCard from "@/components/recipes/RecipeCard.vue";
 import RecipeCardSkeleton from "./RecipeCardSkeleton.vue";
 
 interface PreviewCardProps {

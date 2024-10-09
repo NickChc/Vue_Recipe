@@ -2,7 +2,7 @@
 import { RouterLink } from "vue-router";
 import Button from "@/components/Button.vue";
 import FormInput from "@/components/FormInput.vue";
-import FormError from "@/components/Auth/FormError.vue";
+import FormError from "@/components/auth/FormError.vue";
 import { onMounted, ref } from "vue";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/firebase";

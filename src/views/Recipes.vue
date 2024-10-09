@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HeaderImage from "@/components/HeaderImage.vue";
-import RecipeCard from "@/components/Recipes/RecipeCard.vue";
-import RecipeCardSkeleton from "@/components/Recipes/RecipeCardSkeleton.vue";
+import RecipeCard from "@/components/recipes/RecipeCard.vue";
+import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 import { useGetRecipes } from "@/composables/useGetRecipes";
 
 const { recipes, loading } = useGetRecipes();

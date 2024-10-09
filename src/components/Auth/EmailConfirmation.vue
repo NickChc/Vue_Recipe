@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Button from "@/components/Button.vue";
-import FormError from "@/components/Auth/FormError.vue";
+import FormError from "@/components/auth/FormError.vue";
 import { useEmailConfirmation } from "@/composables/useEmailConfirmation";
 import { ref } from "vue";
 import { useAuthStore } from "@/stores/authStore";

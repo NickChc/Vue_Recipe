@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import StarIcon from "@/components/Icons/StarIcon.vue";
-import ManIcon from "@/components/Icons/ManIcon.vue";
+import StarIcon from "@/components/icons/StarIcon.vue";
+import ManIcon from "@/components/icons/ManIcon.vue";
 import { sendToast } from "@/utils/sendToast";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/authStore";

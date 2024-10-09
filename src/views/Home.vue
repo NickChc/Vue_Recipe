@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import HeaderImage from "@/components/HeaderImage.vue";
-import NewIcon from "@/components/Icons/NewIcon.vue";
-import StarIcon from "@/components/Icons/StarIcon.vue";
-import PreviewCard from "@/components/Recipes/PreviewCard.vue";
+import NewIcon from "@/components/icons/NewIcon.vue";
+import StarIcon from "@/components/icons/StarIcon.vue";
+import PreviewCard from "@/components/recipes/PreviewCard.vue";
 import { useNewestRecipes } from "@/composables/useNewestRecipes";
 import { useTopRatedRecipes } from "@/composables/useTopRatedRecipes";
 import { useThemeStore } from "@/stores/themeStore";

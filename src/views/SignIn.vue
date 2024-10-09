@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SignInForm from "@/components/Auth/SignInForm.vue";
+import SignInForm from "@/components/auth/SignInForm.vue";
 import { useLangStore } from "@/stores/langStore";
 import { storeToRefs } from "pinia";
 

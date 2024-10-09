@@ -1,6 +1,3 @@
-import { TRecipeFormValues } from "@/@types/general";
-import { storage } from "@/firebase";
-import { getImageRef } from "@/utils/getImageRef";
 import {
   deleteObject,
   getDownloadURL,
@@ -8,7 +5,10 @@ import {
   StorageReference,
   uploadBytes,
 } from "firebase/storage";
-import { updateRecipe } from "./updateRecipe";
+import { TRecipeFormValues } from "@/@types/general";
+import { storage } from "@/firebase";
+import { getImageRef } from "@/utils/getImageRef";
+import { updateRecipe } from "@/data/updateRecipe";
 
 export async function editRecipe(
   id: string,

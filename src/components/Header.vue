@@ -2,8 +2,8 @@
 import NavLink from "@/components/NavLink.vue";
 import ToggleTheme from "@/components/ToggleTheme.vue";
 import SelectLang from "@/components/SelectLang.vue";
-import SideBarButton from "@/components/SideBar/SideBarButton.vue";
-import AuthButton from "@/components/Auth/AuthButton.vue";
+import SideBarButton from "@/components/sideBar/SideBarButton.vue";
+import AuthButton from "@/components/auth/AuthButton.vue";
 </script>
 
 <template>

@@ -2,7 +2,7 @@
 import { TRecipe } from "@/@types/general";
 import { ref } from "vue";
 import Fallback_Food_Image from "@/assets/images/Fallback_Food_Image.jpeg";
-import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
+import RecipeCardRating from "@/components/recipes/RecipeCardRating.vue";
 
 interface RecipeCardImageProps {
   recipe: TRecipe;

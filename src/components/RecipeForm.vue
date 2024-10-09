@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import FormInput from "@/components/FormInput.vue";
-import NewIngredient from "@/components/Recipes/NewIngredient.vue";
-import SelectDiets from "@/components/Recipes/SelectDiets.vue";
-import SelectCategories from "@/components/Recipes/SelectCategories.vue";
+import NewIngredient from "@/components/recipes/NewIngredient.vue";
+import SelectDiets from "@/components/recipes/SelectDiets.vue";
+import SelectCategories from "@/components/recipes/SelectCategories.vue";
 import {
   TCategory_Enum,
   TComplexity_Enum,
@@ -13,7 +13,7 @@ import {
 } from "@/@types/general";
 import Button from "@/components/Button.vue";
 import FormHint from "@/components/FormHint.vue";
-import FormError from "@/components/Auth/FormError.vue";
+import FormError from "@/components/auth/FormError.vue";
 import FieldError from "@/components/FieldError.vue";
 import RecipeImageInput from "@/components/RecipeImageInput.vue";
 import { useCreateRecipe } from "@/composables/useCreateRecipe";

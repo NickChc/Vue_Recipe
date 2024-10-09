@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { TComplexity_Enum, TRecipe } from "@/@types/general";
-import RecipeCardRating from "@/components/Recipes/RecipeCardRating.vue";
-import ManIcon from "@/components/Icons/ManIcon.vue";
+import RecipeCardRating from "@/components/recipes/RecipeCardRating.vue";
+import ManIcon from "@/components/icons/ManIcon.vue";
 import { checkRecipeComplexity } from "@/utils/checkRecipeComplexity";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
-import SubscribeButton from "./SubscribeButton.vue";
+import SubscribeButton from "@/components/recipes/SubscribeButton.vue";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;

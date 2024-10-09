@@ -4,7 +4,7 @@ import { isAuthPath } from "@/utils/isAuthPath";
 import { storeToRefs } from "pinia";
 import { useRoute } from "vue-router";
 import Button from "@/components/Button.vue";
-import AuthButtonDropdown from "@/components/Auth/AuthButtonDropdown.vue";
+import AuthButtonDropdown from "@/components/auth/AuthButtonDropdown.vue";
 import { computed } from "vue";
 
 const route = useRoute();

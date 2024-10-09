@@ -7,8 +7,8 @@ import Button from "@/components/Button.vue";
 import FormInput from "@/components/FormInput.vue";
 import { auth } from "@/firebase";
 import { TLoginValues, useValidateLogin } from "@/composables/useValidateLogin";
-import FormError from "@/components/Auth/FormError.vue";
-import SocialProvidersSignIn from "@/components/Auth/SocialProvidersSignIn.vue";
+import FormError from "@/components/auth/FormError.vue";
+import SocialProvidersSignIn from "@/components/auth/SocialProvidersSignIn.vue";
 
 const loading = ref(false);
 const error = ref<null | string>(null);

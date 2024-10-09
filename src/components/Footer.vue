@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import FacebookIcon from "@/components/Icons/FacebookIcon.vue";
-import GithubIcon from "@/components/Icons/GithubIcon.vue";
-import InstagramIcon from "@/components/Icons/InstagramIcon.vue";
-import LinkedinIcon from "@/components/Icons/LinkedinIcon.vue";
-import TwitterIcon from "@/components/Icons/TwitterIcon.vue";
+import FacebookIcon from "@/components/icons/FacebookIcon.vue";
+import GithubIcon from "@/components/icons/GithubIcon.vue";
+import InstagramIcon from "@/components/icons/InstagramIcon.vue";
+import LinkedinIcon from "@/components/icons/LinkedinIcon.vue";
+import TwitterIcon from "@/components/icons/TwitterIcon.vue";
 import { RouterLink } from "vue-router";
 </script>
 
 <template>
   <footer
-    class="bg-add-2 pt-3 sm:pt-6 pb-10 px-3 sm:px-10 border-t-2 border-primary flex flex-col sm:flex-row sm:justify-between gap-y-4 lg:px-[250px] text-lg md:text-xl"
+    class="bg-add-2 text-primary pt-3 sm:pt-6 pb-10 px-3 sm:px-10 border-t-2 border-primary flex flex-col sm:flex-row sm:justify-between gap-y-4 lg:px-[250px] text-lg md:text-xl"
   >
     <nav class="flex flex-col items-center gap-y-2">
       <h2
