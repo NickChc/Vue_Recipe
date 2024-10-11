@@ -21,6 +21,11 @@ export async function createUserDoc(
     subscribers: [],
     subscriptions: [],
     recipes: [],
+    socialLinks: {
+      facebook: null,
+      instagram: null,
+      tiktok: null,
+    },
   };
 
   await setDoc(userDocRef, newUser);

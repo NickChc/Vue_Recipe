@@ -39,7 +39,7 @@ export interface TRecipe {
   title: string;
   recipe: string;
   cooking_time: TCookingTime_Enum;
-  rating: number; // 0 - 100
+  rating: number;
   rates: { point: number; user_id: string }[];
   complexity: TComplexity_Enum;
   created_at: Timestamp;
@@ -58,6 +58,12 @@ export type TRecipeFormValues = Omit<
   "id" | "user_id" | "rating" | "rates" | "created_at" | "author"
 >;
 
+export interface TSocialLinks {
+  facebook?: string;
+  instagram?: string;
+  tiktok?: string;
+}
+
 export interface TUser {
   id: string;
   email: string;
@@ -67,4 +73,5 @@ export interface TUser {
   recipes: string[]; // recipe id's
   subscriptions: string[]; // user id's
   subscribers: { id: string; email: string }[]; // user id's
+  socialLinks: TSocialLinks;
 }
