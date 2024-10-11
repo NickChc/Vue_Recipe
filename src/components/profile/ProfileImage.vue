@@ -14,7 +14,6 @@ import { sendToast } from "@/utils/sendToast";
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import { getImageRef } from "@/utils/getImageRef";
 import { v4 as uuidv4 } from "uuid";
-import Button from "@/components/Button.vue";
 
 interface ProfileImageProps {
   fireUser: User | null;
