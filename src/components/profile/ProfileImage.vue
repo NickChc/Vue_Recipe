@@ -54,6 +54,7 @@ async function handleImageDiscard(imageUrl: string) {
 }
 
 async function handleUpload(e: Event) {
+  console.log(fireUser);
   if (fireUser == null) return;
   const originalPhoto = fireUser.photoURL;
   let imageStorageRef: undefined | StorageReference;
@@ -62,6 +63,7 @@ async function handleUpload(e: Event) {
     loading.value = true;
     const target = e.target as HTMLInputElement;
     newImage.value = target.files?.[0];
+    console.log(newImage.value);
 
     if (newImage.value == null) return;
 
@@ -106,9 +108,7 @@ async function handleUpload(e: Event) {
       accept="image/*"
     />
     <div
-      @click="$refs.imageInput.click()"
-      class="relative group inline-block w-auto max-w-40 overflow-hidden"
-      :class="{ 'cursor-default': loading, 'cursor-pointer': !loading }"
+      class="relative group inline-block w-40 max-w-40 overflow-hidden bg-black"
     >
       <img
         :src="image || ProfilePlaceholderImage"
@@ -124,32 +124,47 @@ async function handleUpload(e: Event) {
       >
         <HourglassLoading />
       </div>
-      <template v-else>
-        <div
-          class="absolute top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 add-circle-hover flex flex-col items-center font-semibold duration-200 transition-opacity"
-        >
-          <i class="material-symbols-outlined text-4xl sm:text-6xl"
-            >add_circle</i
-          >
-          <span class="whitespace-nowrap text-shadow-lg">Upload Image</span>
-        </div>
-      </template>
-    </div>
-    <div
-      v-if="
-        image &&
-        image !== ProfilePlaceholderImage &&
-        fireUser?.photoURL &&
-        !loading
-      "
-      class=".remove-image-btn w-full grid text-xs"
-    >
-      <Button
-        @click.stop="handleImageDiscard(fireUser.photoURL)"
-        variation="danger-filled"
-        size="sm"
-        >REMOVE</Button
+      <div
+        v-else-if="
+          image &&
+          image !== ProfilePlaceholderImage &&
+          fireUser?.photoURL &&
+          !loading
+        "
+        class="flex flex-col gap-y-3 text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute add-circle-hover duration-200 transition-opacity"
       >
+        <div
+          @click="$refs.imageInput.click()"
+          class="flex flex-col items-center font-semibold text-success cursor-pointer success-hover"
+        >
+          <i class="material-symbols-outlined lg:text-3xl">edit</i>
+          <span
+            class="whitespace-nowrap text-shadow-lg text-sm xs:text-base xl:text-lg"
+            >CHANGE IMAGE</span
+          >
+        </div>
+        <div
+          @click="handleImageDiscard(fireUser.photoURL)"
+          class="flex flex-col items-center font-semibold text-shadow-lg text-danger cursor-pointer danger-hover"
+        >
+          <i class="material-symbols-outlined lg:text-3xl">delete</i>
+          <span
+            class="whitespace-nowrap text-shadow-lg text-sm xs:text-base xl:text-lg"
+            >REMOVE IMAGE</span
+          >
+        </div>
+      </div>
+      <div
+        v-else
+        @click="$refs.imageInput.click()"
+        class="flex flex-col items-center font-semibold hover:text-success text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute success-hover duration-200 transition-opacity text-success cursor-pointer add-circle-hover"
+      >
+        <i class="material-symbols-outlined text-2xl lg:text-3xl">add_circle</i>
+        <span
+          class="whitespace-nowrap text-shadow-lg xl:text-lg text-sm xs:text-base"
+          >UPLAOD IMAGE</span
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -161,11 +176,19 @@ async function handleUpload(e: Event) {
   }
 
   .add-circle-hover {
-    @apply group-hover:opacity-75 opacity-0;
+    @apply group-hover:opacity-100 opacity-0;
   }
 
   .remove-image-btn {
     @apply duration-300 transition-transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100;
+  }
+
+  .success-hover {
+    @apply text-primary hover:text-success;
+  }
+
+  .danger-hover {
+    @apply text-primary hover:text-danger;
   }
 }
 </style>
