@@ -4,9 +4,16 @@ import BackgroundImage from "@/assets/images/Layout_Image.jpg";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/authStore";
 import AddUserData from "@/components/profile/AddUserData.vue";
+import { ref } from "vue";
 
 const authStore = useAuthStore();
-const { fireUser, currentUser } = storeToRefs(authStore);
+const { currentUser } = storeToRefs(authStore);
+
+const isEditMode = ref(false);
+
+function setEditMode(value: boolean) {
+  isEditMode.value = value;
+}
 </script>
 
 <template>
@@ -14,9 +21,25 @@ const { fireUser, currentUser } = storeToRefs(authStore);
     v-if="currentUser"
     class="min-h-full pb-12 p-3 w-full sm:w-[90%] lg:w-[80%] mx-auto"
   >
-    <h1 class="font-bold text-xl xs:text-2xl sm:text-3xl lg:text-4xl mb-3">
-      YOUR PROFILE
-    </h1>
+    <div class="flex items-center justify-between">
+      <h1 class="font-bold text-xl xs:text-2xl sm:text-3xl lg:text-4xl mb-3">
+        YOUR PROFILE
+      </h1>
+
+      <button
+        class="hover:opacity-75 mb-3 flex items-end gap-x-1"
+        :class="{ 'text-success': isEditMode }"
+        @click="isEditMode = !isEditMode"
+      >
+        <strong v-if="isEditMode" class="hidden sm:block text-lg">{{
+          $t("done").toLocaleUpperCase()
+        }}</strong>
+        <strong v-else class="hidden sm:block text-lg">{{
+          $t("edit").toLocaleUpperCase()
+        }}</strong>
+        <i class="material-symbols-outlined text-2xl sm:text-3xl">edit</i>
+      </button>
+    </div>
     <div
       class="min-h-60 bg-add-2 text-primary p-4 sm:p-6 rounded-lg relative flex flex-col items-center justify-center xs:items-start"
     >
@@ -25,14 +48,19 @@ const { fireUser, currentUser } = storeToRefs(authStore);
         :style="{ backgroundImage: `url(${BackgroundImage})` }"
       ></div>
       <div class="flex flex-col items-center gap-y-1.5">
-        <ProfileImage :fireUser="fireUser" />
+        <ProfileImage :isEditMode />
         <h2 class="font-semibold mx-3 text-center">{{ currentUser?.name }}</h2>
 
-        <p v-if="currentUser.bio" class="line-clamp-1">{{ currentUser.bio }}</p>
+        <p v-if="currentUser.bio" class="line-clamp-1 text-sm">
+          {{ currentUser.bio }}
+        </p>
       </div>
     </div>
-
-    <AddUserData :currentUser="currentUser" />
+    <AddUserData
+      @set-edit-mode="setEditMode"
+      :isEditMode="isEditMode"
+      :currentUser="currentUser"
+    />
   </div>
 </template>
 

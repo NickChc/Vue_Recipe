@@ -59,9 +59,9 @@ export type TRecipeFormValues = Omit<
 >;
 
 export interface TSocialLinks {
-  facebook?: string;
-  instagram?: string;
-  tiktok?: string;
+  facebook?: string | null;
+  instagram?: string | null;
+  tiktok?: string | null;
 }
 
 export interface TUser {

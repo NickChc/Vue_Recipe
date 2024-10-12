@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { InputTypeHTMLAttribute, onMounted, ref } from "vue";
+import { InputTypeHTMLAttribute, onMounted, ref, watch } from "vue";
 
 interface FormInputProps {
   modelValue?: string;
@@ -57,6 +57,15 @@ onMounted(() => {
 
   input.value.value = savedValue;
 });
+
+watch(
+  () => modelValue,
+  () => {
+    if (modelValue == null || input.value == null) return;
+
+    input.value.value = modelValue;
+  }
+);
 </script>
 
 <template>
