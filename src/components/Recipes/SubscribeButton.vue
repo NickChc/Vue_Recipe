@@ -48,9 +48,13 @@ async function handleSubscription() {
       throw new Error("accountNoLongerExists");
     }
 
-    if (currUser.subscriptions.includes(recipe.user_id)) {
-      const newSubscriptions: string[] = currUser.subscriptions.filter(
-        (id) => id !== recipe.user_id
+    const isSubscribed = currUser.subscriptions.some(
+      (s) => s.id === recipe.user_id
+    );
+
+    if (isSubscribed) {
+      const newSubscriptions = currUser.subscriptions.filter(
+        (s) => s.id !== recipe.user_id
       );
 
       await updateUser(currUser.id, {
@@ -63,12 +67,18 @@ async function handleSubscription() {
       });
     } else {
       await updateUser(currUser.id, {
-        subscriptions: [...currUser.subscriptions, recipe.user_id],
+        subscriptions: [
+          ...currUser.subscriptions,
+          { id: recipe.user_id, name: recipe.author.name },
+        ],
       });
 
       authStore.setCurrentUser({
         ...currUser,
-        subscriptions: [...currUser.subscriptions, recipe.user_id],
+        subscriptions: [
+          ...currUser.subscriptions,
+          { id: recipe.user_id, name: recipe.author.name },
+        ],
       });
     }
 
@@ -109,8 +119,8 @@ async function handleSubscription() {
 
 onMounted(() => {
   if (currentUser.value) {
-    isSubscribed.value = currentUser.value.subscriptions.includes(
-      recipe.user_id
+    isSubscribed.value = currentUser.value.subscriptions.some(
+      (s) => s.id === recipe.user_id
     );
   }
 });

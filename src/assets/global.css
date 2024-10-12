@@ -9,7 +9,6 @@
   --clr-add-light: #fc8830;
   --clr-add: #ff6f00;
   --clr-add-2: #4b5563;
-  /* --clr-danger: #d32f2f; */
   --clr-danger: #b71414;
   --clr-danger-dark: #d04f4f;
   --clr-success: #08a408;
@@ -35,6 +34,19 @@
 
   .text-shadow-lg {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  }
+
+  .scrollbar-small::-webkit-scrollbar {
+    width: 4px;
+    background-color: var(--clr-primary);
+    border-radius: 8px;
+  }
+  .scrollbar-small::-webkit-scrollbar-track {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--clr-add);
+    border-radius: 8px;
   }
 }
 

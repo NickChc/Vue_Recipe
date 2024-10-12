@@ -31,7 +31,10 @@ async function handleSubmit() {
     error.value = null;
     validateLogin();
 
-    if (!isValid.value) return;
+    if (!isValid.value) {
+      loading.value = false;
+      return;
+    }
 
     const { email, password } = loginData.value;
 

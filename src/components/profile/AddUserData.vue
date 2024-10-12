@@ -179,7 +179,7 @@ async function handleAddData() {
 <template>
   <form
     @submit.prevent="handleAddData"
-    class="bg-add-2 text-primary p-4 sm:p-6 rounded-lg mt-6"
+    class="bg-add-2 text-primary p-4 sm:p-6 rounded-lg mt-6 w-full"
   >
     <div
       v-if="isEditMode"
@@ -199,7 +199,13 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
     <hr class="w-full my-4" />
 
     <div class="flex flex-col gap-y-2 items-stretch text-center">
-      <h3>Link social accounts</h3>
+      <button
+        type="button"
+        class="font-merri underline"
+        @click="emitSetEditMode(!isEditMode)"
+      >
+        Link social accounts
+      </button>
 
       <ul class="list-none">
         <li class="text-sm">
@@ -347,7 +353,7 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
 
     <Button
       v-if="isEditMode"
-      :disabled="disableBtn"
+      :disabled="disableBtn || loading"
       variation="primary"
       size="sm"
       class="w-full mt-6"

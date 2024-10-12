@@ -75,7 +75,7 @@ function handleImageUpload(e: Event) {
     <div v-if="image" class="absolute right-3 top-full">
       <button
         type="button"
-        class="flex items-center gap-x-1 my-1 text-xs xs:text-sm sm:text-base"
+        class="flex items-center gap-x-1 my-1 text-xs xs:text-sm sm:text-base hover:text-danger duration-200 transition-colors"
         @click="
           (e) => {
             e.stopPropagation();

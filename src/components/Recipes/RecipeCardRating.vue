@@ -37,6 +37,8 @@ const userRating = computed(() => {
 });
 
 const ratingPercentage = computed(() => {
+  if (!recipeRates.value.length) return 0;
+
   const sumOfPoints = recipeRates.value.reduce(
     (acc, prev) => (acc += prev.point),
     0

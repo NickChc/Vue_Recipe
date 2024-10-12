@@ -107,12 +107,12 @@ async function handleUpload(e: Event) {
       accept="image/*"
     />
     <div
-      class="relative group inline-block w-40 max-w-40 overflow-hidden bg-black"
+      class="relative group inline-block w-32 max-w-32 xs:w-40 xs:max-w-40 overflow-hidden bg-black"
     >
       <img
         :src="image || ProfilePlaceholderImage"
         alt="Profile picture"
-        :class="`w-full aspect-square rounded-sm  duration-200 transition-opacity ${
+        :class="`w-full aspect-square rounded-sm duration-200 transition-opacity ${
           loading ? 'opacity-75 pointer-events-none' : ''
         } ${isEditMode ? 'profile-image-hover' : ''}}`"
         @error="image = ProfilePlaceholderImage"

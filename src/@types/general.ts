@@ -71,7 +71,7 @@ export interface TUser {
   bio?: string;
   avatar?: string;
   recipes: string[]; // recipe id's
-  subscriptions: string[]; // user id's
+  subscriptions: { id: string; name: string }[]; // user id's
   subscribers: { id: string; email: string }[]; // user id's
   socialLinks: TSocialLinks;
 }
