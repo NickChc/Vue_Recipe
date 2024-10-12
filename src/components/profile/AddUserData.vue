@@ -201,7 +201,7 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
     <div class="flex flex-col gap-y-2 items-stretch text-center">
       <button
         type="button"
-        class="font-merri underline"
+        class="font-merri underline w-fit mx-auto"
         @click="emitSetEditMode(!isEditMode)"
       >
         Link social accounts
@@ -213,7 +213,9 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
             class="flex items-center justify-between px-4 gap-x-3 w-full"
             v-if="isEditMode || currentUser.socialLinks.facebook"
           >
-            <span class="flex justify-center items-center gap-x-2 mt-2">
+            <span
+              class="flex justify-center items-center gap-x-2 mt-2 sm:text-lg"
+            >
               <FacebookIcon />
               Facebook</span
             >
@@ -249,7 +251,7 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
             v-else-if="currentUser.socialLinks.facebook"
             :href="currentUser.socialLinks.facebook"
             target="_blank"
-            class="bg-primary flex text-secondary rounded-sm my-1 px-1 py-0.5 underline truncate"
+            class="bg-primary flex text-secondary rounded-sm my-1 px-1 py-0.5 underline truncate sm:text-base"
           >
             {{ currentUser.socialLinks.facebook }}
           </a>
@@ -260,7 +262,9 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
             v-if="isEditMode || currentUser.socialLinks.instagram"
             class="flex items-center justify-between px-4 gap-x-3 w-full"
           >
-            <span class="flex justify-center items-center gap-x-2 mt-2">
+            <span
+              class="flex justify-center items-center gap-x-2 mt-2 sm:text-lg"
+            >
               <InstagramIcon />
               Instagram</span
             >
@@ -296,7 +300,7 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
             v-else-if="currentUser.socialLinks.instagram"
             :href="currentUser.socialLinks.instagram"
             target="_blank"
-            class="bg-primary flex text-secondary rounded-sm my-1 px-1 py-0.5 underline truncate"
+            class="bg-primary flex text-secondary rounded-sm my-1 px-1 py-0.5 underline truncate sm:text-base"
           >
             {{ currentUser.socialLinks.instagram }}
           </a>
@@ -307,7 +311,9 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
             v-if="isEditMode || currentUser.socialLinks.tiktok"
             class="flex items-center justify-between px-4 gap-x-3 w-full"
           >
-            <span class="flex justify-center items-center gap-x-2 mt-2">
+            <span
+              class="flex justify-center items-center gap-x-2 mt-2 sm:text-lg"
+            >
               <TiktokIcon />
               TikTok</span
             >
@@ -343,7 +349,7 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
             v-else-if="currentUser.socialLinks.tiktok"
             :href="currentUser.socialLinks.tiktok"
             target="_blank"
-            class="bg-primary flex text-secondary rounded-sm my-1 px-1 py-0.5 underline truncate"
+            class="bg-primary flex text-secondary rounded-sm my-1 px-1 py-0.5 underline truncate sm:text-base"
           >
             {{ currentUser.socialLinks.tiktok }}
           </a>

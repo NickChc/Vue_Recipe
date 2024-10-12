@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { updateProfile, User } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import {
   deleteObject,
   getDownloadURL,
@@ -22,6 +22,7 @@ interface ProfileImageProps {
 const { isEditMode } = defineProps<ProfileImageProps>();
 
 const fireUser = auth.currentUser;
+const imageInput = ref<null | HTMLInputElement>(null);
 
 const loading = ref(false);
 const image = ref<string | undefined | null>(fireUser?.photoURL);
@@ -48,6 +49,9 @@ async function handleImageDiscard(imageUrl: string) {
     image.value = null;
     await removeImage(imageUrl);
     await updateProfile(fireUser, { photoURL: null });
+    if (imageInput.value?.files) {
+      imageInput.value.value = "";
+    }
   } catch (err: any) {
     console.log(err.message);
     image.value = ogUrl;
@@ -114,7 +118,7 @@ async function handleUpload(e: Event) {
         alt="Profile picture"
         :class="`w-full aspect-square rounded-sm duration-200 transition-opacity ${
           loading ? 'opacity-75 pointer-events-none' : ''
-        } ${isEditMode ? 'profile-image-hover' : ''}}`"
+        } ${isEditMode ? '' : ''}}`"
         @error="image = ProfilePlaceholderImage"
       />
       <template v-if="isEditMode">
@@ -131,7 +135,7 @@ async function handleUpload(e: Event) {
             fireUser?.photoURL &&
             !loading
           "
-          class="flex flex-col gap-y-3 text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute add-circle-hover duration-200 transition-opacity"
+          class="flex flex-col gap-y-3 text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute duration-200 transition-opacity"
         >
           <div
             @click="$refs.imageInput.click()"
@@ -157,7 +161,7 @@ async function handleUpload(e: Event) {
         <div
           v-else
           @click="$refs.imageInput.click()"
-          class="flex flex-col items-center font-semibold hover:text-success text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute success-hover duration-200 transition-opacity text-success cursor-pointer add-circle-hover"
+          class="flex flex-col items-center font-semibold hover:text-success text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute success-hover duration-200 transition-opacity text-success cursor-pointer"
         >
           <i class="material-symbols-outlined text-2xl lg:text-3xl"
             >add_circle</i

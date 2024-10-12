@@ -8,6 +8,7 @@ import { ref } from "vue";
 import MyAuthorsList from "@/components/profile/MyAuthorsList.vue";
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import Button from "@/components/Button.vue";
+import RecipeCollection from "@/components/profile/RecipeCollection.vue";
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
@@ -20,7 +21,10 @@ function setEditMode(value: boolean) {
 </script>
 
 <template>
-  <div v-if="authStore.loadingAuth" class="h-full grid place-items-center">
+  <div
+    v-if="authStore.loadingAuth || currentUser == null"
+    class="h-full grid place-items-center"
+  >
     <HourglassLoading />
   </div>
   <div
@@ -50,7 +54,7 @@ function setEditMode(value: boolean) {
       class="min-h-60 bg-add-2 text-primary p-4 sm:p-6 rounded-lg relative flex flex-col items-center justify-center xs:items-start"
     >
       <div
-        class="brightness-90 absolute top-0 bottom-[60%] rounded-t-lg right-0 left-0 bg-danger bg-cover bg-left"
+        class="brightness-90 absolute top-0 bottom-[70%] sm:bottom-[60%] rounded-t-lg right-0 left-0 bg-cover bg-left"
         :style="{ backgroundImage: `url(${BackgroundImage})` }"
       ></div>
 
@@ -96,12 +100,14 @@ function setEditMode(value: boolean) {
 
         <button
           @click="authStore.handleSignOut"
-          class="flex items-center justify-center font-semibold px-2 py-0.5 gap-x-2 bg-primary rounded-md text-add-2 w-fit"
+          class="flex items-center justify-center font-semibold px-2 py-0.5 gap-x-2 bg-primary rounded-md text-add-2 w-fit duration-200 transition-opacity hover:opacity-80"
         >
           {{ $t("logOut") }} <i class="material-symbols-outlined">logout</i>
         </button>
       </div>
     </div>
+
+    <RecipeCollection :currentUser="currentUser" />
 
     <div class="flex flex-col items-start sm:flex-row gap-x-6" ref="editView">
       <MyAuthorsList :currentUser="currentUser" />
@@ -115,7 +121,5 @@ function setEditMode(value: boolean) {
   </div>
 </template>
 
-<!-- TODO : section that shows other user data, and allows changing it -->
-<!-- TODO : Allow users to add their social account links -->
-
+<!-- TODO : show Rated recipe references -->
 <!-- TODO : Show your recipes, allow performing actions on them -->
