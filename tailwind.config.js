@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  future: {
+    overOnlyWhenSupported: true,
+  },
   darkMode: "selector",
   content: ["./index.html", "./src/**/*.{js.ts.jsx,tsx,vue}"],
   theme: {
@@ -37,5 +40,9 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      addVariant("pointer-fine", "@media(hover: hover)");
+    },
+  ],
 };
