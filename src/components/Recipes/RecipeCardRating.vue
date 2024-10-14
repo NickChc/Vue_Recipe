@@ -132,7 +132,7 @@ function getMaskWidth(star: number) {
         ? 'justify-start gap-x-2 mt-2 mb-4 gap-x-5 items-center'
         : show
         ? 'items-end gap-x-2 justify-between'
-        : 'rating absolute z-30 justify-between items-center'
+        : 'pointer-fine:translate-y-full pointer-fine:opacity-0 pointer-fine:duration-200 pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:translate-y-0 absolute z-30 justify-between items-center'
     }`"
   >
     <div :class="`flex items-center ${show ? 'gap-x-0.5' : 'px-2 gap-x-1'}`">
@@ -171,11 +171,3 @@ function getMaskWidth(star: number) {
     </div>
   </div>
 </template>
-
-<style scoped>
-@media (pointer: fine) {
-  .rating {
-    @apply translate-y-full opacity-0 duration-200 group-hover:opacity-100 group-hover:translate-y-0;
-  }
-}
-</style>

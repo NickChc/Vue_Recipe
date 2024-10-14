@@ -165,5 +165,17 @@
     "partOne": "Glad you asked! If you are planning to actively interact with recipes and authors, you will need to authorize first. For that navigate to sign in page, where you can either authorize using credentials or a social provider like google. In case you are planning just to view recipes, you won't need to authorize, but we strongly encourage you to do it for the full MealShare experience.",
     "partTwo": "If you've already authorized, congratulations! You can start sharing your recipes right now, just navigate to the new recipe page and start adding recipes. Also, now you can rate them and subscribe to users too. Hope you have fun."
   },
-  "thankYou": "Thanks for reading!"
+  "thankYou": "Thanks for reading!",
+  "failedToGetYourRecipes": "Failed to fetch your recipes",
+  "yourProfile": "YOUR PROFILE",
+  "yourRecipes": "Your Recipes",
+  "biography": "Biography",
+  "subscribers": "Subscribers",
+  "authorsYouFollow": "Authors You Follow",
+  "linkSocialAccounts": "Link social accounts",
+  "tellAboutYourself": "Tell others about yourself",
+  "changeImage": "CHANGE IMAGE",
+  "removeImage": "REMOVE IMAGE",
+  "uploadImage": "UPLAOD IMAGE",
+  "wordsMax": "Words Max"
 }

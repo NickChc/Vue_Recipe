@@ -111,14 +111,14 @@ async function handleUpload(e: Event) {
       accept="image/*"
     />
     <div
-      class="relative group inline-block w-32 max-w-32 xs:w-40 xs:max-w-40 overflow-hidden bg-black"
+      class="relative group inline-block w-40 max-w-40 xs:w-32 xs:max-w-32 sm:w-40 sm:max-w-40 overflow-hidden bg-black"
     >
       <img
         :src="image || ProfilePlaceholderImage"
         alt="Profile picture"
         :class="`w-full aspect-square rounded-sm duration-200 transition-opacity ${
           loading ? 'opacity-75 pointer-events-none' : ''
-        } ${isEditMode ? '' : ''}}`"
+        } ${isEditMode ? 'brightness-75 z-50' : ''}}`"
         @error="image = ProfilePlaceholderImage"
       />
       <template v-if="isEditMode">
@@ -144,7 +144,7 @@ async function handleUpload(e: Event) {
             <i class="material-symbols-outlined lg:text-3xl">edit</i>
             <span
               class="whitespace-nowrap text-shadow-lg text-sm xs:text-base xl:text-lg"
-              >CHANGE IMAGE</span
+              >{{ $t("changeImage").toLocaleUpperCase() }}</span
             >
           </div>
           <div
@@ -154,7 +154,7 @@ async function handleUpload(e: Event) {
             <i class="material-symbols-outlined lg:text-3xl">delete</i>
             <span
               class="whitespace-nowrap text-shadow-lg text-sm xs:text-base xl:text-lg"
-              >REMOVE IMAGE</span
+              >{{ $t("removeImage").toLocaleUpperCase() }}</span
             >
           </div>
         </div>
@@ -167,8 +167,8 @@ async function handleUpload(e: Event) {
             >add_circle</i
           >
           <span
-            class="whitespace-nowrap text-shadow-lg xl:text-lg text-sm xs:text-base"
-            >UPLAOD IMAGE</span
+            class="text-center text-shadow-lg xl:text-lg text-sm xs:text-base"
+            >{{ $t("uploadImage").toLocaleUpperCase() }}</span
           >
         </div>
       </template>

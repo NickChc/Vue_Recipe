@@ -185,7 +185,7 @@ async function handleAddData() {
       v-if="isEditMode"
       class="flex flex-col gap-y-2 items-stretch text-center"
     >
-      <h3>Tell others about yourself</h3>
+      <h3 class="sm:text-lg">{{ $t("tellAboutYourself") }}</h3>
       <textarea
         v-model="userBio"
         class="outline-add p-1 resize-none h-32 text-secondary text-sm"
@@ -193,7 +193,9 @@ async function handleAddData() {
         placeholder="Hello,
 my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
       />
-      <p class="text-xs opacity-60 text-start">250 words max</p>
+      <p class="text-xs opacity-60 text-start sm:text-sm">
+        250 {{ $t("wordsMax") }}
+      </p>
     </div>
 
     <hr class="w-full my-4" />
@@ -201,10 +203,10 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
     <div class="flex flex-col gap-y-2 items-stretch text-center">
       <button
         type="button"
-        class="font-merri underline w-fit mx-auto"
+        class="font-merri underline w-fit mx-auto md:text-lg"
         @click="emitSetEditMode(!isEditMode)"
       >
-        Link social accounts
+        {{ $t("linkSocialAccounts") }}
       </button>
 
       <ul class="list-none">
@@ -363,7 +365,13 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
       variation="primary"
       size="sm"
       class="w-full mt-6"
-      >{{ loading ? "SAVING..." : "SAVE" }}</Button
+      >{{
+        loading
+          ? $t("saving").toLocaleUpperCase()
+          : $t("save").toLocaleUpperCase()
+      }}</Button
     >
   </form>
 </template>
+
+<!-- TODO : divide this component in seperate components -->

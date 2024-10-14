@@ -11,6 +11,7 @@ export function useGetUserRecipes(userId: string) {
     try {
       error.value = null;
       loading.value = true;
+
       const data = await getRecipesByUserId(userId);
 
       userRecipes.value = data;

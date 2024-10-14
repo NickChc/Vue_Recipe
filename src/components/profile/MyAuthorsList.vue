@@ -22,7 +22,7 @@ const authorsToShow = computed(() => {
   <div
     class="rounded-lg bg-add-2 p-3 mt-6 w-full sm:w-auto sm:min-w-fit text-primary"
   >
-    <h3 class="text-center">Authors you follow</h3>
+    <h3 class="text-center xs:text-lg">{{ $t("authorsYouFollow") }}</h3>
 
     <hr class="my-3" />
 

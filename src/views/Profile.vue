@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
 import ProfileImage from "@/components/profile/ProfileImage.vue";
 import BackgroundImage from "@/assets/images/Layout_Image.jpg";
-import { storeToRefs } from "pinia";
 import { useAuthStore } from "@/stores/authStore";
 import AddUserData from "@/components/profile/AddUserData.vue";
-import { ref } from "vue";
 import MyAuthorsList from "@/components/profile/MyAuthorsList.vue";
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import Button from "@/components/Button.vue";
@@ -33,7 +33,7 @@ function setEditMode(value: boolean) {
   >
     <div class="flex items-center justify-between">
       <h1 class="font-bold text-xl xs:text-2xl sm:text-3xl lg:text-4xl mb-3">
-        YOUR PROFILE
+        {{ $t("yourProfile").toLocaleUpperCase() }}
       </h1>
 
       <button
@@ -61,14 +61,16 @@ function setEditMode(value: boolean) {
       <div class="flex flex-col xs:items-start">
         <div class="flex flex-col items-center gap-y-1.5">
           <ProfileImage :isEditMode />
-          <h2 class="font-semibold mx-3 text-center">
+          <h2 class="font-semibold mx-3 text-center sm:text-xl">
             {{ currentUser?.name }}
           </h2>
         </div>
         <template v-if="currentUser.bio">
-          <h5 class="opacity-50 text-sm self-start m-1">Biography</h5>
+          <h5 class="opacity-50 text-sm self-start m-1">
+            {{ $t("biography") }}
+          </h5>
           <p
-            class="h-20 scrollbar-small overflow-y-auto text-sm max-w-[400px] lg:max-w-[500px] pr-1"
+            class="h-20 scrollbar-small overflow-y-auto text-sm sm:text-base max-w-[400px] lg:max-w-[500px] pr-1"
           >
             {{ currentUser.bio }}
           </p>
@@ -96,11 +98,11 @@ function setEditMode(value: boolean) {
       <div
         class="mt-6 w-full flex flex-col sm:flex-row sm:items-center gap-y-2 justify-between"
       >
-        <h4>Subscribers: {{ currentUser.subscribers.length }}</h4>
+        <h4>{{ $t("subscribers") }}: {{ currentUser.subscribers.length }}</h4>
 
         <button
           @click="authStore.handleSignOut"
-          class="flex items-center justify-center font-semibold px-2 py-0.5 gap-x-2 bg-primary rounded-md text-add-2 w-fit duration-200 transition-opacity hover:opacity-80"
+          class="flex items-center justify-center font-semibold px-2 py-0.5 gap-x-2 bg-primary rounded-md text-add-2 w-fit duration-200 transition-opacity hover:opacity-80 self-end"
         >
           {{ $t("logOut") }} <i class="material-symbols-outlined">logout</i>
         </button>
@@ -122,4 +124,3 @@ function setEditMode(value: boolean) {
 </template>
 
 <!-- TODO : show Rated recipe references -->
-<!-- TODO : Show your recipes, allow performing actions on them -->

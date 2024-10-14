@@ -37,13 +37,16 @@ onBeforeUnmount(() => {
 });
 </script>
 
+<!-- TODO : make this thing work with show more/less -->
 <template>
   <div class="bg-add-2 rounded-lg p-3 mt-6 text-primary">
-    <div class="flex items-center justify-between">
-      <h2 class="text-center">Your Recipes</h2>
+    <div class="flex items-center justify-between sm:justify-center">
+      <h2 class="text-center xs:text-lg sm:text-2xl lg:text-3xl font-semibold">
+        {{ $t("yourRecipes") }}
+      </h2>
       <RouterLink
         :to="`/recipes/new`"
-        class="block sm:hidden rounded-full border-2 text-xl border-primary grid"
+        class="block sm:hidden rounded-full border-2 text-xl border-primary grid active:text-success active:border-success"
       >
         <i class="material-symbols-outlined text-[1em]">add</i>
       </RouterLink>
@@ -51,7 +54,17 @@ onBeforeUnmount(() => {
 
     <hr class="my-3" />
 
-    <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      v-if="error"
+      class="text-center sm:text-lg p-3 rounded-lg bg-danger text-primary"
+    >
+      {{ $t(error) }}
+    </div>
+
+    <div
+      v-else
+      class="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
       <div
         v-if="loading"
         v-for="n in recipesToShow"
@@ -62,7 +75,7 @@ onBeforeUnmount(() => {
       </div>
 
       <template v-else>
-        <RouterLink to="/recipes/new" class="hidden sm:block">
+        <RouterLink to="/recipes/new" class="hidden sm:block min-h-60">
           <div
             class="h-full rounded-sm group bg-primary dark:bg-secondary text-secondary dark:text-primary text-center grid place-items-center relative bg-cover"
             :style="{ backgroundImage: `url(${AddRecipeCardImage})` }"
