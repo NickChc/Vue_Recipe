@@ -15,20 +15,20 @@ import AuthButton from "@/components/auth/AuthButton.vue";
     <SelectLang />
 
     <nav
-      class="flex items-center justify-around sm:justify-center w-full xs:gap-x-6 sm:gap-x-10 md:gap-x-14 lg:gap-x-20 text-primary font-merri mx-auto"
+      class="flex items-center justify-around sm:justify-center w-full xs:gap-x-6 sm:gap-x-10 md:gap-x-14 lg:gap-x-20 text-primary mx-auto"
     >
       <NavLink to="/">
         <i class="material-symbols-outlined sm:text-2xl">house</i>
 
         <p class="hidden xs:block">
-          {{ $t("home") }}
+          {{ $t("home").toLocaleUpperCase() }}
         </p>
       </NavLink>
       <NavLink to="/recipes">
         <i class="material-symbols-outlined">menu_book</i>
 
         <p class="hidden xs:block">
-          {{ $t("recipes") }}
+          {{ $t("recipes").toLocaleUpperCase() }}
         </p>
       </NavLink>
     </nav>

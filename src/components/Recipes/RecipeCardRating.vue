@@ -12,12 +12,12 @@ import { useGetCurrentRecipe } from "@/composables/useGetCurrentRecipe";
 import { computed } from "vue";
 
 interface RecipeCardRatingProps {
-  totalRating: number;
   recipe: TRecipe;
+  show?: boolean;
   isMore?: boolean;
 }
 
-const { recipe, isMore, totalRating } = defineProps<RecipeCardRatingProps>();
+const { recipe, isMore, show } = defineProps<RecipeCardRatingProps>();
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
@@ -127,20 +127,26 @@ function getMaskWidth(star: number) {
 <template>
   <h3 v-if="isMore" class="text-sm mt-3">{{ $t("rateTheRecipe") }}:</h3>
   <div
-    :class="`bottom-1 left-0 right-0 text-[goldenrod] flex  pr-2 items-center ${
+    :class="`bottom-1 left-0 right-0 text-[goldenrod] overflow-hidden flex  pr-2  max-w-full ${
       isMore
-        ? 'justify-start xs:gap-x-5 mt-2 mb-4'
-        : 'rating absolute z-30 justify-between'
+        ? 'justify-start gap-x-2 mt-2 mb-4 gap-x-5 items-center'
+        : show
+        ? 'items-end gap-x-2 justify-between'
+        : 'rating absolute z-30 justify-between items-center'
     }`"
   >
-    <div class="flex items-center gap-x-1 px-2">
+    <div :class="`flex items-center ${show ? 'gap-x-0.5' : 'px-2 gap-x-1'}`">
       <button
         v-for="star in [1, 2, 3, 4, 5]"
         :key="star"
         @click="handleRate(20 * star)"
       >
         <StarIcon
-          class="text-xs xs:text-sm lg:text-base xl:text-sm"
+          :class="
+            show
+              ? 'text-[clamp(0.5rem,1vw+0.5rem,1rem)] sm:text-xs lg:text-[0.75rem] xl:text-sm'
+              : 'text-xs xs:text-sm lg:text-base xl:text-sm'
+          "
           :fill="userRating! >= 20 * star ? 'goldenrod' : undefined"
           :mask-width="getMaskWidth(star)"
         />
@@ -149,13 +155,17 @@ function getMaskWidth(star: number) {
 
     <div
       class="flex items-center gap-x-1.5 ml-0.5 mt-2"
-      :title="$t('peopleRatedAmount', { amount: totalRating })"
+      :title="$t('peopleRatedAmount', { amount: recipe.rates.length })"
     >
       <span class="text-shadow text-sm flex items-center"
         >{{ ratingPercentage }}%
       </span>
       <span class="border border-[goldenrod] h-3.5"></span>
-      <span class="flex items-center text-sm xs:text-base">
+      <span
+        :class="`flex items-center ${
+          show ? 'text-xs xs:text-sm' : 'text-sm xs:text-base'
+        }`"
+      >
         {{ recipeRates.length }} <ManIcon class="text-base xs:text-lg" />
       </span>
     </div>

@@ -19,11 +19,7 @@ const totalRates = computed(() => recipe.rates.length);
       isMore ? 'h-full pb-6 bg-add-2' : 'rounded-sm bg-primary dark:bg-add-2'
     }`"
   >
-    <RecipeCardImage
-      :recipe="recipe"
-      :totalRates="totalRates"
-      :isMore="isMore"
-    />
+    <RecipeCardImage :recipe="recipe" :isMore="isMore" />
     <div
       :class="`p-3 flex flex-col ${isMore ? 'my-3 text-primary' : 'gap-y-3'}`"
     >

@@ -1,6 +1,7 @@
-import { TRecipe } from "@/@types/general";
 import { defineStore } from "pinia";
 import { ref } from "vue";
+import { TRecipe } from "@/@types/general";
+import { useGlobalStore } from "@/stores/globalStore";
 
 export const useRecipesStore = defineStore("recipes", () => {
   const recipes = ref<TRecipe[]>([]);
@@ -8,6 +9,8 @@ export const useRecipesStore = defineStore("recipes", () => {
   const newestRecipes = ref<TRecipe[]>([]);
 
   const deleteRecipe = ref<TRecipe | null>(null);
+
+  const globalStore = useGlobalStore();
 
   function setTopRatedRecipes(recipes: TRecipe[]) {
     topRatedRecipes.value = recipes;
@@ -25,6 +28,11 @@ export const useRecipesStore = defineStore("recipes", () => {
     deleteRecipe.value = newValue;
   }
 
+  function startDeleteRecipe(recipe: TRecipe) {
+    deleteRecipe.value = recipe;
+    globalStore.toggleModal();
+  }
+
   return {
     recipes,
     topRatedRecipes,
@@ -34,5 +42,6 @@ export const useRecipesStore = defineStore("recipes", () => {
     setNewestRecipes,
     setRecipes,
     setDeleteRecipe,
+    startDeleteRecipe,
   };
 });

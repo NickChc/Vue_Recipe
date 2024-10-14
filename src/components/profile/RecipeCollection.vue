@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref } from "vue";
+import { RouterLink } from "vue-router";
 import { TUser } from "@/@types/general";
 import { useGetUserRecipes } from "@/composables/useGetUserRecipes";
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import CollectionCard from "@/components/profile/CollectionCard.vue";
+import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
+import AddRecipeCardImage from "@/assets/images/Add_Recipe_Card_Image.jpg";
 
 interface RecipeCollectionProps {
   currentUser: TUser;
@@ -34,15 +38,55 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="bg-add-2 rounded-lg p-3 mt-6">
-    <h2 class="text-center">Your Recipes</h2>
+  <div class="bg-add-2 rounded-lg p-3 mt-6 text-primary">
+    <div class="flex items-center justify-between">
+      <h2 class="text-center">Your Recipes</h2>
+      <RouterLink
+        :to="`/recipes/new`"
+        class="block sm:hidden rounded-full border-2 text-xl border-primary grid"
+      >
+        <i class="material-symbols-outlined text-[1em]">add</i>
+      </RouterLink>
+    </div>
 
     <hr class="my-3" />
 
-    <div class="mt-3">
-      <div v-for="recipe in userRecipes" :key="recipe.id">
-        {{ recipe.title }}
+    <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        v-if="loading"
+        v-for="n in recipesToShow"
+        :key="n"
+        class="border-2 border-add rounded-sm"
+      >
+        <RecipeCardSkeleton />
       </div>
+
+      <template v-else>
+        <RouterLink to="/recipes/new" class="hidden sm:block">
+          <div
+            class="h-full rounded-sm group bg-primary dark:bg-secondary text-secondary dark:text-primary text-center grid place-items-center relative bg-cover"
+            :style="{ backgroundImage: `url(${AddRecipeCardImage})` }"
+          >
+            <div class="absolute inset-0 bg-[rgba(0,0,0,0.4)] z-10"></div>
+            <div
+              class="flex flex-col items-center relative z-20 pointer-fine:group-hover:text-success text-3xl duration-200 transition-colors text-primary"
+            >
+              <h2 class="font-semibold">
+                {{ $t("addARecipe").toLocaleUpperCase() }}
+              </h2>
+              <span class="">
+                <i class="material-symbols-outlined text-7xl">add</i>
+              </span>
+            </div>
+          </div>
+        </RouterLink>
+
+        <CollectionCard
+          v-for="recipe in userRecipes"
+          :key="recipe.id"
+          :recipe="recipe"
+        />
+      </template>
     </div>
   </div>
 </template>

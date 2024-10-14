@@ -27,7 +27,7 @@ const { variation, asChild, type, disabled, color, size, loading } =
         : variation === 'danger'
         ? 'border-danger text-danger'
         : variation === 'danger-filled'
-        ? 'border-danger bg-danger text-primary'
+        ? 'border-danger bg-danger text-primary hover:opacity-90'
         : variation === 'primary'
         ? 'border-add text-primary bg-add hover:opacity-90'
         : 'border-add text-add hover:bg-add disabled:bg-add disabled:text-primary hover:text-primary'

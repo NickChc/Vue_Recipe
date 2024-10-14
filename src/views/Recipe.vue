@@ -71,11 +71,17 @@ function startDelete() {
 
     <div v-if="loading" class="bg-add-2">
       <RecipeCardSkeleton />
-      <div class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-full">
+      <div
+        class="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-full hidden sm:block"
+      >
         <HourglassLoading />
       </div>
     </div>
-    <RecipeCard v-else-if="currentRecipe" :recipe="currentRecipe" isMore />
+    <RecipeCard
+      v-else-if="currentRecipe && currentRecipe != null"
+      :recipe="currentRecipe!"
+      isMore
+    />
     <div v-else-if="error" class="w-full text-center text-lg text-danger">
       {{ error }}
     </div>

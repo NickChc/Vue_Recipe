@@ -139,7 +139,7 @@ async function handleUpload(e: Event) {
         >
           <div
             @click="$refs.imageInput.click()"
-            class="flex flex-col items-center font-semibold text-success cursor-pointer success-hover"
+            class="flex flex-col items-center font-semibold text-success cursor-pointer pointer-fine:text-primary pointer-fine:hover:text-success"
           >
             <i class="material-symbols-outlined lg:text-3xl">edit</i>
             <span
@@ -149,7 +149,7 @@ async function handleUpload(e: Event) {
           </div>
           <div
             @click="handleImageDiscard(fireUser.photoURL)"
-            class="flex flex-col items-center font-semibold text-shadow-lg text-danger cursor-pointer danger-hover"
+            class="flex flex-col items-center font-semibold text-shadow-lg text-danger cursor-pointer pointer-fine:text-primary pointer-fine:hover:text-danger"
           >
             <i class="material-symbols-outlined lg:text-3xl">delete</i>
             <span
@@ -161,7 +161,7 @@ async function handleUpload(e: Event) {
         <div
           v-else
           @click="$refs.imageInput.click()"
-          class="flex flex-col items-center font-semibold hover:text-success text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute success-hover duration-200 transition-opacity text-success cursor-pointer"
+          class="flex flex-col items-center font-semibold hover:text-success text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute pointer-fine:text-primary pointer-fine:hover:text-success duration-200 transition-opacity text-success cursor-pointer"
         >
           <i class="material-symbols-outlined text-2xl lg:text-3xl"
             >add_circle</i
@@ -175,27 +175,3 @@ async function handleUpload(e: Event) {
     </div>
   </div>
 </template>
-
-<style scoped>
-@media (pointer: fine) {
-  .profile-image-hover {
-    @apply group-hover:opacity-75;
-  }
-
-  .add-circle-hover {
-    @apply group-hover:opacity-100 opacity-0;
-  }
-
-  .remove-image-btn {
-    @apply duration-300 transition-transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100;
-  }
-
-  .success-hover {
-    @apply text-primary hover:text-success;
-  }
-
-  .danger-hover {
-    @apply text-primary hover:text-danger;
-  }
-}
-</style>
