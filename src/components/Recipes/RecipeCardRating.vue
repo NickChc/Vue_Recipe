@@ -154,7 +154,7 @@ function getMaskWidth(star: number) {
     </div>
 
     <div
-      class="flex items-center gap-x-1.5 ml-0.5 mt-2"
+      class="flex items-center gap-x-0.5 xs:gap-x-1.5 ml-0.5 mt-2"
       :title="$t('peopleRatedAmount', { amount: recipe.rates.length })"
     >
       <span class="text-shadow text-sm flex items-center"
@@ -162,8 +162,8 @@ function getMaskWidth(star: number) {
       </span>
       <span class="border border-[goldenrod] h-3.5"></span>
       <span
-        :class="`flex items-center ${
-          show ? 'text-xs xs:text-sm' : 'text-sm xs:text-base'
+        :class="`flex items-center  ${
+          show ? 'text-sm xs:text-sm' : 'text-sm xs:text-base'
         }`"
       >
         {{ recipeRates.length }} <ManIcon class="text-base xs:text-lg" />

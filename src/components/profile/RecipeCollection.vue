@@ -16,11 +16,12 @@ const { currentUser } = defineProps<RecipeCollectionProps>();
 const { userRecipes, loading, error } = useGetUserRecipes(currentUser.id);
 
 const recipesToShow = ref(3);
+const showMore = ref(false);
 
 function updateRecipesToShow() {
   const width = window.innerWidth;
 
-  if (width >= 640 && width <= 768) {
+  if (width >= 1024) {
     recipesToShow.value = 2;
     return;
   }
@@ -29,23 +30,23 @@ function updateRecipesToShow() {
 }
 
 onMounted(() => {
-  document.addEventListener("resize", updateRecipesToShow);
+  window.addEventListener("resize", updateRecipesToShow);
+  updateRecipesToShow();
 });
 
 onBeforeUnmount(() => {
-  document.removeEventListener("reset", updateRecipesToShow);
+  window.removeEventListener("resize", updateRecipesToShow);
 });
 </script>
 
-<!-- TODO : make this thing work with show more/less -->
 <template>
-  <div class="bg-add-2 rounded-lg p-3 mt-6 text-primary">
+  <div class="bg-add-2 rounded-lg p-1.5 xs:p-3 mt-6 text-primary">
     <div class="flex items-center justify-between sm:justify-center">
       <h2 class="text-center xs:text-lg sm:text-2xl lg:text-3xl font-semibold">
         {{ $t("yourRecipes") }}
       </h2>
       <RouterLink
-        :to="`/recipes/new`"
+        to="/recipes/new"
         class="block sm:hidden rounded-full border-2 text-xl border-primary grid active:text-success active:border-success"
       >
         <i class="material-symbols-outlined text-[1em]">add</i>
@@ -95,11 +96,28 @@ onBeforeUnmount(() => {
         </RouterLink>
 
         <CollectionCard
-          v-for="recipe in userRecipes"
+          v-for="recipe in showMore
+            ? userRecipes
+            : userRecipes.slice(0, recipesToShow)"
           :key="recipe.id"
           :recipe="recipe"
         />
       </template>
     </div>
+    <button
+      v-if="userRecipes.length > recipesToShow"
+      @click="showMore = !showMore"
+      class="flex items-center justify-center gap-x-2 mx-auto mt-3 font-semibold"
+      :class="{ 'text-add': showMore }"
+    >
+      {{ showMore ? $t("showLess") : $t("showMore") }}
+      <span
+        :class="`grid duration-300 transition-transform ease-in ${
+          showMore ? 'rotate-180' : ''
+        }`"
+      >
+        <i class="material-symbols-outlined">arrow_downward</i>
+      </span>
+    </button>
   </div>
 </template>

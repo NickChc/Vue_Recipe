@@ -34,7 +34,7 @@ const authorsToShow = computed(() => {
       "
     >
       <ul
-        :class="`list-none ${
+        :class="`list-none min-h-24 ${
           showAll ? 'overflow-y-auto max-h-34 pt-1 pr-1 scrollbar-small ' : ''
         }`"
       >
@@ -57,7 +57,7 @@ const authorsToShow = computed(() => {
         class="w-full flex items-center justify-center gap-x-2 hover:opacity-75"
         @click="showAll = true"
       >
-        Show All
+        {{ $t("showMore") }}
         <i class="material-symbols-outlined text-xl">arrow_downward</i>
       </button>
 
@@ -66,7 +66,7 @@ const authorsToShow = computed(() => {
         class="w-full flex items-end justify-center gap-x-2 hover:opacity-75 text-add font-semibold"
         @click="showAll = false"
       >
-        Show Less
+        {{ $t("showLess") }}
         <i class="material-symbols-outlined text-xl">arrow_upward</i>
       </button>
     </div>

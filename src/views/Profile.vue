@@ -109,10 +109,8 @@ function setEditMode(value: boolean) {
       </div>
     </div>
 
-    <RecipeCollection :currentUser="currentUser" />
-
-    <div class="flex flex-col items-start sm:flex-row gap-x-6" ref="editView">
-      <MyAuthorsList :currentUser="currentUser" />
+    <div class="flex flex-col items-start sm:flex-row gap-x-6">
+      <MyAuthorsList v-if="!isEditMode" :currentUser="currentUser" />
 
       <AddUserData
         @set-edit-mode="setEditMode"
@@ -120,6 +118,7 @@ function setEditMode(value: boolean) {
         :currentUser="currentUser"
       />
     </div>
+    <RecipeCollection :currentUser="currentUser" />
   </div>
 </template>
 

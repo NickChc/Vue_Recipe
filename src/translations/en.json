@@ -177,5 +177,7 @@
   "changeImage": "CHANGE IMAGE",
   "removeImage": "REMOVE IMAGE",
   "uploadImage": "UPLAOD IMAGE",
-  "wordsMax": "Words Max"
+  "wordsMax": "Words Max",
+  "showMore": "Show More",
+  "showLess": "Show Less"
 }

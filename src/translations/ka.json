@@ -177,5 +177,7 @@
   "changeImage": "შეცვალეთ ",
   "removeImage": "წაშალეთ",
   "uploadImage": "ატვირთეთ სურათი",
-  "wordsMax": "სიტყვა მაქსიმუმ"
+  "wordsMax": "სიტყვა მაქსიმუმ",
+  "showMore": "მეტის ჩვენება",
+  "showLess": "ნაკლების ჩვენება"
 }
