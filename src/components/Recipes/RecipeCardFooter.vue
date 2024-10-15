@@ -67,7 +67,7 @@ const { t } = useI18n();
       </p>
     </div>
     <hr class="w-full border-add mt-2" />
-    <RecipeCardRating isMore :recipe="recipe" :totalRating="totalRates" />
+    <RecipeCardRating isMore :recipe="recipe" />
   </template>
 
   <strong

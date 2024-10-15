@@ -26,6 +26,7 @@ export async function createUserDoc(
       instagram: null,
       tiktok: null,
     },
+    rates: [],
   };
 
   await setDoc(userDocRef, newUser);

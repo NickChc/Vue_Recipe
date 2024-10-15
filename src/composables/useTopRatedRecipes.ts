@@ -1,21 +1,18 @@
+import { getDocs, limit, orderBy, query } from "firebase/firestore";
 import { TRecipe } from "@/@types/general";
 import { recipesCollection } from "@/firebase";
 import { useRecipesStore } from "@/stores/recipesStore";
-import { getDocs, limit, orderBy, query } from "firebase/firestore";
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
 
 export function useTopRatedRecipes() {
   const recipesStore = useRecipesStore();
-  const { topRatedRecipes } = storeToRefs(recipesStore);
-
-  const loading = ref<boolean>(false);
-  const error = ref<null | string>(null);
 
   async function getTopRatedRecipes() {
     try {
-      error.value = null;
-      loading.value = true;
+      recipesStore.setTopRatedRecipesState({
+        error: null,
+        loading:
+          recipesStore.topRatedRecipesState.recipes.length > 0 ? false : true,
+      });
 
       const recipesQuery = query(
         recipesCollection,
@@ -34,14 +31,20 @@ export function useTopRatedRecipes() {
         } as TRecipe;
       });
 
-      recipesStore.setTopRatedRecipes(data);
+      recipesStore.setTopRatedRecipesState({ recipes: data });
     } catch (err: any) {
       console.log(err.message);
-      error.value = "Couldn't get top rated recipes";
+      recipesStore.setTopRatedRecipesState({
+        error: "Couldn't get top rated recipes",
+      });
     } finally {
-      loading.value = false;
+      recipesStore.setTopRatedRecipesState({
+        loading: false,
+      });
     }
   }
 
-  return { getTopRatedRecipes, loading, error, topRatedRecipes };
+  return {
+    getTopRatedRecipes,
+  };
 }

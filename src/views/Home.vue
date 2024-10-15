@@ -3,30 +3,16 @@ import HeaderImage from "@/components/HeaderImage.vue";
 import NewIcon from "@/components/icons/NewIcon.vue";
 import StarIcon from "@/components/icons/StarIcon.vue";
 import PreviewCard from "@/components/recipes/PreviewCard.vue";
-import { useNewestRecipes } from "@/composables/useNewestRecipes";
-import { useTopRatedRecipes } from "@/composables/useTopRatedRecipes";
+import { useRecipesStore } from "@/stores/recipesStore";
 import { useThemeStore } from "@/stores/themeStore";
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
 
-const {
-  getTopRatedRecipes,
-  loading: gettingTopRated,
-  topRatedRecipes,
-} = useTopRatedRecipes();
+const recipesStore = useRecipesStore();
 
-const {
-  getNewestRecipes,
-  loading: gettingNewest,
-  newestRecipes,
-} = useNewestRecipes();
 const themeStore = useThemeStore();
 const { isDark } = storeToRefs(themeStore);
 
-onMounted(() => {
-  getTopRatedRecipes();
-  getNewestRecipes();
-});
+const { topRatedRecipesState, newestRecipesState } = storeToRefs(recipesStore);
 </script>
 
 <template>
@@ -34,9 +20,10 @@ onMounted(() => {
   <div
     class="sm:w-[90%] md:w-[80%] mx-auto pt-6 pb-20 sm:pb-40 flex flex-col gap-y-10"
   >
+    <button @click="recipesStore.fetchRecipeData()">FETCH RECIPES</button>
     <PreviewCard
-      :recipes="newestRecipes"
-      :loading="gettingNewest"
+      :recipes="newestRecipesState.recipes"
+      :loading="newestRecipesState.loading"
       :title="$t('newest', 'New Recipes')"
     >
       <NewIcon
@@ -45,8 +32,8 @@ onMounted(() => {
     </PreviewCard>
 
     <PreviewCard
-      :loading="gettingTopRated"
-      :recipes="topRatedRecipes"
+      :loading="topRatedRecipesState.loading"
+      :recipes="topRatedRecipesState.recipes"
       :title="$t('topRated', 'Top Rated')"
     >
       <StarIcon

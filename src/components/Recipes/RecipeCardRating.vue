@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
+import { storeToRefs } from "pinia";
 import StarIcon from "@/components/icons/StarIcon.vue";
 import ManIcon from "@/components/icons/ManIcon.vue";
 import { sendToast } from "@/utils/sendToast";
-import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/authStore";
-import { storeToRefs } from "pinia";
 import { updateRecipe } from "@/data/updateRecipe";
 import { TRecipe } from "@/@types/general";
 import { useGetCurrentRecipe } from "@/composables/useGetCurrentRecipe";
-import { computed } from "vue";
+import { updateUser } from "@/data/updateUser";
+import { useRecipesStore } from "@/stores/recipesStore";
 
 interface RecipeCardRatingProps {
   recipe: TRecipe;
@@ -21,6 +23,8 @@ const { recipe, isMore, show } = defineProps<RecipeCardRatingProps>();
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
+
+const recipesStore = useRecipesStore();
 
 const { handleGetRecipeById } = useGetCurrentRecipe(recipe.id);
 
@@ -69,6 +73,35 @@ async function handleRate(point: number) {
       (rate) => rate.user_id === currUser.id
     );
 
+    const existingUserRate = currUser.rates.find(
+      (rate) => rate.recipe_id === recipe.id
+    );
+
+    let newUserRates: {
+      recipe_id: string;
+      recipe_title: string;
+      point: number;
+    }[] = [];
+
+    if (existingUserRate) {
+      if (existingUserRate.point === point) {
+        newUserRates = currUser.rates.filter((r) => r.recipe_id !== recipe.id);
+      } else {
+        newUserRates = currUser.rates.map((r) =>
+          r.recipe_id === recipe.id ? { ...r, point } : r
+        );
+      }
+    } else {
+      newUserRates = [
+        ...currUser.rates,
+        { recipe_id: recipe.id, recipe_title: recipe.title, point },
+      ];
+    }
+
+    await updateUser(currUser.id, {
+      rates: newUserRates,
+    });
+
     let newRates: { user_id: string; point: number }[] = [];
 
     if (existingRate) {
@@ -87,21 +120,24 @@ async function handleRate(point: number) {
       });
 
       recipeRates.value = newRates;
-      return;
+    } else {
+      newRates = [...recipeRates.value, { user_id: currUser.id, point }];
+      recipeRates.value = newRates;
+
+      await updateRecipe(recipe.id, {
+        rates: newRates,
+      });
+
+      await handleGetRecipeById(recipe.id);
     }
 
-    newRates = [...recipeRates.value, { user_id: currUser.id, point }];
-    recipeRates.value = newRates;
-
-    await updateRecipe(recipe.id, {
-      rates: newRates,
-    });
-
-    await handleGetRecipeById(recipe.id);
+    authStore.setCurrentUser({ ...currUser, rates: newUserRates });
+    recipesStore.fetchRecipeData();
   } catch (err: any) {
     console.log(err.message);
     sendToast("error", t("problemOccuredTryAgain"));
     recipeRates.value = recipe.rates;
+    authStore.setCurrentUser(currUser);
   }
 }
 
@@ -122,6 +158,13 @@ function getMaskWidth(star: number) {
     ((ratingPercentage.value - starStart) / percentagePerStar) * 100;
   return `${filledPercentage}%`;
 }
+
+watch(
+  () => recipe.rates,
+  (rates) => {
+    recipeRates.value = rates;
+  }
+);
 </script>
 
 <template>

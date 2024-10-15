@@ -34,7 +34,7 @@ function onImageError(e: Event) {
     >
       <h2
         :class="`text-primary text-center font-bold font-merri select-none ${
-          isMore ? 'text-xl xs:text-2xl' : 'text-[1.5em]'
+          isMore ? 'text-xl xs:text-2xl' : 'text-[1.4em]'
         }`"
       >
         {{ $t("noImage") }}

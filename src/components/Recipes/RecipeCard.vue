@@ -25,7 +25,7 @@ const totalRates = computed(() => recipe.rates.length);
     >
       <div class="flex flex-col gap-y-1">
         <h3
-          :class="`text-xl font-semibold ${
+          :class="`text-xl font-semibold line-clamp-1 ${
             isMore ? 'md:text-2xl lg:text-3xl' : ''
           }`"
         >

@@ -1,21 +1,19 @@
+import { storeToRefs } from "pinia";
+import { getDocs } from "firebase/firestore";
 import { TRecipe } from "@/@types/general";
 import { recipesCollection } from "@/firebase";
 import { useRecipesStore } from "@/stores/recipesStore";
-import { getDocs } from "firebase/firestore";
-import { storeToRefs } from "pinia";
-import { onMounted, ref } from "vue";
 
 export function useGetRecipes() {
   const recipesStore = useRecipesStore();
-  const { recipes } = storeToRefs(recipesStore);
-
-  const loading = ref(false);
-  const error = ref<null | string>(null);
+  const { recipes, recipesLoading, recipesError } = storeToRefs(recipesStore);
 
   async function getRecipes() {
     try {
-      error.value = null;
-      loading.value = true;
+      if (recipesStore.recipes.length === 0) {
+        recipesStore.setRecipesLoading(true);
+      }
+      recipesStore.setRecipesError(null);
 
       const recipeDocs = await getDocs(recipesCollection);
 
@@ -26,15 +24,11 @@ export function useGetRecipes() {
       recipesStore.setRecipes(data);
     } catch (err: any) {
       console.log(err.message);
-      error.value = "Couldn't fetch recipes";
+      recipesStore.setRecipesError("Couldn't fetch recipes");
     } finally {
-      loading.value = false;
+      recipesStore.setRecipesLoading(false);
     }
   }
 
-  onMounted(() => {
-    getRecipes();
-  });
-
-  return { loading, error, getRecipes, recipes };
+  return { getRecipes, recipes, loading: recipesLoading, error: recipesError };
 }

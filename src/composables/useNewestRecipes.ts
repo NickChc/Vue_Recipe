@@ -1,21 +1,21 @@
+import { getDocs, limit, orderBy, query } from "firebase/firestore";
 import { TRecipe } from "@/@types/general";
 import { recipesCollection } from "@/firebase";
 import { useRecipesStore } from "@/stores/recipesStore";
-import { getDocs, limit, orderBy, query } from "firebase/firestore";
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { wait } from "@/utils/wait";
 
 export function useNewestRecipes() {
   const recipesStore = useRecipesStore();
-  const { newestRecipes } = storeToRefs(recipesStore);
-
-  const loading = ref<boolean>(false);
-  const error = ref<null | string>(null);
-
   async function getNewestRecipes() {
     try {
-      error.value = null;
-      loading.value = true;
+      recipesStore.setNewestRecipesState({
+        error: null,
+        loading: !!recipesStore.newestRecipesState.recipes.length
+          ? false
+          : true,
+      });
+
+      await wait(3000);
 
       const recipesQuery = query(
         recipesCollection,
@@ -34,14 +34,22 @@ export function useNewestRecipes() {
         } as TRecipe;
       });
 
-      recipesStore.setNewestRecipes(data);
+      recipesStore.setNewestRecipesState({
+        recipes: data,
+      });
     } catch (err: any) {
       console.log(err.message);
-      error.value = "Couldn't get top rated recipes";
+      recipesStore.setNewestRecipesState({
+        error: "Couldn't get top rated recipes",
+      });
     } finally {
-      loading.value = false;
+      recipesStore.setNewestRecipesState({
+        loading: false,
+      });
     }
   }
 
-  return { getNewestRecipes, loading, error, newestRecipes };
+  return {
+    getNewestRecipes,
+  };
 }

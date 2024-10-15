@@ -9,6 +9,7 @@ import MyAuthorsList from "@/components/profile/MyAuthorsList.vue";
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import Button from "@/components/Button.vue";
 import RecipeCollection from "@/components/profile/RecipeCollection.vue";
+import RatedRecipes from "@/components/profile/RatedRecipes.vue";
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
@@ -118,6 +119,9 @@ function setEditMode(value: boolean) {
         :currentUser="currentUser"
       />
     </div>
+
+    <RatedRecipes :currUser="currentUser" />
+
     <RecipeCollection :currentUser="currentUser" />
   </div>
 </template>

@@ -74,6 +74,5 @@ export interface TUser {
   subscriptions: { id: string; name: string }[]; // user id's
   subscribers: { id: string; email: string }[]; // user id's
   socialLinks: TSocialLinks;
+  rates: { recipe_id: string; recipe_title: string; point: number }[];
 }
-
-// TODO : add rates to user model, to display reated ones on profile page.

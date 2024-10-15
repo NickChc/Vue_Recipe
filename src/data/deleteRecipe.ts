@@ -21,7 +21,9 @@ export async function deleteRecipe(recipe: TRecipe) {
 
   if (recipe.image == null) return;
 
-  const imageRef = getImageRef(recipe.image);
+  if (recipe.image) {
+    const imageRef = getImageRef(recipe.image);
 
-  await deleteObject(imageRef);
+    await deleteObject(imageRef);
+  }
 }

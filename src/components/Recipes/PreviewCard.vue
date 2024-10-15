@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { TRecipe } from "@/@types/general";
 import RecipeCard from "@/components/recipes/RecipeCard.vue";
-import RecipeCardSkeleton from "./RecipeCardSkeleton.vue";
+import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 
 interface PreviewCardProps {
   recipes: TRecipe[];
@@ -11,6 +11,8 @@ interface PreviewCardProps {
 
 const { recipes, title } = defineProps<PreviewCardProps>();
 </script>
+
+<!-- TODO : make it accept error prop and display it -->
 
 <template>
   <div class="flex flex-col gap-y-2">

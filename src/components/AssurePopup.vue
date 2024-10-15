@@ -30,7 +30,6 @@ async function handleDelete() {
     loading.value = true;
     await deleteRecipe(recipe);
     handleCancel();
-    router.replace("/");
   } catch (err: any) {
     console.log(err.message);
     loading.value = false;
