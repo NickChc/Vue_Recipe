@@ -7,6 +7,7 @@ import { useRouter } from "vue-router";
 import { RECIPE_FORM_DATA, SERVINGS } from "@/config/storageKeys";
 import { useI18n } from "vue-i18n";
 import { editRecipe as handleEditRecipe } from "@/data/editRecipe";
+import { useRecipesStore } from "@/stores/recipesStore";
 
 export function useCreateRecipe(
   newRecipeData: Ref<TRecipeFormValues>,
@@ -34,6 +35,8 @@ export function useCreateRecipe(
 
   const { isValid, validateNewRecipe, ...rest } = useValidateNewRecipe();
   const authStore = useAuthStore();
+
+  const recipesStore = useRecipesStore();
 
   async function handleCreateRecipe() {
     if (authStore.currentUser == null) return;
@@ -74,6 +77,7 @@ export function useCreateRecipe(
 
       localStorage.removeItem(RECIPE_FORM_DATA);
       localStorage.removeItem(SERVINGS);
+      recipesStore.fetchRecipeData();
       router.push("/");
     } catch (err: any) {
       console.log(err.message);

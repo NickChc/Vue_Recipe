@@ -20,7 +20,6 @@ const { topRatedRecipesState, newestRecipesState } = storeToRefs(recipesStore);
   <div
     class="sm:w-[90%] md:w-[80%] mx-auto pt-6 pb-20 sm:pb-40 flex flex-col gap-y-10"
   >
-    <button @click="recipesStore.fetchRecipeData()">FETCH RECIPES</button>
     <PreviewCard
       :recipes="newestRecipesState.recipes"
       :loading="newestRecipesState.loading"

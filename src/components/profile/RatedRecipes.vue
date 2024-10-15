@@ -1,15 +1,20 @@
 <script setup lang="ts">
 import { TUser } from "@/@types/general";
+import { computed } from "vue";
 
 interface RatedRecipesProps {
   currUser: TUser;
 }
 
 const { currUser } = defineProps<RatedRecipesProps>();
+
+const ratedRecipesSorted = computed(() => {
+  return currUser.rates.sort((a, b) => b.point - a.point);
+});
 </script>
 
 <template>
-  <div class="rounded-lg bg-add-2 p-3 mt-6">
+  <div v-if="!!currUser.rates.length" class="rounded-lg bg-add-2 p-3 mt-6">
     <h2
       class="my-1 text-center xs:text-lg sm:text-2xl lg:text-3xl font-semibold"
     >
@@ -19,7 +24,7 @@ const { currUser } = defineProps<RatedRecipesProps>();
 
     <ul>
       <li
-        v-for="rate in currUser.rates"
+        v-for="rate in ratedRecipesSorted"
         :key="rate.recipe_id"
         class="m-1 inline-block"
       >
