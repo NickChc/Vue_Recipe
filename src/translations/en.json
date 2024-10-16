@@ -180,5 +180,6 @@
   "wordsMax": "Words Max",
   "showMore": "Show More",
   "showLess": "Show Less",
-  "ratedByYou": "Rated by you"
+  "ratedByYou": "Rated by you",
+  "failedToFetchRecipes": "Couldn't fetch recipes"
 }

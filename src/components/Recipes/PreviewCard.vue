@@ -4,15 +4,16 @@ import RecipeCard from "@/components/recipes/RecipeCard.vue";
 import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 
 interface PreviewCardProps {
-  recipes: TRecipe[];
+  recipesState: {
+    recipes: TRecipe[];
+    loading: boolean;
+    error: null | string;
+  };
   title: string;
-  loading: boolean;
 }
 
-const { recipes, title } = defineProps<PreviewCardProps>();
+const { recipesState, title } = defineProps<PreviewCardProps>();
 </script>
-
-<!-- TODO : make it accept error prop and display it -->
 
 <template>
   <div class="flex flex-col gap-y-2">
@@ -23,17 +24,25 @@ const { recipes, title } = defineProps<PreviewCardProps>();
       <slot></slot>
     </h2>
     <div
+      v-if="recipesState.error"
+      class="bg-danger rounded-lg text-primary p-3 w-full text-center font-semibold my-2"
+    >
+      {{ $t(recipesState.error).toLocaleUpperCase() }}
+    </div>
+    <div
+      v-else
       class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-4 gap-y-6 p-3"
     >
-      <template v-if="loading">
+      <template v-if="recipesState.loading">
         <RecipeCardSkeleton />
         <RecipeCardSkeleton />
         <RecipeCardSkeleton />
         <RecipeCardSkeleton />
       </template>
+
       <RecipeCard
         v-else
-        v-for="recipe in recipes"
+        v-for="recipe in recipesState.recipes"
         :key="recipe.id"
         :recipe="recipe"
       />

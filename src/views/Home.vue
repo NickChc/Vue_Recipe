@@ -21,8 +21,7 @@ const { topRatedRecipesState, newestRecipesState } = storeToRefs(recipesStore);
     class="sm:w-[90%] md:w-[80%] mx-auto pt-6 pb-20 sm:pb-40 flex flex-col gap-y-10"
   >
     <PreviewCard
-      :recipes="newestRecipesState.recipes"
-      :loading="newestRecipesState.loading"
+      :recipesState="newestRecipesState"
       :title="$t('newest', 'New Recipes')"
     >
       <NewIcon
@@ -31,8 +30,7 @@ const { topRatedRecipesState, newestRecipesState } = storeToRefs(recipesStore);
     </PreviewCard>
 
     <PreviewCard
-      :loading="topRatedRecipesState.loading"
-      :recipes="topRatedRecipesState.recipes"
+      :recipesState="topRatedRecipesState"
       :title="$t('topRated', 'Top Rated')"
     >
       <StarIcon

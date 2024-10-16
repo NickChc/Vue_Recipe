@@ -35,7 +35,7 @@ export function useTopRatedRecipes() {
     } catch (err: any) {
       console.log(err.message);
       recipesStore.setTopRatedRecipesState({
-        error: "Couldn't get top rated recipes",
+        error: "failedToFetchRecipes",
       });
     } finally {
       recipesStore.setTopRatedRecipesState({

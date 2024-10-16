@@ -2,7 +2,6 @@ import { getDocs, limit, orderBy, query } from "firebase/firestore";
 import { TRecipe } from "@/@types/general";
 import { recipesCollection } from "@/firebase";
 import { useRecipesStore } from "@/stores/recipesStore";
-import { wait } from "@/utils/wait";
 
 export function useNewestRecipes() {
   const recipesStore = useRecipesStore();
@@ -14,8 +13,6 @@ export function useNewestRecipes() {
           ? false
           : true,
       });
-
-      await wait(3000);
 
       const recipesQuery = query(
         recipesCollection,
@@ -40,7 +37,7 @@ export function useNewestRecipes() {
     } catch (err: any) {
       console.log(err.message);
       recipesStore.setNewestRecipesState({
-        error: "Couldn't get top rated recipes",
+        error: "failedToFetchRecipes",
       });
     } finally {
       recipesStore.setNewestRecipesState({
