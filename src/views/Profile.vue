@@ -125,5 +125,3 @@ function setEditMode(value: boolean) {
     <RecipeCollection :currentUser="currentUser" />
   </div>
 </template>
-
-<!-- TODO : show Rated recipe references -->

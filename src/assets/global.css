@@ -38,11 +38,14 @@
 
   .scrollbar-small::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
+
     background-color: var(--clr-primary);
     border-radius: 8px;
   }
   .scrollbar-small::-webkit-scrollbar-track {
     width: 4px;
+    height: 4px;
   }
   ::-webkit-scrollbar-thumb {
     background-color: var(--clr-add);
@@ -73,10 +76,12 @@ body.dark {
 
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
   background-color: var(--clr-primary);
 }
 ::-webkit-scrollbar-track {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--clr-add);
