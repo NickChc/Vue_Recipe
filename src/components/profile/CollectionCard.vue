@@ -30,13 +30,13 @@ const recipesStore = useRecipesStore();
         />
       </div>
 
-      <h3 class="my-2 font-semibold">{{ recipe.title }}</h3>
+      <h3 class="my-2 font-semibold sm:text-lg">{{ recipe.title }}</h3>
 
       <div @click.stop>
         <RecipeCardRating show :recipe="recipe" />
       </div>
 
-      <p class="line-clamp-3 text-sm my-1">{{ recipe.recipe }}</p>
+      <p class="line-clamp-3 text-sm sm:text-base my-1">{{ recipe.recipe }}</p>
     </div>
 
     <div @click.stop class="flex items-stretch flex-col gap-y-2 mt-3">

@@ -1,20 +1,30 @@
-import { onMounted, ref } from "vue";
-import { TRecipe } from "@/@types/general";
+import { ref } from "vue";
 import { getRecipesByUserId } from "@/data/getRecipesByUserId";
+import { useAuthStore } from "@/stores/authStore";
+import { useRecipesStore } from "@/stores/recipesStore";
+import { storeToRefs } from "pinia";
 
-export function useGetUserRecipes(userId: string) {
-  const userRecipes = ref<TRecipe[]>([]);
+export function useGetUserRecipes() {
+  const authStore = useAuthStore();
+  const recipesStore = useRecipesStore();
+  const { currUserRecipes } = storeToRefs(recipesStore);
+
+  // const userRecipes = ref<TRecipe[]>([]);
   const loading = ref(false);
   const error = ref<null | string>(null);
 
-  async function handleGetUserRecipes(userId: string) {
+  async function handleGetUserRecipes() {
+    const userId = authStore.currentUser?.id;
+
     try {
+      if (userId == null) return;
+
       error.value = null;
       loading.value = true;
 
       const data = await getRecipesByUserId(userId);
 
-      userRecipes.value = data;
+      recipesStore.setCurrUserRecipes(data);
     } catch (err: any) {
       console.log(err.message);
       error.value = "failedToGetYourRecipes";
@@ -23,9 +33,10 @@ export function useGetUserRecipes(userId: string) {
     }
   }
 
-  onMounted(() => {
-    handleGetUserRecipes(userId);
-  });
-
-  return { userRecipes, loading, error };
+  return {
+    currUserRecipes,
+    loading,
+    error,
+    handleGetUserRecipes,
+  };
 }

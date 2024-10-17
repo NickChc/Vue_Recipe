@@ -33,7 +33,6 @@ const routes: RouteRecordRaw[] = [
       {
         path: "/recipes/:recipeId",
         name: "Recipe",
-        props: true,
         component: () => import("@/views/Recipe.vue"),
       },
       {

@@ -10,6 +10,8 @@ export const useAuthStore = defineStore("authStore", () => {
   const currentUser = ref<TUser | null>(null);
   const loadingAuth = ref(true);
 
+  const isDeletingAcc = ref(false);
+
   const verificationSent = ref(false);
 
   function setCurrentUser(user: TUser | null) {
@@ -23,6 +25,10 @@ export const useAuthStore = defineStore("authStore", () => {
     } catch (err: any) {
       console.log(err.message);
     }
+  }
+
+  function setIsDeletingAcc(newValue?: boolean) {
+    isDeletingAcc.value = newValue || !isDeletingAcc.value;
   }
 
   onMounted(() => {
@@ -48,8 +54,10 @@ export const useAuthStore = defineStore("authStore", () => {
     fireUser,
     verificationSent,
     currentUser,
-    setCurrentUser,
     loadingAuth,
+    isDeletingAcc,
+    setCurrentUser,
     handleSignOut,
+    setIsDeletingAcc,
   };
 });

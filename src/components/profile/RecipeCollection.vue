@@ -1,19 +1,13 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
-import { TUser } from "@/@types/general";
 import { useGetUserRecipes } from "@/composables/useGetUserRecipes";
 import CollectionCard from "@/components/profile/CollectionCard.vue";
 import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 import AddRecipeCardImage from "@/assets/images/Add_Recipe_Card_Image.jpg";
 
-interface RecipeCollectionProps {
-  currentUser: TUser;
-}
-
-const { currentUser } = defineProps<RecipeCollectionProps>();
-
-const { userRecipes, loading, error } = useGetUserRecipes(currentUser.id);
+const { currUserRecipes, loading, error, handleGetUserRecipes } =
+  useGetUserRecipes();
 
 const recipesToShow = ref(3);
 const showMore = ref(false);
@@ -30,6 +24,8 @@ function updateRecipesToShow() {
 }
 
 onMounted(() => {
+  handleGetUserRecipes();
+
   window.addEventListener("resize", updateRecipesToShow);
   updateRecipesToShow();
 });
@@ -97,15 +93,15 @@ onBeforeUnmount(() => {
 
         <CollectionCard
           v-for="recipe in showMore
-            ? userRecipes
-            : userRecipes.slice(0, recipesToShow)"
+            ? currUserRecipes
+            : currUserRecipes.slice(0, recipesToShow)"
           :key="recipe.id"
           :recipe="recipe"
         />
       </template>
     </div>
     <button
-      v-if="userRecipes.length > recipesToShow"
+      v-if="currUserRecipes.length > recipesToShow"
       @click="showMore = !showMore"
       class="flex items-center justify-center gap-x-2 mx-auto mt-3 font-semibold"
       :class="{ 'text-add': showMore }"

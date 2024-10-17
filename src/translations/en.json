@@ -181,5 +181,11 @@
   "showMore": "Show More",
   "showLess": "Show Less",
   "ratedByYou": "Rated by you",
-  "failedToFetchRecipes": "Couldn't fetch recipes"
+  "failedToFetchRecipes": "Couldn't fetch recipes",
+  "deleteAccount": "Delete Account",
+  "assureDeleteAcc": "Are you sure you want to delete your account?",
+  "no": "No",
+  "yes": "Yes",
+  "failedToDeleteRecipe": "Failed to delete recipe",
+  "failedToFindRecipe": "Failed to find the recipe"
 }

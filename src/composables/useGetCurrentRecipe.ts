@@ -1,11 +1,17 @@
 import { TRecipe } from "@/@types/general";
 import { getRecipeById } from "@/data/getRecipeById";
 import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 
-export function useGetCurrentRecipe(recipeId: string) {
+export function useGetCurrentRecipe() {
   const currentRecipe = ref<TRecipe | null>(null);
   const loading = ref(false);
   const error = ref<null | string>(null);
+
+  const { params } = useRoute();
+  const recipeId = Array.isArray(params.recipeId)
+    ? params.recipeId[0]
+    : params.recipeId || null;
 
   async function handleGetRecipeById(recipeId: string) {
     try {
@@ -17,13 +23,15 @@ export function useGetCurrentRecipe(recipeId: string) {
       currentRecipe.value = recipe;
     } catch (err: any) {
       console.log(err.message);
-      error.value = `Couldn't fetch the recipe with ID - ${recipeId}`;
+      error.value = "failedToFindRecipe";
     } finally {
       loading.value = false;
     }
   }
 
   onMounted(() => {
+    if (recipeId == null) return;
+
     handleGetRecipeById(recipeId);
   });
 

@@ -1,6 +1,13 @@
-slot
 <script setup lang="ts">
 import { useGlobalStore } from "@/stores/globalStore";
+
+const emit = defineEmits<{
+  (e: "close-modal"): void;
+}>();
+
+function emitCloseModal() {
+  emit("close-modal");
+}
 
 const globalStore = useGlobalStore();
 </script>
@@ -8,7 +15,7 @@ const globalStore = useGlobalStore();
 <template>
   <div
     v-if="globalStore.modalOpen"
-    @mousedown="globalStore.toggleModal"
+    @mousedown="emitCloseModal"
     class="fixed inset-0 z-50 bg-[rgba(0,0,0,0.7)]"
   >
     <div

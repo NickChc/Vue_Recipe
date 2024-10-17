@@ -181,5 +181,11 @@
   "showMore": "მეტის ჩვენება",
   "showLess": "ნაკლების ჩვენება",
   "ratedByYou": "თქვენი შეფასებული",
-  "failedToFetchRecipes": "რეცეპტების წამოღება ვერ მოხერხდა"
+  "failedToFetchRecipes": "რეცეპტების წამოღება ვერ მოხერხდა",
+  "deleteAccount": "ანგარიშის წაშლა",
+  "assureDeleteAcc": "დარწმუნებული ხართ, რომ გსურთ ანგარიშის გაუქმება?",
+  "no": "არა",
+  "yes": "კი",
+  "failedToDeleteRecipe": "რეცეპტის წაშლა ვერ მოხერხდა",
+  "failedToFindRecipe": "რეცეპტი ვერ მოიძებნა"
 }

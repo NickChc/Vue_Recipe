@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { TRecipe } from "@/@types/general";
 import { useGlobalStore } from "@/stores/globalStore";
 import { useGetRecipes } from "@/composables/useGetRecipes";
 import { useTopRatedRecipes } from "@/composables/useTopRatedRecipes";
 import { useNewestRecipes } from "@/composables/useNewestRecipes";
+import { useGetUserRecipes } from "@/composables/useGetUserRecipes";
+import { useAuthStore } from "./authStore";
 
 interface TFetchRecipesState {
   loading: boolean;
@@ -29,18 +31,26 @@ export const useRecipesStore = defineStore("recipes", () => {
     recipes: [],
   });
 
+  const currUserRecipes = ref<TRecipe[]>([]);
+
   const deleteRecipe = ref<TRecipe | null>(null);
+  const deletingRecipe = ref(false);
 
   const globalStore = useGlobalStore();
+  const authStore = useAuthStore();
 
   const { getRecipes } = useGetRecipes();
   const { getTopRatedRecipes } = useTopRatedRecipes();
   const { getNewestRecipes } = useNewestRecipes();
+  const { handleGetUserRecipes } = useGetUserRecipes();
 
   async function fetchRecipeData() {
     getRecipes();
     getTopRatedRecipes();
     getNewestRecipes();
+    if (authStore.currentUser) {
+      handleGetUserRecipes();
+    }
   }
 
   function setRecipes(newRecipes: TRecipe[]) {
@@ -72,6 +82,10 @@ export const useRecipesStore = defineStore("recipes", () => {
     newestRecipesState.value = { ...newestRecipesState.value, ...newState };
   }
 
+  function setCurrUserRecipes(recipes: TRecipe[]) {
+    currUserRecipes.value = recipes;
+  }
+
   onMounted(() => {
     fetchRecipeData();
   });
@@ -83,6 +97,9 @@ export const useRecipesStore = defineStore("recipes", () => {
     recipesError,
     topRatedRecipesState,
     newestRecipesState,
+    deletingRecipe,
+    currUserRecipes,
+    setCurrUserRecipes,
     setNewestRecipesState,
     setRecipes,
     setDeleteRecipe,

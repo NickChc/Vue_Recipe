@@ -1,10 +1,11 @@
-import { db } from "@/firebase";
+import { deleteObject } from "firebase/storage";
 import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "@/firebase";
 import { updateUser } from "@/data/updateUser";
 import { getUserById } from "@/data/getUserById";
 import { TRecipe, TUser } from "@/@types/general";
 import { getImageRef } from "@/utils/getImageRef";
-import { deleteObject } from "firebase/storage";
+import PlaceholderImage from "@/assets/images/Fallback_Food_Image.jpeg";
 
 export async function deleteRecipe(recipe: TRecipe) {
   const userId = recipe.user_id;
@@ -19,11 +20,9 @@ export async function deleteRecipe(recipe: TRecipe) {
     await updateUser(userId, { recipes: newUserRecipes } as Partial<TUser>);
   }
 
-  if (recipe.image == null) return;
+  if (recipe.image == null && recipe.image !== PlaceholderImage) return;
 
-  if (recipe.image) {
-    const imageRef = getImageRef(recipe.image);
+  const imageRef = getImageRef(recipe.image);
 
-    await deleteObject(imageRef);
-  }
+  await deleteObject(imageRef);
 }

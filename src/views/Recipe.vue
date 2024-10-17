@@ -9,12 +9,6 @@ import { useRecipesStore } from "@/stores/recipesStore";
 import { storeToRefs } from "pinia";
 import { RouterLink, useRouter } from "vue-router";
 
-interface RecipePageProps {
-  recipeId: string;
-}
-
-const { recipeId } = defineProps<RecipePageProps>();
-
 const router = useRouter();
 
 const globalStore = useGlobalStore();
@@ -24,7 +18,7 @@ const recipesStore = useRecipesStore();
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
 
-const { currentRecipe, loading, error } = useGetCurrentRecipe(recipeId);
+const { currentRecipe, loading, error } = useGetCurrentRecipe();
 
 function startDelete() {
   if (currentRecipe.value == null) return;
@@ -82,8 +76,12 @@ function startDelete() {
       :recipe="currentRecipe!"
       isMore
     />
-    <div v-else-if="error" class="w-full text-center text-lg text-danger">
-      {{ error }}
+    <!-- TODO : better error display -->
+    <div
+      v-else-if="error"
+      class="bg-add-2 text-center text-lg text-danger font-semibold sm:font-xl"
+    >
+      {{ $t(error) }}
     </div>
   </div>
 </template>
