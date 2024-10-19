@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { v4 as uuidv4 } from "uuid";
 import { updateProfile } from "firebase/auth";
 import {
   deleteObject,
@@ -13,7 +14,6 @@ import { auth, storage } from "@/firebase";
 import { sendToast } from "@/utils/sendToast";
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import { getImageRef } from "@/utils/getImageRef";
-import { v4 as uuidv4 } from "uuid";
 
 interface ProfileImageProps {
   isEditMode: boolean;
@@ -21,15 +21,16 @@ interface ProfileImageProps {
 
 const { isEditMode } = defineProps<ProfileImageProps>();
 
-const fireUser = auth.currentUser;
 const imageInput = ref<null | HTMLInputElement>(null);
 
 const loading = ref(false);
-const image = ref<string | undefined | null>(fireUser?.photoURL);
+const image = ref<string | undefined | null>(auth.currentUser?.photoURL);
 const newImage = ref<undefined | File>();
 
-async function removeImage(imageUrl: string) {
+async function removeImageObj(imageUrl: string) {
   try {
+    if (auth.currentUser == null) return;
+
     const imageRef = getImageRef(imageUrl);
 
     if (imageRef) {
@@ -41,17 +42,18 @@ async function removeImage(imageUrl: string) {
 }
 
 async function handleImageDiscard(imageUrl: string) {
-  if (fireUser == null) return;
+  if (auth.currentUser == null) return;
 
   const ogUrl = imageUrl;
 
   try {
     image.value = null;
-    await removeImage(imageUrl);
-    await updateProfile(fireUser, { photoURL: null });
+    await removeImageObj(imageUrl);
     if (imageInput.value?.files) {
       imageInput.value.value = "";
     }
+    await updateProfile(auth.currentUser, { photoURL: "" });
+    await auth.currentUser?.reload();
   } catch (err: any) {
     console.log(err.message);
     image.value = ogUrl;
@@ -59,8 +61,9 @@ async function handleImageDiscard(imageUrl: string) {
 }
 
 async function handleUpload(e: Event) {
-  if (fireUser == null) return;
-  const originalPhoto = fireUser.photoURL;
+  if (auth.currentUser == null) return;
+
+  const originalPhoto = auth.currentUser.photoURL;
   let imageStorageRef: undefined | StorageReference;
 
   try {
@@ -81,18 +84,18 @@ async function handleUpload(e: Event) {
 
     const imageUrl = await getDownloadURL(imageSnap.ref);
 
-    await updateProfile(fireUser, { photoURL: imageUrl });
+    await updateProfile(auth.currentUser, { photoURL: imageUrl });
 
     if (originalPhoto == null) return;
 
-    removeImage(originalPhoto);
+    removeImageObj(originalPhoto);
   } catch (err: any) {
     console.log(err.message);
     sendToast("error", "Failed to upload image");
     image.value = originalPhoto;
     if (imageStorageRef) {
       await deleteObject(imageStorageRef);
-      await updateProfile(fireUser, { photoURL: null });
+      await updateProfile(auth.currentUser, { photoURL: "" });
     }
   } finally {
     loading.value = false;
@@ -132,7 +135,7 @@ async function handleUpload(e: Event) {
           v-else-if="
             image &&
             image !== ProfilePlaceholderImage &&
-            fireUser?.photoURL &&
+            auth.currentUser?.photoURL &&
             !loading
           "
           class="flex flex-col gap-y-3 text-primary top-1/2 right-1/2 -translate-y-1/2 translate-x-1/2 absolute duration-200 transition-opacity"
@@ -148,7 +151,7 @@ async function handleUpload(e: Event) {
             >
           </div>
           <div
-            @click="handleImageDiscard(fireUser.photoURL)"
+            @click="handleImageDiscard(auth.currentUser.photoURL)"
             class="flex flex-col items-center font-semibold text-shadow-lg text-danger cursor-pointer pointer-fine:text-primary pointer-fine:hover:text-danger"
           >
             <i class="material-symbols-outlined lg:text-3xl">delete</i>

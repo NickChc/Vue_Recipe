@@ -67,7 +67,6 @@ export interface TUser {
   email: string;
   name: string;
   bio?: string;
-  avatar?: string;
   recipes: string[]; // recipe id's
   subscriptions: { id: string; name: string }[]; // user id's
   subscribers: { id: string; email: string }[]; // user id's
