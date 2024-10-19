@@ -29,7 +29,11 @@ function startDelete() {
 </script>
 
 <template>
-  <div class="sm:w-[80%] min-h-full mx-auto overflow-hidden relative">
+  <div
+    :class="`sm:w-[80%] bg-add-2 mx-auto relative ${
+      error ? 'h-full' : 'min-h-fit h-fit'
+    }`"
+  >
     <nav
       class="text-primary text-lg w-full flex items-center justify-between p-2 px-4 bg-add-2 font-semibold border-b border-primary"
     >
@@ -72,16 +76,20 @@ function startDelete() {
       </div>
     </div>
     <RecipeCard
-      v-else-if="currentRecipe && currentRecipe != null"
-      :recipe="currentRecipe!"
+      v-else-if="currentRecipe != null"
+      :recipe="currentRecipe"
       isMore
     />
-    <!-- TODO : better error display -->
     <div
       v-else-if="error"
-      class="bg-add-2 text-center text-lg text-danger font-semibold sm:font-xl"
+      class="bg-add-2 text-center text-lg text-danger font-semibold sm:font-xl sm:text-3xl flex gap-x-2 justify-center py-20 gap-x-3 bg-add-2 max-h-full"
     >
-      {{ $t(error) }}
+      <span>
+        <i class="material-symbols-outlined text-2xl sm:text-5xl">info</i>
+      </span>
+      <div class="sm:text-3xl">
+        {{ $t(error) }}
+      </div>
     </div>
   </div>
 </template>
