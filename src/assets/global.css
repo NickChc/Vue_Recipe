@@ -36,6 +36,7 @@
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   }
 
+  textarea::-webkit-scrollbar,
   .scrollbar-small::-webkit-scrollbar {
     width: 4px;
     height: 4px;
@@ -43,6 +44,7 @@
     background-color: var(--clr-primary);
     border-radius: 8px;
   }
+  textarea::-webkit-scrollbar-track,
   .scrollbar-small::-webkit-scrollbar-track {
     width: 4px;
     height: 4px;

@@ -187,5 +187,8 @@
   "no": "No",
   "yes": "Yes",
   "failedToDeleteRecipe": "Failed to delete recipe",
-  "failedToFindRecipe": "Failed to find the recipe"
+  "failedToFindRecipe": "Failed to find the recipe",
+  "enterYourPasswordToProceed": "Enter your password to proceed",
+  "deletedAcc": "Deleted Account",
+  "deletedAccSm": "Deleted"
 }

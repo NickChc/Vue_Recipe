@@ -35,7 +35,7 @@ export enum TDiet_Enum {
 
 export interface TRecipe {
   id: string;
-  user_id: string;
+  user_id: string | null;
   title: string;
   recipe: string;
   cooking_time: TCookingTime_Enum;
@@ -50,7 +50,7 @@ export interface TRecipe {
   image: null | string;
   author: {
     name: string;
-  };
+  } | null;
 }
 
 export type TRecipeFormValues = Omit<

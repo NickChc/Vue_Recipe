@@ -2,7 +2,7 @@ import { TUser } from "@/@types/general";
 import { db } from "@/firebase";
 import { User } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { getUserById } from "./getUserById";
+import { getUserById } from "@/data/getUserById";
 
 export async function createUserDoc(
   fireUser: User,
@@ -21,11 +21,7 @@ export async function createUserDoc(
     subscribers: [],
     subscriptions: [],
     recipes: [],
-    socialLinks: {
-      facebook: null,
-      instagram: null,
-      tiktok: null,
-    },
+    socialLinks: {},
     rates: [],
   };
 

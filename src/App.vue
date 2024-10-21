@@ -8,6 +8,7 @@ import { useRecipesStore } from "@/stores/recipesStore";
 import AssurePopup from "@/components/AssurePopup.vue";
 import { useGlobalStore } from "@/stores/globalStore";
 import { useDeleteRecipe } from "@/composables/useDeleteRecipe";
+import DeleteAccPopup from "@/components/profile/DeleteAccPopup.vue";
 
 const route = useRoute();
 const router = useRouter();
@@ -17,12 +18,6 @@ const authStore = useAuthStore();
 const recipesStore = useRecipesStore();
 
 const { handleDeleteRecipe, loading: deletingRecipe } = useDeleteRecipe();
-
-function closeModal() {
-  globalStore.toggleModal();
-  recipesStore.setDeleteRecipe(null);
-  authStore.setIsDeletingAcc(false);
-}
 
 watch(route, ({ fullPath }) => {
   const fireUser = authStore.fireUser;
@@ -47,27 +42,18 @@ watch(
 </script>
 
 <template>
-  <Modal @close-modal="closeModal">
+  <Modal @close-modal="globalStore.closeModal">
     <AssurePopup
       v-if="recipesStore.deleteRecipe"
       :title="recipesStore.deleteRecipe.title"
       :recipe="recipesStore.deleteRecipe"
       :loading="deletingRecipe"
-      @on-decline="closeModal"
+      @on-decline="globalStore.closeModal"
       @on-confirm="handleDeleteRecipe"
       >{{ $t("sureToDeleteRecipe") }}</AssurePopup
     >
 
-    <!-- TODO : finish delete account -->
-    <AssurePopup
-      v-else-if="authStore.isDeletingAcc"
-      @on-confirm="console.log('CONFIRMED')"
-      @on-decline="closeModal"
-      :title="$t('deleteAccount')"
-      type="danger"
-    >
-      {{ $t("assureDeleteAcc") }}
-    </AssurePopup>
+    <DeleteAccPopup v-else-if="authStore.isDeletingAcc" />
   </Modal>
   <RouterView />
 </template>

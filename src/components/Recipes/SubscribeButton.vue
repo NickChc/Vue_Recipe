@@ -26,6 +26,9 @@ const attemptCount = ref(0);
 
 async function handleSubscription() {
   const currUser = currentUser.value;
+
+  if (recipe.author == null || recipe.user_id == null) return;
+
   if (currUser == null || attemptCount.value > 9) return;
 
   const originalState = isSubscribed.value;

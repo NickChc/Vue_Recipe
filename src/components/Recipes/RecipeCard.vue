@@ -105,11 +105,7 @@ const totalRates = computed(() => recipe.rates.length);
         </p>
       </div>
 
-      <RecipeCardFooter
-        :recipe="recipe"
-        :isMore="isMore"
-        :totalRates="totalRates"
-      />
+      <RecipeCardFooter :recipe="recipe" :isMore="isMore" />
     </div>
   </div>
 </template>

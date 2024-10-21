@@ -187,5 +187,8 @@
   "no": "არა",
   "yes": "კი",
   "failedToDeleteRecipe": "რეცეპტის წაშლა ვერ მოხერხდა",
-  "failedToFindRecipe": "რეცეპტი ვერ მოიძებნა"
+  "failedToFindRecipe": "რეცეპტი ვერ მოიძებნა",
+  "enterYourPasswordToProceed": "შეიყვანეთ პაროლი გასაგრძელებლად",
+  "deletedAcc": "ანგარიში გაუქმებულია",
+  "deletedAccSm": "გაუქმებულია"
 }

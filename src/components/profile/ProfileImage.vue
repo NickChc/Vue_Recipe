@@ -14,6 +14,7 @@ import { auth, storage } from "@/firebase";
 import { sendToast } from "@/utils/sendToast";
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import { getImageRef } from "@/utils/getImageRef";
+import { removeImageObj } from "@/data/removeImageObj";
 
 interface ProfileImageProps {
   isEditMode: boolean;
@@ -26,20 +27,6 @@ const imageInput = ref<null | HTMLInputElement>(null);
 const loading = ref(false);
 const image = ref<string | undefined | null>(auth.currentUser?.photoURL);
 const newImage = ref<undefined | File>();
-
-async function removeImageObj(imageUrl: string) {
-  try {
-    if (auth.currentUser == null) return;
-
-    const imageRef = getImageRef(imageUrl);
-
-    if (imageRef) {
-      await deleteObject(imageRef);
-    }
-  } catch (err: any) {
-    console.log(err.message);
-  }
-}
 
 async function handleImageDiscard(imageUrl: string) {
   if (auth.currentUser == null) return;

@@ -50,7 +50,7 @@ export async function deleteRecipe(rec: TRecipe) {
       await batch.commit();
 
       // Update current users rates array (without refetching user)
-      if (ratedRecipeUserIds.includes(recipe.user_id)) {
+      if (recipe.user_id && ratedRecipeUserIds.includes(recipe.user_id)) {
         const authStore = useAuthStore();
         const currUser = authStore.currentUser;
 

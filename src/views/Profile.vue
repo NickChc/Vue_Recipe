@@ -20,6 +20,8 @@ const isEditMode = ref(false);
 function setEditMode(value: boolean) {
   isEditMode.value = value;
 }
+
+// TODO : allow users to change their name
 </script>
 
 <template>

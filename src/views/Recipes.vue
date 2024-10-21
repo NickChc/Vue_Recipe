@@ -5,6 +5,8 @@ import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 import { useGetRecipes } from "@/composables/useGetRecipes";
 
 const { recipes, loading } = useGetRecipes();
+
+// TODO : add filters for recipes
 </script>
 
 <template>

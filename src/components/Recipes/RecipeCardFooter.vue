@@ -11,10 +11,9 @@ import SubscribeButton from "@/components/recipes/SubscribeButton.vue";
 interface RecipeCardFooterProps {
   recipe: TRecipe;
   isMore?: boolean;
-  totalRates: number;
 }
 
-const { isMore, recipe, totalRates } = defineProps<RecipeCardFooterProps>();
+const { isMore, recipe } = defineProps<RecipeCardFooterProps>();
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
@@ -48,11 +47,18 @@ const { t } = useI18n();
         class="flex flex-col gap-y-2 items-start sm:items-center lg:flex-row lg:gap-x-3 min-w-[50%] sm:text-lg 2xl:text-xl"
       >
         <template v-if="currentUser?.id !== recipe.user_id">
-          <strong class="text-add max-w-[50%] min-w-fit"
-            >{{ $t("author", { name: recipe.author.name }) }}
+          <strong
+            class="text-add max-w-[50%] min-w-fit"
+            :class="{ 'text-gray-400': recipe.author == null }"
+            >{{
+              $t("author", { name: recipe.author?.name || $t("deletedAcc") })
+            }}
           </strong>
 
-          <SubscribeButton v-if="currentUser" :recipe="recipe" />
+          <SubscribeButton
+            v-if="currentUser && recipe.author && recipe.user_id"
+            :recipe="recipe"
+          />
         </template>
         <strong v-else class="text-[#08a408] max-w-[50%] min-w-fit"
           >{{ $t("author") }}
@@ -60,7 +66,7 @@ const { t } = useI18n();
         </strong>
       </div>
       <p
-        v-if="currentUser?.id !== recipe.user_id"
+        v-if="currentUser?.id !== recipe.user_id && recipe.author"
         class="text-sm sm:text-base text-add"
       >
         {{ $t("subscribeTip") }}
@@ -77,8 +83,11 @@ const { t } = useI18n();
     <span class="]">{{ $t("you") }}</span>
   </strong>
 
-  <strong v-else class="text-add max-w-full truncate"
-    >{{ $t("author", { name: recipe.author.name }) }}
+  <strong
+    v-else
+    class="text-add max-w-full truncate"
+    :class="{ 'text-gray-300': recipe.author == null }"
+    >{{ $t("author", { name: recipe.author?.name || $t("deletedAccSm") }) }}
   </strong>
 
   <div

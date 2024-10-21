@@ -11,11 +11,13 @@ import { deleteCurrUser } from "@/data/deleteCurrUser";
 import { sendToast } from "@/utils/sendToast";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
+import { useRecipesStore } from "@/stores/recipesStore";
 
 const password = ref("");
 const loading = ref(false);
 const error = ref<null | string>(null);
 
+const recipesStore = useRecipesStore();
 const globalStore = useGlobalStore();
 const authStore = useAuthStore();
 const { currProvider, currentUser } = storeToRefs(authStore);
@@ -29,9 +31,11 @@ async function handleDeleteAccount() {
     loading.value = true;
     error.value = null;
 
-    const currUser = currentUser.value;
+    if (currentUser.value == null) return;
 
-    if (currUser == null) return;
+    await authStore.resetCurrUser(currentUser.value.id);
+
+    const currUser = currentUser.value;
 
     if (currProvider.value == null) {
       throw new Error("no auth provider present");
@@ -55,6 +59,10 @@ async function handleDeleteAccount() {
     await deleteCurrUser(currUser);
     globalStore.closeModal();
     router.replace("/");
+
+    if (!currUser.recipes.length) return;
+
+    recipesStore.fetchRecipeData();
   } catch (err: any) {
     console.log(err.message);
     if (err.message.includes("invalid-credential")) {

@@ -5,10 +5,16 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
 
+export enum TAuthProvider_Enum {
+  PASSWORD = "password",
+  GOOGLE = "google.com",
+}
+
 export const useAuthStore = defineStore("authStore", () => {
   const fireUser = ref<null | User>(null);
   const currentUser = ref<TUser | null>(null);
   const loadingAuth = ref(true);
+  const currProvider = ref<null | TAuthProvider_Enum>(null);
 
   const isDeletingAcc = ref(false);
 
@@ -31,17 +37,28 @@ export const useAuthStore = defineStore("authStore", () => {
     isDeletingAcc.value = newValue || !isDeletingAcc.value;
   }
 
+  async function resetCurrUser(id: string) {
+    currentUser.value = await getUserById(id);
+  }
+
   onMounted(() => {
     onAuthStateChanged(auth, async (authUser) => {
       if (authUser) {
         try {
           fireUser.value = authUser;
-          currentUser.value = await getUserById(authUser.uid);
+          resetCurrUser(authUser.uid);
+          // currentUser.value = await getUserById(authUser.uid);
         } catch (err: any) {
           console.log(err.message);
         } finally {
           loadingAuth.value = false;
         }
+        const providerResult = await authUser.getIdTokenResult();
+
+        if (providerResult == null) return;
+
+        currProvider.value =
+          providerResult.signInProvider as TAuthProvider_Enum;
       } else {
         loadingAuth.value = false;
         fireUser.value = null;
@@ -56,8 +73,10 @@ export const useAuthStore = defineStore("authStore", () => {
     currentUser,
     loadingAuth,
     isDeletingAcc,
+    currProvider,
     setCurrentUser,
     handleSignOut,
     setIsDeletingAcc,
+    resetCurrUser,
   };
 });

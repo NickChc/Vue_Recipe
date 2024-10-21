@@ -38,7 +38,7 @@ const { handleAddData, removeLink, removalLoading, disableBtn } =
 <template>
   <form
     @submit.prevent="handleAddData"
-    class="bg-add-2 text-primary p-4 sm:p-6 rounded-lg mt-6 w-full"
+    class="bg-add-2 text-primary p-4 sm:p-6 rounded-lg mt-6 w-full flex flex-col"
   >
     <div
       v-if="isEditMode"
@@ -57,16 +57,39 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
       </p>
     </div>
 
+    <button
+      v-if="!isEditMode"
+      type="button"
+      class="font-merri w-fit mx-auto md:text-lg duration-200 transition-opacity hover:opacity-80 flex items-center gap-x-2"
+      @click="emitSetEditMode(!isEditMode)"
+    >
+      {{ $t("linkSocialAccounts") }}
+      <span>
+        <i class="material-symbols-outlined text-2xl">share</i>
+      </span>
+    </button>
+
     <hr class="w-full my-4" />
 
     <div class="flex flex-col gap-y-2 items-stretch text-center">
       <button
+        v-if="isEditMode"
         type="button"
-        class="font-merri underline w-fit mx-auto md:text-lg"
+        class="font-merri w-fit mx-auto md:text-lg duration-200 transition-opacity hover:opacity-80 flex items-center gap-x-2"
         @click="emitSetEditMode(!isEditMode)"
       >
         {{ $t("linkSocialAccounts") }}
+        <span>
+          <i class="material-symbols-outlined text-2xl">share</i>
+        </span>
       </button>
+      <!-- <button
+        type="button"
+        class="font-merri w-fit mx-auto md:text-lg"
+        @click="emitSetEditMode(!isEditMode)"
+      >
+        {{ $t("linkSocialAccounts") }}
+      </button> -->
 
       <ul class="list-none">
         <li v-for="soc in SOCIAL_NETWORKS" :key="soc.url" class="text-sm">
