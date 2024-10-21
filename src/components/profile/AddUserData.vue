@@ -32,10 +32,7 @@ SOCIAL_NETWORKS.forEach((soc) => {
 });
 
 const { handleAddData, removeLink, removalLoading, disableBtn } =
-  useProfileUpdate(
-    { userBio: userBio.value, loading, userSocialLinks },
-    emitSetEditMode
-  );
+  useProfileUpdate({ userBio, loading, userSocialLinks }, emitSetEditMode);
 </script>
 
 <template>

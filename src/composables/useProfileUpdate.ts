@@ -11,7 +11,7 @@ import { computed, Ref, ref } from "vue";
 
 export function useProfileUpdate(
   state: {
-    userBio: string;
+    userBio: Ref<string>;
     loading: Ref<boolean>;
     userSocialLinks: Ref<TSocialLinks>;
   },
@@ -27,7 +27,7 @@ export function useProfileUpdate(
   const removalLoading = ref<(keyof TSocialLinks)[]>([]);
 
   const disableBtn = computed(() => {
-    if (state.userBio !== "") return false;
+    if (state.userBio.value !== "") return false;
 
     const isChanged = Object.keys(state.userSocialLinks.value).some((k) => {
       const key = k as keyof TSocialLinks;
@@ -39,9 +39,7 @@ export function useProfileUpdate(
       }
     });
 
-    if (isChanged) return false;
-
-    return true;
+    return !isChanged;
   });
 
   async function removeLink(type: keyof TSocialLinks) {
@@ -85,8 +83,8 @@ export function useProfileUpdate(
         },
       };
 
-      if (!!state.userBio.trim()) {
-        updateValues.bio = state.userBio;
+      if (!!state.userBio.value.trim() || !!currentUser.value.bio) {
+        updateValues.bio = state.userBio.value;
       }
 
       let errorToast = false;
@@ -128,25 +126,22 @@ export function useProfileUpdate(
       const oldLinks = currentUser.value.socialLinks;
       const newLinks = updateValues.socialLinks;
 
-      const linksChanged =
-        Object.keys(oldLinks)?.some((k) => {
-          const key = k as keyof TSocialLinks;
+      const linksChanged = Object.keys(oldLinks)?.some((k) => {
+        const key = k as keyof TSocialLinks;
 
-          if (oldLinks[key] !== newLinks[key]) {
-            return true;
-          }
+        if (oldLinks[key] !== newLinks[key]) {
+          return true;
+        }
 
-          return false;
-        }) || true;
+        return false;
+      });
 
-      if (
-        !linksChanged &&
-        (state.userBio.trim() === "" || state.userBio === currentUser.value.bio)
-      ) {
+      if (!linksChanged && updateValues.bio == null) {
         setEditMode(false);
         return;
       }
 
+      console.log(updateValues);
       await updateUser(currentUser.value.id, updateValues);
       const updatedUser = await getUserById(currentUser.value.id);
       authStore.setCurrentUser(updatedUser);
