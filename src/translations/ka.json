@@ -192,6 +192,7 @@
   "deletedAcc": "ანგარიში გაუქმებულია",
   "deletedAccSm": "გაუქმებულია",
   "newPassword": "ახალი პაროლი",
+  "currPassword": "თქვენი პაროლი",
   "confirming": "დასტურდება...",
   "confirmPasswordToChangeData": "მნიშვნელოვანი მონაცემების შესაცვლელად დაადასტურეთ პაროლი",
   "changeEmailOrPassword": "შეცვალეთ ელ. ფოსტა ან პაროლი",
@@ -202,5 +203,6 @@
   "change": "შეცვლა",
   "changing": "იცვლება...",
   "confirmEmailToChange": "დაადასტურეთ ახალი ელ. ფოსტა მისამართზე ",
-  "enterNewEmail": "შეიყვანეთ ახალი ელ. ფოსტა"
+  "enterNewEmail": "შეიყვანეთ ახალი ელ. ფოსტა",
+  "passwordUpdateSuccess": "პაროლი წარმატებით განახლდა"
 }

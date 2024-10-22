@@ -192,6 +192,7 @@
   "deletedAcc": "Deleted Account",
   "deletedAccSm": "Deleted",
   "newPassword": "New Password",
+  "currPassword": "Current password",
   "confirming": "Confirming...",
   "confirmPasswordToChangeData": "Confirm Your password to change important data",
   "changeEmailOrPassword": "Change email or password",
@@ -202,5 +203,6 @@
   "change": "Change",
   "changing": "Changing...",
   "confirmEmailToChange": "Confirm the email address to change it at",
-  "enterNewEmail": "Enter a new email"
+  "enterNewEmail": "Enter a new email",
+  "passwordUpdateSuccess": "Password was updated successfully"
 }

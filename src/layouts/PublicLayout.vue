@@ -27,6 +27,7 @@ const { sideBarOpen } = storeToRefs(globalStore);
   >
     <Header />
     <div
+      id="public-layout-scrollable"
       class="h-[calc(100%-var(--height-header-sm))] sm:h-[calc(100%-var(--height-header-lg))]"
       :class="sideBarOpen ? 'overflow-hidden' : 'overflow-y-auto'"
     >

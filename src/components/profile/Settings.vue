@@ -5,6 +5,7 @@ import Button from "@/components/Button.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { useGlobalStore } from "@/stores/globalStore";
 import ChangeEmail from "@/components/profile/ChangeEmail.vue";
+import ChangePassword from "@/components/profile/ChangePassword.vue";
 
 enum TChangeData_Enum {
   EMAIL = "email",
@@ -75,9 +76,31 @@ function setChangeData(dataToChange: TChangeData_Enum | null) {
         @done="setChangeData(null)"
       />
 
-      <!-- <button @click="setChangeData(TChangeData_Enum.PASSWORD)"> -->
-      <!-- <h3>{{ $t("changePassword") }}</h3> -->
-      <!-- </button> -->
+      <button
+        @click="setChangeData(TChangeData_Enum.PASSWORD)"
+        :class="`text-xs xs:text-sm flex items-center justify-between px-2 sm:px-6 py-2 duration-200 transition-colors hover:bg-[rgba(0,0,0,0.1)] ${
+          changeData === TChangeData_Enum.PASSWORD ? 'text-success' : ''
+        }`"
+      >
+        <div
+          class="flex flex-col sm:flex-row items-start sm:items-center gap-x-2 w-[70%] sm:text-base"
+        >
+          <h3 class="whitespace-nowrap">{{ $t("changePassword") }}</h3>
+          <br />
+          <span class="max-w-[90%] truncate">*********</span>
+        </div>
+
+        <span>
+          <i class="material-symbols-outlined">edit</i>
+        </span>
+      </button>
+
+      <hr class="mt-3" />
+
+      <ChangePassword
+        v-if="changeData === TChangeData_Enum.PASSWORD"
+        @done="setChangeData(null)"
+      />
     </div>
 
     <div class="flex flex-col items-center mt-9">

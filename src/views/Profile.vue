@@ -114,7 +114,7 @@ function setEditMode(value: boolean) {
       </div>
     </div>
 
-    <div class="flex flex-col items-start sm:flex-row gap-x-6">
+    <div class="flex flex-col items-start sm:flex-row sm:items-stretch gap-x-6">
       <MyAuthorsList v-if="!isEditMode" :currentUser="currentUser" />
 
       <AddUserData

@@ -31,7 +31,6 @@ const verificationSent = ref(false);
 
 const { t } = useI18n();
 
-// change user email
 async function changeEmail() {
   try {
     loading.value = true;
@@ -123,7 +122,7 @@ onMounted(() => {
   <form
     @submit.prevent="changeEmail"
     novalidate
-    class="flex flex-col gap-y-4 my-2 text-xs sm:text-base 2xl:text-xl"
+    class="flex flex-col gap-y-4 my-2 text-xs sm:text-base 2xl:text-xl mb-9"
   >
     <FormInput
       :disabled="verificationSent"
