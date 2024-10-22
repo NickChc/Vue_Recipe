@@ -40,7 +40,17 @@ const authorsToShow = computed(() => {
           showAll ? 'overflow-y-auto max-h-34 pt-1 pr-1 scrollbar-small ' : ''
         }`"
       >
+        <div
+          v-if="authorsToShow.length < 1"
+          class="text-center flex flex-col items-center gap-y-2 text-xs xs:text-sm md:text-base"
+        >
+          <h2>You are not following anyone</h2>
+          <span>
+            <i class="material-symbols-outlined text-4xl xs:text-5xl">block</i>
+          </span>
+        </div>
         <li
+          v-else
           v-for="author in authorsToShow"
           :key="author.id"
           class="my-2 lg:my-3"

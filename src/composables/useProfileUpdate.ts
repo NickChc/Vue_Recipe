@@ -125,7 +125,7 @@ export function useProfileUpdate(
       const oldLinks = currentUser.value.socialLinks;
       const newLinks = updateValues.socialLinks;
 
-      const linksChanged = Object.keys(oldLinks)?.some((k) => {
+      const linksChanged = Object.keys(newLinks)?.some((k) => {
         const key = k as keyof TSocialLinks;
 
         if (oldLinks[key] !== newLinks[key]) {

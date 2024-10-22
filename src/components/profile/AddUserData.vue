@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { TSocialLinks, TUser } from "@/@types/general";
 import FormInput from "@/components/FormInput.vue";
 import Button from "@/components/Button.vue";
@@ -26,6 +26,10 @@ const loading = ref(false);
 const userBio = ref(currentUser.bio || "");
 
 const userSocialLinks = ref<TSocialLinks>({});
+
+const hasSocLinked = computed(() => {
+  return SOCIAL_NETWORKS.some((s) => currentUser.socialLinks[s.name] != null);
+});
 
 SOCIAL_NETWORKS.forEach((soc) => {
   userSocialLinks.value[soc.name] = currentUser.socialLinks[soc.name] || "";
@@ -84,8 +88,15 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
         </span>
       </button>
 
-      <ul class="list-none">
-        <!-- TODO : if empty, show icons -->
+      <div
+        v-if="!hasSocLinked && !isEditMode"
+        class="flex items-center justify-center gap-x-3"
+      >
+        <span v-for="soc in SOCIAL_NETWORKS" :key="soc.url" class="text-2xl">
+          <component :is="soc.icon" />
+        </span>
+      </div>
+      <ul v-else class="list-none">
         <li v-for="soc in SOCIAL_NETWORKS" :key="soc.url" class="text-sm">
           <div
             class="flex items-center justify-between px-4 gap-x-3 w-full"
