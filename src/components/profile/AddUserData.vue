@@ -83,15 +83,9 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
           <i class="material-symbols-outlined text-2xl">share</i>
         </span>
       </button>
-      <!-- <button
-        type="button"
-        class="font-merri w-fit mx-auto md:text-lg"
-        @click="emitSetEditMode(!isEditMode)"
-      >
-        {{ $t("linkSocialAccounts") }}
-      </button> -->
 
       <ul class="list-none">
+        <!-- TODO : if empty, show icons -->
         <li v-for="soc in SOCIAL_NETWORKS" :key="soc.url" class="text-sm">
           <div
             class="flex items-center justify-between px-4 gap-x-3 w-full"

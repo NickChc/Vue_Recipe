@@ -46,8 +46,7 @@ export const useAuthStore = defineStore("authStore", () => {
       if (authUser) {
         try {
           fireUser.value = authUser;
-          resetCurrUser(authUser.uid);
-          // currentUser.value = await getUserById(authUser.uid);
+          await resetCurrUser(authUser.uid);
         } catch (err: any) {
           console.log(err.message);
         } finally {

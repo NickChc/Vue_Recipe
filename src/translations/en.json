@@ -190,5 +190,17 @@
   "failedToFindRecipe": "Failed to find the recipe",
   "enterYourPasswordToProceed": "Enter your password to proceed",
   "deletedAcc": "Deleted Account",
-  "deletedAccSm": "Deleted"
+  "deletedAccSm": "Deleted",
+  "newPassword": "New Password",
+  "confirming": "Confirming...",
+  "confirmPasswordToChangeData": "Confirm Your password to change important data",
+  "changeEmailOrPassword": "Change email or password",
+  "settings": "Settings",
+  "addBio": "Add a bio",
+  "changeEmail": "Change Email",
+  "changePassword": "Change Password",
+  "change": "Change",
+  "changing": "Changing...",
+  "confirmEmailToChange": "Confirm the email address to change it at",
+  "enterNewEmail": "Enter a new email"
 }

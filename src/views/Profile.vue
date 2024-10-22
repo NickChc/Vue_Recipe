@@ -84,7 +84,8 @@ function setEditMode(value: boolean) {
           class="opacity-50 flex items-center gap-x-1"
           @click="isEditMode = true"
         >
-          Add a bio <i class="material-symbols-outlined text-lg">add</i>
+          {{ $t("addBio") }}
+          <i class="material-symbols-outlined text-lg">add</i>
         </button>
       </div>
 

@@ -1,4 +1,5 @@
 import { useLangStore } from "@/stores/langStore";
+import { createEmailSchema, createPasswordSchema } from "@/utils/createSchemas";
 import { storeToRefs } from "pinia";
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
@@ -21,13 +22,8 @@ function createRegisterSchema(t: any) {
         .string({ message: t("enterYourName") })
         .min(1, t("enterYourName"))
         .min(2, t("nameAtLeast2Chars")),
-      email: z
-        .string({ message: t("invalidEmailFormat") })
-        .email(t("invalidEmailFormat")),
-      password: z
-        .string({ message: t("enterPassword") })
-        .min(1, t("enterPassword"))
-        .min(8, t("passwordAtLeast8")),
+      email: createEmailSchema(t),
+      password: createPasswordSchema(t),
       confirmPassword: z
         .string({ message: t("repeatPassword") })
         .min(1, t("repeatPassword")),

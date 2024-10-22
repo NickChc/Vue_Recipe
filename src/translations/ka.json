@@ -190,5 +190,17 @@
   "failedToFindRecipe": "რეცეპტი ვერ მოიძებნა",
   "enterYourPasswordToProceed": "შეიყვანეთ პაროლი გასაგრძელებლად",
   "deletedAcc": "ანგარიში გაუქმებულია",
-  "deletedAccSm": "გაუქმებულია"
+  "deletedAccSm": "გაუქმებულია",
+  "newPassword": "ახალი პაროლი",
+  "confirming": "დასტურდება...",
+  "confirmPasswordToChangeData": "მნიშვნელოვანი მონაცემების შესაცვლელად დაადასტურეთ პაროლი",
+  "changeEmailOrPassword": "შეცვალეთ ელ. ფოსტა ან პაროლი",
+  "settings": "პარამეტრები",
+  "addBio": "დაამატეთ ბიოგრაფია",
+  "changeEmail": "ელ. ფოსტის შეცვლა",
+  "changePassword": "პაროლის შეცვლა",
+  "change": "შეცვლა",
+  "changing": "იცვლება...",
+  "confirmEmailToChange": "დაადასტურეთ ახალი ელ. ფოსტა მისამართზე ",
+  "enterNewEmail": "შეიყვანეთ ახალი ელ. ფოსტა"
 }
