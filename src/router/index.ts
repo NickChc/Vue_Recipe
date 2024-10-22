@@ -91,6 +91,12 @@ const router = createRouter({
       return savedPosition;
     }
 
+    const publicLayout = document.getElementById("public-layout-scrollable");
+
+    if (publicLayout) {
+      publicLayout.scrollTo({ top: 0 });
+    }
+
     return { top: 0 };
   },
 });
