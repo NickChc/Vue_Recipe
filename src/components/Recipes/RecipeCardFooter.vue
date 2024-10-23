@@ -7,6 +7,7 @@ import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 import SubscribeButton from "@/components/recipes/SubscribeButton.vue";
+import RecipeCardUser from "./RecipeCardUser.vue";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;
@@ -46,13 +47,20 @@ const { t } = useI18n();
       <div
         class="flex flex-col gap-y-2 items-start sm:items-center lg:flex-row lg:gap-x-3 min-w-[50%] sm:text-lg 2xl:text-xl"
       >
-        <template v-if="currentUser?.id !== recipe.user_id">
+        <RecipeCardUser :recipe="recipe" :currUser="currentUser" :isMore />
+        <!-- <template v-if="currentUser?.id !== recipe.user_id">
+          <RouterLink
+            v-if="recipe.author != null && recipe.user_id != null"
+            :to="`/authors/${recipe.user_id}`"
+            class="text-add max-w-[50%] w-fit"
+            >{{ $t("author", { name: recipe.author.name }) }}
+          </RouterLink>
           <strong
-            class="text-add max-w-[50%] min-w-fit"
-            :class="{ 'text-gray-400': recipe.author == null }"
-            >{{
-              $t("author", { name: recipe.author?.name || $t("deletedAcc") })
-            }}
+            v-else
+            :to="`/authors/${recipe.user_id}`"
+            class="text-gray-400 max-w-[50%] w-fit"
+          >
+            {{ $t("author", { name: $t("deletedAcc") }) }}
           </strong>
 
           <SubscribeButton
@@ -60,10 +68,10 @@ const { t } = useI18n();
             :recipe="recipe"
           />
         </template>
-        <strong v-else class="text-[#08a408] max-w-[50%] min-w-fit"
+        <strong v-else class="text-[#08a408] max-w-[50%] w-fit"
           >{{ $t("author") }}
           <span class="]">{{ $t("you") }}</span>
-        </strong>
+        </strong> -->
       </div>
       <p
         v-if="currentUser?.id !== recipe.user_id && recipe.author"
@@ -76,19 +84,7 @@ const { t } = useI18n();
     <RecipeCardRating isMore :recipe="recipe" />
   </template>
 
-  <strong
-    v-else-if="currentUser?.id === recipe.user_id"
-    class="text-success max-w-full truncate"
-    >{{ $t("author") }}
-    <span class="]">{{ $t("you") }}</span>
-  </strong>
-
-  <strong
-    v-else
-    class="text-add max-w-full truncate"
-    :class="{ 'text-gray-300': recipe.author == null }"
-    >{{ $t("author", { name: recipe.author?.name || $t("deletedAccSm") }) }}
-  </strong>
+  <RecipeCardUser v-else :recipe="recipe" :currUser="currentUser" />
 
   <div
     :class="`flex pb-3 gap-x-4 items-center text-xs xs:text-sm ${

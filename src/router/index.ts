@@ -28,6 +28,12 @@ const routes: RouteRecordRaw[] = [
             name: "Profile",
             component: () => import("@/views/Profile.vue"),
           },
+          {
+            path: "/authors/:userId",
+            name: "AuthorPage",
+            component: () => import("@/views/AuthorPage.vue"),
+            props: true,
+          },
         ],
       },
       {
@@ -105,9 +111,11 @@ router.beforeEach((to) => {
   const authStore = useAuthStore();
   const { loadingAuth, currentUser } = storeToRefs(authStore);
 
+  // Handle protected routes
   if (AUTH_ROUTES.includes(to.path)) {
     if (!loadingAuth.value) return currentUser.value ? { path: "/" } : true;
 
+    // If user is pending, await
     return new Promise((resolve) => {
       const unsubscribe = authStore.$subscribe(() => {
         if (!authStore.loadingAuth) {
