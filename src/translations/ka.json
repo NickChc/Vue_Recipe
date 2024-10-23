@@ -204,5 +204,7 @@
   "changing": "იცვლება...",
   "confirmEmailToChange": "დაადასტურეთ ახალი ელ. ფოსტა მისამართზე ",
   "enterNewEmail": "შეიყვანეთ ახალი ელ. ფოსტა",
-  "passwordUpdateSuccess": "პაროლი წარმატებით განახლდა"
+  "passwordUpdateSuccess": "პაროლი წარმატებით განახლდა",
+  "enterToSave": "დააწექით \"Enter\" -ს",
+  "enterName": "შეიყვანეთ სახელი"
 }

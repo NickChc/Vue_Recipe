@@ -1,5 +1,9 @@
 import { useLangStore } from "@/stores/langStore";
-import { createEmailSchema, createPasswordSchema } from "@/utils/createSchemas";
+import {
+  createEmailSchema,
+  createNameSchema,
+  createPasswordSchema,
+} from "@/utils/createSchemas";
 import { storeToRefs } from "pinia";
 import { ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
@@ -18,10 +22,7 @@ interface TRegisterErrors {
 function createRegisterSchema(t: any) {
   return z
     .object({
-      name: z
-        .string({ message: t("enterYourName") })
-        .min(1, t("enterYourName"))
-        .min(2, t("nameAtLeast2Chars")),
+      name: createNameSchema(t),
       email: createEmailSchema(t),
       password: createPasswordSchema(t),
       confirmPassword: z

@@ -27,7 +27,7 @@ async function handleGoogleSignIn() {
         res.user.email!
       );
 
-      authStore.resetCurrUser(auth.currentUser.uid);
+      authStore.resetCurrUser();
     }
     router.replace("/");
   } catch (err: any) {

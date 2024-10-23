@@ -37,8 +37,16 @@ export const useAuthStore = defineStore("authStore", () => {
     isDeletingAcc.value = newValue || !isDeletingAcc.value;
   }
 
-  async function resetCurrUser(id: string) {
-    currentUser.value = await getUserById(id);
+  async function resetCurrUser(id?: string) {
+    if (id) {
+      currentUser.value = await getUserById(id);
+      return;
+    }
+
+    const currUser = currentUser.value;
+    if (currUser == null) return;
+
+    currentUser.value = await getUserById(currUser.id);
   }
 
   onMounted(() => {

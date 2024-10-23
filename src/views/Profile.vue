@@ -11,6 +11,7 @@ import Button from "@/components/Button.vue";
 import RecipeCollection from "@/components/profile/RecipeCollection.vue";
 import RatedRecipes from "@/components/profile/RatedRecipes.vue";
 import Settings from "@/components/profile/Settings.vue";
+import UserName from "@/components/profile/UserName.vue";
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);
@@ -65,9 +66,7 @@ function setEditMode(value: boolean) {
       <div class="flex flex-col xs:items-start">
         <div class="flex flex-col items-center gap-y-1.5">
           <ProfileImage :isEditMode />
-          <h2 class="font-semibold mx-3 text-center sm:text-xl">
-            {{ currentUser?.name }}
-          </h2>
+          <UserName :isEditMode :currUser="currentUser" />
         </div>
         <template v-if="currentUser.bio">
           <h5 class="opacity-50 text-sm self-start m-1">
@@ -89,7 +88,11 @@ function setEditMode(value: boolean) {
         </button>
       </div>
 
-      <Button class="sm:absolute right-5 max-w-full mt-2 sm:mt-0" asChild>
+      <Button
+        v-if="!isEditMode"
+        class="sm:absolute right-5 max-w-full mt-2 sm:mt-0"
+        asChild
+      >
         <RouterLink
           to="/recipes/new"
           class="px-2 py-0.5 flex items-center gap-x-2 text-xs xs:text-sm sm:text-base"

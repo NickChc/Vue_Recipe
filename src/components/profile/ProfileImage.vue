@@ -13,7 +13,6 @@ import ProfilePlaceholderImage from "@/assets/images/Profile_Placeholder_Image.p
 import { auth, storage } from "@/firebase";
 import { sendToast } from "@/utils/sendToast";
 import HourglassLoading from "@/components/HourglassLoading.vue";
-import { getImageRef } from "@/utils/getImageRef";
 import { removeImageObj } from "@/data/removeImageObj";
 
 interface ProfileImageProps {

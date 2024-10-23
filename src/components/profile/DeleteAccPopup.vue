@@ -33,7 +33,7 @@ async function handleDeleteAccount() {
 
     if (currentUser.value == null) return;
 
-    await authStore.resetCurrUser(currentUser.value.id);
+    await authStore.resetCurrUser();
 
     const currUser = currentUser.value;
 

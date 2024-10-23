@@ -204,5 +204,7 @@
   "changing": "Changing...",
   "confirmEmailToChange": "Confirm the email address to change it at",
   "enterNewEmail": "Enter a new email",
-  "passwordUpdateSuccess": "Password was updated successfully"
+  "passwordUpdateSuccess": "Password was updated successfully",
+  "enterToSave": "Press \"Enter\" to save",
+  "enterName": "Enter name"
 }

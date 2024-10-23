@@ -61,7 +61,7 @@ export function useProfileUpdate(
       });
 
       await auth.currentUser?.reload();
-      authStore.resetCurrUser(currentUser.value.id);
+      authStore.resetCurrUser();
     } catch (err: any) {
       console.log(err.message);
       authStore.setCurrentUser(originalUser);

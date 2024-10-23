@@ -18,8 +18,6 @@ const authorsToShow = computed(() => {
 });
 </script>
 
-<!-- TODO : if empty, show some icon -->
-
 <template>
   <div
     class="rounded-lg bg-add-2 p-3 mt-6 w-full sm:w-auto sm:min-w-fit text-primary"
