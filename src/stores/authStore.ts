@@ -43,10 +43,9 @@ export const useAuthStore = defineStore("authStore", () => {
       return;
     }
 
-    const currUser = currentUser.value;
-    if (currUser == null) return;
+    if (fireUser.value == null) return;
 
-    currentUser.value = await getUserById(currUser.id);
+    currentUser.value = await getUserById(fireUser.value.uid);
   }
 
   onMounted(() => {

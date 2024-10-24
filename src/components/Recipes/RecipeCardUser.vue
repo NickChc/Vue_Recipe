@@ -44,6 +44,6 @@ const { recipe, currUser, isMore } = defineProps<RecipeCardUserProps>();
   <!-- If authorized and is "isMore" view and current suer isn't the author -->
   <SubscribeButton
     v-if="isMore && currUser != null && currUser.id !== recipe.user_id"
-    :recipe="recipe"
+    :authorId="recipe.user_id"
   />
 </template>

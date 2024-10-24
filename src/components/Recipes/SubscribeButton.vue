@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { TRecipe } from "@/@types/general";
 import { useSubscribeUser } from "@/composables/useSubscribeUser";
 
 interface SubscrieButtonProps {
-  recipe: TRecipe;
+  authorId: string | null;
 }
 
-const { recipe } = defineProps<SubscrieButtonProps>();
+const { authorId } = defineProps<SubscrieButtonProps>();
 
-const { handleSubscription, isSubscribed } = useSubscribeUser(recipe.user_id);
+const { handleSubscription, isSubscribed } = useSubscribeUser(authorId);
 </script>
 
 <template>

@@ -6,7 +6,7 @@ import { updateUser } from "@/data/updateUser";
 import { useAuthStore } from "@/stores/authStore";
 import { sendToast } from "@/utils/sendToast";
 
-export function useSubscribeUser(authorId: string | null) {
+export function useSubscribeUser(authorId: string | null | undefined) {
   const authStore = useAuthStore();
   const { currentUser } = storeToRefs(authStore);
 

@@ -3,7 +3,7 @@ import FacebookIcon from "@/components/icons/FacebookIcon.vue";
 import InstagramIcon from "@/components/icons/InstagramIcon.vue";
 import TiktokIcon from "@/components/icons/TiktokIcon.vue";
 
-interface TSocialNetwork {
+export interface TSocialNetwork {
   name: keyof TSocialLinks;
   displayName: string;
   url: string;

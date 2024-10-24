@@ -14,6 +14,7 @@ import { auth, storage } from "@/firebase";
 import { sendToast } from "@/utils/sendToast";
 import HourglassLoading from "@/components/HourglassLoading.vue";
 import { removeImageObj } from "@/data/removeImageObj";
+import { updateUser } from "@/data/updateUser";
 
 interface ProfileImageProps {
   isEditMode: boolean;
@@ -39,6 +40,7 @@ async function handleImageDiscard(imageUrl: string) {
       imageInput.value.value = "";
     }
     await updateProfile(auth.currentUser, { photoURL: "" });
+    await updateUser(auth.currentUser.uid, { image: null });
     await auth.currentUser?.reload();
   } catch (err: any) {
     console.log(err.message);
@@ -71,6 +73,7 @@ async function handleUpload(e: Event) {
     const imageUrl = await getDownloadURL(imageSnap.ref);
 
     await updateProfile(auth.currentUser, { photoURL: imageUrl });
+    await updateUser(auth.currentUser.uid, { image: imageUrl });
 
     if (originalPhoto == null) return;
 
@@ -82,6 +85,7 @@ async function handleUpload(e: Event) {
     if (imageStorageRef) {
       await deleteObject(imageStorageRef);
       await updateProfile(auth.currentUser, { photoURL: "" });
+      await updateUser(auth.currentUser.uid, { image: null });
     }
   } finally {
     loading.value = false;
