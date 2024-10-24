@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import { TRecipe } from "@/@types/general";
 import RecipeCardImage from "@/components/recipes/RecipeCardImage.vue";
 import RecipeCardFooter from "@/components/recipes/RecipeCardFooter.vue";
@@ -10,7 +9,6 @@ interface RecipeCardProps {
 }
 
 const { recipe, isMore } = defineProps<RecipeCardProps>();
-const totalRates = computed(() => recipe.rates.length);
 </script>
 
 <template>

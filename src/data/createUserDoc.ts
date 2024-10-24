@@ -18,6 +18,7 @@ export async function createUserDoc(
   const newUser: Omit<TUser, "id"> = {
     name,
     email,
+    image: fireUser.photoURL,
     subscribers: [],
     subscriptions: [],
     recipes: [],

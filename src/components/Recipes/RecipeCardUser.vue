@@ -20,14 +20,14 @@ const { recipe, currUser, isMore } = defineProps<RecipeCardUserProps>();
       recipe.user_id !== currUser?.id
     "
     :to="`/authors/${recipe.user_id}`"
-    class="text-add max-w-[50%] w-fit"
+    class="text-add w-fit hover:underline"
   >
     {{ $t("author", { name: recipe.author.name }) }}
   </RouterLink>
 
   <!-- Author is current user -->
   <strong v-else-if="currUser != null && currUser.id === recipe.user_id">
-    <strong class="text-[#08a408] max-w-[50%] w-fit"
+    <strong class="text-[#08a408] w-fit"
       >{{ $t("author") }}
       <span class="]">{{ $t("you") }}</span>
     </strong>
@@ -36,7 +36,7 @@ const { recipe, currUser, isMore } = defineProps<RecipeCardUserProps>();
   <!-- Author is deleted -->
   <strong
     v-else-if="recipe.author == null"
-    class="text-gray-400 max-w-[50%] w-fit text-sm whitespace-nowrap"
+    class="text-gray-400 w-fit text-sm whitespace-nowrap"
   >
     {{ $t("author", { name: $t("deletedAcc") }) }}
   </strong>

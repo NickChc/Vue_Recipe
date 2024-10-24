@@ -6,8 +6,7 @@ import { checkRecipeComplexity } from "@/utils/checkRecipeComplexity";
 import { useI18n } from "vue-i18n";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
-import SubscribeButton from "@/components/recipes/SubscribeButton.vue";
-import RecipeCardUser from "./RecipeCardUser.vue";
+import RecipeCardUser from "@/components/recipes/RecipeCardUser.vue";
 
 interface RecipeCardFooterProps {
   recipe: TRecipe;
@@ -48,30 +47,6 @@ const { t } = useI18n();
         class="flex flex-col gap-y-2 items-start sm:items-center lg:flex-row lg:gap-x-3 min-w-[50%] sm:text-lg 2xl:text-xl"
       >
         <RecipeCardUser :recipe="recipe" :currUser="currentUser" :isMore />
-        <!-- <template v-if="currentUser?.id !== recipe.user_id">
-          <RouterLink
-            v-if="recipe.author != null && recipe.user_id != null"
-            :to="`/authors/${recipe.user_id}`"
-            class="text-add max-w-[50%] w-fit"
-            >{{ $t("author", { name: recipe.author.name }) }}
-          </RouterLink>
-          <strong
-            v-else
-            :to="`/authors/${recipe.user_id}`"
-            class="text-gray-400 max-w-[50%] w-fit"
-          >
-            {{ $t("author", { name: $t("deletedAcc") }) }}
-          </strong>
-
-          <SubscribeButton
-            v-if="currentUser && recipe.author && recipe.user_id"
-            :recipe="recipe"
-          />
-        </template>
-        <strong v-else class="text-[#08a408] max-w-[50%] w-fit"
-          >{{ $t("author") }}
-          <span class="]">{{ $t("you") }}</span>
-        </strong> -->
       </div>
       <p
         v-if="currentUser?.id !== recipe.user_id && recipe.author"
