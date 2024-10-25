@@ -146,7 +146,7 @@
   "done": "მზადაა",
   "subscribeSuccess": "თქვენ გახდით {name} -ის გამომწერი",
   "unsubscribeSuccess": "თქვენ აღარ ხართ {name} -ის გამომწერი",
-  "authPersonOnly": "გასაგრძელებლად გაიარეთ ავტორიზაცია",
+  "authToRate": "რეცეპტის შესაფასებლად გაიარეთ ავტორიზაცია",
   "nikaChichua": "ნიკა ჩიჩუა",
   "info": "ინფორმაცია",
   "socialNetworks": "სოც. ქსელი",

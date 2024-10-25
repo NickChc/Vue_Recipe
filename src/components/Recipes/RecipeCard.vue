@@ -6,6 +6,8 @@ import RecipeCardFooter from "@/components/recipes/RecipeCardFooter.vue";
 interface RecipeCardProps {
   recipe: TRecipe;
   isMore?: boolean;
+  isDark?: boolean;
+  hideRating?: boolean;
 }
 
 const { recipe, isMore } = defineProps<RecipeCardProps>();
@@ -14,10 +16,18 @@ const { recipe, isMore } = defineProps<RecipeCardProps>();
 <template>
   <div
     :class="`flex flex-col shadow-xl group h-full relative ${
-      isMore ? 'h-full pb-6 bg-add-2' : 'rounded-sm bg-primary dark:bg-add-2'
+      isMore
+        ? 'h-full pb-6 bg-add-2'
+        : `rounded-sm ${
+            isDark ? 'bg-add-2 text-primary' : 'bg-white dark:bg-add-2'
+          }`
     }`"
   >
-    <RecipeCardImage :recipe="recipe" :isMore="isMore" />
+    <RecipeCardImage
+      :hideRating="hideRating"
+      :recipe="recipe"
+      :isMore="isMore"
+    />
     <div
       :class="`p-3 flex flex-col ${isMore ? 'my-3 text-primary' : 'gap-y-3'}`"
     >
@@ -36,7 +46,11 @@ const { recipe, isMore } = defineProps<RecipeCardProps>();
             class="flex flex-col md:grid md:grid-cols-2 w-full gap-y-3 md:gap-x-6 md:relative my-2"
           >
             <div
-              class="w-full h-full flex flex-col items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
+              :class="`w-full h-full flex flex-col items-center  rounded-2xl p-1 ${
+                isDark
+                  ? 'bg-secondary text-primary'
+                  : 'bg-primary dark:bg-secondary text-secondary dark:text-primary'
+              }`"
             >
               <h4
                 class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl text-center"
@@ -67,7 +81,11 @@ const { recipe, isMore } = defineProps<RecipeCardProps>();
             ></div>
 
             <div
-              class="w-full h-full flex flex-col items-center bg-primary dark:bg-secondary text-secondary dark:text-primary rounded-2xl p-1"
+              :class="`w-full h-full flex flex-col items-center  rounded-2xl p-1 ${
+                isDark
+                  ? 'bg-secondary text-primary'
+                  : 'bg-primary dark:bg-secondary text-secondary dark:text-primary'
+              }`"
             >
               <h4
                 class="text-lg sm:text-xl md:text-2xl md:px-4 lg:text-2xl xl:text-3xl text-center"
@@ -95,15 +113,20 @@ const { recipe, isMore } = defineProps<RecipeCardProps>();
         <p
           :class="`text-sm ${
             isMore
-              ? 'md:max-w-[700px] mb-3 md:text-base lg:text-lg py-3 sm:px-10'
-              : 'line-clamp-3'
+              ? 'md:max-w-[700px] bg-success mb-3 md:text-base lg:text-lg py-3 sm:px-10'
+              : 'line-clamp-3 h-[4.5em]'
           }`"
         >
           {{ recipe.recipe }}
         </p>
       </div>
 
-      <RecipeCardFooter :recipe="recipe" :isMore="isMore" />
+      <RecipeCardFooter
+        :hideRating="hideRating"
+        :isDark="isDark"
+        :recipe="recipe"
+        :isMore="isMore"
+      />
     </div>
   </div>
 </template>

@@ -146,7 +146,7 @@
   "done": "Done",
   "subscribeSuccess": "Now you are subscribed to {name}",
   "unsubscribeSuccess": "You are no longer subscribed to {name}",
-  "authPersonOnly": "Sign in to perform this action",
+  "authToRate": "Sign in to rate recipes",
   "nikaChichua": "Nika Chichua",
   "info": "Info",
   "socialNetworks": "Social Networks",

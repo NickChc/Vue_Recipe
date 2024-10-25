@@ -11,6 +11,7 @@ import RecipeCardUser from "@/components/recipes/RecipeCardUser.vue";
 interface RecipeCardFooterProps {
   recipe: TRecipe;
   isMore?: boolean;
+  isDark?: boolean;
 }
 
 const { isMore, recipe } = defineProps<RecipeCardFooterProps>();
@@ -65,7 +66,9 @@ const { t } = useI18n();
     :class="`flex pb-3 gap-x-4 items-center text-xs xs:text-sm ${
       isMore
         ? 'sm:text-lg text-primary justify-between'
-        : 'justify-start text-add-2 dark:text-primary'
+        : `justify-start ${
+            isDark ? 'text-primary' : 'text-add-2 dark:text-primary'
+          }`
     }`"
   >
     <span
@@ -109,7 +112,7 @@ const { t } = useI18n();
     >
     <RouterLink
       v-if="!isMore"
-      class="text-secondary dark:text-add duration-200 transition-colors hover:text-add active:opacity-75 flex items-center absolute bottom-1 right-1"
+      class="text-add duration-200 transition-colors hover:text-add active:opacity-75 flex items-center absolute bottom-1 right-1"
       :to="`/recipes/${recipe.id}`"
     >
       <p class="underline">{{ $t("more") }}</p>

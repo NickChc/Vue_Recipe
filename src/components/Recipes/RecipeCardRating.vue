@@ -26,7 +26,7 @@ const { currentUser } = storeToRefs(authStore);
 
 const recipesStore = useRecipesStore();
 
-const { handleGetRecipeById } = useGetCurrentRecipe(recipe.id);
+const { handleGetRecipeById } = useGetCurrentRecipe();
 
 const { t } = useI18n();
 
@@ -63,7 +63,7 @@ async function handleRate(point: number) {
       return;
     }
 
-    sendToast("error", t("authPersonOnly"), { limit: 3 });
+    sendToast("info", t("authToRate"), { limit: 3 });
     authWarning.value++;
     return;
   }

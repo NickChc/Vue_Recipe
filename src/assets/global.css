@@ -22,9 +22,13 @@
   --height-header-sm: 56px;
   --height-header-lg: 66px;
 
-  --toastify-icon-color-success: var(--clr-add) !important;
+  --toastify-icon-color-success: var(--clr-success) !important;
+  --toastify-icon-color-info: var(--clr-add) !important;
+  --toastify-icon-color-error: var(--clr-danger) !important;
 
-  --toastify-color-progress-success: var(--clr-add) !important;
+  --toastify-color-progress-success: var(--clr-success) !important;
+  --toastify-color-progress-info: var(--clr-add) !important;
+  --toastify-color-progress-error: var(--clr-danger) !important;
 }
 
 @layer components {
@@ -117,5 +121,11 @@ h6 {
 }
 
 .vue-toastify__toast-icon--success {
-  color: var(--clr-add); /* Change this to any color */
+  color: var(--clr-success);
+}
+.vue-toastify__toast-icon--info {
+  color: var(--clr-add);
+}
+.vue-toastify__toast-icon--error {
+  color: var(--clr-danger);
 }

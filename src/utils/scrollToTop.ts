@@ -3,18 +3,18 @@ export function scrollToTop(element: Node | null) {
 
   let parent = element.parentElement;
 
-  // Traverse up the DOM tree
+  // Iterate over DOM tree
   while (parent) {
     // Check if the parent has a scrollbar
     const overflowY = window.getComputedStyle(parent).overflowY;
     const isScrollable = overflowY === "auto" || overflowY === "scroll";
 
     if (isScrollable) {
-      parent.scrollTop = 0; // Scroll to the top of the scrollable parent
-      return; // Exit the function after scrolling
+      parent.scrollTop = 0;
+      return;
     }
 
-    parent = parent.parentElement; // Move to the next parent
+    parent = parent.parentElement;
   }
 
   // If no scrollable parent found, scroll the window to the top
