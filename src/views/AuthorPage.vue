@@ -8,6 +8,8 @@ import { useAuthStore } from "@/stores/authStore";
 import { getRecipesByUserId } from "@/data/getRecipesByUserId";
 import RecipeSlider from "@/components/RecipeSlider.vue";
 import AuthorInfo from "@/components/authorPage/AuthorInfo.vue";
+import AuthorPageSkeleton from "@/components/authorPage/AuthorPageSkeleton.vue";
+import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 
 interface AuthorPageProps {
   userId: string;
@@ -78,15 +80,30 @@ onMounted(() => {
       <AuthorInfo :author="author" />
 
       <div class="bg-add-2 rounded-lg p-1.5 xs:p-3 my-6">
-        <RecipeSlider :recipes="authorRecipes" />
+        <!-- Skeleton loading for author's recipes -->
+        <div
+          v-if="loadingRecipes"
+          class="grid grid-cols-1 gap-14 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          <div class="border-2 border-add animate-pulse-2">
+            <RecipeCardSkeleton />
+          </div>
+          <div class="border-2 border-add animate-pulse-2 hidden sm:block">
+            <RecipeCardSkeleton />
+          </div>
+          <div class="border-2 border-add animate-pulse-2 hidden lg:block">
+            <RecipeCardSkeleton />
+          </div>
+        </div>
+
+        <RecipeSlider v-else :recipes="authorRecipes" />
       </div>
     </template>
 
-    <!-- No author view -->
-    <!-- TODO : make skeleton loading for this page -->
-    <div v-else-if="loading">
-      <HourglassLoading />
-    </div>
+    <!-- Loading author -->
+    <AuthorPageSkeleton v-if="loading" />
+    <!-- TODO : make good looking error here -->
+    <!-- Error fetching author -->
     <div v-else-if="error">{{ error }}</div>
   </div>
 </template>
