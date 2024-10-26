@@ -3,13 +3,13 @@ import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { TRecipe, TUser } from "@/@types/general";
 import { getUserById } from "@/data/getUserById";
-import HourglassLoading from "@/components/HourglassLoading.vue";
 import { useAuthStore } from "@/stores/authStore";
 import { getRecipesByUserId } from "@/data/getRecipesByUserId";
 import RecipeSlider from "@/components/RecipeSlider.vue";
 import AuthorInfo from "@/components/authorPage/AuthorInfo.vue";
 import AuthorPageSkeleton from "@/components/authorPage/AuthorPageSkeleton.vue";
 import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
+import Button from "@/components/Button.vue";
 
 interface AuthorPageProps {
   userId: string;
@@ -20,7 +20,7 @@ const { userId } = defineProps<AuthorPageProps>();
 const authStore = useAuthStore();
 
 const loading = ref(false);
-const error = ref<null | string>(null);
+const error = ref<null | string>("authorNotFound");
 
 const loadingRecipes = ref(false);
 const recipesError = ref<null | string>(null);
@@ -51,7 +51,10 @@ async function getAuthor() {
 
     const user = await getUserById(userId);
 
-    if (user == null) throw new Error("Author not found");
+    if (user == null) {
+      error.value = "authorNotFound";
+      return;
+    }
 
     // Handle redirect if current user is author ends up here
     if (user.id === authStore.currentUser?.id) {
@@ -76,8 +79,8 @@ onMounted(() => {
 
 <template>
   <div class="h-full sm:w-[80%] mx-auto min-h-fit mb-14 px-1 xs:px-3">
-    <template v-if="author">
-      <AuthorInfo :author="author" />
+    <template v-if="author && false">
+      <!-- <AuthorInfo :author="author" /> -->
 
       <div class="bg-add-2 rounded-lg p-1.5 xs:p-3 my-6">
         <!-- Skeleton loading for author's recipes -->
@@ -102,8 +105,15 @@ onMounted(() => {
 
     <!-- Loading author -->
     <AuthorPageSkeleton v-if="loading" />
-    <!-- TODO : make good looking error here -->
     <!-- Error fetching author -->
-    <div v-else-if="error">{{ error }}</div>
+    <div v-else-if="error" class="bg-danger rounded-lg p-3 mt-14 text-center">
+      <p class="text-lg lg:text-xl font-semibold mb-9">{{ $t(error) }}</p>
+      <Button variation="outlined" size="sm" @click="router.go(-1)">
+        <div class="flex items-center gap-x-2">
+          <i class="material-symbols-outlined">arrow_back</i>
+          {{ $t("back").toLocaleUpperCase() }}
+        </div>
+      </Button>
+    </div>
   </div>
 </template>

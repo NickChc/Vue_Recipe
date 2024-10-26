@@ -206,5 +206,6 @@
   "passwordUpdateSuccess": "Password was updated successfully",
   "enterToSave": "Press \"Enter\" to save",
   "enterName": "Enter name",
-  "failedToAuth": "Couldn't authorize user"
+  "failedToAuth": "Couldn't authorize user",
+  "authorNotFound": "Author not found"
 }
