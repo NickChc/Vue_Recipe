@@ -48,8 +48,6 @@ export const useAuthStore = defineStore("authStore", () => {
     currentUser.value = await getUserById(fireUser.value.uid);
   }
 
-  // TODO : fix popup sign in issue on safari
-
   onMounted(() => {
     onAuthStateChanged(auth, async (authUser) => {
       if (authUser) {

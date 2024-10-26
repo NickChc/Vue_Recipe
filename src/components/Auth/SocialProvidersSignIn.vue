@@ -1,23 +1,34 @@
 <script setup lang="ts">
 import Button from "@/components/Button.vue";
 import { auth, googleProvider } from "@/firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signInWithRedirect } from "firebase/auth";
 import GoogleIcon from "@/assets/images/GoogleIconImage.webp";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { createUserDoc } from "@/data/createUserDoc";
 import { getUserById } from "@/data/getUserById";
+import { sendToast } from "@/utils/sendToast";
+import { useI18n } from "vue-i18n";
 
 const loading = ref(false);
 
 const router = useRouter();
 const authStore = useAuthStore();
 
+const { t } = useI18n();
+
 async function handleGoogleSignIn() {
   try {
     loading.value = true;
-    const res = await signInWithPopup(auth, googleProvider);
+    let res;
+    const { userAgent } = window.navigator;
+    if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) {
+      res = await signInWithRedirect(auth, googleProvider);
+    } else {
+      res = await signInWithPopup(auth, googleProvider);
+    }
+
     const existingUser = await getUserById(res.user.uid);
 
     if (existingUser == null && auth.currentUser) {
@@ -32,10 +43,9 @@ async function handleGoogleSignIn() {
     router.replace("/");
   } catch (err: any) {
     console.log(err.message);
+    sendToast("error", t("failedToAuth"));
   } finally {
-    setTimeout(() => {
-      loading.value = false;
-    }, 2000);
+    loading.value = false;
   }
 }
 </script>

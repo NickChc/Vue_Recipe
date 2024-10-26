@@ -205,5 +205,6 @@
   "enterNewEmail": "Enter a new email",
   "passwordUpdateSuccess": "Password was updated successfully",
   "enterToSave": "Press \"Enter\" to save",
-  "enterName": "Enter name"
+  "enterName": "Enter name",
+  "failedToAuth": "Couldn't authorize user"
 }
