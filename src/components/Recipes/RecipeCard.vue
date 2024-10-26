@@ -10,7 +10,7 @@ interface RecipeCardProps {
   hideRating?: boolean;
 }
 
-const { recipe, isMore } = defineProps<RecipeCardProps>();
+const { recipe, isMore, isDark, hideRating } = defineProps<RecipeCardProps>();
 </script>
 
 <template>

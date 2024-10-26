@@ -36,6 +36,7 @@ async function handleImageDiscard(imageUrl: string) {
   try {
     image.value = null;
     await removeImageObj(imageUrl);
+
     if (imageInput.value?.files) {
       imageInput.value.value = "";
     }
@@ -83,9 +84,11 @@ async function handleUpload(e: Event) {
     sendToast("error", "Failed to upload image");
     image.value = originalPhoto;
     if (imageStorageRef) {
-      await deleteObject(imageStorageRef);
-      await updateProfile(auth.currentUser, { photoURL: "" });
-      await updateUser(auth.currentUser.uid, { image: null });
+      await Promise.all([
+        deleteObject(imageStorageRef),
+        updateProfile(auth.currentUser, { photoURL: "" }),
+        updateUser(auth.currentUser.uid, { image: null }),
+      ]);
     }
   } finally {
     loading.value = false;

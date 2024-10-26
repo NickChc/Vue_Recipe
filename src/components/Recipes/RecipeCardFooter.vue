@@ -12,9 +12,11 @@ interface RecipeCardFooterProps {
   recipe: TRecipe;
   isMore?: boolean;
   isDark?: boolean;
+  hideRating?: boolean;
 }
 
-const { isMore, recipe } = defineProps<RecipeCardFooterProps>();
+const { isMore, recipe, isDark, hideRating } =
+  defineProps<RecipeCardFooterProps>();
 
 const authStore = useAuthStore();
 const { currentUser } = storeToRefs(authStore);

@@ -2,6 +2,7 @@ import { TRecipe, TRecipeFormValues, TUser } from "@/@types/general";
 import { recipesCollection, storage } from "@/firebase";
 import { addDoc, Timestamp } from "firebase/firestore";
 import { updateUser } from "@/data/updateUser";
+import { v4 as uuidv4 } from "uuid";
 import {
   deleteObject,
   getDownloadURL,
@@ -20,7 +21,7 @@ export async function createRecipe(
     let imageUrl: string | null = null;
 
     if (imageFile) {
-      storageRef = ref(storage, `images/${imageFile.name}`);
+      storageRef = ref(storage, `images/${imageFile.name}-${uuidv4()}`);
       const imageSnap = await uploadBytes(storageRef, imageFile);
 
       imageUrl = await getDownloadURL(imageSnap.ref);
