@@ -20,7 +20,7 @@ const { userId } = defineProps<AuthorPageProps>();
 const authStore = useAuthStore();
 
 const loading = ref(false);
-const error = ref<null | string>("authorNotFound");
+const error = ref<null | string>(null);
 
 const loadingRecipes = ref(false);
 const recipesError = ref<null | string>(null);
@@ -79,8 +79,8 @@ onMounted(() => {
 
 <template>
   <div class="h-full sm:w-[80%] mx-auto min-h-fit mb-14 px-1 xs:px-3">
-    <template v-if="author && false">
-      <!-- <AuthorInfo :author="author" /> -->
+    <template v-if="author">
+      <AuthorInfo :author="author" />
 
       <div class="bg-add-2 rounded-lg p-1.5 xs:p-3 my-6">
         <!-- Skeleton loading for author's recipes -->
