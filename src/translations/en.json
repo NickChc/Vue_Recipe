@@ -211,5 +211,6 @@
   "bioPlaceholder": "Hello, my name is Jane, 25 y.o Cooking enthusiast with special passion for steaks.",
   "filterRecipes": "Filter Recipes",
   "byDiets": "By Diets",
-  "byCategory": "By Category"
+  "byCategory": "By Category",
+  "byCookingTime": "By Cooking Time"
 }
