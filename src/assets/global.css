@@ -106,6 +106,10 @@ input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px var(--clr-primary) inset !important;
 }
 
+input[type="checkbox"]:checked {
+  accent-color: var(--clr-add);
+}
+
 #app {
   height: 100dvh;
   width: 100vw;

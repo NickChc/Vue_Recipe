@@ -16,7 +16,9 @@ function setComplexity(lvl: TComplexity_Enum | null) {
 
 <template>
   <div
-    :class="`flex flex-col ${filteringBy === 'complexity' ? 'gap-y-2' : ''}`"
+    :class="`w-full flex flex-col ${
+      filteringBy === 'complexity' ? 'gap-y-2' : ''
+    }`"
   >
     <div
       :class="`grid duration-500 ${

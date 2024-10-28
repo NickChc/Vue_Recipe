@@ -213,5 +213,7 @@
   "byDiets": "By Diets",
   "byCategory": "By Category",
   "byCookingTime": "By Cooking Time",
-  "byComplexity": "By Complexity"
+  "byComplexity": "By Complexity",
+  "byRating": "By Rating",
+  "highRated": "High Rated"
 }

@@ -16,7 +16,9 @@ function setCookingTime(time: TCookingTime_Enum | null) {
 
 <template>
   <div
-    :class="`flex flex-col ${filteringBy === 'cooking_time' ? 'gap-y-2' : ''}`"
+    :class="`w-full flex flex-col ${
+      filteringBy === 'cooking_time' ? 'gap-y-2' : ''
+    }`"
   >
     <div
       :class="`grid duration-500 ${

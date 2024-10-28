@@ -25,6 +25,7 @@ interface TFilters {
   categories: TCategory_Enum[];
   cookingTime: TCookingTime_Enum | null;
   complexity: TComplexity_Enum | null;
+  highRating: boolean;
 }
 
 type TCurrFilter =
@@ -39,12 +40,17 @@ export const useRecipesStore = defineStore("recipes", () => {
   const recipesLoading = ref(false);
   const recipesError = ref<null | string>(null);
 
-  const filters = ref<TFilters>({
+  const defaultFilters = {
     diets: [],
     categories: [],
     cookingTime: null,
     complexity: null,
-  });
+    highRating: false,
+  };
+
+  // TODO : save the filters
+
+  const filters = ref<TFilters>(defaultFilters);
 
   const filteringBy = ref<null | TCurrFilter>(null);
 

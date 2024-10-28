@@ -20,7 +20,9 @@ function setDiets(diet: TDiet_Enum) {
 </script>
 
 <template>
-  <div :class="`flex flex-col ${filteringBy === 'diets' ? 'gap-y-2' : ''}`">
+  <div
+    :class="`w-full flex flex-col ${filteringBy === 'diets' ? 'gap-y-2' : ''}`"
+  >
     <div
       :class="`grid duration-500 ${
         filteringBy === 'diets' ? 'grid-rows-[1fr] py-1' : 'grid-rows-[0fr]'

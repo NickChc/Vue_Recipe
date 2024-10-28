@@ -178,7 +178,7 @@ watch(
         : 'pointer-fine:translate-y-full pointer-fine:opacity-0 pointer-fine:duration-200 pointer-fine:group-hover:opacity-100 pointer-fine:group-hover:translate-y-0 absolute z-30 justify-between items-center'
     }`"
   >
-    <div :class="`flex items-center ${show ? 'gap-x-0.5' : 'px-2 gap-x-1'}`">
+    <div :class="`flex items-center gap-x-0.5 ${show ? '' : 'px-1'}`">
       <button
         v-for="star in [1, 2, 3, 4, 5]"
         :key="star"
