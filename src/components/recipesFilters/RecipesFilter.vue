@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DietFilter from "@/components/recipesFilters/DietFilter.vue";
+import CategoryFilter from "./CategoryFilter.vue";
 </script>
 
 <!-- TODO : Filter recipes by : -->
@@ -18,7 +19,11 @@ import DietFilter from "@/components/recipesFilters/DietFilter.vue";
 
   <div class="flex flex-col items-center mx-3">
     <DietFilter />
-  </div>
 
-  <hr class="border-add-2 w-[90%] mx-auto my-2" />
+    <hr class="border-add-2 w-[90%] mx-auto my-1" />
+
+    <CategoryFilter />
+
+    <hr class="border-add-2 w-[90%] mx-auto my-2" />
+  </div>
 </template>

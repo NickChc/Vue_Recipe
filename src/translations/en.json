@@ -210,5 +210,6 @@
   "authorNotFound": "Author not found",
   "bioPlaceholder": "Hello, my name is Jane, 25 y.o Cooking enthusiast with special passion for steaks.",
   "filterRecipes": "Filter Recipes",
-  "byDiets": "By Diets"
+  "byDiets": "By Diets",
+  "byCategory": "By Category"
 }

@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
-import { TDiet_Enum, TRecipe } from "@/@types/general";
+import { TCategory_Enum, TDiet_Enum, TRecipe } from "@/@types/general";
 import { useGlobalStore } from "@/stores/globalStore";
 import { useGetRecipes } from "@/composables/useGetRecipes";
 import { useTopRatedRecipes } from "@/composables/useTopRatedRecipes";
@@ -16,11 +16,12 @@ interface TFetchRecipesState {
 
 interface TFilters {
   diets: TDiet_Enum[];
+  categories: TCategory_Enum[];
 }
 
 type TCurrFilter =
   | "diets"
-  | "catregory"
+  | "category"
   | "cooking_time"
   | "hardness"
   | "rating";
@@ -32,6 +33,7 @@ export const useRecipesStore = defineStore("recipes", () => {
 
   const filters = ref<TFilters>({
     diets: [],
+    categories: [],
   });
 
   const filteringBy = ref<null | TCurrFilter>(null);
