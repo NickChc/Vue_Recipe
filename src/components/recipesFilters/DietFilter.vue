@@ -36,10 +36,10 @@ function setDiets(diet: TDiet_Enum) {
         <button
           v-for="diet in Object.values(TDiet_Enum)"
           :key="diet"
-          :class="`whitespace-nowrap border rounded-sm p-0.5 dureation-300 transition-colors text-primary font-semibold text-xs m-1 ${
+          :class="`whitespace-nowrap border rounded-sm p-0.5 dureation-300 transition-colors font-semibold text-xs sm:text-sm m-1 ${
             filters.diets.includes(diet)
-              ? 'bg-add border-add border-add '
-              : 'bg-add-2 border-add-2'
+              ? 'bg-add border-add border-add-2 '
+              : 'bg-primary text-add-2 pointer-fine:hover:text-add  border-primary'
           }`"
           @click="setDiets(diet)"
         >
@@ -50,7 +50,7 @@ function setDiets(diet: TDiet_Enum) {
 
     <button
       @click="recipesStore.setFilteringBy('diets')"
-      :class="`flex items-center justify-between px-3 gap-x-2 font-semibold text-sm ${
+      :class="`flex items-center justify-between px-3 gap-x-2 font-semibold text-sm sm:text-base ${
         filteringBy === 'diets' ? 'text-add' : ''
       }`"
     >

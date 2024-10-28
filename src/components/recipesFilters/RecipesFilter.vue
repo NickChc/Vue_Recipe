@@ -14,31 +14,33 @@ import RatingFilter from "@/components/recipesFilters/RatingFilter.vue";
 <!-- RATING - single -->
 
 <template>
-  <h4 class="font-bold text-center px-3 text-sm xs:text-base mt-2">
-    {{ $t("filterRecipes").toLocaleUpperCase() }}
-  </h4>
+  <div class="text-primary">
+    <h4 class="font-bold text-center px-3 text-sm xs:text-base mt-2">
+      {{ $t("filterRecipes").toLocaleUpperCase() }}
+    </h4>
 
-  <div class="flex flex-col items-center mx-3 max-w-[400px] mx-auto">
-    <hr class="border-secondary dark:border-primary my-1 w-[95%] mx-auto" />
+    <div
+      class="flex flex-col sm:gap-y-1 items-center mx-3 max-w-[400px] mx-auto"
+    >
+      <hr class="border-primary dark:border-primary my-1 w-[95%] mx-auto" />
 
-    <DietFilter />
+      <DietFilter />
 
-    <hr class="border-add-2 w-[95%] mx-auto my-1" />
+      <hr class="border-primary w-[95%] mx-auto my-1" />
 
-    <CategoryFilter />
+      <CategoryFilter />
 
-    <hr class="border-add-2 w-[95%] mx-auto my-1" />
+      <hr class="border-primary w-[95%] mx-auto my-1" />
 
-    <CookingTimeFilter />
+      <CookingTimeFilter />
 
-    <hr class="border-add-2 w-[95%] mx-auto my-1" />
+      <hr class="border-primary w-[95%] mx-auto my-1" />
 
-    <ComplexityFilter />
+      <ComplexityFilter />
 
-    <hr class="border-add-2 w-[95%] mx-auto my-1" />
+      <hr class="border-primary w-[95%] mx-auto my-1" />
 
-    <RatingFilter />
-
-    <hr class="border-add-2 w-[95%] mx-auto my-2" />
+      <RatingFilter />
+    </div>
   </div>
 </template>

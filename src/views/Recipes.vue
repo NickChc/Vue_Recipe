@@ -11,23 +11,29 @@ const { recipes, loading } = useGetRecipes();
 <template>
   <HeaderImage />
 
-  <RecipesFilter />
+  <div class="flex flex-col sm:flex-row">
+    <div class="bg-add-2 pt-3 pb-6 px-1 xs:px-2 sm:relative">
+      <div class="sm:sticky sm:top-0 sm:inset-x-0">
+        <RecipesFilter />
+      </div>
+    </div>
 
-  <div
-    class="sm:w-[80%] p-3 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-8 mb-9"
-  >
-    <template v-if="loading">
-      <RecipeCardSkeleton />
-      <RecipeCardSkeleton />
-      <RecipeCardSkeleton />
-      <RecipeCardSkeleton />
-    </template>
+    <div
+      class="sm:w-[75%] md:w-full p-3 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 mb-9"
+    >
+      <template v-if="loading">
+        <RecipeCardSkeleton />
+        <RecipeCardSkeleton />
+        <RecipeCardSkeleton />
+        <RecipeCardSkeleton />
+      </template>
 
-    <RecipeCard
-      v-else
-      v-for="recipe in recipes"
-      :key="recipe.id"
-      :recipe="recipe"
-    />
+      <RecipeCard
+        v-else
+        v-for="recipe in recipes"
+        :key="recipe.id"
+        :recipe="recipe"
+      />
+    </div>
   </div>
 </template>

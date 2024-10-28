@@ -35,10 +35,11 @@ function setCookingTime(time: TCookingTime_Enum | null) {
         <button
           v-for="time in Object.keys(TCookingTime_Enum)"
           :key="time"
-          :class="`whitespace-nowrap border rounded-sm p-0.5 dureation-300 transition-colors text-primary font-semibold text-xs m-1 ${
+          :class="`whitespace-nowrap border rounded-sm p-0.5 dureation-300 transition-colors font-semibold text-xs sm:text-sm m-1 ${
               filters.cookingTime === TCookingTime_Enum[time as keyof typeof TCookingTime_Enum]
-                ? 'bg-add border-add border-add '
-                : 'bg-add-2 border-add-2'
+                ? 'bg-add border-add border-add-2 '
+              : 'bg-primary text-add-2 pointer-fine:hover:text-add  border-primary'
+
             }`"
           @click="
             setCookingTime(
@@ -53,7 +54,7 @@ function setCookingTime(time: TCookingTime_Enum | null) {
 
     <button
       @click="recipesStore.setFilteringBy('cooking_time')"
-      :class="`flex items-center justify-between px-3 gap-x-2 font-semibold text-sm ${
+      :class="`flex items-center justify-between px-3 gap-x-2 font-semibold text-sm sm:text-base ${
         filteringBy === 'cooking_time' ? 'text-add' : ''
       }`"
     >
