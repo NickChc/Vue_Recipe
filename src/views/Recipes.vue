@@ -3,16 +3,18 @@ import HeaderImage from "@/components/HeaderImage.vue";
 import RecipeCard from "@/components/recipes/RecipeCard.vue";
 import RecipeCardSkeleton from "@/components/recipes/RecipeCardSkeleton.vue";
 import { useGetRecipes } from "@/composables/useGetRecipes";
+import RecipesFilter from "@/components/recipesFilters/RecipesFilter.vue";
 
 const { recipes, loading } = useGetRecipes();
-
-// TODO : add filters for recipes
 </script>
 
 <template>
   <HeaderImage />
+
+  <RecipesFilter />
+
   <div
-    class="sm:w-[80%] p-3 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-8 my-9"
+    class="sm:w-[80%] p-3 mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-8 mb-9"
   >
     <template v-if="loading">
       <RecipeCardSkeleton />
@@ -20,6 +22,7 @@ const { recipes, loading } = useGetRecipes();
       <RecipeCardSkeleton />
       <RecipeCardSkeleton />
     </template>
+
     <RecipeCard
       v-else
       v-for="recipe in recipes"

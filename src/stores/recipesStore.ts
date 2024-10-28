@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
-import { TRecipe } from "@/@types/general";
+import { TDiet_Enum, TRecipe } from "@/@types/general";
 import { useGlobalStore } from "@/stores/globalStore";
 import { useGetRecipes } from "@/composables/useGetRecipes";
 import { useTopRatedRecipes } from "@/composables/useTopRatedRecipes";
 import { useNewestRecipes } from "@/composables/useNewestRecipes";
 import { useGetUserRecipes } from "@/composables/useGetUserRecipes";
-import { useAuthStore } from "./authStore";
+import { useAuthStore } from "@/stores/authStore";
 
 interface TFetchRecipesState {
   loading: boolean;
@@ -14,10 +14,35 @@ interface TFetchRecipesState {
   recipes: TRecipe[];
 }
 
+interface TFilters {
+  diets: TDiet_Enum[];
+}
+
+type TCurrFilter =
+  | "diets"
+  | "catregory"
+  | "cooking_time"
+  | "hardness"
+  | "rating";
+
 export const useRecipesStore = defineStore("recipes", () => {
   const recipes = ref<TRecipe[]>([]);
   const recipesLoading = ref(false);
   const recipesError = ref<null | string>(null);
+
+  const filters = ref<TFilters>({
+    diets: [],
+  });
+
+  const filteringBy = ref<null | TCurrFilter>(null);
+
+  function setFilteringBy(filter: TCurrFilter | null) {
+    if (filteringBy.value === filter) {
+      filteringBy.value = null;
+    } else {
+      filteringBy.value = filter;
+    }
+  }
 
   const topRatedRecipesState = ref<TFetchRecipesState>({
     loading: false,
@@ -55,6 +80,10 @@ export const useRecipesStore = defineStore("recipes", () => {
 
   function setRecipes(newRecipes: TRecipe[]) {
     recipes.value = newRecipes;
+  }
+
+  function setFilters(newFilters: TFilters) {
+    filters.value = newFilters;
   }
 
   function setDeleteRecipe(newValue: TRecipe | null) {
@@ -99,6 +128,10 @@ export const useRecipesStore = defineStore("recipes", () => {
     newestRecipesState,
     deletingRecipe,
     currUserRecipes,
+    filters,
+    filteringBy,
+    setFilters,
+    setFilteringBy,
     setCurrUserRecipes,
     setNewestRecipesState,
     setRecipes,

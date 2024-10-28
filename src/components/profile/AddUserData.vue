@@ -51,10 +51,9 @@ const { handleAddData, removeLink, removalLoading, disableBtn } =
       <h3 class="sm:text-lg">{{ $t("tellAboutYourself") }}</h3>
       <textarea
         v-model="userBio"
-        class="outline-add p-1 resize-none h-32 text-secondary text-sm"
+        class="outline-add p-1 resize-none h-32 text-secondary text-sm sm:text-base lg:text-lg"
         maxlength="250"
-        placeholder="Hello,
-my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
+        :placeholder="$t('bioPlaceholder')"
       />
       <p class="text-xs opacity-60 text-start sm:text-sm">
         250 {{ $t("wordsMax") }}
@@ -65,7 +64,7 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
       v-if="!isEditMode"
       type="button"
       class="font-merri w-fit mx-auto md:text-lg duration-200 transition-opacity hover:opacity-80 flex items-center gap-x-2"
-      @click="emitSetEditMode(!isEditMode)"
+      @click="emitSetEditMode(true)"
     >
       {{ $t("linkSocialAccounts") }}
       <span>
@@ -76,17 +75,16 @@ my name is Mike, 25 y.o Cooking enthusiast with special passion for steaks."
     <hr class="w-full my-4" />
 
     <div class="flex flex-col gap-y-2 items-stretch text-center">
-      <button
+      <div
         v-if="isEditMode"
         type="button"
-        class="font-merri w-fit mx-auto md:text-lg duration-200 transition-opacity hover:opacity-80 flex items-center gap-x-2"
-        @click="emitSetEditMode(!isEditMode)"
+        class="font-merri w-fit mx-auto md:text-lg flex items-center gap-x-2"
       >
         {{ $t("linkSocialAccounts") }}
         <span>
           <i class="material-symbols-outlined text-2xl">share</i>
         </span>
-      </button>
+      </div>
 
       <div
         v-if="!hasSocLinked && !isEditMode"

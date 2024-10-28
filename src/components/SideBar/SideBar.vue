@@ -39,6 +39,8 @@ onBeforeUnmount(() => {
 });
 </script>
 
+<!-- TODO : add a filtered navigation here -->
+
 <template>
   <div
     :class="`bg-priamry dark:bg-secondary overflow-hidden border-r-2 border-add p-3 h-full sm:hidden fixed top-0 bottom-0 z-40 duration-[400ms] ease-in w-[calc(100vw-var(--width-sidebar-btn))] text-add ${
