@@ -212,5 +212,6 @@
   "filterRecipes": "რეცეპტების გაფილტრვა",
   "byDiets": "დიეტის მიხედვით",
   "byCategory": "კატეგორიის მიხედვით",
-  "byCookingTime": "დროის მიხედვით"
+  "byCookingTime": "დროის მიხედვით",
+  "byComplexity": "სირთულის მიხედვით"
 }

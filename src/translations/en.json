@@ -212,5 +212,6 @@
   "filterRecipes": "Filter Recipes",
   "byDiets": "By Diets",
   "byCategory": "By Category",
-  "byCookingTime": "By Cooking Time"
+  "byCookingTime": "By Cooking Time",
+  "byComplexity": "By Complexity"
 }

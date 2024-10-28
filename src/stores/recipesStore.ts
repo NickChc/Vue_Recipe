@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
 import {
   TCategory_Enum,
+  TComplexity_Enum,
   TCookingTime_Enum,
   TDiet_Enum,
   TRecipe,
@@ -23,13 +24,14 @@ interface TFilters {
   diets: TDiet_Enum[];
   categories: TCategory_Enum[];
   cookingTime: TCookingTime_Enum | null;
+  complexity: TComplexity_Enum | null;
 }
 
 type TCurrFilter =
   | "diets"
   | "category"
   | "cooking_time"
-  | "hardness"
+  | "complexity"
   | "rating";
 
 export const useRecipesStore = defineStore("recipes", () => {
@@ -41,6 +43,7 @@ export const useRecipesStore = defineStore("recipes", () => {
     diets: [],
     categories: [],
     cookingTime: null,
+    complexity: null,
   });
 
   const filteringBy = ref<null | TCurrFilter>(null);

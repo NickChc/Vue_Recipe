@@ -2,6 +2,7 @@
 import DietFilter from "@/components/recipesFilters/DietFilter.vue";
 import CategoryFilter from "./CategoryFilter.vue";
 import CookingTimeFilter from "./CookingTimeFilter.vue";
+import ComplexityFilter from "./ComplexityFilter.vue";
 </script>
 
 <!-- TODO : Filter recipes by : -->
@@ -28,6 +29,10 @@ import CookingTimeFilter from "./CookingTimeFilter.vue";
     <hr class="border-add-2 w-[90%] mx-auto my-1" />
 
     <CookingTimeFilter />
+
+    <hr class="border-add-2 w-[90%] mx-auto my-1" />
+
+    <ComplexityFilter />
 
     <hr class="border-add-2 w-[90%] mx-auto my-2" />
   </div>
