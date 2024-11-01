@@ -115,8 +115,13 @@ async function handleRate(point: number) {
         );
       }
 
+      const newRating =
+        newRates.reduce((acc, curr) => (acc += curr.point), 0) /
+        newRates.length;
+
       await updateRecipe(recipe.id, {
         rates: newRates,
+        rating: newRating,
       });
 
       recipeRates.value = newRates;
@@ -124,14 +129,27 @@ async function handleRate(point: number) {
       newRates = [...recipeRates.value, { user_id: currUser.id, point }];
       recipeRates.value = newRates;
 
+      const newRating =
+        newRates.reduce((acc, curr) => (acc += curr.point), 0) /
+        newRates.length;
+
       await updateRecipe(recipe.id, {
         rates: newRates,
+        rating: newRating,
+      });
+
+      await updateRecipe(recipe.id, {
+        rates: newRates,
+        rating: newRating,
       });
 
       await handleGetRecipeById(recipe.id);
     }
 
-    authStore.setCurrentUser({ ...currUser, rates: newUserRates });
+    authStore.setCurrentUser({
+      ...currUser,
+      rates: newUserRates,
+    });
     recipesStore.fetchRecipeData();
   } catch (err: any) {
     console.log(err.message);

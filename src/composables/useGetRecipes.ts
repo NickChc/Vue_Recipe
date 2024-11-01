@@ -1,5 +1,5 @@
 import { storeToRefs } from "pinia";
-import { getDocs } from "firebase/firestore";
+import { getDocs, query, QueryConstraint, where } from "firebase/firestore";
 import { TRecipe } from "@/@types/general";
 import { recipesCollection } from "@/firebase";
 import { useRecipesStore } from "@/stores/recipesStore";
@@ -15,7 +15,34 @@ export function useGetRecipes() {
       }
       recipesStore.setRecipesError(null);
 
-      const recipeDocs = await getDocs(recipesCollection);
+      const { categories, diets, complexity, cookingTime, highRating } =
+        recipesStore.filters;
+
+      const queryRules: QueryConstraint[] = [];
+
+      if (diets.length > 0) {
+        queryRules.push(where("diet", "array-contains-any", diets));
+      }
+
+      if (categories.length > 0) {
+        queryRules.push(where("category", "array-contains-any", categories));
+      }
+
+      if (complexity != null) {
+        queryRules.push(where("complexity", "==", complexity));
+      }
+
+      if (cookingTime != null) {
+        queryRules.push(where("cooking_time", "==", cookingTime));
+      }
+
+      if (highRating) {
+        queryRules.push(where("rating", ">=", 75));
+      }
+
+      const recipesQuery = query(recipesCollection, ...queryRules);
+
+      const recipeDocs = await getDocs(recipesQuery);
 
       const data: TRecipe[] = recipeDocs.docs.map((doc) => {
         return { id: doc.id, ...doc.data() } as TRecipe;

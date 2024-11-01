@@ -215,5 +215,6 @@
   "byCookingTime": "By Cooking Time",
   "byComplexity": "By Complexity",
   "byRating": "By Rating",
-  "highRated": "High Rated"
+  "highRated": "High Rated",
+  "recipesNotFound": "Recipes Not Found"
 }

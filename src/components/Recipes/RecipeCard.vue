@@ -113,7 +113,7 @@ const { recipe, isMore, isDark, hideRating } = defineProps<RecipeCardProps>();
         <p
           :class="`text-sm ${
             isMore
-              ? 'md:max-w-[700px] bg-success mb-3 md:text-base lg:text-lg py-3 sm:px-10'
+              ? 'md:max-w-[700px] mb-3 md:text-base lg:text-lg py-3 sm:px-10'
               : 'line-clamp-3 h-[4.5em]'
           }`"
         >

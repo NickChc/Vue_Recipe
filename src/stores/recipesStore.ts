@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import {
   TCategory_Enum,
   TComplexity_Enum,
@@ -40,27 +40,23 @@ export const useRecipesStore = defineStore("recipes", () => {
   const recipesLoading = ref(false);
   const recipesError = ref<null | string>(null);
 
-  const defaultFilters = {
+  // TODO : retrive filters from query onMounted
+
+  const savedFilters = ref<TFilters>({
     diets: [],
     categories: [],
     cookingTime: null,
     complexity: null,
     highRating: false,
-  };
+  });
 
-  // TODO : save the filters
-
-  const filters = ref<TFilters>(defaultFilters);
+  const filters = ref<TFilters>(savedFilters.value);
 
   const filteringBy = ref<null | TCurrFilter>(null);
 
-  function setFilteringBy(filter: TCurrFilter | null) {
-    if (filteringBy.value === filter) {
-      filteringBy.value = null;
-    } else {
-      filteringBy.value = filter;
-    }
-  }
+  const filtersToSave = computed(() => {
+    return JSON.stringify(filters.value) !== JSON.stringify(savedFilters.value);
+  });
 
   const topRatedRecipesState = ref<TFetchRecipesState>({
     loading: false,
@@ -94,6 +90,41 @@ export const useRecipesStore = defineStore("recipes", () => {
     if (authStore.currentUser) {
       handleGetUserRecipes();
     }
+  }
+
+  function setFilteringBy(filter: TCurrFilter | null) {
+    if (filteringBy.value === filter) {
+      filteringBy.value = null;
+    } else {
+      filteringBy.value = filter;
+    }
+  }
+
+  function saveFilters() {
+    savedFilters.value = filters.value;
+
+    const { cookingTime, diets, highRating, categories, complexity } =
+      filters.value;
+
+    const params = new URLSearchParams();
+
+    if (cookingTime != null) {
+      params.append("cooking_time", cookingTime);
+    }
+
+    if (complexity != null) {
+      params.append("complexity", complexity);
+    }
+
+    if (highRating) {
+      params.append("high_rating", "true");
+    }
+
+    diets.forEach((d) => params.append("diet", d));
+
+    categories.forEach((c) => params.append("category", c));
+
+    return params;
   }
 
   function setRecipes(newRecipes: TRecipe[]) {
@@ -137,6 +168,10 @@ export const useRecipesStore = defineStore("recipes", () => {
     fetchRecipeData();
   });
 
+  watch(savedFilters, () => {
+    getRecipes();
+  });
+
   return {
     recipes,
     deleteRecipe,
@@ -148,7 +183,9 @@ export const useRecipesStore = defineStore("recipes", () => {
     currUserRecipes,
     filters,
     filteringBy,
+    filtersToSave,
     setFilters,
+    saveFilters,
     setFilteringBy,
     setCurrUserRecipes,
     setNewestRecipesState,

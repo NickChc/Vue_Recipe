@@ -7,6 +7,7 @@ import { onBeforeUnmount, onMounted, watch } from "vue";
 import SideBarLangSelect from "@/components/sideBar/SideBarLangSelect.vue";
 import Button from "@/components/Button.vue";
 import { RouterLink, useRoute } from "vue-router";
+import RecipesFilter from "../recipesFilters/RecipesFilter.vue";
 
 const globalStore = useGlobalStore();
 const { sideBarOpen } = storeToRefs(globalStore);
@@ -43,13 +44,13 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    :class="`bg-priamry dark:bg-secondary overflow-hidden border-r-2 border-add p-3 h-full sm:hidden fixed top-0 bottom-0 z-40 duration-[400ms] ease-in w-[calc(100vw-var(--width-sidebar-btn))] text-add ${
+    :class="`bg-priamry dark:bg-secondary overflow-hidden border-r-2 border-add p-1.5 h-full sm:hidden fixed top-0 bottom-0 z-40 duration-[400ms] ease-in w-[calc(100vw-var(--width-sidebar-btn))] text-add ${
       sideBarOpen ? 'left-0 opacity-100' : '-left-full opacity-0'
     }`"
   >
     <h2 class="text-2xl font-semibold">{{ $t("menu") }}</h2>
     <ul
-      class="list-none flex flex-col gap-y-3 mt-5 w-full xs:w-[80%] mx-auto pb-10 min-h-[90%] max-h-[90%] overflow-x-hidden overflow-y-auto"
+      class="scrollbar-small list-none flex flex-col gap-y-3 mt-5 w-full xs:w-[80%] mx-auto pb-10 min-h-[90%] max-h-[90%] overflow-x-hidden overflow-y-auto"
     >
       <li>
         <SideBarThemeToggle />
@@ -103,6 +104,11 @@ onBeforeUnmount(() => {
             {{ $t("signIn") }}</RouterLink
           >
         </Button>
+      </li>
+      <li>
+        <div v-if="!route.fullPath.endsWith('/recipes') || true">
+          <RecipesFilter />
+        </div>
       </li>
     </ul>
   </div>
