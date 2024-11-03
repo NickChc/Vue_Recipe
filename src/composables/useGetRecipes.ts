@@ -24,10 +24,6 @@ export function useGetRecipes() {
         queryRules.push(where("diet", "array-contains-any", diets));
       }
 
-      if (categories.length > 0) {
-        queryRules.push(where("category", "array-contains-any", categories));
-      }
-
       if (complexity != null) {
         queryRules.push(where("complexity", "==", complexity));
       }
@@ -44,9 +40,32 @@ export function useGetRecipes() {
 
       const recipeDocs = await getDocs(recipesQuery);
 
-      const data: TRecipe[] = recipeDocs.docs.map((doc) => {
+      let data: TRecipe[] = recipeDocs.docs.map((doc) => {
         return { id: doc.id, ...doc.data() } as TRecipe;
       });
+
+      if (categories.length > 0) {
+        queryRules.map((q) => {
+          if (q !== where("diets", "array-contains-any", diets)) {
+            return where("category", "array-contains-any", categories);
+          }
+
+          return q;
+        });
+
+        const categoriesQuery = query(recipesCollection, ...queryRules);
+
+        const categoryRecipeDocs = await getDocs(categoriesQuery);
+
+        categoryRecipeDocs.forEach((doc) => {
+          data.push({ id: doc.id, ...doc.data() } as TRecipe);
+        });
+
+        data = data.filter(
+          (recipe, index, self) =>
+            index === self.findIndex((r) => r.id === recipe.id)
+        );
+      }
 
       recipesStore.setRecipes(data);
     } catch (err: any) {
