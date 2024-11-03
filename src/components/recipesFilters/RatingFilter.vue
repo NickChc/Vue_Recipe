@@ -11,6 +11,7 @@ const isChecked = computed({
 });
 </script>
 
+<!-- TODO : display applied filters -->
 <template>
   <button
     @click="isChecked = !isChecked"

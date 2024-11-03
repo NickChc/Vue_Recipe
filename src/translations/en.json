@@ -215,6 +215,10 @@
   "byCookingTime": "By Cooking Time",
   "byComplexity": "By Complexity",
   "byRating": "By Rating",
+  "categories": "Categories",
+  "cookingTime": "CookingTime",
+  "rating": "Rating",
   "highRated": "High Rated",
-  "recipesNotFound": "Recipes Not Found"
+  "recipesNotFound": "Recipes Not Found",
+  "appliedFilters": "Applied Filters"
 }

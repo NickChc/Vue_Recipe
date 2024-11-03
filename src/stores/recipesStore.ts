@@ -40,8 +40,6 @@ export const useRecipesStore = defineStore("recipes", () => {
   const recipesLoading = ref(false);
   const recipesError = ref<null | string>(null);
 
-  // TODO : retrive filters from query onMounted
-
   const savedFilters = ref<TFilters>({
     diets: [],
     categories: [],

@@ -215,6 +215,10 @@
   "byCookingTime": "დროის მიხედვით",
   "byComplexity": "სირთულის მიხედვით",
   "byRating": "შეფასების მიხედვით",
+  "categories": "კატეგორიები",
+  "cookingTime": "მომზადების დრო",
+  "rating": "შეფასება",
   "highRated": "მაღალ შეფასებიანი",
-  "recipesNotFound": "რეცეპტები ვერ მოიძებნა"
+  "recipesNotFound": "რეცეპტები ვერ მოიძებნა",
+  "appliedFilters": "გამოყენებული ფილტრები"
 }

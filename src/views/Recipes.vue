@@ -83,7 +83,7 @@ onMounted(() => {
 
     <div
       v-else
-      class="sm:w-[75%] md:w-full p-3 mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-3 gap-y-8 mb-9"
+      class="py-14 px-4 sm:w-[75%] md:w-full mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-5 gap-y-8 mb-9"
     >
       <template v-if="loading">
         <RecipeCardSkeleton />

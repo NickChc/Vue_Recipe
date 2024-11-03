@@ -105,8 +105,8 @@ onBeforeUnmount(() => {
           >
         </Button>
       </li>
-      <li>
-        <div v-if="!route.fullPath.endsWith('/recipes') || true">
+      <li v-if="!route.fullPath.endsWith('/recipes')">
+        <div>
           <RecipesFilter />
         </div>
       </li>

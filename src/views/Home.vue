@@ -25,7 +25,7 @@ const { topRatedRecipesState, newestRecipesState } = storeToRefs(recipesStore);
       :title="$t('newest', 'New Recipes')"
     >
       <NewIcon
-        class="text-secondary dark:text-primary text-xl sm:text-2xl xl:text-4xl mb-1"
+        class="text-secondary dark:text-primary text-xl sm:text-3xl xl:text-4xl mb-1"
       />
     </PreviewCard>
 
