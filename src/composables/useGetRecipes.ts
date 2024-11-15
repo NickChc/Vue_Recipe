@@ -20,8 +20,21 @@ export function useGetRecipes() {
 
       const queryRules: QueryConstraint[] = [];
 
+      const categoryQueryRule = where(
+        "category",
+        "array-contains-any",
+        categories
+      );
+
+      /* 
+          !!!
+           Since firebase allows to check document's array contents with one array at a time only, we have to check if filters contain 2 arrays and if so, fetch two times with different queries, then merge the query results in one array
+          !!!        
+        */
       if (diets.length > 0) {
         queryRules.push(where("diet", "array-contains-any", diets));
+      } else if (categories.length > 0) {
+        queryRules.push(categoryQueryRule);
       }
 
       if (complexity != null) {
@@ -44,16 +57,17 @@ export function useGetRecipes() {
         return { id: doc.id, ...doc.data() } as TRecipe;
       });
 
-      if (categories.length > 0) {
-        queryRules.map((q) => {
-          if (q !== where("diets", "array-contains-any", diets)) {
-            return where("category", "array-contains-any", categories);
-          }
+      const dietQueryString = JSON.stringify(
+        where("diet", "array-contains-any", diets)
+      );
 
-          return q;
-        });
+      // Both array query rules are present
+      if (categories.length > 0 && diets.length > 0) {
+        const newQueryRules: QueryConstraint[] = queryRules.map((r) =>
+          JSON.stringify(r) === dietQueryString ? categoryQueryRule : r
+        );
 
-        const categoriesQuery = query(recipesCollection, ...queryRules);
+        const categoriesQuery = query(recipesCollection, ...newQueryRules);
 
         const categoryRecipeDocs = await getDocs(categoriesQuery);
 
@@ -61,6 +75,7 @@ export function useGetRecipes() {
           data.push({ id: doc.id, ...doc.data() } as TRecipe);
         });
 
+        // Remove duplicates
         data = data.filter(
           (recipe, index, self) =>
             index === self.findIndex((r) => r.id === recipe.id)
