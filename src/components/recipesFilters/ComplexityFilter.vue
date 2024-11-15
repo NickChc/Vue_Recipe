@@ -37,7 +37,7 @@ function setComplexity(lvl: TComplexity_Enum | null) {
           :key="lvl"
           :class="`whitespace-nowrap border rounded-sm p-0.5 dureation-300 transition-colors font-semibold text-xs sm:text-sm m-1 ${
               filters.complexity === TComplexity_Enum[lvl as keyof typeof TComplexity_Enum]
-                ? 'bg-add border-add border-add-2 '
+                ? 'bg-add border-add border-2 '
               : 'bg-primary text-add-2 pointer-fine:hover:text-add  border-primary'
 
             }`"
@@ -47,7 +47,7 @@ function setComplexity(lvl: TComplexity_Enum | null) {
             )
           "
         >
-          {{ $t(`complexity.${lvl.toLowerCase()}`) }}
+          {{ $t(`complexity_obj.${lvl.toLowerCase()}`) }}
         </button>
       </div>
     </div>
